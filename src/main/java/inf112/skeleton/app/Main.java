@@ -13,7 +13,8 @@ public class Main {
 
         UI_test ui = new UI_test();
 
-        cfg.setWindowedMode(ui.getWidthPixels(), ui.getHeightPixels());
+//        cfg.setWindowedMode(ui.getWidthPixels(), ui.getHeightPixels());
+        cfg.setWindowedMode(500, 500);
 
         new Lwjgl3Application(ui, cfg);
     }
