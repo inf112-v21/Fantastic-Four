@@ -18,6 +18,8 @@ import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.maps.tiled.tiles.StaticTiledMapTile;
 import com.badlogic.gdx.math.Vector2;
 
+import java.util.Iterator;
+
 /**
  * Morten
  */
@@ -40,6 +42,10 @@ public class UI_test extends InputAdapter implements ApplicationListener {
         // Display map and layers
         TmxMapLoader loader = new TmxMapLoader();
         map = loader.load("example.tmx");
+        for (Iterator<String> it = map.getProperties().getKeys(); it.hasNext(); ) {
+            String key = it.next();
+            System.err.println("key, value: " + key + ", " + map.getProperties().get(key));
+        }
         boardLayer = (TiledMapTileLayer) map.getLayers().get("Board");
         playerLayer = (TiledMapTileLayer) map.getLayers().get("Player");
         holeLayer = (TiledMapTileLayer) map.getLayers().get("Hole");
@@ -135,5 +141,17 @@ public class UI_test extends InputAdapter implements ApplicationListener {
     private void move(int dx, int dy) {
         playerLayer.setCell((int) playerPosition.x, (int) playerPosition.y, null);
         playerPosition.set(playerPosition.x + dx, playerPosition.y + dy);
+    }
+
+    public int getWidthPixels() {
+        int numTiles = (int) map.getProperties().get("width");
+        int tileWidth = (int) map.getProperties().get("tilewidth");
+        return numTiles * tileWidth;
+    }
+
+    public int getHeightPixels() {
+        int numTiles = (int) map.getProperties().get("height");
+        int tileHeigth = (int) map.getProperties().get("tileheight");
+        return numTiles * tileHeigth;
     }
 }
