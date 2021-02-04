@@ -23,3 +23,4 @@ Applikasjonen skal la en eller flere spillere spille en digital utgave av bretts
 
 ## Deloppgave 4
 _Vi forventer at dere skriver brukerhistorier (husk å få med hvilke krav brukerhistoriene dekker i beskrivelse)og kode for punkt 1 til 5 ved denne innleveringen_
+ 
