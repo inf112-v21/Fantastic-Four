@@ -1,82 +1,82 @@
-# Obligatorisk oppgave 1
+# Mandatory Assignment 1
 
-## Deloppgave 1
+## Subproblem 1
 
-### Organisering av teamet
-- Lagleder og kundekontakt - Morten
-- Testansvarlig - Daniel
+### Organisering of team
+- Team leader and customer contact - Morten
+- Test responsible - Daniel
 - UI design lead - Edyta
 - Mechanics/tech lead - Mathias
 
-## Deloppgave 2
-- Vi har bestemt oss for Kanban-metodikk.
-- Møter og hyppighet: mandag kl. 14, torsdag kl. 12.
-- Kommunikasjon mellom møter: Ad hoc når det behøves, hovedsaklig via Discord.
-- Arbeidsfordeling: Mathias lager prosjektstruktur og oppretter clubhouse project board. Vi alle må lese reglene for spillet, så vi har en felles forståelse av hvordan spillet fungerer og hvilke metoder som må lages.
-- Oppfølging av arbeid: Dette tas opp på hvert møte.
-- Deling og oppbevaring av dokumenter: Vi deler dokumenter på github. Java-klasser har én eier, og en person har kun myndighet til å gjøre endringer på sin egen klasse hvis ikke annet er avklart.
+## Subproblem 2
+- The team has agreed on a Kanban approach.
+- Meetings and frequency: Monday at 14:00 and Thursday at 12:00.
+- Communication between meetings: Ad hoc when needed, mainly through Discord.
+- Work distribution: Mathias makes project structure and creates Clubhouse project board. We all need to read the
+  RoboRally Rules, so that we have a joint understanding of how the game works and what methods need to be implemented.
+- Follow-up of work: will be addressed each meeting.
+- Sharing and storing documents: The team shares/stores documents in the project repository on GitHub. Java-classes
+  has one owner, and a team member has administrative rights only for their own classes, if not explicitly stated
+  otherwise.
 
-## Deloppgave 3
+## Subproblem 3
 
-### Kort beskrivelse av det overordnede målet for applikasjonen:
-Applikasjonen skal la en eller flere spillere spille en digital utgave av brettspillet RoboRally. Det skal være mulig å spille single player (mot AI) og multiplayer (over internett). Applikasjonen skal hjelpe spillere til å utføre lovlige trekk uten at spilleren selv skal trenge å kunne reglene for RoboRally. Applikasjonen skal vise brettet, brikkene, kort mm. Applikasjonen skal flytte spillernes brikker for dem, tildele skade, holde styr på prioriteringsrekkefølgen samt stokke og dele ut kortene.
+### Shot description of the overall motivation for the application
+The application will allow one or more players to play a digital version of the board game RoboRally.
+It must be possible to play single player (against AI) and multiplayer (over the internet). Players will be guided by
+the application to perform legal moves without the player having to know all the rule details. The board, pieces, 
+and cards etc, should be displayed for the player by the application.
+The application will do quite a lot of operations without help of the users, including moving the players' pieces,
+inflicting damage, keeping track of the move priority order, as well as shuffling and dealing out cards for the players.
 
-### Liste over brukerhistorier til systemet basert på MVP-kravene.
-- som spiller ønsker jeg å se et spillbrett
-- som spiller ønsker jeg at min brikke skal flytte seg på spillbrettet
-- som tester ønsker jeg å flytte brikke vha taster for å teste spillet
-- som spiller ønsker jeg at roboten kan besøke et flagg for å drive spillet videre
-- som spiller ønsker jeg å vinne ved å besøke et flagg for å avslutte spillet
-- som spiller ønsker jeg å kunne spille multiplayer for å øke gleden
-- som spiller ønsker jeg å kunne starte et multiplayerspill for å invitere venner
-- som spiller ønsker jeg at kort blir delt ut slik at jeg kan spille
-- som spiller ønsker jeg å velge 5 kort av de jeg blir tildelt slik at spillet kan gå videre
-- som spiller ønsker jeg at mine valgte kort skal bevege min robot slik at jeg kan konkurrere
+### List of user stories for the system based on the MVP-requirements
+- as a player I wish to see a game board
+- as a player I wish that my piece/robot will move on the game board
+- as a tester I wish to move a piece/robot by using keyboard keys to test the game
+- as a player I wish that the robot can visit a flag to drive the game forward
+- as a player I wish to win by visiting a flag to finish the game
+- as a player I wish to play multiplayer to increase the joy of playing
+- as a player I wish to be able to start a multiplayer game to invite friends
+- as a player I wish that cards are dealt so that I can play
+- as a player I wish to choose 5 cards of those I am dealt, so that the game can proceed
+- as a player I wish that my chosen cards will move my robot so that I can compete in the game
 
-
-### Brukerhistorier knyttet til spillmeny
-
-Kari: Spiller 1
-Ola: Spiller 2
-
-- Brukerhistorie 1:
-  Kari: Når jeg starter spillet, vil jeg kunne få opp spillmeny med en gang. Her skal jeg kunne bestemme hvilket brett jeg vil spille.
-
-- Brukerhistorie 2:
-  Ola: Når jeg starter spillet vil jeg kunne få opp spillinstruksjon med en gang, slik at jeg kan lære meg spillet.
-
-- Brukerhistorie 3:
-  Kari: Når jeg starter spillet vil jeg kunne få instillinger med en gang, slik at jeg kan justere lyden osv.
-
-- Brukerhistorie 4:
-  Ola: Når jeg vinner/taper spillet vil jeg få melding om det med en gang, slik at jeg kan velge om jeg skal fortsette eller slutte å spille.
+### List of user stories related to the game menu
+- as a player I wish that when I start the game, I will see a game menu right away, so that I can decide which
+  board I would like to play
+- as a player I wish that when I start the game, a game instruction will appear, so that I can learn the game.
+- as a player I wish that when I start the game, I will have access to game settings right away, so that I 
+  can adjust sound, image, appearance, language, etc
+- as a player I wish that when I win/lose the game, I will be notified immediately, so that I can decide if I want to
+  continue or stop playing
 
 ### Brukerhistorier til Program Sheet
-- som spiller trenger jeg et Program Sheet slik at jeg har oversikt over spillstatus (isfjell)
-  - som spiller trenger jeg å se kortene mine foran meg, slik at jeg har kontroll på hvilke trekk roboten
+- as a player I need a Program Sheet so that I have an overview of the game status (ice berg)
+  - as a player I need å se kortene mine foran meg, slik at jeg har kontroll på hvilke trekk roboten
     min kommer til å foreta seg
-  - som spiller trenger jeg å se hvor mange Damge tokens roboten min har fått, slik at jeg kan ta overveide
+  - as a player I need å se hvor mange Damge tokens roboten min har fått, slik at jeg kan ta overveide
     strategiske valg
-  - som spiller trenger jeg å se hvor mange Life tokens (gjenværende liv) jeg har igjen, slik at jeg har oversikt over
+  - as a player I need å se hvor mange Life tokens (gjenværende liv) jeg har igjen, slik at jeg har oversikt over
     spillsituasjonen min
-  - som spiller trenger jeg en visuell bekreftelse på om jeg har aktiv Power Down status for neste runde eller ikke
-  - som spiller trenger jeg en oversikt over hvilke Option cards jeg har i inventoriet mitt, slik at jeg kan ta
+  - as a player I need en visuell bekreftelse på om jeg har aktiv Power Down status for neste runde eller ikke
+  - as a player I need en oversikt over hvilke Option cards jeg har i inventoriet mitt, slik at jeg kan ta
     fornuftige beslutninger
-  - som spiller trenger jeg også å se de andre spillernes Program Sheets, som de ville fremstå i en spillsituasjon
+  - as a player I need også å se de andre spillernes Program Sheets, som de ville fremstå i en spillsituasjon
     "over bordet", slik at jeg kan ta taktiske valg
-  - som spiller trenger jeg å se hvor mye tid det er igjen på å organisere programkortene, slik at kortene ikke blir
+  - as a player I need å se hvor mye tid det er igjen på å organisere programkortene, slik at kortene ikke blir
     plassert tilfeldig i "registerne"
 
 
 ### Akseptansekriterier og arbeidsoppgaver til brukerhistoriene
-_For hver brukerhistorie, skal dere ha akseptansekriterier og arbeidsoppgaver, 
+-For hver brukerhistorie, skal dere ha akseptansekriterier og arbeidsoppgaver, 
 samt beskrivelse av hvilke krav brukerhistorien oppfyller (dette lager dere kun 
 for historier dere er ferdige med, holder på med, eller skal til å begynne med)_
 
 ### Prioritert liste over brukerhistorier til første iterasjon
-_En prioritert liste over hvilke brukerhistorier dere vil ha med i første iterasjon 
-(altså frem til levering av denne oppgaven, se deloppgave 4 for forslag)_
+-En prioritert liste over hvilke brukerhistorier dere vil ha med i første iterasjon 
+(altså frem til levering av denne oppgaven, se Subproblem 4 for forslag)_
 
-## Deloppgave 4
-_Vi forventer at dere skriver brukerhistorier (husk å få med hvilke krav brukerhistoriene dekker i beskrivelse)og kode for punkt 1 til 5 ved denne innleveringen_
+## Subproblem 4
+-Vi forventer at dere skriver brukerhistorier (husk å få med hvilke krav brukerhistoriene dekker i beskrivelse)og kode
+for punkt 1 til 5 ved denne innleveringen_
  
