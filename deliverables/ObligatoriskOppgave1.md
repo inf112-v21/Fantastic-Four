@@ -51,6 +51,23 @@ Ola: Spiller 2
 - Brukerhistorie 4:
   Ola: Når jeg vinner/taper spillet vil jeg få melding om det med en gang, slik at jeg kan velge om jeg skal fortsette eller slutte å spille.
 
+### Brukerhistorier til Program Sheet
+- som spiller trenger jeg et Program Sheet slik at jeg har oversikt over spillstatus (isfjell)
+  - som spiller trenger jeg å se kortene mine foran meg, slik at jeg har kontroll på hvilke trekk roboten
+    min kommer til å foreta seg
+  - som spiller trenger jeg å se hvor mange Damge tokens roboten min har fått, slik at jeg kan ta overveide
+    strategiske valg
+  - som spiller trenger jeg å se hvor mange Life tokens (gjenværende liv) jeg har igjen, slik at jeg har oversikt over
+    spillsituasjonen min
+  - som spiller trenger jeg en visuell bekreftelse på om jeg har aktiv Power Down status for neste runde eller ikke
+  - som spiller trenger jeg en oversikt over hvilke Option cards jeg har i inventoriet mitt, slik at jeg kan ta
+    fornuftige beslutninger
+  - som spiller trenger jeg også å se de andre spillernes Program Sheets, som de ville fremstå i en spillsituasjon
+    "over bordet", slik at jeg kan ta taktiske valg
+  - som spiller trenger jeg å se hvor mye tid det er igjen på å organisere programkortene, slik at kortene ikke blir
+    plassert tilfeldig i "registerne"
+
+
 ### Akseptansekriterier og arbeidsoppgaver til brukerhistoriene
 _For hver brukerhistorie, skal dere ha akseptansekriterier og arbeidsoppgaver, 
 samt beskrivelse av hvilke krav brukerhistorien oppfyller (dette lager dere kun 
