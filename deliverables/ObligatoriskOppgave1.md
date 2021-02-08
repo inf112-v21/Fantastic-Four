@@ -33,6 +33,24 @@ Applikasjonen skal la en eller flere spillere spille en digital utgave av bretts
 - som spiller ønsker jeg å velge 5 kort av de jeg blir tildelt slik at spillet kan gå videre
 - som spiller ønsker jeg at mine valgte kort skal bevege min robot slik at jeg kan konkurrere
 
+
+### Brukerhistorier knyttet til spillmeny
+
+Kari: Spiller 1
+Ola: Spiller 2
+
+- Brukerhistorie 1:
+  Kari: Når jeg starter spillet, vil jeg kunne få opp spillmeny med en gang. Her skal jeg kunne bestemme hvilket brett jeg vil spille.
+
+- Brukerhistorie 2:
+  Ola: Når jeg starter spillet vil jeg kunne få opp spillinstruksjon med en gang, slik at jeg kan lære meg spillet.
+
+- Brukerhistorie 3:
+  Kari: Når jeg starter spillet vil jeg kunne få instillinger med en gang, slik at jeg kan justere lyden osv.
+
+- Brukerhistorie 4:
+  Ola: Når jeg vinner/taper spillet vil jeg få melding om det med en gang, slik at jeg kan velge om jeg skal fortsette eller slutte å spille.
+
 ### Akseptansekriterier og arbeidsoppgaver til brukerhistoriene
 _For hver brukerhistorie, skal dere ha akseptansekriterier og arbeidsoppgaver, 
 samt beskrivelse av hvilke krav brukerhistorien oppfyller (dette lager dere kun 
