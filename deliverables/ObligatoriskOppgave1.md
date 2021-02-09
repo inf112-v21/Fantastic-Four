@@ -29,54 +29,59 @@ and cards etc, should be displayed for the player by the application.
 The application will do quite a lot of operations without help of the users, including moving the players' pieces,
 inflicting damage, keeping track of the move priority order, as well as shuffling and dealing out cards for the players.
 
-### List of user stories for the system based on the MVP-requirements
-- as a player I wish to see a game board
-- as a player I wish that my piece/robot will move on the game board
-- as a tester I wish to move a piece/robot by using keyboard keys to test the game
-- as a player I wish that the robot can visit a flag to drive the game forward
-- as a player I wish to win by visiting a flag to finish the game
-- as a player I wish to play multiplayer to increase the joy of playing
-- as a player I wish to be able to start a multiplayer game to invite friends
-- as a player I wish that cards are dealt so that I can play
-- as a player I wish to choose 5 cards of those I am dealt, so that the game can proceed
-- as a player I wish that my chosen cards will move my robot so that I can compete in the game
+### User stories based on the MVP-requirements
+Below follow user stories that were designed in terms of the MVP-requirements:
+- as a player I wish to see a game board.
+- as a player I wish that my piece/robot will move on the game board.
+- as a tester I wish to move a piece/robot by using keyboard keys to test the game.
+- as a player I wish that the robot can visit a flag to drive the game forward.
+- as a player I wish to win by visiting a flag to finish the game.
+- as a player I wish to play multiplayer to increase the joy of playing.
+- as a player I wish to be able to start a multiplayer game to invite friends.
+- as a player I wish that cards are dealt so that I can play.
+- as a player I wish to choose 5 cards of those I am dealt, so that the game can proceed.
+- as a player I wish that my chosen cards will move my robot so that I can compete in the game.
 
-### List of user stories related to the game menu
+### User stories related to the game menu
+These are the current user stories that were created associated with the game menu appearance:
 - as a player I wish that when I start the game, I will see a game menu right away, so that I can decide which
-  board I would like to play
+  board I would like to play.
 - as a player I wish that when I start the game, a game instruction will appear, so that I can learn the game.
 - as a player I wish that when I start the game, I will have access to game settings right away, so that I 
-  can adjust sound, image, appearance, language, etc
+  can adjust sound, image, appearance, language, etc.
 - as a player I wish that when I win/lose the game, I will be notified immediately, so that I can decide if I want to
-  continue or stop playing
+  continue or stop playing.
 
-### Brukerhistorier til Program Sheet
-- as a player I need a Program Sheet so that I have an overview of the game status (ice berg)
-  - as a player I need å se kortene mine foran meg, slik at jeg har kontroll på hvilke trekk roboten
-    min kommer til å foreta seg
-  - as a player I need å se hvor mange Damge tokens roboten min har fått, slik at jeg kan ta overveide
-    strategiske valg
-  - as a player I need å se hvor mange Life tokens (gjenværende liv) jeg har igjen, slik at jeg har oversikt over
-    spillsituasjonen min
-  - as a player I need en visuell bekreftelse på om jeg har aktiv Power Down status for neste runde eller ikke
-  - as a player I need en oversikt over hvilke Option cards jeg har i inventoriet mitt, slik at jeg kan ta
-    fornuftige beslutninger
-  - as a player I need også å se de andre spillernes Program Sheets, som de ville fremstå i en spillsituasjon
-    "over bordet", slik at jeg kan ta taktiske valg
-  - as a player I need å se hvor mye tid det er igjen på å organisere programkortene, slik at kortene ikke blir
-    plassert tilfeldig i "registerne"
+### User stories related to the Program Sheet
+
+- as a player I need a Program Sheet so that I have an overview of the game status (ice berg?).
+- as a player I need to see the cards infront of me, so that I know which moves my robot will carry out.
+- as a player I need to see how many Damage tokens my robot has received, so that I can make the right strategic
+  choices.
+- as a player I need to see how many Life tokens (remaining lives) I have left, so that I don't make the wrong
+  strategic choices.
+- as a player I need a visual confirmation whether I have an active Power Down status for the next turn.
+- as a player I need an overview of which Option cards I may have in my inventory, so that I am able to use one if
+  needed.
+- as a player I also need to see other players' Program Sheets (as they would appear in an "over the table" game
+  situation), so that I can base my choices on other players' game status.
+- as a player I need to know how much time is left when organizing my Program cards, so that the cards are not
+  randomly placed in the registers.
+
+### List of prioritized user stories for first iteration
+Below are the selected user stories that the team chose to focus on for the first iteration of Mandatory Assignment 1
+-(En prioritert liste over hvilke brukerhistorier dere vil ha med i første iterasjon
+(altså frem til levering av denne oppgaven, se Subproblem 4 for forslag))
 
 
-### Akseptansekriterier og arbeidsoppgaver til brukerhistoriene
--For hver brukerhistorie, skal dere ha akseptansekriterier og arbeidsoppgaver, 
+### Acceptance criterias for user stories and work tasks for user stories
+- (For hver brukerhistorie, skal dere ha akseptansekriterier og arbeidsoppgaver, 
 samt beskrivelse av hvilke krav brukerhistorien oppfyller (dette lager dere kun 
-for historier dere er ferdige med, holder på med, eller skal til å begynne med)_
+for historier dere er ferdige med, holder på med, eller skal til å begynne med))
 
-### Prioritert liste over brukerhistorier til første iterasjon
--En prioritert liste over hvilke brukerhistorier dere vil ha med i første iterasjon 
-(altså frem til levering av denne oppgaven, se Subproblem 4 for forslag)_
+
 
 ## Subproblem 4
--Vi forventer at dere skriver brukerhistorier (husk å få med hvilke krav brukerhistoriene dekker i beskrivelse)og kode
-for punkt 1 til 5 ved denne innleveringen_
+-(Vi forventer at dere skriver brukerhistorier (husk å få med hvilke krav brukerhistoriene dekker i beskrivelse) og
+kode for punkt 1 til 5 ved denne innleveringen)
  
