@@ -6,14 +6,13 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
+import static org.junit.Assert.*;
 
 public class MapTest {
     static Map map;
     static Lwjgl3Application app;
     static Lwjgl3ApplicationConfiguration cfg;
-
+    static String mapName = "example.tmx";
     @BeforeClass
     public static void setup() {
         cfg = new Lwjgl3ApplicationConfiguration();
@@ -21,7 +20,7 @@ public class MapTest {
 //        cfg.setInitialVisible(false);
         cfg.setWindowedMode(500, 500);
 
-        map = new Map("example.tmx");
+        map = new Map(mapName);
         app = new Lwjgl3Application(map, cfg);
         app.exit();
 
@@ -38,5 +37,10 @@ public class MapTest {
         assertNotNull(map.playerLayer);
         assertNotNull(map.holeLayer);
         assertNotNull(map.flagLayer);
+    }
+
+    @Test
+    public void testMapNameSaved() {
+        assertEquals(mapName, map.mapName);
     }
 }
