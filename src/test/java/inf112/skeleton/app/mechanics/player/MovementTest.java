@@ -6,7 +6,7 @@ import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.math.Vector2;
 import org.junit.Test;
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.Before;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -16,7 +16,7 @@ public class MovementTest {
     TiledMapTileLayer playerLayer;
     Movement m;
 
-    @BeforeEach
+    @Before
     public void setup() {
         TmxMapLoader loader = new TmxMapLoader();
         playerLayer = new TiledMapTileLayer(5, 5, 300, 300);
@@ -26,8 +26,6 @@ public class MovementTest {
 
     @Test
     public void testMoveUp() {
-        setup(); // TODO @BeforeEach is not run, call setup() from here..
-
         // Assert that the Cell in the playerLayer is occupied
         assertNotNull(m.playerLayer.getCell((int) m.playerPosition.x, (int) m.playerPosition.y));
 
@@ -50,8 +48,6 @@ public class MovementTest {
 
     @Test
     public void testMoveDown() {
-        setup(); // TODO @BeforeEach is not run, call setup() from here..
-
         // Assert that the Cell in the playerLayer is occupied
         assertNotNull(m.playerLayer.getCell((int) m.playerPosition.x, (int) m.playerPosition.y));
 
@@ -74,8 +70,6 @@ public class MovementTest {
 
     @Test
     public void testMoveLeft() {
-        setup(); // TODO @BeforeEach is not run, call setup() from here..
-
         // Assert that the Cell in the playerLayer is occupied
         assertNotNull(m.playerLayer.getCell((int) m.playerPosition.x, (int) m.playerPosition.y));
 
@@ -98,8 +92,6 @@ public class MovementTest {
 
     @Test
     public void testMoveRight() {
-        setup(); // TODO @BeforeEach is not run, call setup() from here..
-
         // Assert that the Cell in the playerLayer is occupied
         assertNotNull(m.playerLayer.getCell((int) m.playerPosition.x, (int) m.playerPosition.y));
 
