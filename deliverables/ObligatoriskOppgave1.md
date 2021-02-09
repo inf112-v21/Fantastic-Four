@@ -31,9 +31,9 @@ inflicting damage, keeping track of the move priority order, as well as shufflin
 
 ### User stories based on the MVP-requirements
 Below follow user stories that were designed in terms of the MVP-requirements:
-- as a player I wish to see a game board.
-- as a player I wish that my piece/robot will move on the game board.
-- as a tester I wish to move a piece/robot by using keyboard keys to test the game.
+- as a player I wish to see a game board to be able to
+- as a player I wish that my piece/robot will move on the game board,
+- as a tester I wish to move a piece/robot by using keyboard keys to test the robot movement
 - as a player I wish that the robot can visit a flag to drive the game forward.
 - as a player I wish to win by visiting a flag to finish the game.
 - as a player I wish to play multiplayer to increase the joy of playing.
@@ -45,7 +45,7 @@ Below follow user stories that were designed in terms of the MVP-requirements:
 ### User stories related to the game menu
 These are the current user stories that were created associated with the game menu appearance:
 - as a player I wish that when I start the game, I will see a game menu right away, so that I can decide which
-  board I would like to play.
+  game I would like to play.
 - as a player I wish that when I start the game, a game instruction will appear, so that I can learn the game.
 - as a player I wish that when I start the game, I will have access to game settings right away, so that I 
   can adjust sound, image, appearance, language, etc.
@@ -75,13 +75,35 @@ Below are the selected user stories that the team chose to focus on for the firs
 
 
 ### Acceptance criterias for user stories and work tasks for user stories
-- (For hver brukerhistorie, skal dere ha akseptansekriterier og arbeidsoppgaver, 
-samt beskrivelse av hvilke krav brukerhistorien oppfyller (dette lager dere kun 
-for historier dere er ferdige med, holder på med, eller skal til å begynne med))
+Acceptance criterias for the prioritized user stories are created based on the scenario-oriented format
+(given, when, then):
+- as a player I wish that when I start the game, I will see a game menu right away, so that I can decide which
+  game I would like to play.
+  - given a runnable RoboRally application, when the user starts the application, then the initial menu is visible
+  - 
+- as a tester I wish to move a piece/robot by using keyboard keys to test the robot movement
+  - given a visual game board, when using the arrow keys on the keyboard, then the robot responds as expected
+  - given a robot at (1,1) (surrounded by vacant cells), when the user presses one of the arrow or WASD keys, the robot
+    moves 1 step in the corresponding direction.
+- as a player I wish that the robot can visit a flag to drive the game forward.
+  - given a robot at a location next to a flag, when the robot moves into the same cell as the flag, an EventHandler
+    fires.
+
+### AC EXAMPLES TO BE REVIEWED
+Morten
+
+Edyta
+
+
+Mathias
+
+
+Daniel
 
 
 
 ## Subproblem 4
--(Vi forventer at dere skriver brukerhistorier (husk å få med hvilke krav brukerhistoriene dekker i beskrivelse) og
+- (Kode)
+(Vi forventer at dere skriver brukerhistorier (husk å få med hvilke krav brukerhistoriene dekker i beskrivelse) og
 kode for punkt 1 til 5 ved denne innleveringen)
  
