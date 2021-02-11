@@ -54,12 +54,22 @@ UML Diagram
 #Suggestions from team members:
 Thoughts on what went well and what could be improved?
 ## Subproblem 1: Organizing the team
-
+- Originally Daniel was intended to be the test lead, and Morten was intended to be the team leader. But a reversal of
+  those roles came naturally and were changed.
+- Even in a small team, a division of responsibility is a good technique for securing progress.
 
 ## Subproblem 2: Specify a process for the team (thoughts on MOM's, communication and Kanban project board)
-
+- Minutes of meetings are valuable for logging what was discussed and deciding further actions.
+- The method of using smaller tasks and sprints on a project board was motivational.
+- A project board story that involved two test classes proved to big, as one of the classes (`MapTest`) was difficult to automate.
+  So even smaller stories are recommended.
 
 ## Subproblem 3: Overview of expected product (user stories, AC, solutions)
-
+- User stories and acceptance criteria were (and still are) a new concept for us, and proved harder to do than expected.
+- Also, user stories might be even harder to write for an existing game with strict rules. Especially the value added
+  part felt backwards as they could probably all just be "because the rules say so"
 
 ## Subproblem 4: Code (thoughts?)
+- The code part of this first sprint was small and mostly achieved through the libGDX and Tiled tutorial.
+- There are several classes in the project that are empty, but intended to use for abstraction and modulation as the
+  project progresses.
