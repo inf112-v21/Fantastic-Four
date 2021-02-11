@@ -50,11 +50,6 @@ public class Map implements ApplicationListener {
         // Display map and layers
         tiledMap = tmxMapLoader.load(mapName);
 
-        for (Iterator<String> it = tiledMap.getProperties().getKeys(); it.hasNext(); ) {
-            String key = it.next();
-            System.out.println("key, value: " + key + ", " + tiledMap.getProperties().get(key));
-        }
-
         boardLayer = (TiledMapTileLayer) tiledMap.getLayers().get("Board");
         playerLayer = (TiledMapTileLayer) tiledMap.getLayers().get("Player");
         holeLayer = (TiledMapTileLayer) tiledMap.getLayers().get("Hole");
@@ -78,6 +73,7 @@ public class Map implements ApplicationListener {
         playerWonCell.setTile(new StaticTiledMapTile(textureRegions[0][2]));
         playerPosition = new Vector2(0, 0);
 
+        // Add Movement
         movementMechanics = new Movement(playerPosition, playerLayer);
 
         Gdx.input.setInputProcessor(movementMechanics);
