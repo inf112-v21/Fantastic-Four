@@ -80,15 +80,20 @@ Acceptance criterias for the prioritized user stories are created based on the s
 (given, when, then):
 - as a player I wish that when I start the game, I will see a game menu right away, so that I can decide which
   game I would like to play.
-  - given a runnable RoboRally application, when the user starts the application, then the initial menu is visible
-  - 
+  - given a runnable RoboRally application,
+    when the user starts the application,
+    then the initial menu is visible
 - as a tester I wish to move a piece/robot by using keyboard keys to test the robot movement
-  - given a visual game board, when using the arrow keys on the keyboard, then the robot responds as expected
-  - given a robot at (1,1) (surrounded by vacant cells), when the user presses one of the arrow or WASD keys, the robot
-    moves 1 step in the corresponding direction.
+  - given a visual game board,
+    when using the arrow keys on the keyboard,
+    then the robot responds as expected
+  - given a robot at (1,1) (surrounded by vacant cells),
+    when the user presses one of the arrow or WASD keys,
+    then the robot moves 1 step in the corresponding direction.
 - as a player I wish that the robot can visit a flag to drive the game forward.
-  - given a robot at a location next to a flag, when the robot moves into the same cell as the flag, an EventHandler
-    fires.
+  - given a robot at a location next to a flag,
+    when the robot moves into the same cell as the flag,
+    then an EventHandler fires.
 
 ### AC EXAMPLES TO BE REVIEWED
 Morten
