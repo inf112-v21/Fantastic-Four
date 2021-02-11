@@ -31,7 +31,8 @@ inflicting damage, keeping track of the move priority order, as well as shufflin
 
 ### User stories based on the MVP-requirements
 Below follow user stories that were designed in terms of the MVP-requirements:
-- as a player I wish to see a game board to be able to
+- as a player I wish to see a game board to be able to play 
+- as a player I wish to see my robot on the board to be able to make my decisions
 - as a player I wish that my piece/robot will move on the game board,
 - as a tester I wish to move a piece/robot by using keyboard keys to test the robot movement
 - as a player I wish that the robot can visit a flag to drive the game forward.
@@ -91,6 +92,45 @@ Acceptance criterias for the prioritized user stories are created based on the s
 
 ### AC EXAMPLES TO BE REVIEWED
 Morten
+
+#### MVP 1:
+- as a player I wish to see a game board to be able to play
+  - Given a running game instance,
+    when the game loop goes in to the next iteration,
+    then the board must still be visible
+    AND the board must be updated according to any changes
+    __(iceberg..)__
+    
+#### MVP 2:
+- as a player I wish to see my robot on the board to be able to make my decisions
+  - Given a running instance of RoboRally,
+  when a player starts a game,
+    then that player's robot is visible on the game board
+    
+#### MVP 3:
+- as a player(tester) I wish that my piece/robot will move on the game board,
+  - Given a running game instance,
+    when a call is made to make a move of a robot,
+    then a check is performed to verify that the move is valid
+  - Given a running game instance, 
+    when a call is made to make a valid move of a robot,
+    then the robot should be removed from the old location
+    AND rendered at the new location
+    
+#### MVP 4:
+- as a player I wish that the robot can visit a flag to drive the game forward.
+  - Given a running game instance,
+  with a player having collected <(n-1) flags (where n is the total number of flags),
+    when that player's robot lands on a flag,
+    then that player's boolean value for that flag is set to true
+    
+#### MVP 5:
+- as a player I wish to win by visiting a flag to finish the game.
+  - Given a running game instance,
+    with a player having collected n-1 flags(where n is the total number of flags), 
+    when that player's robot lands on the last flag,
+    then that player is the winner 
+    AND the game stops.
 
 Edyta
 
