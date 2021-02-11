@@ -133,6 +133,30 @@ Morten
     AND the game stops.
 
 Edyta
+#### MVP 1:
+- as a player I wish to see a game board after I started single player game mode to be able to plan my strategy
+  - Given a running game, when a player clicks on a single player button from main menu, then the game board is visible on the screen
+
+#### MVP 2:
+- as a player I wish to see my robot on the board to be able to make my decisions
+  - Given a running game, when a player starts a game, then the player's robot is visible on the game board on the position (0,0)
+  
+#### MVP 3:
+- as a player I wish that my piece/robot will move on the game board,
+  - Given a running game, when the player who is located at the position (1,1) on the game board press the button Upwards Arrow one time, then the players move to     the position (0,2)
+  - Given a running game, when the player who is located at the position (0,0) on the game board press the button Downwards Arrow one time, then the players move     to the position (0,0)
+  - Given a running game, when the player who is located at the position (0,0) on the game board press the button Leftwards Arrow one time, then the players move     to the position (1,0)
+  - Given a running game, when the player who is located at the position (0,0) on the game board press the button Rightwards Arrow one time, then the players move     to the position (0,1)
+   
+"how is it with move out of the board?"
+#### MVP 4:
+
+- as a player I wish that the robot can visit a flag to drive the game forward.
+  - Given a running game, when a player starts a game, and has the same position as flag located on the game board (x,y) == (x,y), then visited flag_collected status increased by +1.
+
+#### MVP 5:
+- as a player I wish to win by visiting a flag to finish the game. 
+  - Given a running game, when a player starts a game, and has flag_collected=number_of_flag  then, the player is informed about win and the game stops. 
 
 
 Mathias
