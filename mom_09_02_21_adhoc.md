@@ -1,4 +1,5 @@
 ## 09.02.2021
+Participants: Daniel, Edyta, Mathias, Morten
 
 ### Since last meeting
 Discuss last MOM.
@@ -24,4 +25,4 @@ Discuss last MOM.
 - Put tasks from MOM onto Clubhouse project board 
 
 ### Next meeting
-Thursday, 11.02.21, at 12:00
+Thursday, 11.02.2021, at 12:00
