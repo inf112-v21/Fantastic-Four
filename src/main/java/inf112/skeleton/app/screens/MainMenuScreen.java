@@ -25,10 +25,10 @@ package inf112.skeleton.app.screens;
 	       batch = new SpriteBatch();
 	       logo = new Texture(Gdx.files.internal("logo.png"));
 	       background = new Texture(Gdx.files.internal("background.png"));
-	       b1 = new Texture(Gdx.files.internal("b1.png"));
-	       b2 = new Texture(Gdx.files.internal("b2.png"));
-	       b3 = new Texture(Gdx.files.internal("b3.png"));
-	       b4 = new Texture(Gdx.files.internal("b4.png"));
+	       b1 = new Texture(Gdx.files.internal("button_singleplayer.png"));
+	       b2 = new Texture(Gdx.files.internal("button_multiplayer.png"));
+	       b3 = new Texture(Gdx.files.internal("button_rules.png"));
+	       b4 = new Texture(Gdx.files.internal("button_settings.png"));
 
 
 	    }
