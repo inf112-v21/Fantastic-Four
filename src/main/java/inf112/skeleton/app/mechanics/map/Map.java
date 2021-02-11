@@ -93,6 +93,8 @@ public class Map implements ApplicationListener {
         }
         else if (flagLayer.getCell((int) playerPosition.x, (int) playerPosition.y) != null) {
             playerLayer.setCell((int) playerPosition.x, (int) playerPosition.y, playerWonCell);
+            Gdx.app.getGraphics().setTitle("You won!");
+            movementMechanics.stopGame();
         }
         else {
             playerLayer.setCell((int) playerPosition.x, (int) playerPosition.y, playerCell);
