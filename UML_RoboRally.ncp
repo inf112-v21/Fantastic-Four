@@ -1,0 +1,115 @@
+<Project>
+  <Name>Untitled</Name>
+  <ProjectItem type="NClass.DiagramEditor.ClassDiagram.Diagram" assembly="NClass.DiagramEditor, Version=2.4.1823.0, Culture=neutral, PublicKeyToken=null">
+    <Name>RoboRally</Name>
+    <Language>Java</Language>
+    <Entities>
+      <Entity type="Class">
+        <Name>Game</Name>
+        <Access>Public</Access>
+        <Location left="1353" top="108" />
+        <Size width="162" height="216" />
+        <Collapsed>False</Collapsed>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>Card</Name>
+        <Access>Public</Access>
+        <Location left="1179" top="658" />
+        <Size width="162" height="216" />
+        <Collapsed>False</Collapsed>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>Player</Name>
+        <Access>Public</Access>
+        <Location left="1440" top="501" />
+        <Size width="162" height="216" />
+        <Collapsed>False</Collapsed>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>Map</Name>
+        <Access>Public</Access>
+        <Location left="291" top="495" />
+        <Size width="162" height="216" />
+        <Collapsed>False</Collapsed>
+        <Member type="Method">void create()</Member>
+        <Member type="Method">void resize(int var1, int var2)</Member>
+        <Member type="Method">void render()</Member>
+        <Member type="Method">void pause()</Member>
+        <Member type="Method">void resume()</Member>
+        <Member type="Method">void dispose()</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>Movement</Name>
+        <Access>Public</Access>
+        <Location left="608" top="658" />
+        <Size width="272" height="216" />
+        <Collapsed>False</Collapsed>
+        <Member type="Method">boolean keyUp(int var1)</Member>
+        <Member type="Method">private void move(int dx, int dy)</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Interface">
+        <Name>ApplicationListener</Name>
+        <Access>Public</Access>
+        <Location left="291" top="163" />
+        <Size width="162" height="216" />
+        <Collapsed>False</Collapsed>
+        <Member type="Method">void create()</Member>
+        <Member type="Method">void resize(int var1, int var2)</Member>
+        <Member type="Method">void render()</Member>
+        <Member type="Method">void pause()</Member>
+        <Member type="Method">void resume()</Member>
+        <Member type="Method">void dispose()</Member>
+      </Entity>
+      <Entity type="Class">
+        <Name>InputAdapter</Name>
+        <Access>Public</Access>
+        <Location left="578" top="358" />
+        <Size width="341" height="216" />
+        <Collapsed>False</Collapsed>
+        <Member type="Method">boolean keyDown(int var1)</Member>
+        <Member type="Method">boolean keyUp(int var1)</Member>
+        <Member type="Method">boolean keyTyped(char var1)</Member>
+        <Member type="Method">boolean touchDown(int var1, int var2, int var3, int var4)</Member>
+        <Member type="Method">boolean touchUp(int var1, int var2, int var3, int var4)</Member>
+        <Member type="Method">boolean touchDragged(int var1, int var2, int var3)</Member>
+        <Member type="Method">boolean mouseMoved(int var1, int var2)</Member>
+        <Member type="Method">boolean scrolled(int var1)</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Interface">
+        <Name>InputProcessor</Name>
+        <Access>Public</Access>
+        <Location left="578" top="41" />
+        <Size width="328" height="216" />
+        <Collapsed>False</Collapsed>
+        <Member type="Method">boolean keyDown(int var1)</Member>
+        <Member type="Method">boolean keyUp(int var1)</Member>
+        <Member type="Method">boolean keyTyped(char var1)</Member>
+        <Member type="Method">boolean touchDown(int var1, int var2, int var3, int var4)</Member>
+        <Member type="Method">boolean touchUp(int var1, int var2, int var3, int var4)</Member>
+        <Member type="Method">boolean touchDragged(int var1, int var2, int var3)</Member>
+        <Member type="Method">boolean mouseMoved(int var1, int var2)</Member>
+        <Member type="Method">boolean scrolled(int var1)</Member>
+      </Entity>
+    </Entities>
+    <Relationships>
+      <Relationship type="Realization" first="6" second="7">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+      </Relationship>
+      <Relationship type="Generalization" first="4" second="6">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+      </Relationship>
+      <Relationship type="Realization" first="3" second="5">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+      </Relationship>
+    </Relationships>
+  </ProjectItem>
+</Project>
