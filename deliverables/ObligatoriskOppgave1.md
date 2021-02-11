@@ -24,7 +24,7 @@ Morten:
 - Good grades in all uni courses
 - Knows most of what has been taught during his studies, few spare-time projects
 - Bachelor's degree in Subsea Technology (worked the last 9-10 years as a senior engineer)
-- Good at math (however, minimal experience last 10 years)
+- Good at math (however, minimal practice last 10 years)
 
 Daniel:
 - Knows most of what has been taught so far, decent results
@@ -88,7 +88,7 @@ solutions to them.
   - Given a running game, when a player clicks on a single player button from main menu, then the game board is visible
     on the screen.
 - Solution
-  - tba 
+  - This step can be achieved using the code created by following the libGDX and Tiled tutorial posted on mitt.uib.
 
 #### Show a piece on the game board (MVP 2)
 - User story
@@ -99,7 +99,7 @@ solutions to them.
   - Given a running game, when a player starts a game, then the player's robot is visible on the game board on the
     position (0,0) (see AC for MVP 3 below for definition of the game board coordinate system).
 - Solution
-  - tba
+  - This step can also be achieved via the libGDX and Tiled tutorial.
 
 #### Move piece on game board (MVP 3)
 - User story
@@ -116,16 +116,24 @@ solutions to them.
     - when a robot is located at position (1,1) of the game board and the
       right arrow key is pressed once, then the robot moves to position (2,1). 
 - Solution
-  - Use InputAdapter to...
+  - Add event listeners (InputAdapter in libGDX) for key-up for the arrow and WASD keys.
+  - When one of the above event listeners are trigged, call a common `move()` method with the desired change in 
+  coordinates as the input.
+    - The `move()` method needs to both change the coordinates to the new coordinates, and remove the robot from the old
+  coordinates.
 
 #### Robot visits flag (MVP 4)
 - User story
   - As a tester I wish that the robot can visit a flag to verify that a robot can occupy a cell with a flag in it.
 - Acceptance criteria
   - Given a running game instance, when a player tries to move their robot (e.g. with arrow keys) into a cell that is
-    occupied by a flag, then the robot should be allowed this, and be placed on top of the flag.    
+    occupied by a flag, then the robot should be allowed this, and be placed on top of the flag.
+  - Given a running game instance, when a player moves their robot to a a cell that is occupied by a flag, then the game
+    should react 
 - Solution
-  - tba
+  - Add flags to a seperate layer on the board (using Tiled)
+  - Add a check to `Map.render()` to see if the robot in question is on a `Cell` that is not `null` in the flag layer,
+  meaning that there is a collision between a flag and a robot.
 
 #### Robot wins by visiting flag (MVP 5)
 - User story
@@ -134,9 +142,8 @@ solutions to them.
   - Given a running game instance, with a player having collected n-1 flags (where n is the total number of flags),
     when that player's robot lands on the last flag, then that player is announced the winner and the game stops.
 - Solution
-  - 
+  - Temporary solution is to only have one flag and one robot, and the player wins when the robot reaches the flag.
 
 
 ## Subproblem 4: Code
 
-## Summary: Retrospective view on the project performance
