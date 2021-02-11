@@ -9,14 +9,17 @@ public class Movement extends InputAdapter {
 
     Vector2 playerPosition;
     TiledMapTileLayer playerLayer;
+    boolean gameRunning;
 
     public Movement (Vector2 _playerPosition, TiledMapTileLayer _playerLayer) {
         playerPosition = _playerPosition;
         playerLayer = _playerLayer;
+        gameRunning = true;
     }
 
     @Override
     public boolean keyUp(int keycode) {
+        if (!gameRunning) return false;
         switch (keycode) {
             case Input.Keys.UP:
                 move(0, 1);
@@ -49,5 +52,9 @@ public class Movement extends InputAdapter {
     private void move(int dx, int dy) {
         playerLayer.setCell((int) playerPosition.x, (int) playerPosition.y, null);
         playerPosition.set(playerPosition.x + dx, playerPosition.y + dy);
+    }
+
+    public void stopGame() {
+        gameRunning = false;
     }
 }
