@@ -30,7 +30,7 @@ These are the current user stories that were created associated with the game me
 ### User stories related to the Program Sheet
 
 - as a player I need a Program Sheet so that I have an overview of the game status (ice berg?).
-- as a player I need to see the cards infront of me, so that I know which moves my robot will carry out.
+- as a player I need to see the cards in front of me, so that I know which moves my robot will carry out.
 - as a player I need to see how many Damage tokens my robot has received, so that I can make the right strategic
   choices.
 - as a player I need to see how many Life tokens (remaining lives) I have left, so that I don't make the wrong
