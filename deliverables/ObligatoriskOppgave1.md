@@ -1,14 +1,40 @@
 # Mandatory Assignment 1
 
-## Subproblem 1
+## Subproblem 1: Organizing the team
 
-### Organisering of team
-- Team leader and customer contact - Morten
-- Test responsible - Daniel
-- UI design lead - Edyta
-- Mechanics/tech lead - Mathias
+### Team roles
+- Team Lead and Customer Contact - Daniel
+- Code and Test Responsible - Morten
+- UI Design Lead - Edyta
+- Mechanics/Tech Lead - Mathias
 
-## Subproblem 2
+### Member competance
+Mathias:
+- Web development
+- Knows Java quite well
+- Knows Github (branching etc.)
+- Skilled in programming and algorithms
+
+Edyta:
+- INF102, INF101, INF100
+- Master's degree in Earth Science
+- Decent abilities in math
+
+Morten:
+- Good grades in all uni courses
+- Knows most of what has been taught during his studies, few spare-time projects
+- Bachelor's degree in Subsea Technology (worked the last 9-10 years as a senior engineer)
+- Good at math (however, minimal experience last 10 years)
+
+Daniel:
+- Knows most of what has been taught so far, decent results
+- Master's degree in Earth Science
+- Worked 5-6 years in the hydrocarbon exploration industry (interpretation of seismic data and well data)
+- Good at reqognition/interpration of patterns and rules
+
+
+
+## Subproblem 2: Specify a process for the team
 - The team has agreed on a Kanban approach.
 - Meetings and frequency: Monday at 14:00 and Thursday at 12:00.
 - Communication between meetings: Ad hoc when needed, mainly through Discord.
@@ -19,9 +45,9 @@
   has one owner, and a team member has administrative rights only for their own classes, if not explicitly stated
   otherwise.
 
-## Subproblem 3
+## Subproblem 3: Overview of expected product
 
-### Shot description of the overall motivation for the application
+### Short description of the overall motivation for the application
 The application will allow one or more players to play a digital version of the board game RoboRally.
 It must be possible to play single player (against AI) and multiplayer (over the internet). Players will be guided by
 the application to perform legal moves without the player having to know all the rule details. The board, pieces, 
@@ -55,7 +81,7 @@ Robot wins by visiting flag (MVP 5)
 Prioritized user stories with acceptance criteria based on the scenario-oriented format (given, when, then), and
 solutions to them.
 
-####Show a game board (MVP 1)
+#### Show a game board (MVP 1)
 - User story
   - As a player I wish to see a game board after I started singleplayer game mode to be able to play the game.
 - Acceptance criteria
@@ -64,7 +90,7 @@ solutions to them.
 - Solution
   - tba 
 
-####Show a piece on the game board (MVP 2)
+#### Show a piece on the game board (MVP 2)
 - User story
   - As a player I wish to see my robot on the game board to be able to make my decisions.
 - Acceptance criteria
@@ -75,7 +101,7 @@ solutions to them.
 - Solution
   - tba
 
-####Move piece on game board (MVP 3)
+#### Move piece on game board (MVP 3)
 - User story
   - As a player I wish that my robot will move on the game board, so that the move mechanism can be verified.
 - Acceptance criteria
@@ -92,7 +118,7 @@ solutions to them.
 - Solution
   - Use InputAdapter to...
 
-####Robot visits flag (MVP 4)
+#### Robot visits flag (MVP 4)
 - User story
   - As a tester I wish that the robot can visit a flag to verify that a robot can occupy a cell with a flag in it.
 - Acceptance criteria
@@ -101,7 +127,7 @@ solutions to them.
 - Solution
   - tba
 
-####Robot wins by visiting flag (MVP 5)
+#### Robot wins by visiting flag (MVP 5)
 - User story
   - As a tester I wish to win by visiting a flag to stop the game.
 - Acceptance criteria
@@ -109,3 +135,8 @@ solutions to them.
     when that player's robot lands on the last flag, then that player is announced the winner and the game stops.
 - Solution
   - 
+
+
+## Subproblem 4: Code
+
+## Summary: Retrospective view on the project performance
