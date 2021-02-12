@@ -1,8 +1,6 @@
 ## User stories, acceptance criterias, and solutions to them
 This is I file for collecting all brainstormed user stories with associated acceptance criteria and solutions.
 
-
-
 ### User stories based on the MVP-requirements
 Below follow user stories that were designed in terms of the MVP-requirements:
 - as a player I wish to see a game board to be able to play 
