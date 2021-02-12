@@ -30,11 +30,12 @@ Daniel:
 - Knows most of what has been taught so far, decent results
 - Master's degree in Earth Science
 - Worked 5-6 years in the hydrocarbon exploration industry (interpretation of seismic data and well data)
-- Good at reqognition/interpration of patterns and rules
+- Good at recognition/interpretation of patterns and rules
 
 
 
 ## Subproblem 2: Specify a process for the team
+
 - The team has agreed on a Kanban approach.
 - Meetings and frequency: Monday at 14:00 and Thursday at 12:00.
 - Communication between meetings: Ad hoc when needed, mainly through Discord.
@@ -59,7 +60,7 @@ inflicting damage, keeping track of the move priority order, as well as shufflin
 For this assignment, only the user stories that are relevant for the current hand-in are included. Other user stories
 for future parts of the RoboRally project are described briefly in "all_user_stories.md".
 
-### List of prioritized user stories for first iteration
+### Prioritized user stories for first iteration
 Below are the selected user stories that the team chose to focus on for the first iteration of Mandatory Assignment 1.
 
 Show a game board (MVP 1)
@@ -117,7 +118,7 @@ solutions to them.
       right arrow key is pressed once, then the robot moves to position (2,1). 
 - Solution
   - Add event listeners (InputAdapter in libGDX) for key-up for the arrow and WASD keys.
-  - When one of the above event listeners are trigged, call a common `move()` method with the desired change in 
+  - When one of the above event listeners are triggered, call a common `move()` method with the desired change in 
   coordinates as the input.
     - The `move()` method needs to both change the coordinates to the new coordinates, and remove the robot from the old
   coordinates.
@@ -128,10 +129,10 @@ solutions to them.
 - Acceptance criteria
   - Given a running game instance, when a player tries to move their robot (e.g. with arrow keys) into a cell that is
     occupied by a flag, then the robot should be allowed this, and be placed on top of the flag.
-  - Given a running game instance, when a player moves their robot to a a cell that is occupied by a flag, then the game
-    should react 
+  - Given a running game instance, when a player moves their robot to a cell that is occupied by a flag, then the game
+    should react.
 - Solution
-  - Add flags to a seperate layer on the board (using Tiled)
+  - Add flags to a separate layer on the board (using Tiled)
   - Add a check to `Map.render()` to see if the robot in question is on a `Cell` that is not `null` in the flag layer,
   meaning that there is a collision between a flag and a robot.
 
@@ -143,7 +144,81 @@ solutions to them.
     when that player's robot lands on the last flag, then that player is announced the winner and the game stops.
 - Solution
   - Temporary solution is to only have one flag and one robot, and the player wins when the robot reaches the flag.
-
-
+  
 ## Subproblem 4: Code
 
+The coding part of this delivery focuses on the five first MVP-requirements as listed in Subproblem 3 (Prioritized user
+stories for first iteration) above. The team has utilised the LibGDX game-development application and the Tiled
+tutorial to build the simple game boards and model the robot movements.
+
+How to start the RoboRally application:
+- Run Main from a terminal, command line window, or your favourite IDE.
+
+## Summary: Retrospective view on the project performance
+
+All in all a good team experience where all team members contributed well on their respective areas.
+The team's impression is that most of this assignment has revolved around organizing the team and writing about the
+processes, and less about actual programming. However, the assumption is that there will be a lot more hands-on
+coding tasks for the assignments to come!
+
+### MOM's, communication, and Kanban project board
+As this project-based programming assignment was quite a new experience for the team, a structured, well-thought-out
+plan for the administrative process was not fully developed before the team had been working for a week already.
+For instance, a blueprint format for the MOM's was not proposed until the third team meeting (mom_08_02_21.md),
+and also the decision to write everything in English were taken in this same meeting. That being said, when the team
+first utilised proper MOM-reporting, it proved valuable for logging what had been discussed earlier meetings, and for
+deciding further actions.
+
+When it comes to communication between team members, most of the important dialog happened in recurring team meetings,
+while remaining issues were raised in the Discord channel. Keywords for team communication:
+- Even though it has been a new experience to all, everyone has tried their best and cooperated nicely with each other.
+- The tone and atmosphere between team members have been good, and all feel like their opinions have been heard.
+- Some have worked more on code than others, while others have done more administrative work.
+
+For the project methodology, the team chose to go for the Kanban approach, where a so-called Kanban project board was
+central for monitoring the team's progress. Strictly speaking the Kanban approach involves limiting the number of tasks
+each team member has in development at one time, however, for this particular project relay, this limitation was not
+implemented. Despite this, the Kanban approach worked fine for this "warm-up" leg of the project, and the method of
+using smaller tasks and sprints on a project board was motivational. On the contrary, the team is fully aware that
+limiting each team member's number of subtasks could prove valuable in more complex parts of the project.
+Another learning was that a project board "stick-note" that involved two test classes was proved too big, as one of the
+classes (`MapTest`) was difficult to automate. So the conclusion is that even smaller stories are recommended.
+
+Another project tool that the team recognises as valuable for such a programming project is the UML class diagram.
+Ideally, such a diagram should be incorporated early in every process to get an overview of the application composition.
+The team has tried to create such a diagram, but it was never completed due to remaining uncertainties in how the
+classes and interfaces should e implemented. Nevertheless, a starting sketch of the UML class diagram is included in
+the deliverables.
+
+### Team description and distribution of roles
+During the first team meeting, the team members were given specific roles based on a hunch of what could benefit
+the team:
+- Team Lead and Customer Contact - Morten
+- Test Responsible - Daniel
+- UI Design Lead - Edyta
+- Mechanics/Tech Lead - Mathias
+
+This division were shown to be quite adequate, however as the project evolved, and as the team members embarked various
+tasks that needed attention, a natural distribution of roles were solidifying. Morten had taken most of the
+responsibility for testing and writing code, while Daniel had taken on most of the administrative tasks that were
+pressing. Edyta showed excellent spirit in developing user interfaces for the various game menus, which will be an
+important part of the next assignments. Last but not least, Mathias has done good research on the workings of
+the libGDX application (including how to implement screens, and come up with a strategy for making the game
+object-oriented); in other words, facilitated further development of RoboRally for the coming assignments. In a small
+team like this, a division of responsibility as described above proved to be a good technique for securing progress.
+
+The roles for this assignment turned out to be:
+- Team Lead and Customer Contact - Daniel
+- Code & Test Responsible - Morten
+- UI Design Lead - Edyta
+- Mechanics/Tech Lead - Mathias
+
+### Thoughts on user stories, acceptance criteria, and solutions
+User stories and acceptance criteria were (and still are) a new concept for us, and proved harder to do than expected.
+Also, user stories might be even harder to write for an existing game with strict rules. Especially the "value added"
+part felt backwards as some of them could probably just be "because the rules of the game say so".
+
+### Thoughts on code
+The coding part of this first project leg was small and mostly achieved through the libGDX and Tiled tutorial.
+There are several classes in the project that are empty, but intended to use for abstraction and modulation as the
+project progresses.
