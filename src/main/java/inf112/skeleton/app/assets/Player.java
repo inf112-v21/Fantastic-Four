@@ -1,6 +1,6 @@
 package inf112.skeleton.app.assets;
 
-public class Player {
+public class Player implements IPlayer{
 
     private String playerName;
     private ProgramSheet programSheet;
