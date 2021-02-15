@@ -1,15 +1,17 @@
 package inf112.skeleton.app.assets;
 
+import inf112.skeleton.app.assets.cards.ProgramCard;
+
 import java.util.LinkedList;
 import java.util.Stack;
 
 public class ProgramSheet {
 
-    //public Player playerName;
+    public String playerName;
     public Boolean poweredDown;
     public int lifeTokens;
     public int damageTokens;
-    public Stack<Card> cards;
+    public Stack<ProgramCard> programCards;
 
 
     public static final int MIN_NUMBER_OF_LIFE_TOKENS = 0;
@@ -23,10 +25,11 @@ public class ProgramSheet {
 
 
     public ProgramSheet(String playerName) {
+        this.playerName = playerName;
         this.poweredDown = false;
         this.lifeTokens = MAX_NUMBER_OF_LIFE_TOKENS;
         this.damageTokens = MIN_NUMBER_OF_DAMAGE_TOKENS;
-        this.cards = new Stack();
+        this.programCards = new Stack();
 
     }
 
@@ -60,12 +63,12 @@ public class ProgramSheet {
         this.damageTokens = updatedDamageTokens;
     }
 
-    public Stack<Card> getCards() {
-        return cards;
+    public Stack<ProgramCard> getCards() {
+        return programCards;
     }
 
-    public void setCards(Stack<Card> cards) {
-        this.cards = cards;
+    public void setCards(Stack<ProgramCard> cards) {
+        this.programCards = cards;
     }
 
 
