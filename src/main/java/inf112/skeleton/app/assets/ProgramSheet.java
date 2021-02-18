@@ -5,9 +5,8 @@ import inf112.skeleton.app.assets.cards.ProgramCard;
 import java.util.LinkedList;
 import java.util.Stack;
 
-public class ProgramSheet {
+public class ProgramSheet implements IProgramSheet {
 
-    public String playerName;
     public Boolean poweredDown;
     public int lifeTokens;
     public int damageTokens;
@@ -15,7 +14,7 @@ public class ProgramSheet {
 
 
     public static final int MIN_NUMBER_OF_LIFE_TOKENS = 0;
-    public static final int MAX_NUMBER_OF_LIFE_TOKENS = 3; // or 4 (if 5 or more players)
+    public static final int MAX_NUMBER_OF_LIFE_TOKENS = 3; // or 4 if 5 or more players
 
     public static final int MIN_NUMBER_OF_DAMAGE_TOKENS = 0;
     public static final int MAX_NUMBER_OF_DAMAGE_TOKENS = 9;
@@ -24,8 +23,7 @@ public class ProgramSheet {
     //public static final int MAX_NUMBER_OF_NEW_CARDS = 5;
 
 
-    public ProgramSheet(String playerName) {
-        this.playerName = playerName;
+    public ProgramSheet() {
         this.poweredDown = false;
         this.lifeTokens = MAX_NUMBER_OF_LIFE_TOKENS;
         this.damageTokens = MIN_NUMBER_OF_DAMAGE_TOKENS;
