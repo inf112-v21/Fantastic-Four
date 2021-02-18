@@ -5,26 +5,26 @@
 - The moves will be calculated locally at all instances of RoboRally (the server will not pass out the results, instead the server will provide all variables to the clients)
 
 #### User stories:
-As a player I would like to connect to other RoboRally game instances via the Internet to be able to play with other people
-As a player I would like to play online to play with my friends
-As a player I would like to play RoboRally online to be able to own noobs
+- As a player I would like to connect to other RoboRally game instances via the Internet to be able to play with other people
+- As a player I would like to play online to play with my friends
+- As a player I would like to play RoboRally online to be able to own noobs
 
 #### Acceptance criteria:
-Given a locally running RoboRally instance
+- Given a locally running RoboRally instance
 with one other RoboRally instance connected via the Internet
 when a robot is moved at the _local_ RoboRally instance
 then the robot is moved accordingly at the _remote_ RoboRally instance
 
-Given a locally running RoboRally instance
+- Given a locally running RoboRally instance
 with one other RoboRally instance connected via the Internet
 when a robot is moved at the _remote_ RoboRally instance
 then the robot is moved accordingly at the _local_ RoboRally instance
 
-Given a running RoboRally instance,
+- Given a running RoboRally instance,
 when the user sets up an online game via the menu
 then that user's RoboRally instance accepts remote connections from other RoboRally instances
 
-Given a running RoboRally instance,
+- Given a running RoboRally instance,
 when the user inputs a remote IP to connect to,
 AND that IP is used by a computer with a running RoboRally instance that accepts remote connections,
 then the local RoboRally instance can connect to the remote RoboRally instance.
@@ -54,4 +54,35 @@ then the local RoboRally instance can connect to the remote RoboRally instance.
 - Decide on the representation of cards and decks
 - Implement `Card`
 - Implement `Deck`
+- Write tests
+
+### MVP 8: Velge 5 kort
+#### Assumptions:
+- The correct amount of `Card`s are dealt (9)
+
+#### User stories:
+- As a player, I want to select 5 cards from the 9 cards I am dealt to be able to create a set of moves
+- As a player, I want the card I select from the 9 cards to be unavailable when I select the next card, to avoid breaking the rules
+
+#### Acceptance criteria:
+- Given a player that has received 9 cards,
+    when the player picks 1 of the 9 cards,
+    then only 8 cards are available for picking next
+- Given a player has has received `n` cards,
+    when the player picks 1 of the `n` cards,
+    then only `n-1` cards are available for picking next
+- Given a player that has received `n` cards
+    and picked 4 cards,
+    when the players picks card number 5,
+    then the player cannot pick any more cards
+- Given a player that has received `n` cards
+    and selected `0 < m <= 5` cards,
+    when the player unselects 1 card, 
+    then that card is available for selecting
+    and that card is removed from the selcted pile
+  
+#### Work tasks:
+- Implement a `Deck` for each `Player`
+- Allow the player to select `m` cards from a dealt `Deck` of `n` cards
+- Allow the player to unselect a card, returning it to the dealt `Deck`
 - Write tests
