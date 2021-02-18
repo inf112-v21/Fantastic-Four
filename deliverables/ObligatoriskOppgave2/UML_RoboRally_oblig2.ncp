@@ -184,14 +184,14 @@
       <Entity type="Interface">
         <Name>IProgramSheet</Name>
         <Access>Public</Access>
-        <Location left="2227" top="787" />
+        <Location left="3370" top="419" />
         <Size width="162" height="216" />
         <Collapsed>False</Collapsed>
       </Entity>
       <Entity type="Class">
         <Name>ProgramSheet</Name>
         <Access>Public</Access>
-        <Location left="2227" top="1128" />
+        <Location left="3370" top="742" />
         <Size width="162" height="216" />
         <Collapsed>False</Collapsed>
         <Modifier>None</Modifier>
@@ -199,14 +199,14 @@
       <Entity type="Interface">
         <Name>IRobot</Name>
         <Access>Public</Access>
-        <Location left="3062" top="558" />
+        <Location left="2953" top="419" />
         <Size width="162" height="216" />
         <Collapsed>False</Collapsed>
       </Entity>
       <Entity type="Class">
         <Name>Robot</Name>
         <Access>Public</Access>
-        <Location left="3062" top="958" />
+        <Location left="2966" top="742" />
         <Size width="162" height="216" />
         <Collapsed>False</Collapsed>
         <Modifier>None</Modifier>
@@ -281,16 +281,12 @@
         </BendPoint>
       </Relationship>
       <Relationship type="Association" first="10" second="17">
-        <Label>
-        </Label>
         <StartOrientation>Horizontal</StartOrientation>
         <EndOrientation>Horizontal</EndOrientation>
         <Direction>Unidirectional</Direction>
         <AssociationType>Composition</AssociationType>
       </Relationship>
       <Relationship type="Association" first="16" second="15">
-        <Label>
-        </Label>
         <StartOrientation>Horizontal</StartOrientation>
         <EndOrientation>Horizontal</EndOrientation>
         <Direction>Unidirectional</Direction>
@@ -317,16 +313,12 @@
         <EndOrientation>Vertical</EndOrientation>
       </Relationship>
       <Relationship type="Association" first="0" second="10">
-        <Label>
-        </Label>
         <StartOrientation>Horizontal</StartOrientation>
         <EndOrientation>Horizontal</EndOrientation>
         <Direction>Unidirectional</Direction>
         <AssociationType>Aggregation</AssociationType>
       </Relationship>
       <Relationship type="Association" first="0" second="16">
-        <Label>
-        </Label>
         <StartOrientation>Horizontal</StartOrientation>
         <EndOrientation>Horizontal</EndOrientation>
         <BendPoint relativeToStartShape="True">
@@ -340,7 +332,7 @@
         <Direction>Unidirectional</Direction>
         <AssociationType>Association</AssociationType>
       </Relationship>
-      <Relationship type="Association" first="2" second="21">
+      <Relationship type="Association" first="17" second="21">
         <Label>
         </Label>
         <StartOrientation>Horizontal</StartOrientation>
@@ -348,7 +340,7 @@
         <Direction>Unidirectional</Direction>
         <AssociationType>Association</AssociationType>
       </Relationship>
-      <Relationship type="Association" first="2" second="19">
+      <Relationship type="Association" first="21" second="19">
         <Label>
         </Label>
         <StartOrientation>Horizontal</StartOrientation>
