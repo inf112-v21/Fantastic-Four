@@ -7,7 +7,7 @@
 #### User stories:
 - As a player I would like to connect to other RoboRally game instances via the Internet to be able to play with other people
 - As a player I would like to play online to play with my friends
-- As a player I would like to play RoboRally online to be able to own noobs
+- As a player I would like to play RoboRally online to be able to play with real people
 
 #### Acceptance criteria:
 - Given a locally running RoboRally instance
@@ -85,4 +85,40 @@ then the local RoboRally instance can connect to the remote RoboRally instance.
 - Implement a `Deck` for each `Player`
 - Allow the player to select `m` cards from a dealt `Deck` of `n` cards
 - Allow the player to unselect a card, returning it to the dealt `Deck`
+- Write tests
+
+### MVP 9: Bevege robot ut fra valgte kort
+#### Assumptions:
+
+#### User stories:
+- As a user, I want my robot to move according to my selected cards, to abide by the game rules
+- As a user, I want all robots to move according to their selected cards, to ensure game progress
+
+#### Acceptance criteria:
+- Given a turn of the game, 
+  when it is the turn of the first `Player`'s robot,
+  then that robot moves according to that `Player`'s `Card` corresponding to that turn
+- Given a turn of the game,
+    when it is the turn of a `Player`'s robot
+    and the next `Card` in that `Player`'s program register is `Move n` (`1 <= n <= 3`)
+  then the `Player`'s robot moves `n` step in the direction that the robot is facing
+- Given a turn of the game,
+  when it is the turn of a `Player`'s robot
+  and the next `Card` in that `Player`'s program register is `Rotate left`
+  then the `Player`'s robot rotates 90° counter clockwise from the direction that the robot is facing
+- Given a turn of the game,
+  when it is the turn of a `Player`'s robot
+  and the next `Card` in that `Player`'s program register is `Rotate right`
+  then the `Player`'s robot rotates 90° clockwise from the direction that the robot is facing
+- Given a turn of the game,
+  when it is the turn of a `Player`'s robot
+  and the next `Card` in that `Player`'s program register is `U-turn`
+  then the `Player`'s robot rotates 180° clockwise from the direction that the robot is facing
+- Given a turn of the game,
+  when it is the turn of a `Player`'s robot
+  and the next `Card` in that `Player`'s program register is `Back up`
+  then the `Player`'s robot is moved 1 step in the opposite direction that the robot is facing
+
+#### Work tasks:
+- Implement a game loop with rounds and turns
 - Write tests
