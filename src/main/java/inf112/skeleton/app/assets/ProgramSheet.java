@@ -49,7 +49,7 @@ public class ProgramSheet {
         int updatedLifeTokens = Math.max((this.getLifeTokens() - lifeTokens), this.MIN_NUMBER_OF_LIFE_TOKENS);
         if (MAX_NUMBER_OF_LIFE_TOKENS < updatedLifeTokens)
             throw new IllegalArgumentException("Cannot lose a negative amount of life tokens");
-        this.lifeTokens = lifeTokens;
+        this.lifeTokens = updatedLifeTokens;
     }
 
     public int getDamageTokens() {
