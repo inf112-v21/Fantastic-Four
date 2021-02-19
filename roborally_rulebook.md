@@ -34,7 +34,7 @@ AND MAKE IT CLEARER HOW WE CAN PROCEED WITH THE ABSTRACTION OF THE GAME (Daniel)
 
 ## SETUP
 1) Choose course from Course Manual (combine Docking Bay board, Factory Floor boards and flags into correct course).
-   For our game, the Course Manual could be a menu, where the users/players can visualize the courses.
+   For our roboGame, the Course Manual could be a menu, where the users/players can visualize the courses.
 2) Each player chooses a 1 robot plastic figure, 1 Archive Marker (check point), and 1 Program Sheet for that robot.
 3) Each player gets 3 Life tokens and puts them on their Program Sheet (when 5 or more players, an optional rule is to
    hand out 4 Life tokens instead).
@@ -44,7 +44,7 @@ AND MAKE IT CLEARER HOW WE CAN PROCEED WITH THE ABSTRACTION OF THE GAME (Daniel)
 5) Randomly determine which player will go first. That player puts their Archive Marker (check point) and robot
    on the Dock 1 starting point of the Docking Bay, with the robot facing the Factory Floor board. The player to the left
    does the same (Dock 2), and so on in clockwise order, until all robots are on their dock.
-   Use dock assignments, for something later in the game!
+   Use dock assignments, for something later in the roboGame!
 
 ## HOW TO PLAY
 1) Deal the Program cards.
@@ -77,7 +77,7 @@ AND MAKE IT CLEARER HOW WE CAN PROCEED WITH THE ABSTRACTION OF THE GAME (Daniel)
       runs out, the player's unused cards are randomly placed in the remaining empty registers. Discard any cards that
       are left over.
     - If only one player is programming registers on a given turn (due to other robots are powered down or
-      out of the game), start the 30-seconds timer.
+      out of the roboGame), start the 30-seconds timer.
 
 
 ## 3) Announce Power Down
@@ -91,7 +91,7 @@ AND MAKE IT CLEARER HOW WE CAN PROCEED WITH THE ABSTRACTION OF THE GAME (Daniel)
 - A robot can still be affected by board elements while powered down (e.g. moved by belts, shot by board lasers,
   pushed into holes). It can also be moved/pushed by other robots, or damaged by other robot's lasers.
 - Consequently, robots that are powered down can also receive Damage tokens.
-- If you announce a power down for the next turn but are destroyed before then, you can choose to reenter the game
+- If you announce a power down for the next turn but are destroyed before then, you can choose to reenter the roboGame
   next turn either powered down or not (withdrawing Power Down announcement).
 - before cards are dealt each turn, players whose robot was powered down the last turn can choose if they
   want to leave their robots powered down for the current turn. If so, all Damage tokens are again discarded
@@ -174,7 +174,7 @@ E) Touch flags (checkpoints) and repair sites
 - The robots should have a property (e.g. field variable) which keeps track of the flags the robot have visited.
 - Any robot on a flag or repair site, at the end of the Register Phase, updates its checkpoint by
   putting their Archive Marker on that space.
-- If a robot is destroyed before reaching another checkpoint, this is where it will reenter the game.
+- If a robot is destroyed before reaching another checkpoint, this is where it will reenter the roboGame.
 - Standing on a single
 
 All of the above (A to E) completes a single Register Phase.
@@ -196,7 +196,7 @@ Repeat this sequence for each register in your Program Sheet.
     - Each robot that was destroyed this turn, reenters play in the space where their Archive Marker (check point) is.
       The player chooses which direction the robot faces.
     - Robots reentering the play receive 2 Damage tokens (plus any Damage tokens taken while powered down).
-      A player may change their mind and decide to reenter the game powered down the next turn (to discard
+      A player may change their mind and decide to reenter the roboGame powered down the next turn (to discard
       the Damage tokens).
     - Multiple archive markers on the same space:
         - If two or more robots would reenter play on the same space, they're placed back in the order they were destroyed
@@ -252,10 +252,10 @@ After cleanup, next turn begins!
     - an Option card (of the players choice), and
     - a Life token.
 - When a robot loses a Life token:
-    - it will reenter the game in the Cleanup step, on its checkpoint space (where their Archive Marker is),
-    - unless the Life token was the robot's last Life token -- in that case the robot is permanently out of the game.
+    - it will reenter the roboGame in the Cleanup step, on its checkpoint space (where their Archive Marker is),
+    - unless the Life token was the robot's last Life token -- in that case the robot is permanently out of the roboGame.
 
 ## WINNING THE GAME
 - The winner is the first player to touch all the flags in correct order.
-- The game can end as soon as the winner touches the last flag, or play can continue to determine runners up.
+- The roboGame can end as soon as the winner touches the last flag, or play can continue to determine runners up.
 
