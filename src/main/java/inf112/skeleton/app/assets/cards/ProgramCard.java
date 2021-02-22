@@ -2,12 +2,16 @@ package inf112.skeleton.app.assets.cards;
 
 public class ProgramCard extends AbstractCard {
 
-    String type;
-    int cardValue;
+    private String type;
+    private int cardValue;
 
     public ProgramCard(String type, int cardValue) {
         this.type = type;
         this.cardValue = cardValue;
+    }
+
+    public int getCardValue() {
+        return cardValue;
     }
 
     @Override

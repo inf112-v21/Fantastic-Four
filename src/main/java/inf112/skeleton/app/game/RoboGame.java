@@ -12,11 +12,11 @@ import java.util.List;
 
 public class RoboGame extends com.badlogic.gdx.Game {
 
-    IDeck programDeck;
-    IDeck optionDeck;
-    IDeck programCardDiscarPile;
-    IDeck optionCardDiscardPile;
-    List<IPlayer> players;
+    private IDeck programDeck;
+    private IDeck optionDeck;
+    private IDeck programCardDiscarPile;
+    private IDeck optionCardDiscardPile;
+    private List<IPlayer> players;
     final int MAX_NUMBER_OF_CARDS = 9;
 
     //Declaration of screens
@@ -49,6 +49,9 @@ public class RoboGame extends com.badlogic.gdx.Game {
         super.dispose();
     }
 
+    /**
+     * Deal the program cards
+     */
     public void dealProgramCards() {
         for (IPlayer player : players) {
             IDeck cards = new ProgramDeck(); // Create a small deck of cards for each player
@@ -57,6 +60,9 @@ public class RoboGame extends com.badlogic.gdx.Game {
         }
     }
 
+    /**
+     * Deal the option cards
+     */
     public void dealOptionCards() {
 
     }

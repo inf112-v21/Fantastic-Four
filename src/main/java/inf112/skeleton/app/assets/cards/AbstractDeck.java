@@ -4,7 +4,7 @@ import java.util.Collections;
 import java.util.Stack;
 
 public abstract class AbstractDeck implements IDeck {
-    Stack<ICard> deck;
+    public Stack<ICard> deck;
 
     public AbstractDeck() {
         this.deck = new Stack<>();
