@@ -2,18 +2,17 @@ package inf112.skeleton.app;
 
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application;
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3ApplicationConfiguration;
-import inf112.skeleton.app.mechanics.map.Map;
-import inf112.skeleton.app.screens.MainMenuScreen;
+import inf112.skeleton.app.game.RoboGame;
 
 public class Main {
     public static void main(String[] args) {
         Lwjgl3ApplicationConfiguration cfg = new Lwjgl3ApplicationConfiguration();
         cfg.setTitle("RoboRally");
 
-        Map ui = new Map("example.tmx");
+        //Map ui = new Map("example.tmx");
+        //MainMenuScreen mainMenuScreen = new MainMenuScreen();
+        RoboGame roboGame = new RoboGame();
 
-        cfg.setWindowedMode(500, 500);
-
-        new Lwjgl3Application(ui, cfg);
+        new Lwjgl3Application(roboGame, cfg);
     }
 }

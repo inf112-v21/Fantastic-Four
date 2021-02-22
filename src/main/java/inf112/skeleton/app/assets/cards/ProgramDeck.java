@@ -11,4 +11,14 @@ public class ProgramDeck extends AbstractDeck {
 
     public ProgramDeck() {
     }
+
+    @Override
+    public void add(ICard card) {
+
+    }
+
+    @Override
+    public Iterable<? extends ICard> getCards() {
+        return null;
+    }
 }
