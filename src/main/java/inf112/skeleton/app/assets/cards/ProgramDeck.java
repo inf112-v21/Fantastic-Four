@@ -12,10 +12,11 @@ public class ProgramDeck extends AbstractDeck {
     }
 
     private Stack<ProgramCard> createCardType(String type, int quantity, int cardValue, int deltaValue) {
+        int currentValue = cardValue;
         Stack<ProgramCard> cards = new Stack<>();
         for (int i = 0; i < quantity; i++)  {
-            cards.add(new ProgramCard(type, cardValue));
-            cardValue += deltaValue;
+            cards.add(new ProgramCard(type, currentValue));
+            currentValue += deltaValue;
         }
         return cards;
     }
