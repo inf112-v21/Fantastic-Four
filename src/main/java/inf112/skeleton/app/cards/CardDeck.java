@@ -1,6 +1,12 @@
 package inf112.skeleton.app.cards;
 
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Hashtable;
 import java.util.Stack;
+
+import com.badlogic.gdx.Input;
 
 // Description: we have 2 cards types: move and rotate.
 // in () I wrote how many do we have in deck (Robo Rally - Rules.pdf s.6.
@@ -12,73 +18,48 @@ public class CardDeck {
 
 	Stack<Card> deck = new Stack<>();
 	static Stack<Card> dealtDeck = new Stack<>();
+	int size = 84;
 
 	public Stack<Card> addCardToDeck() {
 
 		deck = new Stack<>();
-		// move 1 (18)
 
-		int cardValue = 490;
-		for (int i = 1; i <= 18; i++) {
-			deck.add(new Card("Move 1", cardValue));
-			cardValue += 10;
+		// move?; name; initial point/ cards from one group has value interval defined
+		// in rule book
+
+		for (int i = 0; i < size; i++) {
+			if (i <= 18) {
+				deck.add(new Card(1, "move1", 490 + (10 * i)));
+			} else if (i <= 30) {
+				deck.add(new Card(2, "move2", 670 + (10 * (i - 18))));
+			} else if (i <= 36) {
+				deck.add(new Card(3, "move3", 670 + (10 * (i - 30))));
+			} else if (i <= 42) {
+				deck.add(new Card(-1, "backup", 430 + (10 * (i - 36))));
+			} else if (i <= 60) {
+				deck.add(new Card(0, "rotateRight", 80 + (20 * (i - 42))));
+			} else if (i <= 78) {
+				deck.add(new Card(0, "rotateLeft", 70 + (20 * (i - 60))));
+			} else if (i <= 84) {
+				deck.add(new Card(0, "uTurn", 10 + (10 * (i - 78))));
+			}
 		}
 
-		// move 2 (12)
-		cardValue = 670;
-		for (int i = 1; i <= 12; i++) {
-			deck.add(new Card("Move 2", cardValue));
-			cardValue += 10;
-
-		}
-
-		// move 3 (6)
-		cardValue = 790;
-		for (int i = 1; i <= 6; i++) {
-			deck.add(new Card("Move 3", cardValue));
-			cardValue += 10;
-
-		}
-
-		// BackUP (6)
-		cardValue = 430;
-		for (int i = 1; i <= 6; i++) {
-			deck.add(new Card("BackUp", cardValue));
-			cardValue += 10;
-
-		}
-
-		// ROTATE CARDS
-		// rotate Right
-		cardValue = 80;
-		for (int i = 1; i <= 18; i++) {
-			deck.add(new Card("Rotate left", cardValue));
-			cardValue += 20;
-
-		}
-
-		// rotate left
-		cardValue = 70;
-		for (int i = 1; i <= 18; i++) {
-			deck.add(new Card("rotate right", cardValue));
-			cardValue += 20;
-
-		}
-		cardValue = 10;
-		for (int i = 1; i <= 6; i++) {
-			deck.add(new Card("u-turn", cardValue));
-			cardValue += 10;
-
-		}
 		// u-turn
+		Collections.shuffle(deck);
 		return deck;
 
 	}
 
 	public static Stack<Card> dealNumberOfCards(int numberofCards, Stack<Card> deck) {
+		if (numberofCards >= deck.size()) {
+			throw new IndexOutOfBoundsException(
+					"Don't have enough cards. I have only " + deck.size() + " you want " + numberofCards);
+		}
+
 		for (int i = 1; i <= numberofCards; i++) {
-			System.out.println(deck.get(i).getDescription());
 			dealtDeck.add(deck.pop());
+
 		}
 		return dealtDeck;
 	}
