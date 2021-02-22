@@ -38,4 +38,14 @@ public class ProgramDeck extends AbstractDeck {
         deck.addAll(createCardType("U-turn", 6, 10, 10));
         return deck;
     }
+
+    @Override
+    public void add(ICard card) {
+
+    }
+
+    @Override
+    public Iterable<? extends ICard> getCards() {
+        return null;
+    }
 }
