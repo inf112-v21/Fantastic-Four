@@ -1,9 +1,13 @@
 package inf112.skeleton.app.assets.cards;
 
-public class OptionDeck extends AbstractDeck {
-    @Override
-    public void add(ICard card) {
+import java.util.Stack;
 
+public class OptionDeck extends AbstractDeck {
+
+
+    @Override
+    public Stack<ICard> createDeck() {
+        return null;
     }
 
     @Override
