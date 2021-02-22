@@ -6,6 +6,7 @@ import inf112.skeleton.app.assets.cards.IDeck;
 import inf112.skeleton.app.assets.cards.OptionDeck;
 import inf112.skeleton.app.assets.cards.ProgramDeck;
 import inf112.skeleton.app.screens.MainMenuScreen;
+import inf112.skeleton.app.screens.MultiplayerSetupScreen;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -21,6 +22,7 @@ public class RoboGame extends com.badlogic.gdx.Game {
 
     //Declaration of screens
     MainMenuScreen mainMenuScreen;
+    MultiplayerSetupScreen multiplayerSetupScreen;
 
     public RoboGame() {
         programDeck = new ProgramDeck();
@@ -36,7 +38,9 @@ public class RoboGame extends com.badlogic.gdx.Game {
     @Override
     public void create() {
         mainMenuScreen = new MainMenuScreen(this);
-        setScreen(mainMenuScreen);
+        multiplayerSetupScreen = new MultiplayerSetupScreen(this);
+//        setScreen(mainMenuScreen);
+        setScreen(multiplayerSetupScreen);
     }
 
     @Override
