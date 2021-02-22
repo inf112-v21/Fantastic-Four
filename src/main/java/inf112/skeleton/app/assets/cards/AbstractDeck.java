@@ -1,5 +1,6 @@
 package inf112.skeleton.app.assets.cards;
 
+import java.util.Collections;
 import java.util.Stack;
 
 public abstract class AbstractDeck implements IDeck {
@@ -11,6 +12,10 @@ public abstract class AbstractDeck implements IDeck {
 
     public void add(ICard card) {
         deck.add(card);
+    }
+
+    public void shuffle() {
+        Collections.shuffle(deck);
     }
 
     public Stack<ICard> draw(int quantity) {

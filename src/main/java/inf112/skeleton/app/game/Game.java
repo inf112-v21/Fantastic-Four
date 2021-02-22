@@ -17,7 +17,7 @@ public class Game {
 
     public Game() {
         deck = new ProgramDeck();
-//        deck.create() // TODO Match with the name of Edyta's method for creating all program cards.
+        deck.createDeck();
         discardPile = new ProgramDeck();
         players = new LinkedList<>();
     }
@@ -25,7 +25,7 @@ public class Game {
     public void dealProgramCards() {
         for (IPlayer player : players) {
             IDeck cards = new ProgramDeck(); // Create a small deck of cards for each player
-//            cards.deal(MAX_NUMBER_OF_CARDS - player.getDamage()); // TODO Match with the name of Edyta's method for creating all cards and getDamage() in Player
+            cards.draw(MAX_NUMBER_OF_CARDS - player.getDamage());
             player.receive(cards); // Each player receives it's cards
         }
     }
