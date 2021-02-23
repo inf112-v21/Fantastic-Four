@@ -9,20 +9,14 @@ public class MainCards {
 		CardDeck startDeck = new CardDeck();
 		Stack<Card> cardDeck = startDeck.addCardToDeck();
 		System.out.println("Initial size of deck" + " " + cardDeck.size() + " ");
-		
-		//Shuffle cards
-		Collections.shuffle(cardDeck);
-		
-		
-		//Check 
-		Stack<Card> deltCard = CardDeck.dealNumberOfCards(9, cardDeck);
-		
-		//Check dealt cards points + name
+		// Check
+		Stack<Card> deltCard = CardDeck.dealNumberOfCards(86, cardDeck);
+
+		// Check dealt cards points + name
 		System.out.println("All dealt cards with name and prioity: ");
 		for (Card card : deltCard) {
-			System.out.println(card.getDescription() + " " + card.getPoint());
+			System.out.println(card.getName() + " " + card.getPoint());
 		}
-
 		// Check if size of given deck is as given
 		// Check startDeck - number of cards to deal: here 84 - 9
 		System.out.println("Card deck size after deal specific number of cards (here (84-9))" + " " + cardDeck.size());

@@ -4,22 +4,16 @@ import com.badlogic.gdx.graphics.Texture;
 
 public class Card implements ICard {
 
-	
 	private String name;
 	private int point;
-	//Texture image;
+	int move;
 
-	public Card(String name, int point) {
-		this.point = point;
+	public Card(int move, String name, int point) {
+		this.move = move;
 		this.name = name;
-		//this.image = image;
+		this.point = point;
 
 	}
-
-	//Not used for now
-//	public Texture getImage() {
-//		return image;
-//	}
 
 	@Override
 	public int getPoint() {
@@ -27,9 +21,13 @@ public class Card implements ICard {
 	}
 
 	@Override
-	public String getDescription() {
+	public String getName() {
 		return name;
 	}
-	
+
+	@Override
+	public int move() {
+		return move;
+	}
 
 }
