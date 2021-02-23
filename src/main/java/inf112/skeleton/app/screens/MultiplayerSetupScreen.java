@@ -4,15 +4,14 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL30;
+import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.EventListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
-import com.badlogic.gdx.scenes.scene2d.ui.TextField;
+import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import inf112.skeleton.app.game.RoboGame;
@@ -30,6 +29,8 @@ public class MultiplayerSetupScreen implements Screen {
     private TextButton okButton, cancelButton;
     private TextButton.TextButtonStyle textButtonStyle;
     private Skin skin;
+    private Label.LabelStyle labelStyle;
+    private Label oneCharSizeCalibrationThrowAway;
 
     public MultiplayerSetupScreen(RoboGame roboGame) {
         this.roboGame = roboGame;
@@ -42,11 +43,23 @@ public class MultiplayerSetupScreen implements Screen {
         font = new BitmapFont();
         font.setColor(Color.ORANGE);
 
+        labelStyle = new Label.LabelStyle();
+        labelStyle.font = font;
+
+        // Cursor for the text field
+        oneCharSizeCalibrationThrowAway = new Label("|", labelStyle);
+        Pixmap cursorColor = new Pixmap((int) oneCharSizeCalibrationThrowAway.getWidth(),
+                (int) oneCharSizeCalibrationThrowAway.getHeight(),
+                Pixmap.Format.RGB888);
+        cursorColor.setColor(Color.GRAY);
+        cursorColor.fill();
+
         textFieldStyle = new TextField.TextFieldStyle();
         textFieldStyle.font = new BitmapFont();
         textFieldStyle.font.setColor(Color.WHITE);
         textFieldStyle.messageFontColor = new Color(Color.GRAY);
         textFieldStyle.fontColor = new Color(Color.RED);
+        textFieldStyle.cursor = new Image(new Texture(cursorColor)).getDrawable();
 
         ipTextField = new TextField("Enter IP", textFieldStyle);
         ipTextField.setX(200);
