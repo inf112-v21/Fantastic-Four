@@ -17,7 +17,7 @@ public interface IDeck {
     /**
      * Shuffle this deck.
      */
-    void shuffle();
+    //void shuffle();
 
     /**
      * Draw 1 or more cards from this deck
