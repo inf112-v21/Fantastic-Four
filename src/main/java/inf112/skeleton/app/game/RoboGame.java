@@ -21,8 +21,8 @@ public class RoboGame extends com.badlogic.gdx.Game {
     final int MAX_NUMBER_OF_CARDS = 9;
 
     //Declaration of screens
-    MainMenuScreen mainMenuScreen;
-    MultiplayerSetupScreen multiplayerSetupScreen;
+    public MainMenuScreen mainMenuScreen;
+    public MultiplayerSetupScreen multiplayerSetupScreen;
 
     public RoboGame() {
         programDeck = new ProgramDeck();

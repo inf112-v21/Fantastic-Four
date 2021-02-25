@@ -89,7 +89,7 @@ public class MultiplayerSetupScreen implements Screen {
         cancelButton.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent changeEvent, Actor actor) {
-                Gdx.app.exit();
+                roboGame.setScreen(roboGame.mainMenuScreen);
             }
         });
         skin = new Skin();
