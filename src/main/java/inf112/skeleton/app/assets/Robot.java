@@ -1,36 +1,43 @@
 package inf112.skeleton.app.assets;
 
-import java.util.HashMap;
+import com.badlogic.gdx.math.Vector2;
+import inf112.skeleton.app.assets.cards.ProgramCard;
+
+import java.util.*;
 
 public class Robot {
 
     private final static int NUMBER_OF_ROBOTS = 8;
     private final static String[] robotNames = {"Twonky", "Squash Bot", "Twitch", "Zoom Bot",
                                                 "Hammer Bot", "Spin Bot", "Hulk X90", "Trundle Bot"};
-    private static HashMap<String, Boolean> availableRobots = new HashMap<>();
-    static {
-        for (String name : robotNames) availableRobots.put(name, true);
-    }
+    private static HashSet<String> availableRobots = new HashSet<>(Arrays.asList(robotNames));
 
     private String robotName;
     private ProgramSheet programSheet;
+    //private LocationAndOrientation locationAndOrientation;             The robots coordinates on the board
+    //private Orientation orientation;
 
 
     public Robot() throws InstantiationException {
-        if (!availableRobots.containsValue(true)) throw new InstantiationException("No robots are available...");
-        for (String robotName : availableRobots.keySet()) {
-            if (availableRobots.get(robotName)) {
-                this.robotName = robotName;
-                setRobotToUnavailable(robotName);
-                this.programSheet = new ProgramSheet();
-                break;
+        if (availableRobots.isEmpty()) throw new InstantiationException("No robots are available...");
+        try {
+            for (String robotName : availableRobots) {
+                if (availableRobots.contains(robotName)) {
+                    this.robotName = robotName;
+                    setRobotToUnavailable(robotName);
+                    this.programSheet = new ProgramSheet();
+                    break;
+                }
             }
+        } catch (Exception e) {
+            e.getMessage();
         }
+
 
     }
 
     public Robot(String robotName) throws InstantiationException {
-        if (!availableRobots.get(robotName)) throw new InstantiationException("The selected robot is unavailable...");
+        if (!availableRobots.contains(robotName)) throw new InstantiationException("The selected robot is unavailable...");
         this.robotName = robotName;
         setRobotToUnavailable(robotName);
         this.programSheet = new ProgramSheet();
@@ -38,7 +45,7 @@ public class Robot {
 
 
     private void setRobotToUnavailable(String robotName) {
-        availableRobots.put(robotName, false);
+        availableRobots.remove(robotName);
     }
 
 
@@ -52,4 +59,9 @@ public class Robot {
     }
 
 
+    public void moveByProgramCard(ProgramCard programCard) {
+    }
+
+    public void pushToPosition(Vector2 position) {
+    }
 }
