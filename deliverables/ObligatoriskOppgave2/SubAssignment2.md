@@ -43,17 +43,22 @@ then the local RoboRally instance can connect to the remote RoboRally instance.
 #### User stories:
 - As a player, when it is my turn, I want to draw as many cards as the rules allow, to be able to pick as many cards as the rules allow
 - As a player, I want to draw a deck of cards to be able to select the cards I want to use
+- As a player, I want to see what properties cards have when I can pick them up, to be able to plan my strategy
 - As a player, I want the roboGame to hand out cards, so that I get a hand of cards to pick moves from
 
 #### Acceptance criteria:
 - Given a running roboGame in the correct state, when the deal method is called, then all players receive the correct amount of cards
-- Given a `Deck` object containing `Card`s, when the deal method is called, then each `Player` receives an individual `Deck` of `Card`s from the original `Deck`
+- Given a `Deck` object containing `Card`s, when the deal method is called, then each `Player` receives an randomly selected `Deck` of `Card`s from the original `Deck`
+- Given a `Deck` object containing `Card`s, when the deal method is called, then each `Player` can get obtain information about what type of cards are they, how high priority they have.
 - Given a `Deck` of `Card`s, when a `Card` is dealt from the `Deck`, then that `Card` is removed from the `Deck`
 
 #### Work tasks:
 - Decide on the representation of cards and decks
-- Implement `Card`
-- Implement `Deck`
+- Decide on which properties `Card` will contain
+- Implement `AbstractCard`
+- According to the `AbstractCard` create subclasses to extend and implement/override the abstract methods.
+- Implement `AbstractDeck`
+- According to the `AbstractDeck` create subclasses to extend and implement/override the abstract methods.
 - Write tests
 
 ### MVP 8: Velge 5 kort
