@@ -2,7 +2,6 @@ package inf112.skeleton.app.assets;
 
 import inf112.skeleton.app.assets.cards.ProgramCard;
 
-import java.util.LinkedList;
 import java.util.Stack;
 
 public class ProgramSheet implements IProgramSheet {

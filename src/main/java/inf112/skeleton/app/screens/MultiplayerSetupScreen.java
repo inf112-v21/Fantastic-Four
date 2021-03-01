@@ -9,11 +9,9 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.scenes.scene2d.EventListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
-import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import inf112.skeleton.app.game.RoboGame;
 
 public class MultiplayerSetupScreen implements Screen {
@@ -31,7 +29,7 @@ public class MultiplayerSetupScreen implements Screen {
     private Skin skin;
     private Label.LabelStyle labelStyle;
     private Label oneCharSizeCalibrationThrowAway;
-
+    private Texture textfieldTexture;
     public MultiplayerSetupScreen(RoboGame roboGame) {
         this.roboGame = roboGame;
 
@@ -54,6 +52,8 @@ public class MultiplayerSetupScreen implements Screen {
         cursorColor.setColor(Color.GRAY);
         cursorColor.fill();
 
+        textfieldTexture = new Texture(Gdx.files.internal("textbox.png"));
+
         textFieldStyle = new TextField.TextFieldStyle();
         textFieldStyle.font = new BitmapFont();
         textFieldStyle.font.setColor(Color.WHITE);
@@ -71,7 +71,6 @@ public class MultiplayerSetupScreen implements Screen {
 
         textButtonStyle = new TextButton.TextButtonStyle();
         textButtonStyle.font = font;
-
 
         okButton = new TextButton("OK", textButtonStyle);
         okButton.setX(100);
@@ -116,6 +115,8 @@ public class MultiplayerSetupScreen implements Screen {
         batch.begin();
         batch.draw(background, 0, 0, Gdx.app.getGraphics().getWidth(), Gdx.app.getGraphics().getHeight());
         batch.draw(logo, (Gdx.app.getGraphics().getWidth() / 2) - 200, Gdx.app.getGraphics().getHeight() - 200, 400, 150);
+        batch.draw(textfieldTexture, 180, 195, 160, 30);
+        batch.draw(textfieldTexture, 180, 245, 160, 30);
         font.draw(batch, "IP address:", 100, 220);
         font.draw(batch, "Nickname:", 100, 270);
         batch.end();

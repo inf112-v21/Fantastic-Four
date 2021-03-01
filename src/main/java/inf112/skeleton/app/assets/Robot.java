@@ -1,8 +1,6 @@
 package inf112.skeleton.app.assets;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map;
 
 public class Robot {
 
