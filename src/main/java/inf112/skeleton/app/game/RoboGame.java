@@ -17,7 +17,7 @@ public class RoboGame extends com.badlogic.gdx.Game {
 
     private IDeck programDeck;
     private IDeck optionDeck;
-    private IDeck programCardDiscarPile;
+    private IDeck programCardDiscardPile;
     private IDeck optionCardDiscardPile;
     private List<IPlayer> players;
     final int MAX_NUMBER_OF_CARDS = 9;
@@ -33,7 +33,7 @@ public class RoboGame extends com.badlogic.gdx.Game {
         programDeck.createDeck();
         optionDeck = new OptionDeck();
         optionDeck.createDeck();
-        programCardDiscarPile = new ProgramDeck();
+        programCardDiscardPile = new ProgramDeck();
         optionCardDiscardPile = new OptionDeck();
         players = new LinkedList<>();
     }
@@ -85,7 +85,7 @@ public class RoboGame extends com.badlogic.gdx.Game {
      */
     public void programCardsToToDiscardPile(IDeck cards) {
         for (ICard card : cards.getCards()) {
-            programCardDiscarPile.add(card);
+            programCardDiscardPile.add(card);
         }
     }
 }

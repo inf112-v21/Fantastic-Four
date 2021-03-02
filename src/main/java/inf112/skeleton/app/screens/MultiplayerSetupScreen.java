@@ -34,11 +34,12 @@ public class MultiplayerSetupScreen implements Screen {
 	private Skin skin;
 	private Label.LabelStyle labelStyle;
 	private Label oneCharSizeCalibrationThrowAway;
-	private ImageTextButton button1, button2;
+	private ImageTextButton okButton, cancelButton, hostButton;
 	private ImageTextButton.ImageTextButtonStyle imageTextButtonStyle;
 
 	private ImageTextButton.ImageTextButtonStyle imageLabelButtonStyle;
-	private ImageTextButton label1, label2;
+	private ImageTextButton nameLabel, ipLabel, hostLabel;
+
 
 	public MultiplayerSetupScreen(RoboGame roboGame) {
 		this.roboGame = roboGame;
@@ -117,29 +118,37 @@ public class MultiplayerSetupScreen implements Screen {
 		imageTextButtonStyle.font = fontLabel;
 		imageTextButtonStyle.fontColor = Color.WHITE;
 
-		button1 = new ImageTextButton("OK", imageTextButtonStyle);
-		button1.setX(170);
-		button1.setY(80);
-		button1.setSize(150, 60);
-		button1.addListener(new ChangeListener() {
+		okButton = new ImageTextButton("OK", imageTextButtonStyle);
+		okButton.setX(170);
+		okButton.setY(80);
+		okButton.setSize(150, 60);
+		okButton.addListener(new ChangeListener() {
 			@Override
 			public void changed(ChangeEvent changeEvent, Actor actor) {
 				Gdx.app.exit();
-
 			}
 		});
 
-		button2 = new ImageTextButton("Cancel", imageTextButtonStyle);
-		button2.setX(320);
-		button2.setY(80);
-		button2.setSize(150, 60);
-
-		button2.addListener(new ChangeListener() {
+		cancelButton = new ImageTextButton("Cancel", imageTextButtonStyle);
+		cancelButton.setX(320);
+		cancelButton.setY(80);
+		cancelButton.setSize(150, 60);
+		cancelButton.addListener(new ChangeListener() {
 			@Override
 			public void changed(ChangeEvent changeEvent, Actor actor) {
 				Screen mainMenu = new MainMenuScreen(roboGame);
 				roboGame.setScreen(mainMenu);
+			}
+		});
 
+		hostButton = new ImageTextButton("Host", imageTextButtonStyle);
+		hostButton.setX(40);
+		hostButton.setY(80);
+		hostButton.setSize(150, 60);
+		hostButton.addListener(new ChangeListener() {
+			@Override
+			public void changed(ChangeEvent changeEvent, Actor actor) {
+				Gdx.app.exit();
 			}
 		});
 
@@ -150,24 +159,30 @@ public class MultiplayerSetupScreen implements Screen {
 		imageLabelButtonStyle.font = fontLabel;
 		imageLabelButtonStyle.fontColor = Color.WHITE;
 
-		label1 = new ImageTextButton("Nickname", imageLabelButtonStyle);
-		label1.setX(40);
-		label1.setY(230);
-		label1.setSize(150, 30);
+		nameLabel = new ImageTextButton("Nickname", imageLabelButtonStyle);
+		nameLabel.setX(40);
+		nameLabel.setY(230);
+		nameLabel.setSize(150, 30);
 
-		label2 = new ImageTextButton("Enter IP", imageLabelButtonStyle);
-		label2.setX(40);
-		label2.setY(180);
-		label2.setSize(150, 30);
+		ipLabel = new ImageTextButton("Enter IP", imageLabelButtonStyle);
+		ipLabel.setX(40);
+		ipLabel.setY(180);
+		ipLabel.setSize(150, 30);
+
+		hostLabel = new ImageTextButton("Nickname", imageLabelButtonStyle);
+		hostLabel.setX(40);
+		hostLabel.setY(230);
+		hostLabel.setSize(150, 30);
 
 		stage = new Stage();
-		stage.addActor(button1);
-		stage.addActor(button2);
+		stage.addActor(okButton);
+		stage.addActor(cancelButton);
 		stage.addActor(ipTextField);
 		stage.addActor(nameTextField);
-		stage.addActor(label1);
-		stage.addActor(label2);
-
+		stage.addActor(nameLabel);
+		stage.addActor(ipLabel);
+		stage.addActor(hostLabel);
+		stage.addActor(hostButton);
 	}
 
 	@Override
