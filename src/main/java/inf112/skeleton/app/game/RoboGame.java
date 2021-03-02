@@ -32,7 +32,6 @@ public class RoboGame extends com.badlogic.gdx.Game {
         programCardDiscarPile = new ProgramDeck();
         optionCardDiscardPile = new OptionDeck();
         players = new LinkedList<>();
-
     }
 
     @Override
