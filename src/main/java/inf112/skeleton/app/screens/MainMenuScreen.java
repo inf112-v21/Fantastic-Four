@@ -92,9 +92,7 @@ public class MainMenuScreen implements Screen {
 		button2.addListener(new ChangeListener() {
 			@Override
 			public void changed(ChangeEvent changeEvent, Actor actor) {
-				Screen multiplayer = new MultiplayerSetupScreen(roboGame);
-				roboGame.setScreen(multiplayer);
-
+				roboGame.initiateMultiplayer();
 			}
 		});
 		button3 = new ImageTextButton("Rules", imageTextButtonStyle);
