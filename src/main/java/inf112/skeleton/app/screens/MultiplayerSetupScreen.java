@@ -2,148 +2,214 @@ package inf112.skeleton.app.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL30;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.scenes.scene2d.EventListener;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
+import com.badlogic.gdx.scenes.scene2d.ui.ImageTextButton.ImageTextButtonStyle;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+
 import inf112.skeleton.app.game.RoboGame;
 
 public class MultiplayerSetupScreen implements Screen {
-    SpriteBatch batch;
-    Texture logo;
-    Texture background;
-    Stage stage;
-    RoboGame roboGame;
-    private BitmapFont font;
-    private TextField ipTextField;
-    private TextField nameTextField;
-    private TextField.TextFieldStyle textFieldStyle;
-    private TextButton okButton, cancelButton;
-    private TextButton.TextButtonStyle textButtonStyle;
-    private Skin skin;
-    private Label.LabelStyle labelStyle;
-    private Label oneCharSizeCalibrationThrowAway;
+	SpriteBatch batch;
+	Texture logo;
+	Texture background;
+	Stage stage;
+	RoboGame roboGame;
 
-    public MultiplayerSetupScreen(RoboGame roboGame) {
-        this.roboGame = roboGame;
+	private BitmapFont fontLabel, fontLabelText;
+	private TextField ipTextField;
+	private TextField nameTextField;
+	private TextField.TextFieldStyle textFieldStyle;
+	private Skin skin;
+	private Label.LabelStyle labelStyle;
+	private Label oneCharSizeCalibrationThrowAway;
+	private ImageTextButton button1, button2;
+	private ImageTextButton.ImageTextButtonStyle imageTextButtonStyle;
 
-        // Initiate key variables
-        batch = new SpriteBatch();
-        logo = new Texture(Gdx.files.internal("logo.png"));
-        background = new Texture(Gdx.files.internal("background.png"));
+	private ImageTextButton.ImageTextButtonStyle imageLabelButtonStyle;
+	private ImageTextButton label1, label2;
 
-        font = new BitmapFont();
-        font.setColor(Color.ORANGE);
+	public MultiplayerSetupScreen(RoboGame roboGame) {
+		this.roboGame = roboGame;
 
-        labelStyle = new Label.LabelStyle();
-        labelStyle.font = font;
+		skin = new Skin();
 
-        // Cursor for the text field
-        oneCharSizeCalibrationThrowAway = new Label("|", labelStyle);
-        Pixmap cursorColor = new Pixmap((int) oneCharSizeCalibrationThrowAway.getWidth(),
-                (int) oneCharSizeCalibrationThrowAway.getHeight(),
-                Pixmap.Format.RGB888);
-        cursorColor.setColor(Color.GRAY);
-        cursorColor.fill();
+		// Create skin
+		FileHandle fileHandle = Gdx.files.internal("src/main/resources/skin/uiskin.json");
+		FileHandle atlasFile = fileHandle.sibling("uiskin.atlas");
+		if (atlasFile.exists()) {
+			Gdx.app.log("MyGame", "atlas file is loaded");
+			skin.addRegions(new TextureAtlas(atlasFile));
+		} else {
+			Gdx.app.log("MyGame", "atlas file is NOT loaded");
+		}
 
-        textFieldStyle = new TextField.TextFieldStyle();
-        textFieldStyle.font = new BitmapFont();
-        textFieldStyle.font.setColor(Color.WHITE);
-        textFieldStyle.messageFontColor = new Color(Color.GRAY);
-        textFieldStyle.fontColor = new Color(Color.RED);
-        textFieldStyle.cursor = new Image(new Texture(cursorColor)).getDrawable();
+		// Initiate key variables
+		batch = new SpriteBatch();
 
-        ipTextField = new TextField("Enter IP", textFieldStyle);
-        ipTextField.setX(200);
-        ipTextField.setY(200);
+		logo = new Texture(Gdx.files.internal("logo.png"));
+		background = new Texture(Gdx.files.internal("background.png"));
 
-        nameTextField = new TextField("Enter name", textFieldStyle);
-        nameTextField.setX(200);
-        nameTextField.setY(250);
+		// Font section
+		fontLabel = new BitmapFont(Gdx.files.internal("src/main/resources/skin/font-export.fnt"), false);
+		fontLabelText = new BitmapFont(Gdx.files.internal("src/main/resources/skin/font-export.fnt"), false);
+		fontLabelText.setColor(Color.WHITE);
 
-        textButtonStyle = new TextButton.TextButtonStyle();
-        textButtonStyle.font = font;
+		labelStyle = new Label.LabelStyle();
+		labelStyle.font = fontLabel;
 
+		// Cursor for the text field
+		oneCharSizeCalibrationThrowAway = new Label("|", labelStyle);
+		Pixmap cursorColor = new Pixmap((int) oneCharSizeCalibrationThrowAway.getWidth(),
+				(int) oneCharSizeCalibrationThrowAway.getHeight(), Pixmap.Format.RGB888);
+		cursorColor.setColor(Color.GRAY);
+		cursorColor.fill();
 
-        okButton = new TextButton("OK", textButtonStyle);
-        okButton.setX(100);
-        okButton.setY(100);
-        okButton.addListener(new ChangeListener() {
-            @Override
-            public void changed(ChangeEvent changeEvent, Actor actor) {
-                System.out.println(nameTextField.getText() + " has IP " + ipTextField.getText());
-            }
-        });
+		// Elements creation
+		textFieldStyle = new TextField.TextFieldStyle();
+		textFieldStyle.font = fontLabel;
+		textFieldStyle.fontColor = new Color(Color.GRAY);
+		textFieldStyle.focusedFontColor = new Color(Color.DARK_GRAY);
+		textFieldStyle.cursor = new Image(new Texture(cursorColor)).getDrawable();
+		textFieldStyle.background = skin.getDrawable("textfield");
 
-        cancelButton = new TextButton("Cancel", textButtonStyle);
-        cancelButton.setX(150);
-        cancelButton.setY(100);
-        cancelButton.addListener(new ChangeListener() {
-            @Override
-            public void changed(ChangeEvent changeEvent, Actor actor) {
-                Gdx.app.exit();
-            }
-        });
-        skin = new Skin();
+		ipTextField = new TextField("Enter IP", textFieldStyle);
+		ipTextField.addListener(new ClickListener() {
+			@Override
+			public void clicked(InputEvent event, float x, float y) {
+				super.clicked(event, x, y);
+				ipTextField.setText("");
+			}
+		});
+		ipTextField.setX(200);
+		ipTextField.setY(170);
+		ipTextField.setSize(300, 50);
 
-        stage = new Stage();
-        stage.addActor(ipTextField);
-        stage.addActor(nameTextField);
-        stage.addActor(okButton);
-        stage.addActor(cancelButton);
+		nameTextField = new TextField("Enter name", textFieldStyle);
+		nameTextField.addListener(new ClickListener() {
+			@Override
+			public void clicked(InputEvent event, float x, float y) {
+				super.clicked(event, x, y);
+				nameTextField.setText("");
+			}
+		});
+		nameTextField.setX(200);
+		nameTextField.setY(230);
+		nameTextField.setSize(300, 50);
 
-        Gdx.input.setInputProcessor(stage);
-    }
+		imageTextButtonStyle = new ImageTextButtonStyle();
+		imageTextButtonStyle.up = skin.newDrawable("panel2", Color.GRAY);
+		imageTextButtonStyle.down = skin.newDrawable("panel2"); // Set image for pressed
+		imageTextButtonStyle.over = skin.newDrawable("panel2", Color.BLUE); // set image for mouse over
+		imageTextButtonStyle.pressedOffsetX = 1;
+		imageTextButtonStyle.pressedOffsetY = -1;
+		imageTextButtonStyle.font = fontLabel;
+		imageTextButtonStyle.fontColor = Color.WHITE;
 
-    @Override
-    public void dispose() {
-        batch.dispose();
-        font.dispose();
-    }
+		button1 = new ImageTextButton("OK", imageTextButtonStyle);
+		button1.setX(170);
+		button1.setY(80);
+		button1.setSize(150, 60);
+		button1.addListener(new ChangeListener() {
+			@Override
+			public void changed(ChangeEvent changeEvent, Actor actor) {
+				Gdx.app.exit();
 
-    @Override
-    public void render(float delta) {
-        Gdx.gl.glClearColor(1, 1, 1, 1);
-        Gdx.gl.glClear(GL30.GL_COLOR_BUFFER_BIT);
-        batch.begin();
-        batch.draw(background, 0, 0, Gdx.app.getGraphics().getWidth(), Gdx.app.getGraphics().getHeight());
-        batch.draw(logo, (Gdx.app.getGraphics().getWidth() / 2) - 200, Gdx.app.getGraphics().getHeight() - 200, 400, 150);
-        font.draw(batch, "IP address:", 100, 220);
-        font.draw(batch, "Nickname:", 100, 270);
-        batch.end();
+			}
+		});
 
-        stage.draw();
-        stage.act();
-    }
+		button2 = new ImageTextButton("Cancel", imageTextButtonStyle);
+		button2.setX(320);
+		button2.setY(80);
+		button2.setSize(150, 60);
 
-    @Override
-    public void show() {
+		button2.addListener(new ChangeListener() {
+			@Override
+			public void changed(ChangeEvent changeEvent, Actor actor) {
+				Screen mainMenu = new MainMenuScreen(roboGame);
+				roboGame.setScreen(mainMenu);
 
-    }
+			}
+		});
 
-    @Override
-    public void resize(int width, int height) {
-    }
+		imageLabelButtonStyle = new ImageTextButtonStyle();
+		imageLabelButtonStyle.up = skin.newDrawable("label"); // Set image for pressed
+		imageLabelButtonStyle.pressedOffsetX = 1;
+		imageLabelButtonStyle.pressedOffsetY = -1;
+		imageLabelButtonStyle.font = fontLabel;
+		imageLabelButtonStyle.fontColor = Color.WHITE;
 
-    @Override
-    public void pause() {
-    }
+		label1 = new ImageTextButton("Nickname", imageLabelButtonStyle);
+		label1.setX(40);
+		label1.setY(230);
+		label1.setSize(150, 30);
 
-    @Override
-    public void resume() {
-    }
+		label2 = new ImageTextButton("Enter IP", imageLabelButtonStyle);
+		label2.setX(40);
+		label2.setY(180);
+		label2.setSize(150, 30);
 
-    @Override
-    public void hide() {
+		stage = new Stage();
+		stage.addActor(button1);
+		stage.addActor(button2);
+		stage.addActor(ipTextField);
+		stage.addActor(nameTextField);
+		stage.addActor(label1);
+		stage.addActor(label2);
 
-    }
+	}
+
+	@Override
+	public void dispose() {
+		batch.dispose();
+	}
+
+	@Override
+	public void render(float delta) {
+		Gdx.gl.glClearColor(1, 1, 1, 1);
+		Gdx.gl.glClear(GL30.GL_COLOR_BUFFER_BIT);
+		batch.begin();
+		batch.draw(background, 0, 0, Gdx.app.getGraphics().getWidth(), Gdx.app.getGraphics().getHeight());
+		batch.draw(logo, (Gdx.app.getGraphics().getWidth() / 2) - 200, Gdx.app.getGraphics().getHeight() - 200, 400,
+				150);
+		batch.end();
+
+		stage.draw();
+		stage.act();
+	}
+
+	@Override
+	public void show() {
+		Gdx.input.setInputProcessor(stage);
+
+	}
+
+	@Override
+	public void resize(int width, int height) {
+	}
+
+	@Override
+	public void pause() {
+	}
+
+	@Override
+	public void resume() {
+	}
+
+	@Override
+	public void hide() {
+
+	}
 
 }

@@ -1,8 +1,9 @@
 package inf112.skeleton.app.assets;
 
+import inf112.skeleton.app.assets.cards.IDeck;
 import inf112.skeleton.app.assets.cards.ProgramCard;
+import inf112.skeleton.app.assets.cards.ProgramDeck;
 
-import java.util.LinkedList;
 import java.util.Stack;
 
 public class ProgramSheet implements IProgramSheet {
@@ -10,7 +11,7 @@ public class ProgramSheet implements IProgramSheet {
     public Boolean poweredDown;
     public int lifeTokens;
     public int damageTokens;
-    public Stack<ProgramCard> programCards;
+    public ProgramDeck programCards;
 
 
     public static final int MIN_NUMBER_OF_LIFE_TOKENS = 0;
@@ -27,7 +28,7 @@ public class ProgramSheet implements IProgramSheet {
         this.poweredDown = false;
         this.lifeTokens = MAX_NUMBER_OF_LIFE_TOKENS;
         this.damageTokens = MIN_NUMBER_OF_DAMAGE_TOKENS;
-        this.programCards = new Stack();
+        this.programCards = new ProgramDeck();
 
     }
 
@@ -61,16 +62,24 @@ public class ProgramSheet implements IProgramSheet {
         this.damageTokens = updatedDamageTokens;
     }
 
-    public Stack<ProgramCard> getCards() {
+    public ProgramDeck getCards() {
         return programCards;
     }
 
-    public void setCards(Stack<ProgramCard> cards) {
+    public void registerCards(ProgramDeck cards) {
+
+
         this.programCards = cards;
     }
 
 
+    public void registerCard() {
+
+    }
 
 
-
+    @Override
+    public ProgramCard getProgramCard(int registerNumber) {
+        return null;
+    }
 }
