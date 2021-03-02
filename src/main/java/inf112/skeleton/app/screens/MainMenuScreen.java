@@ -51,7 +51,7 @@ public class MainMenuScreen implements Screen {
 		// Initiate key variables
 		batch = new SpriteBatch();
 
-		logo = new Texture(Gdx.files.internal("logo.png"));
+		logo = new Texture(Gdx.files.internal("src/main/resources/logo.png"));
 		background = new Texture(Gdx.files.internal("background.png"));
 
 		// Font section
