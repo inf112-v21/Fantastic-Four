@@ -1,25 +1,19 @@
 package inf112.skeleton.app.game;
 
-import com.esotericsoftware.kryonet.Client;
-import com.esotericsoftware.kryonet.Server;
 import inf112.skeleton.app.assets.IPlayer;
 import inf112.skeleton.app.assets.Player;
 import inf112.skeleton.app.assets.cards.ICard;
 import inf112.skeleton.app.assets.cards.IDeck;
-import inf112.skeleton.app.assets.cards.OptionDeck;
 import inf112.skeleton.app.assets.cards.ProgramDeck;
 import inf112.skeleton.app.screens.*;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
 public class RoboGame extends com.badlogic.gdx.Game {
 
     private IDeck programDeck;
-    private IDeck optionDeck;
     private IDeck programCardDiscardPile;
-    private IDeck optionCardDiscardPile;
     private List<IPlayer> players;
     final int MAX_NUMBER_OF_CARDS = 9;
 
@@ -38,10 +32,7 @@ public class RoboGame extends com.badlogic.gdx.Game {
     public RoboGame() {
         programDeck = new ProgramDeck();
         programDeck.createDeck();
-        optionDeck = new OptionDeck();
-        optionDeck.createDeck();
         programCardDiscardPile = new ProgramDeck();
-        optionCardDiscardPile = new OptionDeck();
         players = new LinkedList<>();
     }
 
