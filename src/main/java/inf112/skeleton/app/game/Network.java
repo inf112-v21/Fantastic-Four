@@ -12,7 +12,6 @@ public class Network {
         Kryo kryo = endPoint.getKryo();
         kryo.register(AddPlayer.class);
         kryo.register(PlayCard.class);
-        kryo.register(MovePlayer.class);
     }
 
     static public class AddPlayer {
@@ -21,9 +20,6 @@ public class Network {
 
     static public class PlayCard {
         public Card card;
-    }
-
-    static public class MovePlayer {
-        public int x, y;
+        public Player player;
     }
 }

@@ -80,6 +80,7 @@ public class RoboGame extends com.badlogic.gdx.Game {
 
     public void addPlayer(Player player) {
         players.add(player);
+        System.out.println(players.toString());
     }
 
     @Override
