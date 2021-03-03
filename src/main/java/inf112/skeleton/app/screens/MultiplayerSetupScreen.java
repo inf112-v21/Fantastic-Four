@@ -125,7 +125,7 @@ public class MultiplayerSetupScreen implements Screen {
 		okButton.addListener(new ChangeListener() {
 			@Override
 			public void changed(ChangeEvent changeEvent, Actor actor) {
-				Gdx.app.exit();
+				roboGame.connectToHost(ipTextField.getText(), nameTextField.getText());
 			}
 		});
 
@@ -148,7 +148,7 @@ public class MultiplayerSetupScreen implements Screen {
 		hostButton.addListener(new ChangeListener() {
 			@Override
 			public void changed(ChangeEvent changeEvent, Actor actor) {
-				Gdx.app.exit();
+				roboGame.startHost(nameTextField.getText());
 			}
 		});
 
