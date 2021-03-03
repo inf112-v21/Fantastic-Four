@@ -5,6 +5,8 @@ import inf112.skeleton.app.assets.cards.IDeck;
 import inf112.skeleton.app.assets.cards.ProgramCard;
 import inf112.skeleton.app.assets.cards.ProgramDeck;
 
+import java.util.HashSet;
+
 public class Player implements IPlayer{
 
     private String playerName;
@@ -15,21 +17,10 @@ public class Player implements IPlayer{
 
     public Player(String playerName) {
         this.playerName = playerName;
-        try {
-            this.robot = new Robot();
-        } catch (InstantiationException e) {
-            e.getMessage();
-        }
     }
 
     public Player(String playerName, String robotName) {
         this.playerName = playerName;
-        try {
-            this.robot = new Robot(robotName);
-        } catch (InstantiationException e) {
-            e.getMessage();
-        }
-
     }
     
 
@@ -43,6 +34,18 @@ public class Player implements IPlayer{
         this.receivedProgramCards = (ProgramDeck) cards;
     }
 
+    public void chooseRobot(String robotName) throws InstantiationException {
+        robot = new Robot(robotName);
+    }
+
+
+    public String[] getRobotNames() {
+        return Robot.getRobotNames();
+    }
+
+    public HashSet<String> getAvailableRobots() {
+        return Robot.getAvailableRobots();
+    }
 
 
     @Override
@@ -65,6 +68,23 @@ public class Player implements IPlayer{
     public ProgramCard getProgramCard(int registerNumber) {
         return getRobot().getProgramSheet().getProgramCard(registerNumber);
     }
+
+    public Vector2 getRobotPosition() {
+        return robot.getRobotPosition();
+    }
+
+    public void setRobotPosition(float x, float y) {
+        robot.setRobotPosition(x,y);
+    }
+
+    public Vector2 getArchiveMarkerPosition() {
+        return robot.getArchiveMarkerPosition();
+    }
+
+    public void setArchiveMarkerPosition(float x, float y) {
+        robot.setArchiveMarkerPosition(x,y);
+    }
+
 
     public void moveRobotByProgramCard(ProgramCard programCard) {
         getRobot().moveByProgramCard(programCard);
