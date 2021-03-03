@@ -14,9 +14,8 @@ public class Robot {
 
     private String robotName;
     private ProgramSheet programSheet;
-    //private LocationAndOrientation locationAndOrientation;             The robots coordinates on the board
-    //private Orientation orientation;
-
+    private Vector2 robotPosition;         //The robot's coordinates on the board
+    private Vector2 archiveMarkerPosition;
 
     public Robot() throws InstantiationException {
         if (availableRobots.isEmpty()) throw new InstantiationException("No robots are available...");
@@ -43,6 +42,13 @@ public class Robot {
         this.programSheet = new ProgramSheet();
     }
 
+    public static String[] getRobotNames() {
+        return robotNames;
+    }
+
+    public static HashSet<String> getAvailableRobots() {
+        return availableRobots;
+    }
 
     private void setRobotToUnavailable(String robotName) {
         availableRobots.remove(robotName);
@@ -51,6 +57,22 @@ public class Robot {
 
     public ProgramSheet getProgramSheet() {
         return this.programSheet;
+    }
+
+    public Vector2 getRobotPosition() {
+        return robotPosition;
+    }
+
+    public void setRobotPosition(float x, float y) {
+        this.robotPosition = new Vector2(x,y);
+    }
+
+    public Vector2 getArchiveMarkerPosition() {
+        return archiveMarkerPosition;
+    }
+
+    public void setArchiveMarkerPosition(float x, float y) {
+        this.archiveMarkerPosition = new Vector2(x,y);
     }
 
     @Override
