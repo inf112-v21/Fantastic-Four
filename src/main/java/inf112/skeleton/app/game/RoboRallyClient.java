@@ -15,23 +15,31 @@ public class RoboRallyClient {
 
     RoboGame roboGame;
 
+    static int udpPort = 62210, tcpPort = 62210;
+
     public RoboRallyClient(RoboGame roboGame) {
+        // Create client
         client = new Client();
+
+        // Start the client
         client.start();
         this.roboGame = roboGame;
 
         Network.register(client);
 
+        // Register listeners
         client.addListener(new Listener.ThreadedListener(new Listener() {
-            public void connected (Connection connection) {
 
-            }
-
+            // Add new players to the main file
             public void received (Connection connection, Object object) {
                 if (object instanceof Network.AddPlayer) {
                     Network.AddPlayer msg = (Network.AddPlayer) object;
                     roboGame.addPlayer(((Network.AddPlayer) object).player);
                     return;
+                }
+
+                if (object instanceof Network.ConnectionConfirmed) {
+                    addPlayer();
                 }
             }
         }));
@@ -39,11 +47,13 @@ public class RoboRallyClient {
 
     public void connectToServer(String serverIp, String nickname) {
         try {
-            client.connect(5000, serverIp, 62210);
+            client.connect(5000, serverIp, udpPort, tcpPort);
             this.nickname = nickname;
             roboGame.launchGame();
+            System.out.println("Now connected to " + serverIp + " under the name " + nickname);
         } catch (IOException e) {
             System.out.println("Could not connect to " + serverIp);
+            e.printStackTrace();
         }
     }
 
@@ -51,4 +61,12 @@ public class RoboRallyClient {
 
     }
 
+    public void addPlayer() {
+        Network.AddPlayer addPlayer = new Network.AddPlayer();
+        addPlayer.player = new Player(nickname);
+
+        System.out.println("Sent player register");
+
+        client.sendTCP(addPlayer);
+    }
 }

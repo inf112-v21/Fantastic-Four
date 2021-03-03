@@ -8,7 +8,6 @@ import inf112.skeleton.app.assets.cards.ICard;
 import inf112.skeleton.app.assets.cards.IDeck;
 import inf112.skeleton.app.assets.cards.OptionDeck;
 import inf112.skeleton.app.assets.cards.ProgramDeck;
-import inf112.skeleton.app.mechanics.map.Map;
 import inf112.skeleton.app.screens.*;
 
 import java.util.ArrayList;
@@ -35,7 +34,6 @@ public class RoboGame extends com.badlogic.gdx.Game {
     GameOverScreen gameOverScreen;
     RulesScreen rulesScreen;
     GameActionScreen gameActionScreen;
-    Map map;
 
     public RoboGame() {
         programDeck = new ProgramDeck();
@@ -74,13 +72,17 @@ public class RoboGame extends com.badlogic.gdx.Game {
     }
 
     public void startHost(String nickname) {
-        roboServer = new RoboRallyServer(this);
-        roboServer.startServer(nickname);
+        roboServer = new RoboRallyServer(this, nickname);
+        roboServer.startServer();
     }
 
     public void addPlayer(Player player) {
         players.add(player);
         System.out.println(players.toString());
+    }
+
+    public String getPlayers() {
+        return players.toString();
     }
 
     @Override
