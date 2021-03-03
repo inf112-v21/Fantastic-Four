@@ -55,7 +55,13 @@ public class RoboRallyServer {
                 Player player = connection.player;
 
                 if (object instanceof Network.AddPlayer) {
-                    String name = ((Network.AddPlayer)object).player.getPlayerName();
+                    Player newPlayer = ((Network.AddPlayer)object).player;
+
+                    roboGame.addPlayer(newPlayer);
+                }
+
+                if (object instanceof Network.PlayCard) {
+                    // TODO: Add an action for each card
                 }
             }
         });

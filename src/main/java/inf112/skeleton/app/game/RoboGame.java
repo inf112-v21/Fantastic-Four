@@ -3,6 +3,7 @@ package inf112.skeleton.app.game;
 import com.esotericsoftware.kryonet.Client;
 import com.esotericsoftware.kryonet.Server;
 import inf112.skeleton.app.assets.IPlayer;
+import inf112.skeleton.app.assets.Player;
 import inf112.skeleton.app.assets.cards.ICard;
 import inf112.skeleton.app.assets.cards.IDeck;
 import inf112.skeleton.app.assets.cards.OptionDeck;
@@ -10,6 +11,7 @@ import inf112.skeleton.app.assets.cards.ProgramDeck;
 import inf112.skeleton.app.mechanics.map.Map;
 import inf112.skeleton.app.screens.*;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -74,6 +76,10 @@ public class RoboGame extends com.badlogic.gdx.Game {
     public void startHost(String nickname) {
         roboServer = new RoboRallyServer(this);
         roboServer.startServer(nickname);
+    }
+
+    public void addPlayer(Player player) {
+        players.add(player);
     }
 
     @Override
