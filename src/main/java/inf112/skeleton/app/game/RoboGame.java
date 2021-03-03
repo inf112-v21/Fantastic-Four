@@ -1,14 +1,14 @@
 package inf112.skeleton.app.game;
 
+import com.esotericsoftware.kryonet.Client;
+import com.esotericsoftware.kryonet.Server;
 import inf112.skeleton.app.assets.IPlayer;
 import inf112.skeleton.app.assets.cards.ICard;
 import inf112.skeleton.app.assets.cards.IDeck;
 import inf112.skeleton.app.assets.cards.OptionDeck;
 import inf112.skeleton.app.assets.cards.ProgramDeck;
-import inf112.skeleton.app.screens.GameOverScreen;
-import inf112.skeleton.app.screens.MainMenuScreen;
-import inf112.skeleton.app.screens.MultiplayerSetupScreen;
-import inf112.skeleton.app.screens.RulesScreen;
+import inf112.skeleton.app.mechanics.map.Map;
+import inf112.skeleton.app.screens.*;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -22,11 +22,18 @@ public class RoboGame extends com.badlogic.gdx.Game {
     private List<IPlayer> players;
     final int MAX_NUMBER_OF_CARDS = 9;
 
+    RoboRallyClient roboClient;
+    RoboRallyServer roboServer;
+
+    String currentMap;
+
     //Declaration of screens
     MainMenuScreen mainMenuScreen;
     MultiplayerSetupScreen multiplayerSetupScreen;
     GameOverScreen gameOverScreen;
     RulesScreen rulesScreen;
+    GameActionScreen gameActionScreen;
+    Map map;
 
     public RoboGame() {
         programDeck = new ProgramDeck();
@@ -44,9 +51,29 @@ public class RoboGame extends com.badlogic.gdx.Game {
         setScreen(mainMenuScreen);
     }
 
+    public void launchGame() {
+        gameActionScreen = new GameActionScreen(this, "example.tmx");
+        setScreen(gameActionScreen);
+    }
+
+    public void launchStartScreen() {
+        mainMenuScreen = new MainMenuScreen(this);
+        setScreen(mainMenuScreen);
+    }
+
     public void initiateMultiplayer() {
         multiplayerSetupScreen = new MultiplayerSetupScreen(this);
         setScreen(multiplayerSetupScreen);
+    }
+
+    public void connectToHost(String serverIp, String nickname) {
+        roboClient = new RoboRallyClient(this);
+        roboClient.connectToServer(serverIp, nickname);
+    }
+
+    public void startHost(String nickname) {
+        roboServer = new RoboRallyServer(this);
+        roboServer.startServer(nickname);
     }
 
     @Override

@@ -50,16 +50,13 @@ public class Player implements IPlayer{
         return 0;
     }
 
-    @Override
-    public String toString() {
+    public String getPlayerName() {
         return playerName;
     }
 
     public Robot getRobot() {
         return robot;
     }
-
-
 
     public ProgramCard revealProgramCard(int registerNumber) {
         return getProgramCard(registerNumber);
