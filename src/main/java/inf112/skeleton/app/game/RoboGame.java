@@ -148,6 +148,9 @@ public class RoboGame extends com.badlogic.gdx.Game {
                 PICKCARDS)) {
             if (currentActivity.hasTimedOut()) {
                 for (IPlayer player : players) {
+                    ProgramDeck cards = player.getReceivedProgramCards();
+                    while (cards.deck.size() > 5) cards.deck.pop();
+                    player.getRobot().getProgramSheet().registerCards(cards);
                     // TODO 1: Pick 5 cards for each player
                     // TODO 2: Only pick 5 cards for the players that are not finished
                 }
