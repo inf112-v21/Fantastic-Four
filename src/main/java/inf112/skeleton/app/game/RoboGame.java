@@ -1,7 +1,5 @@
 package inf112.skeleton.app.game;
 
-import com.esotericsoftware.kryonet.Client;
-import com.esotericsoftware.kryonet.Server;
 import inf112.skeleton.app.assets.IPlayer;
 import inf112.skeleton.app.assets.Player;
 import inf112.skeleton.app.assets.cards.ICard;
@@ -10,7 +8,6 @@ import inf112.skeleton.app.assets.cards.OptionDeck;
 import inf112.skeleton.app.assets.cards.ProgramDeck;
 import inf112.skeleton.app.screens.*;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -28,7 +25,7 @@ public class RoboGame extends com.badlogic.gdx.Game {
 
     String currentMap;
 
-    Phase currentPhase;
+    Activity currentActivity;
     boolean gameStarted;
     boolean multiplayer;
 
@@ -39,6 +36,16 @@ public class RoboGame extends com.badlogic.gdx.Game {
     RulesScreen rulesScreen;
     GameActionScreen gameActionScreen;
 
+    /**
+     * Duration of each program card execution in seconds
+     */
+    private final long PROGRAMCARDDURATION;
+
+    /**
+     * The standard duration of each activity that is not instant or unbound
+     */
+    private final long STANDARDDURATION;
+
     public RoboGame() {
         programDeck = new ProgramDeck();
         programDeck.createDeck();
@@ -47,9 +54,11 @@ public class RoboGame extends com.badlogic.gdx.Game {
         programCardDiscardPile = new ProgramDeck();
         optionCardDiscardPile = new OptionDeck();
         players = new LinkedList<>();
-        currentPhase = new Phase(Phase.Phases.OPENMENU, -1, Phase.Phases.INITIALIZE);
+        currentActivity = new Activity(Activity.Activities.OPENMENU, -1);
         multiplayer = false; // Will be changed if the server starts
         gameStarted = false;
+        PROGRAMCARDDURATION = 5;
+        STANDARDDURATION = 1;
     }
 
     @Override
@@ -94,29 +103,96 @@ public class RoboGame extends com.badlogic.gdx.Game {
     }
 
     @Override
-    public void render () {
+    public void render() {
         super.render();
         tick();
     }
 
+    /**
+     * The ticker is called several times a second, via the LibGDX render()-method
+     */
     private void tick() {
-        if (Phase.Phases.OPENMENU.equals(currentPhase.current)) {
+        // TODO Check win conditions before the if-statement
+        System.out.println(currentActivity.current);
+        if (currentActivity.current.equals(Activity.Activities.
+                OPENMENU)) {
             mainMenuScreen = new MainMenuScreen(this);
             setScreen(mainMenuScreen);
-            currentPhase = new Phase(currentPhase.next, -1, Phase.Phases.CHECKMULTIPLAYER);
+            currentActivity = new Activity(Activity.Activities.
+                    WAITFORMENUSELECTION, -1);
         }
-        else if (Phase.Phases.INITIALIZE.equals(currentPhase.current)) {
-            if (gameStarted) currentPhase = new Phase(Phase.Phases.CHECKMULTIPLAYER, -1, Phase.Phases.WAITFORCONNECTIONS);
+        else if (currentActivity.current.equals(Activity.Activities.
+                WAITFORMENUSELECTION)) {
+            if (gameStarted) currentActivity = new Activity(Activity.Activities.CHECKMULTIPLAYER, -1);
         }
-        else if (Phase.Phases.CHECKMULTIPLAYER.equals(currentPhase.current)) {
+        else if (currentActivity.current.equals(Activity.Activities.
+                CHECKMULTIPLAYER)) {
             if (gameStarted) {
-                if (multiplayer) currentPhase = new Phase(Phase.Phases.WAITFORCONNECTIONS, 60, Phase.Phases.PICKBOARD);
-                else currentPhase = new Phase(Phase.Phases.PICKBOARD, -1, Phase.Phases.DEALCARDS);
+                if (multiplayer) currentActivity = new Activity(Activity.Activities.WAITFORCONNECTIONS, STANDARDDURATION);
+                else currentActivity = new Activity(Activity.Activities.PICKBOARD, STANDARDDURATION);
             }
         }
-        else if (Phase.Phases.WAITFORCONNECTIONS.equals(currentPhase.current)) {
-            if (currentPhase.hasTimedOut()) {
-                currentPhase = new Phase(currentPhase.next, -1, Phase.Phases.DEALCARDS);
+        else if (currentActivity.current.equals(Activity.Activities.
+                WAITFORCONNECTIONS)) {
+            if (currentActivity.hasTimedOut()) {
+                // TODO decide if one should add an AI player if noone has connected
+                currentActivity = new Activity(Activity.Activities.PICKBOARD, STANDARDDURATION);
+            }
+        }
+        else if (currentActivity.current.equals(Activity.Activities.
+                PICKBOARD)) {
+            if (currentActivity.hasTimedOut()) {
+                currentActivity = new Activity(Activity.Activities.DEALCARDS, -1);
+            }
+        }
+        else if (currentActivity.current.equals(Activity.Activities.
+                DEALCARDS)) {
+            dealProgramCards();
+            currentActivity = new Activity(Activity.Activities.PICKCARDS, STANDARDDURATION);
+        }
+        else if (currentActivity.current.equals(Activity.Activities.
+                PICKCARDS)) {
+            if (currentActivity.hasTimedOut()) {
+                for (IPlayer player : players) {
+                    // TODO 1: Pick 5 cards for each player
+                    // TODO 2: Only pick 5 cards for the players that are not finished
+                }
+                currentActivity = new Activity(Activity.Activities.EXECUTEPROGRAMCARDS1, PROGRAMCARDDURATION);
+            }
+        }
+        else if (currentActivity.current.equals(Activity.Activities.
+                EXECUTEPROGRAMCARDS1)) {
+            for (IPlayer player : players) player.executeProgramCard(1);
+            if (currentActivity.hasTimedOut()) {
+                currentActivity = new Activity(Activity.Activities.EXECUTEPROGRAMCARDS2, PROGRAMCARDDURATION);
+            }
+        }
+        else if (currentActivity.current.equals(Activity.Activities.
+                EXECUTEPROGRAMCARDS2)) {
+            for (IPlayer player : players) player.executeProgramCard(2);
+            if (currentActivity.hasTimedOut()) {
+                currentActivity = new Activity(Activity.Activities.EXECUTEPROGRAMCARDS3, PROGRAMCARDDURATION);
+            }
+        }
+        else if (currentActivity.current.equals(Activity.Activities.
+                EXECUTEPROGRAMCARDS3)) {
+            for (IPlayer player : players) player.executeProgramCard(3);
+            if (currentActivity.hasTimedOut()) {
+                currentActivity = new Activity(Activity.Activities.EXECUTEPROGRAMCARDS4, PROGRAMCARDDURATION);
+            }
+        }
+        else if (currentActivity.current.equals(Activity.Activities.
+                EXECUTEPROGRAMCARDS4)) {
+            for (IPlayer player : players) player.executeProgramCard(4);
+            if (currentActivity.hasTimedOut()) {
+                currentActivity = new Activity(Activity.Activities.EXECUTEPROGRAMCARDS5, PROGRAMCARDDURATION);
+            }
+        }
+        else if (currentActivity.current.equals(Activity.Activities.
+                EXECUTEPROGRAMCARDS5)) {
+            for (IPlayer player : players) player.executeProgramCard(5);
+            if (currentActivity.hasTimedOut()) {
+                currentActivity = new Activity(Activity.Activities.EXECUTEPROGRAMCARDS5, PROGRAMCARDDURATION);
             }
         }
     }
