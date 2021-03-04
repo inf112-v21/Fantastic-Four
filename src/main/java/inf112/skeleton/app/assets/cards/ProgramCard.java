@@ -20,6 +20,23 @@ public class ProgramCard extends AbstractCard {
         UTURN
     }
 
+    /**
+     *
+     * @param programCardType
+     * @return [Number of steps, degrees to turn]
+     */
+    public static int[] interpretType(ProgramCardType programCardType) {
+        if (programCardType.equals(ProgramCardType.MOVE1)) return new int[]{1, 0};
+        if (programCardType.equals(ProgramCardType.MOVE2)) return new int[]{2, 0};
+        if (programCardType.equals(ProgramCardType.MOVE3)) return new int[]{3, 0};
+        if (programCardType.equals(ProgramCardType.BACKUP)) return new int[]{-1, 0};
+        if (programCardType.equals(ProgramCardType.ROTATELEFT)) return new int[]{0, 90};
+        if (programCardType.equals(ProgramCardType.ROTATERIGHT)) return new int[]{0, -90};
+        if (programCardType.equals(ProgramCardType.UTURN)) return new int[]{0, 180};
+        return new int[]{0, 0};
+    }
+
+    @Override
     public int getPriorityNumber() {
         return priorityNumber;
     }
@@ -33,20 +50,12 @@ public class ProgramCard extends AbstractCard {
     }
 
 	@Override
-	public int getPoint() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public String getName() {
+	public String getCardName() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
-	public int move() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
+	public ProgramCardType getProgramCardType() {
+        return programCardType;
+    }
 }
