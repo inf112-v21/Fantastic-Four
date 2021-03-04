@@ -14,6 +14,10 @@ public abstract class AbstractDeck implements IDeck {
 		deck.add(card);
 	}
 
+	public List getDeck() {
+		return deck;
+	}
+
 	@Override
 	public Iterable<? extends ICard> getCards() {
 		return this.deck;
