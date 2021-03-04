@@ -3,12 +3,13 @@ package inf112.skeleton.app.assets.cards;
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Stack;
 
 class CardDeckTest {
 
 	CardDeck cardDeck = new CardDeck();
-	Stack<ICard> testDeck = cardDeck.createDeck();
+	List<ICard> testDeck = cardDeck.createDeck();
 
 	@Test
 	void testSizeOfDeck() {
@@ -17,7 +18,7 @@ class CardDeckTest {
 
 	@Test
 	void testSizeOfDeckAfterDraw() {
-		Stack<ICard> testDrawDeck = cardDeck.drawCardsFromDeck(5, testDeck);
+		List<ICard> testDrawDeck = cardDeck.draw(5);
 		assertEquals(79, testDeck.size());
 		assertEquals(5, testDrawDeck.size());
 	}
