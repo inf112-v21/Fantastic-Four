@@ -1,6 +1,7 @@
 package inf112.skeleton.app.assets;
 
 import inf112.skeleton.app.assets.cards.IDeck;
+import inf112.skeleton.app.assets.cards.ProgramCard;
 
 public interface IPlayer {
     /**
@@ -14,4 +15,16 @@ public interface IPlayer {
      * @return The damage this player has gotten
      */
     int getDamage();
+
+    void executeProgramCard(int i);
+
+    String getPlayerName();
+
+    Robot getRobot();
+
+    ProgramCard revealProgramCard(int registerNumber);
+
+    ProgramCard getProgramCard(int registerNumber);
+
+    void moveRobotByProgramCard(ProgramCard programCard);
 }
