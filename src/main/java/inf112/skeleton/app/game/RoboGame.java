@@ -119,6 +119,7 @@ public class RoboGame extends com.badlogic.gdx.Game {
     private void tick() {
         // TODO Check win conditions before the if-statement
 
+        // Print the current activity, TODO remove when the game is finished
         if (lastActivityType != currentActivity.currentType) {
             System.out.println(currentActivity.currentType);
             lastActivityType = currentActivity.currentType;
@@ -165,7 +166,7 @@ public class RoboGame extends com.badlogic.gdx.Game {
             if (currentActivity.hasTimedOut()) {
                 for (IPlayer player : players) {
                     ProgramDeck cards = player.getReceivedProgramCards();
-                    while (cards.deck.size() > 5) cards.deck.pop();
+                    while (cards.deck.size() > 5) cards.deck.remove(0);
                     player.getRobot().getProgramSheet().registerCards(cards);
                     // TODO 1: Pick 5 cards for each player
                     // TODO 2: Only pick 5 cards for the players that are not finished
