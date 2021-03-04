@@ -22,7 +22,8 @@ public class Activity {
         EXECUTEPROGRAMCARDS2,
         EXECUTEPROGRAMCARDS3,
         EXECUTEPROGRAMCARDS4,
-        EXECUTEPROGRAMCARDS5
+        EXECUTEPROGRAMCARDS5,
+        HALT
     }
 
     /**
