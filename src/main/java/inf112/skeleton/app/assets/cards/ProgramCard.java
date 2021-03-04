@@ -2,12 +2,22 @@ package inf112.skeleton.app.assets.cards;
 
 public class ProgramCard extends AbstractCard {
 
-    private String type;
+    private ProgramcardType ProgramcardType;
     private int cardValue;
 
-    public ProgramCard(String type, int cardValue) {
-        this.type = type;
+    public ProgramCard(ProgramcardType ProgramcardType, int cardValue) {
+        this.ProgramcardType = ProgramcardType;
         this.cardValue = cardValue;
+    }
+
+    enum ProgramcardType {
+        MOVE1,
+        MOVE2,
+        MOVE3,
+        BACKUP,
+        ROTATELEFT,
+        ROTATERIGHT,
+        UTURN
     }
 
     public int getCardValue() {
@@ -17,7 +27,7 @@ public class ProgramCard extends AbstractCard {
     @Override
     public String toString() {
         return "ProgramCard{" +
-                "type='" + type + '\'' +
+                "type='" + ProgramcardType + '\'' +
                 ", cardValue=" + cardValue +
                 '}';
     }
