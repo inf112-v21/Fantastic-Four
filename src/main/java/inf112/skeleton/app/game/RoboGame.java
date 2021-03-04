@@ -6,6 +6,8 @@ import inf112.skeleton.app.assets.cards.ICard;
 import inf112.skeleton.app.assets.cards.IDeck;
 import inf112.skeleton.app.assets.cards.ProgramDeck;
 import inf112.skeleton.app.screens.*;
+import inf112.skeleton.app.game.Activity.ActivityType;
+
 
 import java.util.LinkedList;
 import java.util.List;
@@ -23,7 +25,7 @@ public class RoboGame extends com.badlogic.gdx.Game {
     String currentMap;
 
     Activity currentActivity;
-    Activity.Activities lastActivity;
+    ActivityType lastActivityType;
 
     boolean gameStarted;
     boolean multiplayer;
@@ -45,17 +47,23 @@ public class RoboGame extends com.badlogic.gdx.Game {
      */
     private final long STANDARDDURATION;
 
+    /**
+     * How long to wait for incoming connections
+     */
+    private final long WAITCONNECTIONDURATION;
+
     public RoboGame() {
         programDeck = new ProgramDeck();
         programDeck.createDeck();
         programCardDiscardPile = new ProgramDeck();
         players = new LinkedList<>();
-        currentActivity = new Activity(Activity.Activities.OPENMENU, -1);
-        lastActivity = Activity.Activities.EXECUTEPROGRAMCARDS5;
+        currentActivity = new Activity(ActivityType.OPENMENU, -1);
+        lastActivityType = ActivityType.EXECUTEPROGRAMCARDS5;
         multiplayer = false; // Will be changed if the server starts
         gameStarted = false;
         PROGRAMCARDDURATION = 1;
         STANDARDDURATION = 1;
+        WAITCONNECTIONDURATION = 60;
     }
 
     @Override
@@ -111,48 +119,48 @@ public class RoboGame extends com.badlogic.gdx.Game {
     private void tick() {
         // TODO Check win conditions before the if-statement
 
-        if (lastActivity != currentActivity.current) {
-            System.out.println(currentActivity.current);
-            lastActivity = currentActivity.current;
+        if (lastActivityType != currentActivity.currentType) {
+            System.out.println(currentActivity.currentType);
+            lastActivityType = currentActivity.currentType;
         }
 
-        if (currentActivity.current.equals(Activity.Activities.
+        if (currentActivity.currentType.equals(ActivityType.
                 OPENMENU)) {
             mainMenuScreen = new MainMenuScreen(this);
             setScreen(mainMenuScreen);
-            currentActivity = new Activity(Activity.Activities.
+            currentActivity = new Activity(ActivityType.
                     WAITFORMENUSELECTION, -1);
         }
-        else if (currentActivity.current.equals(Activity.Activities.
+        else if (currentActivity.currentType.equals(ActivityType.
                 WAITFORMENUSELECTION)) {
-            if (gameStarted) currentActivity = new Activity(Activity.Activities.CHECKMULTIPLAYER, -1);
+            if (gameStarted) currentActivity = new Activity(ActivityType.CHECKMULTIPLAYER, -1);
         }
-        else if (currentActivity.current.equals(Activity.Activities.
+        else if (currentActivity.currentType.equals(ActivityType.
                 CHECKMULTIPLAYER)) {
             if (gameStarted) {
-                if (multiplayer) currentActivity = new Activity(Activity.Activities.WAITFORCONNECTIONS, STANDARDDURATION);
-                else currentActivity = new Activity(Activity.Activities.PICKBOARD, STANDARDDURATION);
+                if (multiplayer) currentActivity = new Activity(ActivityType.WAITFORCONNECTIONS, WAITCONNECTIONDURATION);
+                else currentActivity = new Activity(ActivityType.PICKBOARD, STANDARDDURATION);
             }
         }
-        else if (currentActivity.current.equals(Activity.Activities.
+        else if (currentActivity.currentType.equals(ActivityType.
                 WAITFORCONNECTIONS)) {
             if (currentActivity.hasTimedOut()) {
                 // TODO decide if one should add an AI player if noone has connected
-                currentActivity = new Activity(Activity.Activities.PICKBOARD, STANDARDDURATION);
+                currentActivity = new Activity(ActivityType.PICKBOARD, STANDARDDURATION);
             }
         }
-        else if (currentActivity.current.equals(Activity.Activities.
+        else if (currentActivity.currentType.equals(ActivityType.
                 PICKBOARD)) {
             if (currentActivity.hasTimedOut()) {
-                currentActivity = new Activity(Activity.Activities.DEALCARDS, -1);
+                currentActivity = new Activity(ActivityType.DEALCARDS, -1);
             }
         }
-        else if (currentActivity.current.equals(Activity.Activities.
+        else if (currentActivity.currentType.equals(ActivityType.
                 DEALCARDS)) {
             dealProgramCards();
-            currentActivity = new Activity(Activity.Activities.PICKCARDS, STANDARDDURATION);
+            currentActivity = new Activity(ActivityType.PICKCARDS, STANDARDDURATION);
         }
-        else if (currentActivity.current.equals(Activity.Activities.
+        else if (currentActivity.currentType.equals(ActivityType.
                 PICKCARDS)) {
             if (currentActivity.hasTimedOut()) {
                 for (IPlayer player : players) {
@@ -162,42 +170,42 @@ public class RoboGame extends com.badlogic.gdx.Game {
                     // TODO 1: Pick 5 cards for each player
                     // TODO 2: Only pick 5 cards for the players that are not finished
                 }
-                currentActivity = new Activity(Activity.Activities.EXECUTEPROGRAMCARDS1, PROGRAMCARDDURATION);
+                currentActivity = new Activity(ActivityType.EXECUTEPROGRAMCARDS1, PROGRAMCARDDURATION);
             }
         }
-        else if (currentActivity.current.equals(Activity.Activities.
+        else if (currentActivity.currentType.equals(ActivityType.
                 EXECUTEPROGRAMCARDS1)) {
             for (IPlayer player : players) player.executeProgramCard(1);
             if (currentActivity.hasTimedOut()) {
-                currentActivity = new Activity(Activity.Activities.EXECUTEPROGRAMCARDS2, PROGRAMCARDDURATION);
+                currentActivity = new Activity(ActivityType.EXECUTEPROGRAMCARDS2, PROGRAMCARDDURATION);
             }
         }
-        else if (currentActivity.current.equals(Activity.Activities.
+        else if (currentActivity.currentType.equals(ActivityType.
                 EXECUTEPROGRAMCARDS2)) {
             for (IPlayer player : players) player.executeProgramCard(2);
             if (currentActivity.hasTimedOut()) {
-                currentActivity = new Activity(Activity.Activities.EXECUTEPROGRAMCARDS3, PROGRAMCARDDURATION);
+                currentActivity = new Activity(ActivityType.EXECUTEPROGRAMCARDS3, PROGRAMCARDDURATION);
             }
         }
-        else if (currentActivity.current.equals(Activity.Activities.
+        else if (currentActivity.currentType.equals(ActivityType.
                 EXECUTEPROGRAMCARDS3)) {
             for (IPlayer player : players) player.executeProgramCard(3);
             if (currentActivity.hasTimedOut()) {
-                currentActivity = new Activity(Activity.Activities.EXECUTEPROGRAMCARDS4, PROGRAMCARDDURATION);
+                currentActivity = new Activity(ActivityType.EXECUTEPROGRAMCARDS4, PROGRAMCARDDURATION);
             }
         }
-        else if (currentActivity.current.equals(Activity.Activities.
+        else if (currentActivity.currentType.equals(ActivityType.
                 EXECUTEPROGRAMCARDS4)) {
             for (IPlayer player : players) player.executeProgramCard(4);
             if (currentActivity.hasTimedOut()) {
-                currentActivity = new Activity(Activity.Activities.EXECUTEPROGRAMCARDS5, PROGRAMCARDDURATION);
+                currentActivity = new Activity(ActivityType.EXECUTEPROGRAMCARDS5, PROGRAMCARDDURATION);
             }
         }
-        else if (currentActivity.current.equals(Activity.Activities.
+        else if (currentActivity.currentType.equals(ActivityType.
                 EXECUTEPROGRAMCARDS5)) {
             for (IPlayer player : players) player.executeProgramCard(5);
             if (currentActivity.hasTimedOut()) {
-                currentActivity = new Activity(Activity.Activities.EXECUTEPROGRAMCARDS5, PROGRAMCARDDURATION);
+                currentActivity = new Activity(ActivityType.EXECUTEPROGRAMCARDS5, PROGRAMCARDDURATION);
             }
         }
     }
