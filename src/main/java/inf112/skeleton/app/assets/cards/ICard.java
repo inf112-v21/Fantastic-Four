@@ -2,10 +2,8 @@ package inf112.skeleton.app.assets.cards;
 
 public interface ICard {
 
-	int getPoint();
+	int getPriorityNumber();
 
-	String getName();
-
-	int move();
+	String getCardName();
 
 }
