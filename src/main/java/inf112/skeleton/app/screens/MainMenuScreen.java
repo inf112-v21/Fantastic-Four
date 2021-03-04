@@ -80,7 +80,7 @@ public class MainMenuScreen implements Screen {
 		button1.addListener(new ChangeListener() {
 			@Override
 			public void changed(ChangeEvent changeEvent, Actor actor) {
-				Gdx.app.exit();
+				roboGame.launchGame();
 			}
 		});
 

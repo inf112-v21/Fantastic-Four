@@ -28,6 +28,10 @@ public class RoboGame extends com.badlogic.gdx.Game {
 
     String currentMap;
 
+    Phase currentPhase;
+    boolean gameStarted;
+    boolean multiplayer;
+
     //Declaration of screens
     MainMenuScreen mainMenuScreen;
     MultiplayerSetupScreen multiplayerSetupScreen;
@@ -43,17 +47,20 @@ public class RoboGame extends com.badlogic.gdx.Game {
         programCardDiscardPile = new ProgramDeck();
         optionCardDiscardPile = new OptionDeck();
         players = new LinkedList<>();
+        currentPhase = new Phase(Phase.Phases.OPENMENU, -1, Phase.Phases.INITIALIZE);
+        multiplayer = false; // Will be changed if the server starts
+        gameStarted = false;
     }
 
     @Override
     public void create() {
-        mainMenuScreen = new MainMenuScreen(this);
-        setScreen(mainMenuScreen);
+        tick();
     }
 
     public void launchGame() {
         gameActionScreen = new GameActionScreen(this, "example.tmx");
         setScreen(gameActionScreen);
+        gameStarted = true;
     }
 
     public void launchStartScreen() {
@@ -64,6 +71,7 @@ public class RoboGame extends com.badlogic.gdx.Game {
     public void initiateMultiplayer() {
         multiplayerSetupScreen = new MultiplayerSetupScreen(this);
         setScreen(multiplayerSetupScreen);
+        multiplayer = true;
     }
 
     public void connectToHost(String serverIp, String nickname) {
@@ -88,6 +96,29 @@ public class RoboGame extends com.badlogic.gdx.Game {
     @Override
     public void render () {
         super.render();
+        tick();
+    }
+
+    private void tick() {
+        if (Phase.Phases.OPENMENU.equals(currentPhase.current)) {
+            mainMenuScreen = new MainMenuScreen(this);
+            setScreen(mainMenuScreen);
+            currentPhase = new Phase(currentPhase.next, -1, Phase.Phases.CHECKMULTIPLAYER);
+        }
+        else if (Phase.Phases.INITIALIZE.equals(currentPhase.current)) {
+            if (gameStarted) currentPhase = new Phase(Phase.Phases.CHECKMULTIPLAYER, -1, Phase.Phases.WAITFORCONNECTIONS);
+        }
+        else if (Phase.Phases.CHECKMULTIPLAYER.equals(currentPhase.current)) {
+            if (gameStarted) {
+                if (multiplayer) currentPhase = new Phase(Phase.Phases.WAITFORCONNECTIONS, 60, Phase.Phases.PICKBOARD);
+                else currentPhase = new Phase(Phase.Phases.PICKBOARD, -1, Phase.Phases.DEALCARDS);
+            }
+        }
+        else if (Phase.Phases.WAITFORCONNECTIONS.equals(currentPhase.current)) {
+            if (currentPhase.hasTimedOut()) {
+                currentPhase = new Phase(currentPhase.next, -1, Phase.Phases.DEALCARDS);
+            }
+        }
     }
 
     @Override
