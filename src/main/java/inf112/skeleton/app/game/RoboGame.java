@@ -23,6 +23,8 @@ public class RoboGame extends com.badlogic.gdx.Game {
     String currentMap;
 
     Activity currentActivity;
+    Activity.Activities lastActivity;
+
     boolean gameStarted;
     boolean multiplayer;
 
@@ -49,9 +51,10 @@ public class RoboGame extends com.badlogic.gdx.Game {
         programCardDiscardPile = new ProgramDeck();
         players = new LinkedList<>();
         currentActivity = new Activity(Activity.Activities.OPENMENU, -1);
+        lastActivity = Activity.Activities.EXECUTEPROGRAMCARDS5;
         multiplayer = false; // Will be changed if the server starts
         gameStarted = false;
-        PROGRAMCARDDURATION = 5;
+        PROGRAMCARDDURATION = 1;
         STANDARDDURATION = 1;
     }
 
@@ -107,7 +110,12 @@ public class RoboGame extends com.badlogic.gdx.Game {
      */
     private void tick() {
         // TODO Check win conditions before the if-statement
-        System.out.println(currentActivity.current);
+
+        if (lastActivity != currentActivity.current) {
+            System.out.println(currentActivity.current);
+            lastActivity = currentActivity.current;
+        }
+
         if (currentActivity.current.equals(Activity.Activities.
                 OPENMENU)) {
             mainMenuScreen = new MainMenuScreen(this);
