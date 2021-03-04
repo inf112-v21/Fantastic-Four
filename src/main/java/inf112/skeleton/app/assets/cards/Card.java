@@ -14,18 +14,13 @@ public class Card implements ICard {
 	}
 
 	@Override
-	public int getPoint() {
+	public int getPriorityNumber() {
 		return point;
 	}
 
 	@Override
-	public String getName() {
+	public String getCardName() {
 		return name;
-	}
-
-	@Override
-	public int move() {
-		return move;
 	}
 
 }
