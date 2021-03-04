@@ -1,16 +1,18 @@
 package inf112.skeleton.app.game;
 
-
-public class Phase {
+/**
+ * An activity is something that the RoboGame application has to perform. This includes handling the UI, handling the
+ * rules of RoboRally and any other activities that has to happen at a certain time
+ */
+public class Activity {
     long startingTime;
     long duration;
-    Phases current;
-    Phases next;
+    Activities current;
     final int MILLIS_TO_SECONDS = 1000;
 
-    enum Phases {
+    enum Activities {
         OPENMENU,
-        INITIALIZE,
+        WAITFORMENUSELECTION,
         CHECKMULTIPLAYER,
         WAITFORCONNECTIONS,
         PICKBOARD,
@@ -25,20 +27,18 @@ public class Phase {
 
     /**
      *
-     * @param phase The current phase
-     * @param duration Duration of this phase in seconds, -1 if there is no bound
-     * @param next The next phase to occur
+     * @param activity The current activity
+     * @param duration Duration of this phase in seconds, use a negative number if there is no bound.
      */
-    public Phase(Phases phase, long duration, Phases next) {
-        current = phase;
+    public Activity(Activities activity, long duration) {
+        current = activity;
         startingTime = System.currentTimeMillis();
         this.duration = duration;
-        this.next = next;
     }
 
     /**
      *
-     * @return True if the current phase has timed out
+     * @return True if the current activity has timed out
      */
     public boolean hasTimedOut() {
         return duration > 0 && (startingTime + duration * MILLIS_TO_SECONDS) <= System.currentTimeMillis();
