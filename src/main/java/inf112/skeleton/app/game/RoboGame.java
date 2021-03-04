@@ -76,6 +76,10 @@ public class RoboGame extends com.badlogic.gdx.Game {
         gameActionScreen = new GameActionScreen(this, "example.tmx");
         setScreen(gameActionScreen);
         gameStarted = true;
+        Player player = new Player("Morten");
+        player.chooseRobot("Daniel");
+        players.add(player); // TODO remove and add players properly
+
     }
 
     public void launchStartScreen() {
@@ -177,38 +181,57 @@ public class RoboGame extends com.badlogic.gdx.Game {
         }
         else if (currentActivity.currentType.equals(ActivityType.
                 EXECUTEPROGRAMCARDS1)) {
-            for (IPlayer player : players) player.moveRobotByProgramCard(player.getProgramCard(1));
+            for (IPlayer player : players) {
+                player.moveRobotByProgramCard(player.getProgramCard(0));
+                currentActivity = new Activity(ActivityType.EXECUTEPROGRAMCARDS2, PROGRAMCARDDURATION);
+            }
             if (currentActivity.hasTimedOut()) {
                 currentActivity = new Activity(ActivityType.EXECUTEPROGRAMCARDS2, PROGRAMCARDDURATION);
             }
         }
         else if (currentActivity.currentType.equals(ActivityType.
                 EXECUTEPROGRAMCARDS2)) {
-            for (IPlayer player : players) player.moveRobotByProgramCard(player.getProgramCard(2));
+            for (IPlayer player : players) {
+                player.moveRobotByProgramCard(player.getProgramCard(1));
+                currentActivity = new Activity(ActivityType.EXECUTEPROGRAMCARDS3, PROGRAMCARDDURATION);
+            }
             if (currentActivity.hasTimedOut()) {
                 currentActivity = new Activity(ActivityType.EXECUTEPROGRAMCARDS3, PROGRAMCARDDURATION);
             }
         }
         else if (currentActivity.currentType.equals(ActivityType.
                 EXECUTEPROGRAMCARDS3)) {
-            for (IPlayer player : players) player.moveRobotByProgramCard(player.getProgramCard(3));
+            for (IPlayer player : players) {
+                player.moveRobotByProgramCard(player.getProgramCard(2));
+                currentActivity = new Activity(ActivityType.EXECUTEPROGRAMCARDS4, PROGRAMCARDDURATION);
+            }
             if (currentActivity.hasTimedOut()) {
                 currentActivity = new Activity(ActivityType.EXECUTEPROGRAMCARDS4, PROGRAMCARDDURATION);
             }
         }
         else if (currentActivity.currentType.equals(ActivityType.
                 EXECUTEPROGRAMCARDS4)) {
-            for (IPlayer player : players) player.moveRobotByProgramCard(player.getProgramCard(4));
+            for (IPlayer player : players) {
+                player.moveRobotByProgramCard(player.getProgramCard(3));
+                currentActivity = new Activity(ActivityType.EXECUTEPROGRAMCARDS5, PROGRAMCARDDURATION);
+            }
             if (currentActivity.hasTimedOut()) {
                 currentActivity = new Activity(ActivityType.EXECUTEPROGRAMCARDS5, PROGRAMCARDDURATION);
             }
         }
         else if (currentActivity.currentType.equals(ActivityType.
                 EXECUTEPROGRAMCARDS5)) {
-            for (IPlayer player : players) player.moveRobotByProgramCard(player.getProgramCard(5));
-            if (currentActivity.hasTimedOut()) {
-                currentActivity = new Activity(ActivityType.EXECUTEPROGRAMCARDS5, PROGRAMCARDDURATION);
+            for (IPlayer player : players) {
+                player.moveRobotByProgramCard(player.getProgramCard(4));
+                currentActivity = new Activity(ActivityType.HALT, PROGRAMCARDDURATION);
             }
+            if (currentActivity.hasTimedOut()) {
+                currentActivity = new Activity(ActivityType.HALT, STANDARDDURATION);
+            }
+        }
+        else if (currentActivity.currentType.equals(ActivityType.
+                HALT)) {
+                // No content
         }
     }
 
