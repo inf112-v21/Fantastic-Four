@@ -7,10 +7,10 @@ package inf112.skeleton.app.game;
 public class Activity {
     long startingTime;
     long duration;
-    Activities current;
+    ActivityType currentType;
     final int MILLIS_TO_SECONDS = 1000;
 
-    enum Activities {
+    enum ActivityType {
         OPENMENU,
         WAITFORMENUSELECTION,
         CHECKMULTIPLAYER,
@@ -30,8 +30,8 @@ public class Activity {
      * @param activity The current activity
      * @param duration Duration of this phase in seconds, use a negative number if there is no bound.
      */
-    public Activity(Activities activity, long duration) {
-        current = activity;
+    public Activity(ActivityType activity, long duration) {
+        currentType = activity;
         startingTime = System.currentTimeMillis();
         this.duration = duration;
     }
