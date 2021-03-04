@@ -1,12 +1,13 @@
 package inf112.skeleton.app.assets.cards;
 
+import java.util.List;
 import java.util.Stack;
 
 public interface IDeck {
     /**
      * Create a deck of the appropriate ICards
      */
-    Stack<ICard> createDeck();
+    List<ICard> createDeck();
 
     /**
      * Add a single card to this deck
@@ -22,7 +23,7 @@ public interface IDeck {
     /**
      * Draw 1 or more cards from this deck
      */
-    Stack<ICard> draw(int quantity);
+    List<ICard> draw(int quantity);
 
     /**
      *
