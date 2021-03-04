@@ -2,15 +2,15 @@ package inf112.skeleton.app.assets.cards;
 
 public class ProgramCard extends AbstractCard {
 
-    private ProgramcardType ProgramcardType;
-    private int cardValue;
+    private ProgramCardType programCardType;
+    private int priorityNumber;
 
-    public ProgramCard(ProgramcardType ProgramcardType, int cardValue) {
-        this.ProgramcardType = ProgramcardType;
-        this.cardValue = cardValue;
+    public ProgramCard(ProgramCard.ProgramCardType programCardType, int priorityNumber) {
+        this.programCardType = programCardType;
+        this.priorityNumber = priorityNumber;
     }
 
-    enum ProgramcardType {
+    enum ProgramCardType {
         MOVE1,
         MOVE2,
         MOVE3,
@@ -20,15 +20,15 @@ public class ProgramCard extends AbstractCard {
         UTURN
     }
 
-    public int getCardValue() {
-        return cardValue;
+    public int getPriorityNumber() {
+        return priorityNumber;
     }
 
     @Override
     public String toString() {
         return "ProgramCard{" +
-                "type='" + ProgramcardType + '\'' +
-                ", cardValue=" + cardValue +
+                "type='" + programCardType + '\'' +
+                ", cardValue=" + priorityNumber +
                 '}';
     }
 
