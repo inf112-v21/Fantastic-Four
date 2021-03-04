@@ -4,7 +4,6 @@ import inf112.skeleton.app.assets.IPlayer;
 import inf112.skeleton.app.assets.Player;
 import inf112.skeleton.app.assets.cards.ICard;
 import inf112.skeleton.app.assets.cards.IDeck;
-import inf112.skeleton.app.assets.cards.OptionDeck;
 import inf112.skeleton.app.assets.cards.ProgramDeck;
 import inf112.skeleton.app.screens.*;
 
@@ -14,9 +13,7 @@ import java.util.List;
 public class RoboGame extends com.badlogic.gdx.Game {
 
     private IDeck programDeck;
-    private IDeck optionDeck;
     private IDeck programCardDiscardPile;
-    private IDeck optionCardDiscardPile;
     private List<IPlayer> players;
     final int MAX_NUMBER_OF_CARDS = 9;
 
@@ -49,10 +46,7 @@ public class RoboGame extends com.badlogic.gdx.Game {
     public RoboGame() {
         programDeck = new ProgramDeck();
         programDeck.createDeck();
-        optionDeck = new OptionDeck();
-        optionDeck.createDeck();
         programCardDiscardPile = new ProgramDeck();
-        optionCardDiscardPile = new OptionDeck();
         players = new LinkedList<>();
         currentActivity = new Activity(Activity.Activities.OPENMENU, -1);
         multiplayer = false; // Will be changed if the server starts
