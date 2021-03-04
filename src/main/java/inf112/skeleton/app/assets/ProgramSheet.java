@@ -1,17 +1,18 @@
 package inf112.skeleton.app.assets;
 
-import inf112.skeleton.app.assets.cards.IDeck;
+import inf112.skeleton.app.assets.cards.ICard;
 import inf112.skeleton.app.assets.cards.ProgramCard;
 import inf112.skeleton.app.assets.cards.ProgramDeck;
 
-import java.util.Stack;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ProgramSheet implements IProgramSheet {
 
     public Boolean poweredDown;
     public int lifeTokens;
     public int damageTokens;
-    public ProgramDeck programCards;
+    public List<ICard> programCards;
 
 
     public static final int MIN_NUMBER_OF_LIFE_TOKENS = 0;
@@ -28,7 +29,7 @@ public class ProgramSheet implements IProgramSheet {
         this.poweredDown = false;
         this.lifeTokens = MAX_NUMBER_OF_LIFE_TOKENS;
         this.damageTokens = MIN_NUMBER_OF_DAMAGE_TOKENS;
-        this.programCards = new ProgramDeck();
+        this.programCards = new ArrayList<>();
 
     }
 
@@ -62,24 +63,20 @@ public class ProgramSheet implements IProgramSheet {
         this.damageTokens = updatedDamageTokens;
     }
 
-    public ProgramDeck getCards() {
+    public List<ICard> getCards() {
         return programCards;
     }
 
-    public void registerCards(ProgramDeck cards) {
-
-
+    public void registerCards(List<ICard> cards) {
         this.programCards = cards;
     }
-
 
     public void registerCard() {
 
     }
 
-
     @Override
     public ProgramCard getProgramCard(int registerNumber) {
-        return null;
+        return (ProgramCard) programCards.get(registerNumber);
     }
 }
