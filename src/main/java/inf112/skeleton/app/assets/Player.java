@@ -1,17 +1,19 @@
 package inf112.skeleton.app.assets;
 
 import com.badlogic.gdx.math.Vector2;
+import inf112.skeleton.app.assets.cards.ICard;
 import inf112.skeleton.app.assets.cards.IDeck;
 import inf112.skeleton.app.assets.cards.ProgramCard;
 import inf112.skeleton.app.assets.cards.ProgramDeck;
 
 import java.util.HashSet;
+import java.util.List;
 
 public class Player implements IPlayer{
 
     private String playerName;
     private Robot robot;
-    private ProgramDeck receivedProgramCards;
+    private List<ICard> receivedProgramCards;
 
     public Player(String playerName) {
         this.playerName = playerName;
@@ -21,13 +23,13 @@ public class Player implements IPlayer{
         this.playerName = playerName;
     }
 
-    private void registerSelectedCards(ProgramDeck cards) {
+    private void registerSelectedCards(List<ICard> cards) {
         getRobot().getProgramSheet().registerCards(cards);
     }
 
     @Override
-    public void receive(IDeck cards) {
-        this.receivedProgramCards = (ProgramDeck) cards;
+    public void receive(List<ICard> cards) {
+        this.receivedProgramCards = cards;
     }
 
     public void chooseRobot(String robotName) throws InstantiationException {
@@ -45,11 +47,6 @@ public class Player implements IPlayer{
     @Override
     public int getDamage() {
         return 0;
-    }
-
-    @Override
-    public void executeProgramCard(int i) {
-
     }
 
     public String getPlayerName() {
@@ -89,8 +86,8 @@ public class Player implements IPlayer{
     }
 
     @Override
-    public ProgramDeck getReceivedProgramCards() {
-        return null;
+    public List<ICard> getReceivedProgramCards() {
+        return receivedProgramCards;
     }
 
     public void pushRobotToPosition(Vector2 position) {
