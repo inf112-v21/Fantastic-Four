@@ -49,7 +49,7 @@ public class Player implements IPlayer{
 
     @Override
     public void executeProgramCard(int i) {
-        moveRobotByProgramCard(revealProgramCard(i)); // TODO Daniel to verify if this is the intended way of using these methods
+
     }
 
     public String getPlayerName() {
@@ -86,6 +86,11 @@ public class Player implements IPlayer{
 
     public void moveRobotByProgramCard(ProgramCard programCard) {
         getRobot().moveByProgramCard(programCard);
+    }
+
+    @Override
+    public ProgramDeck getReceivedProgramCards() {
+        return null;
     }
 
     public void pushRobotToPosition(Vector2 position) {
