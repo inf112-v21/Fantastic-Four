@@ -11,7 +11,6 @@ public class ProgramDeck extends AbstractDeck {
 
     public ProgramDeck() {
         super();
-        createDeck();
     }
 
     @Override
