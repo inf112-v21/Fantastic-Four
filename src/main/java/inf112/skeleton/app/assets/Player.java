@@ -13,8 +13,6 @@ public class Player implements IPlayer{
     private Robot robot;
     private ProgramDeck receivedProgramCards;
 
-
-
     public Player(String playerName) {
         this.playerName = playerName;
     }
@@ -22,12 +20,10 @@ public class Player implements IPlayer{
     public Player(String playerName, String robotName) {
         this.playerName = playerName;
     }
-    
 
     private void registerSelectedCards(ProgramDeck cards) {
         getRobot().getProgramSheet().registerCards(cards);
     }
-
 
     @Override
     public void receive(IDeck cards) {
@@ -38,7 +34,6 @@ public class Player implements IPlayer{
         robot = new Robot(robotName);
     }
 
-
     public String[] getRobotNames() {
         return Robot.getRobotNames();
     }
@@ -47,10 +42,14 @@ public class Player implements IPlayer{
         return Robot.getAvailableRobots();
     }
 
-
     @Override
     public int getDamage() {
         return 0;
+    }
+
+    @Override
+    public void executeProgramCard(int i) {
+        moveRobotByProgramCard(revealProgramCard(i)); // TODO Daniel to verify if this is the intended way of using these methods
     }
 
     public String getPlayerName() {
@@ -84,7 +83,6 @@ public class Player implements IPlayer{
     public void setArchiveMarkerPosition(float x, float y) {
         robot.setArchiveMarkerPosition(x,y);
     }
-
 
     public void moveRobotByProgramCard(ProgramCard programCard) {
         getRobot().moveByProgramCard(programCard);
