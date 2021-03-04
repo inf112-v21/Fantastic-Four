@@ -4,7 +4,6 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 import java.util.LinkedHashSet;
 import java.util.List;
-import java.util.Stack;
 
 class CardDeckTest {
 
@@ -36,7 +35,7 @@ class CardDeckTest {
 		names.add("uTurn");
 
 		for (ICard card : testDeck) {
-			namesInCreatedDeck.add(card.getName());
+			namesInCreatedDeck.add(card.getCardName());
 		}
 
 		assertTrue(names.size() == namesInCreatedDeck.size() && namesInCreatedDeck.containsAll(names)
