@@ -32,7 +32,7 @@ public class Player implements IPlayer{
         this.receivedProgramCards = cards;
     }
 
-    public void chooseRobot(String robotName) throws InstantiationException {
+    public void chooseRobot(String robotName) {
         robot = new Robot(robotName);
     }
 
