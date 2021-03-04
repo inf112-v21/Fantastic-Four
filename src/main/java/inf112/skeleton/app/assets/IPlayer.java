@@ -2,6 +2,7 @@ package inf112.skeleton.app.assets;
 
 import inf112.skeleton.app.assets.cards.IDeck;
 import inf112.skeleton.app.assets.cards.ProgramCard;
+import inf112.skeleton.app.assets.cards.ProgramDeck;
 
 public interface IPlayer {
     /**
@@ -27,4 +28,6 @@ public interface IPlayer {
     ProgramCard getProgramCard(int registerNumber);
 
     void moveRobotByProgramCard(ProgramCard programCard);
+
+    ProgramDeck getReceivedProgramCards();
 }
