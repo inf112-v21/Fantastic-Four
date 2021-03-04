@@ -1,6 +1,7 @@
 package inf112.skeleton.app.assets.cards;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import inf112.skeleton.app.assets.cards.ProgramCard.ProgramCardType;
 
@@ -11,16 +12,6 @@ public class ProgramDeck extends AbstractDeck {
     public ProgramDeck() {
         super();
         createDeck();
-    }
-
-    private List<ProgramCard> createCardType(ProgramCardType ProgramcardType, int quantity, int cardValue, int deltaValue) {
-        int currentValue = cardValue;
-        List<ProgramCard> cards = new ArrayList<>();
-        for (int i = 0; i < quantity; i++)  {
-            cards.add(new ProgramCard(ProgramcardType, currentValue));
-            currentValue += deltaValue;
-        }
-        return cards;
     }
 
     @Override
@@ -39,7 +30,18 @@ public class ProgramDeck extends AbstractDeck {
         deck.addAll(createCardType(ProgramCardType.ROTATERIGHT, 18, 70, 20));
         // u-turn
         deck.addAll(createCardType(ProgramCardType.UTURN, 6, 10, 10));
+        Collections.shuffle(deck);
         return deck;
+    }
+
+    private List<ProgramCard> createCardType(ProgramCardType ProgramcardType, int quantity, int cardValue, int deltaValue) {
+        int currentValue = cardValue;
+        List<ProgramCard> cards = new ArrayList<>();
+        for (int i = 0; i < quantity; i++)  {
+            cards.add(new ProgramCard(ProgramcardType, currentValue));
+            currentValue += deltaValue;
+        }
+        return cards;
     }
 
     @Override
@@ -49,7 +51,11 @@ public class ProgramDeck extends AbstractDeck {
 
     @Override
     public List<ICard> draw(int quantity) {
-        return null;
+        ArrayList<ICard> cards = new ArrayList<>();
+        for (int card = 0; card < quantity; card++) {
+            cards.add(deck.remove(0));
+        }
+        return cards;
     }
 
     @Override
