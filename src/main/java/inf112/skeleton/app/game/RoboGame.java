@@ -9,6 +9,7 @@ import inf112.skeleton.app.screens.*;
 import inf112.skeleton.app.game.Activity.ActivityType;
 
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -165,8 +166,8 @@ public class RoboGame extends com.badlogic.gdx.Game {
                 PICKCARDS)) {
             if (currentActivity.hasTimedOut()) {
                 for (IPlayer player : players) {
-                    ProgramDeck cards = player.getReceivedProgramCards();
-                    while (cards.deck.size() > 5) cards.deck.remove(0);
+                    List<ICard> cards = player.getReceivedProgramCards();
+                    while (cards.size() > 5) cards.remove(0);
                     player.getRobot().getProgramSheet().registerCards(cards);
                     // TODO 1: Pick 5 cards for each player
                     // TODO 2: Only pick 5 cards for the players that are not finished
@@ -176,35 +177,35 @@ public class RoboGame extends com.badlogic.gdx.Game {
         }
         else if (currentActivity.currentType.equals(ActivityType.
                 EXECUTEPROGRAMCARDS1)) {
-            for (IPlayer player : players) player.executeProgramCard(1);
+            for (IPlayer player : players) player.moveRobotByProgramCard(player.getProgramCard(1));
             if (currentActivity.hasTimedOut()) {
                 currentActivity = new Activity(ActivityType.EXECUTEPROGRAMCARDS2, PROGRAMCARDDURATION);
             }
         }
         else if (currentActivity.currentType.equals(ActivityType.
                 EXECUTEPROGRAMCARDS2)) {
-            for (IPlayer player : players) player.executeProgramCard(2);
+            for (IPlayer player : players) player.moveRobotByProgramCard(player.getProgramCard(2));
             if (currentActivity.hasTimedOut()) {
                 currentActivity = new Activity(ActivityType.EXECUTEPROGRAMCARDS3, PROGRAMCARDDURATION);
             }
         }
         else if (currentActivity.currentType.equals(ActivityType.
                 EXECUTEPROGRAMCARDS3)) {
-            for (IPlayer player : players) player.executeProgramCard(3);
+            for (IPlayer player : players) player.moveRobotByProgramCard(player.getProgramCard(3));
             if (currentActivity.hasTimedOut()) {
                 currentActivity = new Activity(ActivityType.EXECUTEPROGRAMCARDS4, PROGRAMCARDDURATION);
             }
         }
         else if (currentActivity.currentType.equals(ActivityType.
                 EXECUTEPROGRAMCARDS4)) {
-            for (IPlayer player : players) player.executeProgramCard(4);
+            for (IPlayer player : players) player.moveRobotByProgramCard(player.getProgramCard(4));
             if (currentActivity.hasTimedOut()) {
                 currentActivity = new Activity(ActivityType.EXECUTEPROGRAMCARDS5, PROGRAMCARDDURATION);
             }
         }
         else if (currentActivity.currentType.equals(ActivityType.
                 EXECUTEPROGRAMCARDS5)) {
-            for (IPlayer player : players) player.executeProgramCard(5);
+            for (IPlayer player : players) player.moveRobotByProgramCard(player.getProgramCard(5));
             if (currentActivity.hasTimedOut()) {
                 currentActivity = new Activity(ActivityType.EXECUTEPROGRAMCARDS5, PROGRAMCARDDURATION);
             }
@@ -221,8 +222,8 @@ public class RoboGame extends com.badlogic.gdx.Game {
      */
     public void dealProgramCards() {
         for (IPlayer player : players) {
-            IDeck cards = new ProgramDeck(); // Create a small deck of cards for each player
-            cards.draw(MAX_NUMBER_OF_CARDS - player.getDamage());
+            List<ICard> cards = new ArrayList(); // Create a small deck of cards for each player
+            cards.addAll(programDeck.draw(MAX_NUMBER_OF_CARDS - player.getDamage()));
             player.receive(cards); // Each player receives it's cards
         }
     }
