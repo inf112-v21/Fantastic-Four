@@ -34,8 +34,7 @@ public class Robot {
 
     }
 
-    public Robot(String robotName) throws InstantiationException {
-        if (!availableRobots.contains(robotName)) throw new InstantiationException("The selected robot is unavailable...");
+    public Robot(String robotName) {
         this.robotName = robotName;
         setRobotToUnavailable(robotName);
         this.programSheet = new ProgramSheet();
