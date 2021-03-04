@@ -32,7 +32,6 @@ public class Robot {
             e.getMessage();
         }
 
-
     }
 
     public Robot(String robotName) throws InstantiationException {
@@ -82,6 +81,8 @@ public class Robot {
 
 
     public void moveByProgramCard(ProgramCard programCard) {
+        int[] stepsAndRotation = ProgramCard.interpretType(programCard.getProgramCardType());
+        System.out.printf("%4d %4d\n", stepsAndRotation[0], stepsAndRotation[1]);
     }
 
     public void pushToPosition(Vector2 position) {
