@@ -1,20 +1,22 @@
 package inf112.skeleton.app.assets.cards;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Stack;
 import inf112.skeleton.app.assets.cards.ProgramCard.ProgramcardType;
 
 public class ProgramDeck extends AbstractDeck {
 
-    Stack<ProgramCard> discardedCards;
+    List<ProgramCard> discardedCards;
 
     public ProgramDeck() {
         super();
         createDeck();
     }
 
-    private Stack<ProgramCard> createCardType(ProgramcardType ProgramcardType, int quantity, int cardValue, int deltaValue) {
+    private List<ProgramCard> createCardType(ProgramcardType ProgramcardType, int quantity, int cardValue, int deltaValue) {
         int currentValue = cardValue;
-        Stack<ProgramCard> cards = new Stack<>();
+        List<ProgramCard> cards = new ArrayList<>();
         for (int i = 0; i < quantity; i++)  {
             cards.add(new ProgramCard(ProgramcardType, currentValue));
             currentValue += deltaValue;
@@ -22,7 +24,8 @@ public class ProgramDeck extends AbstractDeck {
         return cards;
     }
 
-    public Stack<ICard> createDeck() {
+    @Override
+    public List<ICard> createDeck() {
         // move 1 (18)
         deck.addAll(createCardType(ProgramcardType.MOVE1, 18, 490, 10));
         // move 2 (12)
@@ -42,7 +45,12 @@ public class ProgramDeck extends AbstractDeck {
 
     @Override
     public void add(ICard card) {
+        deck.add((ProgramCard) card);
+    }
 
+    @Override
+    public List<ICard> draw(int quantity) {
+        return null;
     }
 
     @Override
