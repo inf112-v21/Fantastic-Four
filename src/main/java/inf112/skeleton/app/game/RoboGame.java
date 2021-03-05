@@ -108,8 +108,8 @@ public class RoboGame extends com.badlogic.gdx.Game {
         System.out.println(players.toString());
     }
 
-    public String getPlayers() {
-        return players.toString();
+    public List<IPlayer> getPlayers() {
+        return players;
     }
 
     @Override
