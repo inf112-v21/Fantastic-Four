@@ -208,4 +208,4 @@ use when we later implement the proper GUI version of RoboRally.
 
 For instructions on how to build the project, see [README.md](../../README.md).
 
-
+Description of manual tests are available [here](ManualTest1.md).
