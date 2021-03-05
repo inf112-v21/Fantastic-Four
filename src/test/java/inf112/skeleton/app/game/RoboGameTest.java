@@ -41,6 +41,15 @@ public class RoboGameTest {
         roboGame.tick();
 
         Assert.assertEquals(Activity.ActivityType.CHECKMULTIPLAYER, roboGame.currentActivity.currentType);
+    }
 
+    @Test
+    public void testTickHALTDoesNotChangeActivity() {
+        roboGame.currentActivity = new Activity(Activity.ActivityType.HALT, -1);
+        roboGame.gameStarted = true;
+
+        roboGame.tick();
+
+        Assert.assertEquals(Activity.ActivityType.HALT, roboGame.currentActivity.currentType);
     }
 }
