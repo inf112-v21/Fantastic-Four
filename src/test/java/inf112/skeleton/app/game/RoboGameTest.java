@@ -27,6 +27,7 @@ public class RoboGameTest {
     @Test
     public void testAddPlayer() {
         Player newPlayer = new Player("AnotherTestPlayer");
+        roboGame.addPlayer(newPlayer);
         Assert.assertTrue(roboGame.getPlayers().contains(newPlayer));
     }
 }
