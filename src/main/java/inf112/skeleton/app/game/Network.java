@@ -5,7 +5,7 @@ import com.esotericsoftware.kryonet.EndPoint;
 import inf112.skeleton.app.assets.Player;
 import inf112.skeleton.app.assets.ProgramSheet;
 import inf112.skeleton.app.assets.Robot;
-import inf112.skeleton.app.assets.cards.Card;
+import inf112.skeleton.app.assets.cards.ProgramCard;
 import inf112.skeleton.app.assets.cards.ProgramDeck;
 
 public class Network {
@@ -27,7 +27,7 @@ public class Network {
     }
 
     static public class PlayCard {
-        public Card card;
+        public ProgramCard card;
         public Player player;
     }
 
