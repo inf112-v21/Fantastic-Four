@@ -80,8 +80,16 @@ public class Robot {
 
 
     public void moveByProgramCard(ProgramCard programCard) {
+        System.out.println("The robot named " + robotName + " got " + programCard); // TODO
+        System.out.printf("Old location (%.0f, %.0f). Direction: %.0f\n", getRobotPosition().x, getRobotPosition().y, getRobotPosition().angle());// TODO
         int[] stepsAndRotation = ProgramCard.interpretType(programCard.getProgramCardType());
-        System.out.printf("%4d %4d\n", stepsAndRotation[0], stepsAndRotation[1]);
+        double dx = stepsAndRotation[0] * Math.sin(Math.toRadians(stepsAndRotation[1]));
+        double dy = stepsAndRotation[0] * Math.cos(Math.toRadians(stepsAndRotation[1]));
+        setRobotPosition(getRobotPosition().x + (float) dx, getRobotPosition().y + (float) dy);
+        getRobotPosition().setAngle(getRobotPosition().angle() + stepsAndRotation[1]); // TODO angle does not behave as expected
+        System.out.printf("Steps: %d. Rotation: %d\n", stepsAndRotation[0], stepsAndRotation[1]); // TODO remove, for oblig2 demonstration purposes only
+        System.out.printf("dx: %.0f, dy: %.0f\n", dx, dy);                                  // TODO
+        System.out.printf("New location:: (%.0f, %.0f). Direction: %.0f\n", getRobotPosition().x, getRobotPosition().y, getRobotPosition().angle());// TODO
     }
 
     public void pushToPosition(Vector2 position) {

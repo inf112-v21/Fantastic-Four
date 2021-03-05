@@ -76,10 +76,10 @@ public class RoboGame extends com.badlogic.gdx.Game {
         gameActionScreen = new GameActionScreen(this, "example.tmx");
         setScreen(gameActionScreen);
         gameStarted = true;
-        Player player = new Player("Morten");
-        player.chooseRobot("Daniel");
+        Player player = new Player("Morten"); // TODO
+        player.chooseRobot("Daniel");  // TODO
         players.add(player); // TODO remove and add players properly
-
+        player.setRobotPosition(0f, 0f);  // TODO
     }
 
     public void launchStartScreen() {
