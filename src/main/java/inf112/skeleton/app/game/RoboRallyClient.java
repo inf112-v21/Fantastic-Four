@@ -4,7 +4,7 @@ import com.esotericsoftware.kryonet.Client;
 import com.esotericsoftware.kryonet.Connection;
 import com.esotericsoftware.kryonet.Listener;
 import inf112.skeleton.app.assets.Player;
-import inf112.skeleton.app.assets.cards.Card;
+import inf112.skeleton.app.assets.cards.ProgramCard;
 
 import java.io.IOException;
 
@@ -57,7 +57,7 @@ public class RoboRallyClient {
         }
     }
 
-    public void updatePlayer(Player player, Card card) {
+    public void updatePlayer(Player player, ProgramCard card) {
 
     }
 
