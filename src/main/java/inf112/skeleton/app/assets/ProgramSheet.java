@@ -7,7 +7,7 @@ import inf112.skeleton.app.assets.cards.ProgramDeck;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ProgramSheet implements IProgramSheet {
+public class ProgramSheet {
 
     public Boolean poweredDown;
     public int lifeTokens;
@@ -75,7 +75,6 @@ public class ProgramSheet implements IProgramSheet {
 
     }
 
-    @Override
     public ProgramCard getProgramCard(int registerNumber) {
         return (ProgramCard) programCards.get(registerNumber);
     }
