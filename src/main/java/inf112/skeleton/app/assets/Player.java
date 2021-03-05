@@ -94,6 +94,12 @@ public class Player implements IPlayer{
         getRobot().pushToPosition(position);
     }
 
-
+    @Override
+    public String toString() {
+        return "Player{" +
+                "playerName='" + playerName + '\'' +
+                ", robot=" + robot +
+                '}';
+    }
 }
 
