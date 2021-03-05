@@ -196,8 +196,3 @@ use when we later implement the proper GUI version of RoboRally.
 For instructions on how to build the project, see [README.md](../../README.md).
 
 
-
-
-Lever klassediagram. (Hvis det er veldig mange klasser, lager dere for de viktigste.)
-
-
