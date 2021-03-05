@@ -121,7 +121,7 @@ public class RoboGame extends com.badlogic.gdx.Game {
     /**
      * The ticker is called several times a second, via the LibGDX render()-method
      */
-    private void tick() {
+    void tick() {
         // TODO Check win conditions before the if-statement
 
         // Print the current activity, TODO remove when the game is finished
