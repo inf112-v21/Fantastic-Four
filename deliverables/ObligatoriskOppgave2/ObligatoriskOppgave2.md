@@ -6,6 +6,7 @@ infrastructure. This in mind (together with a closing due date) we were forced t
 MVPs.
 
 ## Subproblem 1: Project and project structure
+
 - The division of roles works okay, and we don't feel the need for updating these at the moment. 
 - We don't feel that we need other roles, however sometimes the work that ends up in team member's hands are not
 specific to that team member's role.
@@ -40,6 +41,18 @@ more in the beginning and some more at the end toward the deadline. The choices 
 - The number of commits to the code base has been quite varying, but the number of code lines is much more balanced. 
 So all in all, we are happy with the work distribution.
 
+### Links to minutes of meeting since last time
+[2021.2.15](mom_2021_02_15.md)
+
+[2021.2.18](mom_2021_02_18.md)
+
+[2021.2.22](mom_2021_02_22.md)
+
+[2021.2.25](mom_2021_02_25.md)
+
+[2021.3.1](mom_2021_03_01.md)
+
+The final meeting from 2021.3.5 ended in this document.
   
 ## Subproblem 2: Requirements
 Below are all user stories, requirements and proposed solutions that we ended up with using (MVP6, MVP7, MVP8 and MVP9).
