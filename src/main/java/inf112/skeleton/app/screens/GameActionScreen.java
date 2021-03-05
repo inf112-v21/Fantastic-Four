@@ -94,6 +94,8 @@ public class GameActionScreen implements Screen {
         else if (flagLayer.getCell((int) playerPosition.x, (int) playerPosition.y) != null) {
             playerLayer.setCell((int) playerPosition.x, (int) playerPosition.y, playerWonCell);
             Gdx.app.getGraphics().setTitle("You won!");
+            GameOverScreen gameOverScreen = new GameOverScreen(roboGame);
+            roboGame.setScreen(gameOverScreen);
             movementMechanics.stopGame();
         }
         else {
