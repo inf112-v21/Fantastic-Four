@@ -21,6 +21,7 @@ public class RoboGameTest {
     @Test
     public void testDealProgramCards() {
         roboGame.dealProgramCards();
+
         Assert.assertEquals(9, player.getReceivedProgramCards().size());
     }
 
@@ -28,6 +29,18 @@ public class RoboGameTest {
     public void testAddPlayer() {
         Player newPlayer = new Player("AnotherTestPlayer");
         roboGame.addPlayer(newPlayer);
+
         Assert.assertTrue(roboGame.getPlayers().contains(newPlayer));
+    }
+
+    @Test
+    public void testTickFromWAITFORMENUSELECTIONToCHECKMULTIPLAYER() {
+        roboGame.currentActivity = new Activity(Activity.ActivityType.WAITFORMENUSELECTION, -1);
+        roboGame.gameStarted = true;
+
+        roboGame.tick();
+
+        Assert.assertEquals(Activity.ActivityType.CHECKMULTIPLAYER, roboGame.currentActivity.currentType);
+
     }
 }
