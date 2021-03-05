@@ -1,23 +1,9 @@
 # Mandatory Assignment 2
 
-Summary: 
-
-Deloppgave 1: Prosjekt og prosjektstruktur
-
-
-Gjør et kort retrospektiv hvor dere vurderer hva dere har klart til nå, og hva som kan forbedres. Dette skal handle om
-prosjektstruktur, ikke kode. Dere kan selvsagt diskutere kode, men dette handler ikke om feilretting, men om hvordan man
-jobber og kommuniserer.
-
-
-Under vurdering vil det vektlegges at alle bidrar til kodebasen. Hvis det er stor forskjell i hvem som committer, må
-dere legge ved en kort forklaring for hvorfor det er sånn. Husk å committe alt. (Også designfiler)
-
-Referat fra møter siden forrige leveranse skal legges ved (mange av punktene over er typisk ting som havner i referat)..
-Bli enige om maks tre forbedringspunkter fra retrospektivet, som skal følges opp under neste sprint.
-
-
-
+Summary: We had a plan to implement MVP6 to MVP9, but especially the multiplayer part of the MVPs proved to be
+more difficult than expected. Also, some of the back-end logic were difficult to incorporate into Oblig 1's code
+infrastructure. This in mind (together with a closing due date) we were forced to shift our focus with regards to the
+MVPs.
 
 ## Subproblem 1: Project and project structure
 - The division of roles works okay, and we don't feel the need for updating these at the moment. 
@@ -39,12 +25,22 @@ more in the beginning and some more at the end toward the deadline. The choices 
   some of the choices made to reach MVPs for Oblig 1 have been counter productive reaching the MVPs of Oblig 2 (e.g.
   moving a player using arrow keys in Oblig 1 vs. using program cards in Oblig 2).
 - Communication is okay, but sometimes we experience that parts of the communication are lost in translation.
--
-- The number of commits to the code base has been quite varying, but this depends on the amounts of commits
--
--
+- Retrospect: 
+  - We have sometimes waited or expected other pieces of code to be finished so that our own code could be implemented
+  and work, however, hiccups along the way for each of us, has lead to difficulties in bringing together a final
+    product.
+  - In other words, we feel that we have worked well on each of our tasks, but we have not been focused enough on
+  joining the separate pieces of code, so that when the delivery date was getting closer, we found out that we couldn't
+  manage to make our original MVP goals
+  - So for next time we plan from the start to have a common view and understanding of how the different parts of the
+  project and codes will be combined into a working RoboRally game, this will be explicitly communicated early in next
+  project leg
+  - Also, a concrete solution to making this flow better, the team plans to meet physically (if possible) in a meeting
+  room at campus. We expect the productivity and understanding will increase drastically by doing so.
+- The number of commits to the code base has been quite varying, but the number of code lines is much more balanced. 
+So all in all, we are happy with the work distribution.
 
-
+  
 ## Subproblem 2: Requirements
 Below are all user stories, requirements and proposed solutions that we ended up with using (MVP6, MVP7, MVP8 and MVP9).
 At first the team was very optimistic about finishing all four MVPs. But eventually, it was clear to us that MVP6 was
@@ -196,15 +192,12 @@ use when we later implement the proper GUI version of RoboRally.
 
 
 ## Subproblem 3: Code
-Dere må dokumentere hvordan prosjektet bygger, testes og kjøres, slik at det er lett for gruppelederne å bygge, teste
-og kjøre koden deres. Under vurdering kommer koden også til å brukertestes.
 
-Prosjektet skal kunne bygge, testes og kjøres på Linux, Windows og OSX.
+For instructions on how to build the project, see [README.md](../../README.md).
 
-Lever klassediagram. (Hvis det er veldig mange klasser, lager dere for de viktigste.) Det er ikke nødvendig å ta med alle metoder og feltvariabler med mindre dere anser dem som viktige for helheten.
 
-Kodekvalitet og testdekning vektlegges. Dersom dere ikke har automatiske tester for GUI-et, lager dere manuelle tester som gruppelederne kan kjøre basert på akseptansekriteriene.
 
-Automatiske tester skal dekke forretningslogikken i systemet (unit-tester).
 
-Utførte oppgaver skal være ferdige.
+Lever klassediagram. (Hvis det er veldig mange klasser, lager dere for de viktigste.)
+
+
