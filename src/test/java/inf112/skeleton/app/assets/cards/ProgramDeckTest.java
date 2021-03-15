@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 class ProgramDeckTest {
 
 	ProgramDeck cardDeck = new ProgramDeck();
-	List<ICard> testDeck = cardDeck.createDeck();
+	List<ProgramCard> testDeck = cardDeck.createDeck();
 
 	@Test
 	void testSizeOfDeck() {
@@ -19,7 +19,7 @@ class ProgramDeckTest {
 
 	@Test
 	void testSizeOfDeckAfterDraw() {
-		List<ICard> testDrawDeck = cardDeck.draw(5);
+		List<ProgramCard> testDrawDeck = cardDeck.draw(5);
 		assertEquals(79, testDeck.size());
 		assertEquals(5, testDrawDeck.size());
 	}

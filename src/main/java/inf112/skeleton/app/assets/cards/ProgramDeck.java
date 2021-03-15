@@ -5,16 +5,14 @@ import java.util.Collections;
 import java.util.List;
 import inf112.skeleton.app.assets.cards.ProgramCard.ProgramCardType;
 
-public class ProgramDeck extends AbstractDeck {
-
-    List<ProgramCard> discardedCards;
+public class ProgramDeck {
+    public List<ProgramCard> deck;
 
     public ProgramDeck() {
-        super();
+        deck = new ArrayList<>();
     }
 
-    @Override
-    public List<ICard> createDeck() {
+    public List<ProgramCard> createDeck() {
         // move 1 (18)
         deck.addAll(createCardType(ProgramCardType.MOVE1, 18, 490, 10));
         // move 2 (12)
@@ -43,22 +41,19 @@ public class ProgramDeck extends AbstractDeck {
         return cards;
     }
 
-    @Override
-    public void add(ICard card) {
+    public void add(ProgramCard card) {
         deck.add((ProgramCard) card);
     }
 
-    @Override
-    public List<ICard> draw(int quantity) {
-        ArrayList<ICard> cards = new ArrayList<>();
+    public List<ProgramCard> draw(int quantity) {
+        ArrayList<ProgramCard> cards = new ArrayList<>();
         for (int card = 0; card < quantity; card++) {
             cards.add(deck.remove(0));
         }
         return cards;
     }
 
-    @Override
-    public Iterable<? extends ICard> getCards() {
-        return null;
+    public Iterable<? extends ProgramCard> getCards() {
+        return deck;
     }
 }

@@ -1,5 +1,6 @@
 package inf112.skeleton.app.game;
 
+import inf112.skeleton.app.assets.Definitions;
 import inf112.skeleton.app.assets.Player;
 import org.junit.Assert;
 import org.junit.Before;
@@ -22,7 +23,7 @@ public class RoboGameTest {
     public void testDealProgramCards() {
         roboGame.dealProgramCards();
 
-        Assert.assertEquals(9, player.getReceivedProgramCards().size());
+        Assert.assertEquals(9, player.getProgramCards().size());
     }
 
     @Test
@@ -35,21 +36,21 @@ public class RoboGameTest {
 
     @Test
     public void testTickFromWAITFORMENUSELECTIONToCHECKMULTIPLAYER() {
-        roboGame.currentActivity = new Activity(Activity.ActivityType.WAITFORMENUSELECTION, -1);
+        roboGame.currentActivity = new Activity(Definitions.ActivityType.WAITFORMENUSELECTION, -1);
         roboGame.gameStarted = true;
 
         roboGame.tick();
 
-        Assert.assertEquals(Activity.ActivityType.CHECKMULTIPLAYER, roboGame.currentActivity.currentType);
+        Assert.assertEquals(Definitions.ActivityType.CHECKMULTIPLAYER, roboGame.currentActivity.currentType);
     }
 
     @Test
     public void testTickHALTDoesNotChangeActivity() {
-        roboGame.currentActivity = new Activity(Activity.ActivityType.HALT, -1);
+        roboGame.currentActivity = new Activity(Definitions.ActivityType.HALT, -1);
         roboGame.gameStarted = true;
 
         roboGame.tick();
 
-        Assert.assertEquals(Activity.ActivityType.HALT, roboGame.currentActivity.currentType);
+        Assert.assertEquals(Definitions.ActivityType.HALT, roboGame.currentActivity.currentType);
     }
 }

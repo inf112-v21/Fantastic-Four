@@ -1,10 +1,8 @@
 package inf112.skeleton.app.game;
 
 import com.esotericsoftware.kryonet.*;
-import inf112.skeleton.app.assets.IPlayer;
 import inf112.skeleton.app.assets.Player;
 
-import java.awt.*;
 import java.io.IOException;
 import java.net.InetAddress;
 import java.net.UnknownHostException;

@@ -1,5 +1,6 @@
 package inf112.skeleton.app.game;
 
+import inf112.skeleton.app.assets.Definitions;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -10,7 +11,7 @@ public class ActivityTest {
     @Test
     public void testHasTimedOut() throws InterruptedException {
         int durationInSeconds = 1;
-        Activity activity = new Activity(Activity.ActivityType.OPENMENU, durationInSeconds);
+        Activity activity = new Activity(Definitions.ActivityType.OPENMENU, durationInSeconds);
         int secToMillis = 1000;
         long start = currentTimeMillis();
 
@@ -24,7 +25,7 @@ public class ActivityTest {
     @Test
     public void testHasNotTimedOut() throws InterruptedException {
         int durationInSeconds = 1;
-        Activity activity = new Activity(Activity.ActivityType.OPENMENU, durationInSeconds);
+        Activity activity = new Activity(Definitions.ActivityType.OPENMENU, durationInSeconds);
         Assert.assertFalse(activity.hasTimedOut());
     }
 }

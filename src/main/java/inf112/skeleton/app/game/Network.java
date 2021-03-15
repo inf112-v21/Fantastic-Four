@@ -3,8 +3,6 @@ package inf112.skeleton.app.game;
 import com.esotericsoftware.kryo.Kryo;
 import com.esotericsoftware.kryonet.EndPoint;
 import inf112.skeleton.app.assets.Player;
-import inf112.skeleton.app.assets.ProgramSheet;
-import inf112.skeleton.app.assets.Robot;
 import inf112.skeleton.app.assets.cards.ProgramCard;
 import inf112.skeleton.app.assets.cards.ProgramDeck;
 
@@ -17,8 +15,6 @@ public class Network {
         kryo.register(PlayCard.class);
         kryo.register(ConnectionConfirmed.class);
         kryo.register(Player.class);
-        kryo.register(Robot.class);
-        kryo.register(ProgramSheet.class);
         kryo.register(ProgramDeck.class);
     }
 
