@@ -71,9 +71,6 @@ public class RoboGame extends com.badlogic.gdx.Game {
     public void launchGame() {
         // Add the local player.
         Player player = new Player("Player 1"); // TODO
-        player.chooseRobot("Robot");  // TODO
-//        player.setRobotPosition(2f, 5f);  // TODO
-        player.getRobotPosition().setAngle(0f);
         players.add(player); // TODO
 
         gameActionScreen = new GameActionScreen(this, "exchange.tmx");
