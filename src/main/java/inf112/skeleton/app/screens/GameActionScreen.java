@@ -36,7 +36,6 @@ public class GameActionScreen implements Screen {
     OrthogonalTiledMapRenderer renderer;
     OrthographicCamera camera;
 
-    Vector2 playerPosition;
     Map<Player, TiledMapTileLayer.Cell> playerTextures;
 
     String mapName;
@@ -53,6 +52,7 @@ public class GameActionScreen implements Screen {
     @Override
     public void show() {
         batch = new SpriteBatch();
+        batch.begin();
         font = new BitmapFont();
         font.setColor(Color.RED);
 
@@ -86,9 +86,6 @@ public class GameActionScreen implements Screen {
             i++;
         }
 
-        // Add Movement
-        movementMechanics = new Movement(playerPosition, playerLayer);
-
         Gdx.input.setInputProcessor(movementMechanics);
     }
 
@@ -102,19 +99,18 @@ public class GameActionScreen implements Screen {
         for (Player player : roboGame.getPlayers()) {
             float x = player.getRobotPosition().x;
             float y = player.getRobotPosition().y;
-            playerLayer.setCell((int) x, (int) y, playerTextures.get(player)) ;
+            playerLayer.setCell((int) x, (int) y, playerTextures.get(player));
+            batch.draw(playerTextures.get(player).getTile().getTextureRegion(),
+                player.getRobotPosition().x,
+                player.getRobotPosition().y,
+                150,
+                150,
+                300,
+                300,
+                1,
+                1,
+                player.getRobotPosition().angle());
         }
-//        if (holeLayer.getCell((int) playerPosition.x, (int) playerPosition.y) != null) {
-//            playerLayer.setCell((int) playerPosition.x, (int) playerPosition.y, playerDiedCell);
-//        }
-//        else if (flagLayer.getCell((int) playerPosition.x, (int) playerPosition.y) != null) {
-//            playerLayer.setCell((int) playerPosition.x, (int) playerPosition.y, playerWonCell);
-//            Gdx.app.getGraphics().setTitle("You won!");
-//            movementMechanics.stopGame();
-//        }
-//        else {
-//            playerLayer.setCell((int) playerPosition.x, (int) playerPosition.y, playerCell);
-//        }
     }
 
     @Override
