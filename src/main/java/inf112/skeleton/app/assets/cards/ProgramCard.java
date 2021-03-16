@@ -30,9 +30,9 @@ public class ProgramCard extends AbstractCard {
         if (programCardType.equals(ProgramCardType.MOVE2)) return new int[]{2, 0};
         if (programCardType.equals(ProgramCardType.MOVE3)) return new int[]{3, 0};
         if (programCardType.equals(ProgramCardType.BACKUP)) return new int[]{-1, 0};
-        if (programCardType.equals(ProgramCardType.ROTATELEFT)) return new int[]{0, 90};
-        if (programCardType.equals(ProgramCardType.ROTATERIGHT)) return new int[]{0, -90};
-        if (programCardType.equals(ProgramCardType.UTURN)) return new int[]{0, 180};
+        if (programCardType.equals(ProgramCardType.ROTATELEFT)) return new int[]{0, -1};
+        if (programCardType.equals(ProgramCardType.ROTATERIGHT)) return new int[]{0, 1};
+        if (programCardType.equals(ProgramCardType.UTURN)) return new int[]{0, 2};
         return new int[]{0, 0};
     }
 
