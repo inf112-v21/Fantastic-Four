@@ -170,12 +170,6 @@ public class MultiplayerSetupScreen implements Screen {
 		ipLabel.setX(Gdx.graphics.getWidth() / 2 - ipTextField.getWidth());
 		ipLabel.setY(180);
 
-
-//		hostLabel = new ImageTextButton("Nickname", imageLabelButtonStyle);
-//		hostLabel.setX(Gdx.graphics.getWidth() / 2 + nameLabel.getWidth());
-//		hostLabel.setY(230);
-//		hostLabel.setSize(150, 30);
-
 		stage = new Stage();
 		stage.addActor(okButton);
 		stage.addActor(cancelButton);
@@ -183,7 +177,6 @@ public class MultiplayerSetupScreen implements Screen {
 		stage.addActor(nameTextField);
 		stage.addActor(nameLabel);
 		stage.addActor(ipLabel);
-//		stage.addActor(hostLabel);
 		stage.addActor(hostButton);
 	}
 
