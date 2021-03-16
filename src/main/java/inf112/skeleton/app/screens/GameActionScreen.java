@@ -1,7 +1,6 @@
 package inf112.skeleton.app.screens;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Graphics;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL30;
@@ -15,8 +14,6 @@ import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.maps.tiled.tiles.StaticTiledMapTile;
-import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.scenes.scene2d.ui.Cell;
 import inf112.skeleton.app.assets.Definitions;
 import inf112.skeleton.app.assets.Player;
 import inf112.skeleton.app.game.RoboGame;
@@ -66,10 +63,10 @@ public class GameActionScreen implements Screen {
         flagLayer = (TiledMapTileLayer) tiledMap.getLayers().get("Flag");
 
         camera = new OrthographicCamera();
-        camera.setToOrtho(false, 12, 12); // TODO change the size of the map on the screen
+        camera.setToOrtho(false, 12, 12);
         camera.update();
 
-        renderer = new OrthogonalTiledMapRenderer(tiledMap, 1f / 300f); // TODO change the size of the map on the screen
+        renderer = new OrthogonalTiledMapRenderer(tiledMap, 1f / 300f);
         renderer.setView(camera);
 
         // Display player
@@ -77,7 +74,6 @@ public class GameActionScreen implements Screen {
         TextureRegion[][] textureRegions = TextureRegion.split(playerTexture, 300, 300);
 
         playerTextures = new HashMap<>();
-
         int i = 0;
         for (Player player : roboGame.getPlayers()) {
             System.out.println(player);
@@ -98,27 +94,30 @@ public class GameActionScreen implements Screen {
         renderer.render();
 
         for (Player player : roboGame.getPlayers()) {
+            // === (x, y) ===
             playerLayer.setCell(player.lastX, player.lastY, null);
             playerLayer.setCell(player.x, player.y, playerTextures.get(player));
             player.lastX = player.x;
             player.lastY = player.y;
-            int angle = 0;
+
+            // === Direction ===
             Definitions.Direction direction = Definitions.Direction.values()[player.directionIndex];
+            int angle;
             if (direction == Definitions.Direction.UP) angle = 0;
             else if (direction == Definitions.Direction.RIGHT) angle = 90;
             else if (direction == Definitions.Direction.DOWN) angle = 180;
             else angle = 270;
-            batch.draw(playerTextures.get(player).getTile().getTextureRegion(),
-                player.x,
-                player.y,
-                150,
-                150,
-                300,
-                300,
-                1,
-                1,
-                angle * 2
-            );
+//            batch.draw(playerTextures.get(player).getTile().getTextureRegion(),
+//                player.x,
+//                player.y,
+//                150,
+//                150,
+//                200,
+//                200,
+//                1,
+//                1,
+//                angle
+//            );
         }
     }
 
