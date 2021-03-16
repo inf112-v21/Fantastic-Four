@@ -70,7 +70,7 @@ public class GameActionScreen implements Screen {
         renderer.setView(camera);
 
         // Display player
-        Texture playerTexture = new Texture("test.png");
+        Texture playerTexture = new Texture("arrowsAndRobots.png");
         TextureRegion[][] textureRegions = TextureRegion.split(playerTexture, 300, 300);
 
         playerTextures = new HashMap<>();
