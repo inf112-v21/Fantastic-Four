@@ -21,7 +21,7 @@ import inf112.skeleton.app.assets.Player;
 import inf112.skeleton.app.game.RoboGame;
 
 public class MainMenuScreen implements Screen {
-	private static final int BORDER = 20;
+	private static final int BORDER = 40;
 	SpriteBatch batch;
 	Texture logo;
 	Texture background;
@@ -53,7 +53,7 @@ public class MainMenuScreen implements Screen {
 		// Initiate key variables
 		batch = new SpriteBatch();
 
-		logo = new Texture(Gdx.files.internal("src/main/resources/logo.png"));
+		logo = new Texture(Gdx.files.internal("src/main/resources/logo2.png"));
 		background = new Texture(Gdx.files.internal("background.png"));
 		background.setWrap(Texture.TextureWrap.ClampToEdge, Texture.TextureWrap.ClampToEdge);
 
