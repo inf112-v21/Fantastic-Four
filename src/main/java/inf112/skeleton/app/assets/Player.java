@@ -3,6 +3,7 @@ package inf112.skeleton.app.assets;
 import inf112.skeleton.app.assets.cards.ICard;
 import inf112.skeleton.app.assets.cards.ProgramCard;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Player {
@@ -24,12 +25,16 @@ public class Player {
 
     long lastMove;
 
+
     public Player(String playerName) {
+        this(playerName, 1, 1);
+    }
+    public Player(String playerName, int x, int y) {
         this.playerName = playerName;
         directionIndex = 0;
         lastMove = System.currentTimeMillis();
-        x = 1;
-        y = 1;
+        this.x = x;
+        this.y = y;
         lastX = -1;
         lastY = -1;
     }
