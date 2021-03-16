@@ -93,9 +93,9 @@ public class MultiplayerSetupScreen implements Screen {
 				ipTextField.setText("");
 			}
 		});
-		ipTextField.setX(200);
-		ipTextField.setY(170);
 		ipTextField.setSize(300, 50);
+		ipTextField.setX(Gdx.graphics.getWidth() / 2);
+		ipTextField.setY(170);
 
 		nameTextField = new TextField("Enter name", textFieldStyle);
 		nameTextField.addListener(new ClickListener() {
@@ -105,9 +105,9 @@ public class MultiplayerSetupScreen implements Screen {
 				nameTextField.setText("");
 			}
 		});
-		nameTextField.setX(200);
-		nameTextField.setY(230);
 		nameTextField.setSize(300, 50);
+		nameTextField.setX(Gdx.graphics.getWidth() / 2);
+		nameTextField.setY(230);
 
 		imageTextButtonStyle = new ImageTextButtonStyle();
 		imageTextButtonStyle.up = skin.newDrawable("panel2", Color.GRAY);
@@ -118,21 +118,10 @@ public class MultiplayerSetupScreen implements Screen {
 		imageTextButtonStyle.font = fontLabel;
 		imageTextButtonStyle.fontColor = Color.WHITE;
 
-		okButton = new ImageTextButton("OK", imageTextButtonStyle);
-		okButton.setX(170);
-		okButton.setY(80);
-		okButton.setSize(150, 60);
-		okButton.addListener(new ChangeListener() {
-			@Override
-			public void changed(ChangeEvent changeEvent, Actor actor) {
-				roboGame.connectToHost(ipTextField.getText(), nameTextField.getText());
-			}
-		});
-
 		cancelButton = new ImageTextButton("Cancel", imageTextButtonStyle);
-		cancelButton.setX(320);
-		cancelButton.setY(80);
 		cancelButton.setSize(150, 60);
+		cancelButton.setX(Gdx.graphics.getWidth() / 2);
+		cancelButton.setY(80);
 		cancelButton.addListener(new ChangeListener() {
 			@Override
 			public void changed(ChangeEvent changeEvent, Actor actor) {
@@ -141,10 +130,22 @@ public class MultiplayerSetupScreen implements Screen {
 			}
 		});
 
+		okButton = new ImageTextButton("OK", imageTextButtonStyle);
+		okButton.setSize(150, 60);
+		okButton.setX(Gdx.graphics.getWidth() / 2- cancelButton.getWidth());
+		okButton.setY(80);
+		okButton.addListener(new ChangeListener() {
+			@Override
+			public void changed(ChangeEvent changeEvent, Actor actor) {
+				roboGame.connectToHost(ipTextField.getText(), nameTextField.getText());
+			}
+		});
+
+
 		hostButton = new ImageTextButton("Host", imageTextButtonStyle);
-		hostButton.setX(40);
-		hostButton.setY(80);
 		hostButton.setSize(150, 60);
+		hostButton.setX(Gdx.graphics.getWidth() / 2 + cancelButton.getWidth());
+		hostButton.setY(80);
 		hostButton.addListener(new ChangeListener() {
 			@Override
 			public void changed(ChangeEvent changeEvent, Actor actor) {
@@ -160,19 +161,20 @@ public class MultiplayerSetupScreen implements Screen {
 		imageLabelButtonStyle.fontColor = Color.WHITE;
 
 		nameLabel = new ImageTextButton("Nickname", imageLabelButtonStyle);
-		nameLabel.setX(40);
-		nameLabel.setY(230);
 		nameLabel.setSize(150, 30);
+		nameLabel.setX(Gdx.graphics.getWidth() / 2 - nameTextField.getWidth());
+		nameLabel.setY(230);
 
 		ipLabel = new ImageTextButton("Enter IP", imageLabelButtonStyle);
-		ipLabel.setX(40);
-		ipLabel.setY(180);
 		ipLabel.setSize(150, 30);
+		ipLabel.setX(Gdx.graphics.getWidth() / 2 - ipTextField.getWidth());
+		ipLabel.setY(180);
 
-		hostLabel = new ImageTextButton("Nickname", imageLabelButtonStyle);
-		hostLabel.setX(40);
-		hostLabel.setY(230);
-		hostLabel.setSize(150, 30);
+
+//		hostLabel = new ImageTextButton("Nickname", imageLabelButtonStyle);
+//		hostLabel.setX(Gdx.graphics.getWidth() / 2 + nameLabel.getWidth());
+//		hostLabel.setY(230);
+//		hostLabel.setSize(150, 30);
 
 		stage = new Stage();
 		stage.addActor(okButton);
@@ -181,7 +183,7 @@ public class MultiplayerSetupScreen implements Screen {
 		stage.addActor(nameTextField);
 		stage.addActor(nameLabel);
 		stage.addActor(ipLabel);
-		stage.addActor(hostLabel);
+//		stage.addActor(hostLabel);
 		stage.addActor(hostButton);
 	}
 
