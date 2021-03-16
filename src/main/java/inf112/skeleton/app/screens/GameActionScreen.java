@@ -17,6 +17,7 @@ import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.maps.tiled.tiles.StaticTiledMapTile;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.ui.Cell;
+import inf112.skeleton.app.assets.Definitions;
 import inf112.skeleton.app.assets.Player;
 import inf112.skeleton.app.game.RoboGame;
 import inf112.skeleton.app.mechanics.player.Movement;
@@ -97,19 +98,27 @@ public class GameActionScreen implements Screen {
         renderer.render();
 
         for (Player player : roboGame.getPlayers()) {
-            float x = player.getRobotPosition().x;
-            float y = player.getRobotPosition().y;
-            playerLayer.setCell((int) x, (int) y, playerTextures.get(player));
+            playerLayer.setCell(player.lastX, player.lastY, null);
+            playerLayer.setCell(player.x, player.y, playerTextures.get(player));
+            player.lastX = player.x;
+            player.lastY = player.y;
+            int angle = 0;
+            Definitions.Direction direction = Definitions.Direction.values()[player.directionIndex];
+            if (direction == Definitions.Direction.UP) angle = 0;
+            else if (direction == Definitions.Direction.RIGHT) angle = 90;
+            else if (direction == Definitions.Direction.DOWN) angle = 180;
+            else angle = 270;
             batch.draw(playerTextures.get(player).getTile().getTextureRegion(),
-                player.getRobotPosition().x,
-                player.getRobotPosition().y,
+                player.x,
+                player.y,
                 150,
                 150,
                 300,
                 300,
                 1,
                 1,
-                player.getRobotPosition().angle());
+                angle * 2
+            );
         }
     }
 
