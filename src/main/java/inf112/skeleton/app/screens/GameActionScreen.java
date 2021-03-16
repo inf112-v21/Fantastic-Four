@@ -1,6 +1,7 @@
 package inf112.skeleton.app.screens;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Graphics;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL30;
@@ -15,8 +16,13 @@ import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.maps.tiled.tiles.StaticTiledMapTile;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.scenes.scene2d.ui.Cell;
+import inf112.skeleton.app.assets.Player;
 import inf112.skeleton.app.game.RoboGame;
 import inf112.skeleton.app.mechanics.player.Movement;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class GameActionScreen implements Screen {
 
@@ -25,13 +31,13 @@ public class GameActionScreen implements Screen {
 
     TiledMap tiledMap;
     TiledMapTileLayer playerLayer, boardLayer, holeLayer, flagLayer;
-    TiledMapTileLayer.Cell playerCell, playerWonCell, playerDiedCell;
     TmxMapLoader tmxMapLoader = new TmxMapLoader();
 
     OrthogonalTiledMapRenderer renderer;
     OrthographicCamera camera;
 
     Vector2 playerPosition;
+    Map<Player, TiledMapTileLayer.Cell> playerTextures;
 
     String mapName;
 
@@ -59,22 +65,26 @@ public class GameActionScreen implements Screen {
         flagLayer = (TiledMapTileLayer) tiledMap.getLayers().get("Flag");
 
         camera = new OrthographicCamera();
-        camera.setToOrtho(false, 5, 5);
+        camera.setToOrtho(false, 12, 12); // TODO change the size of the map on the screen
         camera.update();
 
-        renderer = new OrthogonalTiledMapRenderer(tiledMap, 1f/300f);
+        renderer = new OrthogonalTiledMapRenderer(tiledMap, 1f / 300f); // TODO change the size of the map on the screen
         renderer.setView(camera);
 
         // Display player
-        Texture playerTexture = new Texture("player.png");
+        Texture playerTexture = new Texture("test.png");
         TextureRegion[][] textureRegions = TextureRegion.split(playerTexture, 300, 300);
-        playerCell = new TiledMapTileLayer.Cell();
-        playerCell.setTile(new StaticTiledMapTile(textureRegions[0][0]));
-        playerDiedCell = new TiledMapTileLayer.Cell();
-        playerDiedCell.setTile(new StaticTiledMapTile(textureRegions[0][1]));
-        playerWonCell = new TiledMapTileLayer.Cell();
-        playerWonCell.setTile(new StaticTiledMapTile(textureRegions[0][2]));
-        playerPosition = new Vector2(0, 0);
+
+        playerTextures = new HashMap<>();
+
+        int i = 0;
+        for (Player player : roboGame.getPlayers()) {
+            System.out.println(player);
+            TiledMapTileLayer.Cell playerCell = new TiledMapTileLayer.Cell();
+            playerCell.setTile(new StaticTiledMapTile(textureRegions[0][i]));
+            playerTextures.put(player, playerCell);
+            i++;
+        }
 
         // Add Movement
         movementMechanics = new Movement(playerPosition, playerLayer);
@@ -88,19 +98,23 @@ public class GameActionScreen implements Screen {
         Gdx.gl.glClear(GL30.GL_COLOR_BUFFER_BIT);
 
         renderer.render();
-        if (holeLayer.getCell((int) playerPosition.x, (int) playerPosition.y) != null) {
-            playerLayer.setCell((int) playerPosition.x, (int) playerPosition.y, playerDiedCell);
+
+        for (Player player : roboGame.getPlayers()) {
+            float x = player.getRobotPosition().x;
+            float y = player.getRobotPosition().y;
+            playerLayer.setCell((int) x, (int) y, playerTextures.get(player)) ;
         }
-        else if (flagLayer.getCell((int) playerPosition.x, (int) playerPosition.y) != null) {
-            playerLayer.setCell((int) playerPosition.x, (int) playerPosition.y, playerWonCell);
-            Gdx.app.getGraphics().setTitle("You won!");
-            GameOverScreen gameOverScreen = new GameOverScreen(roboGame);
-            roboGame.setScreen(gameOverScreen);
-            movementMechanics.stopGame();
-        }
-        else {
-            playerLayer.setCell((int) playerPosition.x, (int) playerPosition.y, playerCell);
-        }
+//        if (holeLayer.getCell((int) playerPosition.x, (int) playerPosition.y) != null) {
+//            playerLayer.setCell((int) playerPosition.x, (int) playerPosition.y, playerDiedCell);
+//        }
+//        else if (flagLayer.getCell((int) playerPosition.x, (int) playerPosition.y) != null) {
+//            playerLayer.setCell((int) playerPosition.x, (int) playerPosition.y, playerWonCell);
+//            Gdx.app.getGraphics().setTitle("You won!");
+//            movementMechanics.stopGame();
+//        }
+//        else {
+//            playerLayer.setCell((int) playerPosition.x, (int) playerPosition.y, playerCell);
+//        }
     }
 
     @Override
