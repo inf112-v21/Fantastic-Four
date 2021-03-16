@@ -61,7 +61,7 @@ public class RoboGame extends com.badlogic.gdx.Game {
         gameStarted = false;
         PROGRAMCARDDURATION = 1;
         STANDARDDURATION = 1;
-        WAITCONNECTIONDURATION = 60;
+        WAITCONNECTIONDURATION = 5;
     }
 
     @Override
@@ -69,9 +69,7 @@ public class RoboGame extends com.badlogic.gdx.Game {
     }
 
     public void launchGame() {
-        // Add the local player.
-        Player player = new Player("Player 1"); // TODO
-        players.add(player); // TODO
+        addPlayer(new Player("Player 2", 8, 4)); // TODO For testing purposes, remove
 
         gameActionScreen = new GameActionScreen(this, "exchange.tmx");
         setScreen(gameActionScreen);

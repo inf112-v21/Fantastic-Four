@@ -17,6 +17,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageTextButton.ImageTextButtonStyle;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 
+import inf112.skeleton.app.assets.Player;
 import inf112.skeleton.app.game.RoboGame;
 
 public class MainMenuScreen implements Screen {
@@ -80,6 +81,7 @@ public class MainMenuScreen implements Screen {
 		button1.addListener(new ChangeListener() {
 			@Override
 			public void changed(ChangeEvent changeEvent, Actor actor) {
+				roboGame.addPlayer(new Player("Player 1", 5, 5)); // TODO Change the starting position
 				roboGame.launchGame();
 			}
 		});
