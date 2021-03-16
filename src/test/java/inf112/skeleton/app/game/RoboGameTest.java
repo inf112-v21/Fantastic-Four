@@ -14,8 +14,7 @@ public class RoboGameTest {
     public void setup() {
         roboGame = new RoboGame();
         player = new Player("TestPlayer");
-        player.chooseRobot("TestRobot");
-        player.setRobotPosition(2f, 2f);
+        player.setRobotPosition(2, 2);
         roboGame.addPlayer(player);
     }
 
