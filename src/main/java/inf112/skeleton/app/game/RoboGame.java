@@ -1,5 +1,6 @@
 package inf112.skeleton.app.game;
 
+import com.badlogic.gdx.Gdx;
 import inf112.skeleton.app.assets.Definitions;
 import inf112.skeleton.app.assets.Player;
 import inf112.skeleton.app.assets.cards.ICard;
@@ -21,8 +22,6 @@ public class RoboGame extends com.badlogic.gdx.Game {
 
     RoboRallyClient roboClient;
     RoboRallyServer roboServer;
-
-    String currentMap;
 
     Activity currentActivity;
     ActivityType lastActivityType;
@@ -67,11 +66,10 @@ public class RoboGame extends com.badlogic.gdx.Game {
 
     @Override
     public void create() {
-//        tick();
     }
 
     public void launchGame() {
-        gameActionScreen = new GameActionScreen(this, "example.tmx");
+        gameActionScreen = new GameActionScreen(this, "exchange.tmx");
         setScreen(gameActionScreen);
         gameStarted = true;
         Player player = new Player("Morten"); // TODO
