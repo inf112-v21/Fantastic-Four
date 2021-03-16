@@ -21,6 +21,7 @@ import inf112.skeleton.app.assets.Player;
 import inf112.skeleton.app.game.RoboGame;
 
 public class MainMenuScreen implements Screen {
+	private static final int BORDER = 20;
 	SpriteBatch batch;
 	Texture logo;
 	Texture background;
@@ -32,7 +33,7 @@ public class MainMenuScreen implements Screen {
 	private Label.LabelStyle labelStyle;
 	private ImageTextButton button1, button2, button3, button4, button5;
 	private ImageTextButton.ImageTextButtonStyle imageTextButtonStyle;
-	RoboGame w ;
+
 	public MainMenuScreen(RoboGame roboGame) {
 		this.roboGame = roboGame;
 
@@ -54,6 +55,7 @@ public class MainMenuScreen implements Screen {
 
 		logo = new Texture(Gdx.files.internal("src/main/resources/logo.png"));
 		background = new Texture(Gdx.files.internal("background.png"));
+		background.setWrap(Texture.TextureWrap.ClampToEdge, Texture.TextureWrap.ClampToEdge);
 
 		// Font section
 		fontLabel = new BitmapFont(Gdx.files.internal("src/main/resources/skin/font-export.fnt"), false);
@@ -63,9 +65,6 @@ public class MainMenuScreen implements Screen {
 		labelStyle = new Label.LabelStyle();
 		labelStyle.font = fontLabel;
 
-		// Cursor for the text field
-
-		
 		imageTextButtonStyle = new ImageTextButtonStyle();
 		imageTextButtonStyle.up = skin.newDrawable("panel2", Color.GRAY);
 		imageTextButtonStyle.down = skin.newDrawable("panel2"); // Set image for pressed
@@ -75,9 +74,9 @@ public class MainMenuScreen implements Screen {
 		imageTextButtonStyle.font = fontLabel;
 
 		button1 = new ImageTextButton("Single Player", imageTextButtonStyle);
-		button1.setX(210);
-		button1.setY(260);
 		button1.setSize(200, 60);
+		button1.setX(Gdx.graphics.getWidth() / 2 - button1.getWidth() / 2);
+		button1.setY(Gdx.graphics.getHeight() / 2 + button1.getHeight());
 		button1.addListener(new ChangeListener() {
 			@Override
 			public void changed(ChangeEvent changeEvent, Actor actor) {
@@ -87,21 +86,20 @@ public class MainMenuScreen implements Screen {
 		});
 
 		button2 = new ImageTextButton("Multiplayer", imageTextButtonStyle);
-		button2.setX(210);
-		button2.setY(200);
 		button2.setSize(200, 60);
-
+		button2.setX(Gdx.graphics.getWidth() / 2 - button2.getWidth() / 2);
+		button2.setY(Gdx.graphics.getHeight() / 2);
 		button2.addListener(new ChangeListener() {
 			@Override
 			public void changed(ChangeEvent changeEvent, Actor actor) {
 				roboGame.initiateMultiplayer();
 			}
 		});
-		button3 = new ImageTextButton("Rules", imageTextButtonStyle);
-		button3.setX(210);
-		button3.setY(140);
-		button3.setSize(200, 60);
 
+		button3 = new ImageTextButton("Rules", imageTextButtonStyle);
+		button3.setSize(200, 60);
+		button3.setX(Gdx.graphics.getWidth() / 2 - button3.getWidth() / 2);
+		button3.setY(Gdx.graphics.getHeight() / 2 - button3.getHeight());
 		button3.addListener(new ChangeListener() {
 			@Override
 			public void changed(ChangeEvent changeEvent, Actor actor) {
@@ -109,22 +107,27 @@ public class MainMenuScreen implements Screen {
 				roboGame.setScreen(ruleScreen);
 			}
 		});
-		button4 = new ImageTextButton("Settings", imageTextButtonStyle);
-		button4.setX(210);
-		button4.setY(80);
-		button4.setSize(200, 60);
 
+		button4 = new ImageTextButton("Settings", imageTextButtonStyle);
+		button4.setSize(200, 60);
+		button4.setX(Gdx.graphics.getWidth() / 2 - button4.getWidth() / 2);
+		button4.setY(Gdx.graphics.getHeight() / 2 -
+				button3.getHeight() -
+				button4.getHeight());
 		button4.addListener(new ChangeListener() {
 			@Override
 			public void changed(ChangeEvent changeEvent, Actor actor) {
 				Gdx.app.exit();
 			}
 		});
-		button5 = new ImageTextButton("Quit", imageTextButtonStyle);
-		button5.setX(210);
-		button5.setY(20);
-		button5.setSize(200, 60);
 
+		button5 = new ImageTextButton("Quit", imageTextButtonStyle);
+		button5.setSize(200, 60);
+		button5.setX(Gdx.graphics.getWidth() / 2 - button5.getWidth() / 2);
+		button5.setY(Gdx.graphics.getHeight() / 2 -
+				button3.getHeight() -
+				button4.getHeight() -
+				button5.getHeight());
 		button5.addListener(new ChangeListener() {
 			@Override
 			public void changed(ChangeEvent changeEvent, Actor actor) {
@@ -149,10 +152,16 @@ public class MainMenuScreen implements Screen {
 		Gdx.gl.glClearColor(1, 1, 1, 1);
 		Gdx.gl.glClear(GL30.GL_COLOR_BUFFER_BIT);
 		batch.begin();
-		batch.draw(background, 0, 0, Gdx.app.getGraphics().getWidth(), Gdx.app.getGraphics().getHeight());
-		batch.draw(logo, (Gdx.app.getGraphics().getWidth() / 2) - 200, Gdx.app.getGraphics().getHeight() - 150, 400,
-				100);
-
+		batch.draw(background,
+				0,
+				0,
+				Gdx.graphics.getWidth(),
+				Gdx.graphics.getHeight());
+		batch.draw(logo,
+				Gdx.graphics.getWidth() / 2 - logo.getWidth() / 2,
+				Gdx.graphics.getHeight() - logo.getHeight() - BORDER,
+				logo.getWidth(),
+				logo.getHeight());
 		batch.end();
 		stage.draw();
 		stage.act();
