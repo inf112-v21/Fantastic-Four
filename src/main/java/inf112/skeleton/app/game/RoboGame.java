@@ -69,13 +69,16 @@ public class RoboGame extends com.badlogic.gdx.Game {
     }
 
     public void launchGame() {
+        // Add the local player.
+        Player player = new Player("Player 1"); // TODO
+        player.chooseRobot("Robot");  // TODO
+//        player.setRobotPosition(2f, 5f);  // TODO
+        player.getRobotPosition().setAngle(0f);
+        players.add(player); // TODO
+
         gameActionScreen = new GameActionScreen(this, "exchange.tmx");
         setScreen(gameActionScreen);
         gameStarted = true;
-        Player player = new Player("Morten"); // TODO
-        player.chooseRobot("Daniel");  // TODO
-        players.add(player); // TODO remove and add players properly
-        player.setRobotPosition(0f, 0f);  // TODO
     }
 
     public void launchStartScreen() {
@@ -120,7 +123,7 @@ public class RoboGame extends com.badlogic.gdx.Game {
     void tick() {
         // TODO Check win conditions before the if-statement
 
-        // Print the current activity, TODO remove when the game is finished
+        // Print the current activity
         if (lastActivityType != currentActivity.currentType) {
             System.out.println(currentActivity.currentType);
             lastActivityType = currentActivity.currentType;
