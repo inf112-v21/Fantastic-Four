@@ -59,7 +59,7 @@ public class MultiplayerSetupScreen implements Screen {
 		// Initiate key variables
 		batch = new SpriteBatch();
 
-		logo = new Texture(Gdx.files.internal("src/main/resources/logo.png"));
+		logo = new Texture(Gdx.files.internal("src/main/resources/logo2.png"));
 		background = new Texture(Gdx.files.internal("background.png"));
 
 		// Font section
@@ -77,13 +77,42 @@ public class MultiplayerSetupScreen implements Screen {
 		cursorColor.setColor(Color.GRAY);
 		cursorColor.fill();
 
-		// Elements creation
+		// === Styles ===
+		imageLabelButtonStyle = new ImageTextButtonStyle();
+		imageLabelButtonStyle.up = skin.newDrawable("label"); // Set image for pressed
+		imageLabelButtonStyle.pressedOffsetX = 1;
+		imageLabelButtonStyle.pressedOffsetY = -1;
+		imageLabelButtonStyle.font = fontLabel;
+		imageLabelButtonStyle.fontColor = Color.WHITE;
+
 		textFieldStyle = new TextField.TextFieldStyle();
 		textFieldStyle.font = fontLabel;
 		textFieldStyle.fontColor = new Color(Color.GRAY);
 		textFieldStyle.focusedFontColor = new Color(Color.DARK_GRAY);
 		textFieldStyle.cursor = new Image(new Texture(cursorColor)).getDrawable();
 		textFieldStyle.background = skin.getDrawable("textfield");
+
+		imageTextButtonStyle = new ImageTextButtonStyle();
+		imageTextButtonStyle.up = skin.newDrawable("panel2", Color.GRAY);
+		imageTextButtonStyle.down = skin.newDrawable("panel2"); // Set image for pressed
+		imageTextButtonStyle.over = skin.newDrawable("panel2", Color.BLUE); // set image for mouse over
+		imageTextButtonStyle.pressedOffsetX = 1;
+		imageTextButtonStyle.pressedOffsetY = -1;
+		imageTextButtonStyle.font = fontLabel;
+		imageTextButtonStyle.fontColor = Color.WHITE;
+
+		// === Elements creation ===
+		nameTextField = new TextField("Enter name", textFieldStyle);
+		nameTextField.addListener(new ClickListener() {
+			@Override
+			public void clicked(InputEvent event, float x, float y) {
+				super.clicked(event, x, y);
+				nameTextField.setText("");
+			}
+		});
+		nameTextField.setSize(300, 50);
+		nameTextField.setX(Gdx.graphics.getWidth() / 2);
+		nameTextField.setY(Gdx.graphics.getHeight() / 2);
 
 		ipTextField = new TextField("Enter IP", textFieldStyle);
 		ipTextField.addListener(new ClickListener() {
@@ -95,33 +124,24 @@ public class MultiplayerSetupScreen implements Screen {
 		});
 		ipTextField.setSize(300, 50);
 		ipTextField.setX(Gdx.graphics.getWidth() / 2);
-		ipTextField.setY(170);
+		ipTextField.setY(Gdx.graphics.getHeight() / 2 + nameTextField.getHeight());
 
-		nameTextField = new TextField("Enter name", textFieldStyle);
-		nameTextField.addListener(new ClickListener() {
-			@Override
-			public void clicked(InputEvent event, float x, float y) {
-				super.clicked(event, x, y);
-				nameTextField.setText("");
-			}
-		});
-		nameTextField.setSize(300, 50);
-		nameTextField.setX(Gdx.graphics.getWidth() / 2);
-		nameTextField.setY(230);
+		nameLabel = new ImageTextButton("Nickname", imageLabelButtonStyle);
+		nameLabel.setSize(150, 30);
+		nameLabel.setX(Gdx.graphics.getWidth() / 2 - nameTextField.getWidth());
+		nameLabel.setY(Gdx.graphics.getHeight() / 2);
 
-		imageTextButtonStyle = new ImageTextButtonStyle();
-		imageTextButtonStyle.up = skin.newDrawable("panel2", Color.GRAY);
-		imageTextButtonStyle.down = skin.newDrawable("panel2"); // Set image for pressed
-		imageTextButtonStyle.over = skin.newDrawable("panel2", Color.BLUE); // set image for mouse over
-		imageTextButtonStyle.pressedOffsetX = 1;
-		imageTextButtonStyle.pressedOffsetY = -1;
-		imageTextButtonStyle.font = fontLabel;
-		imageTextButtonStyle.fontColor = Color.WHITE;
+		ipLabel = new ImageTextButton("Enter IP", imageLabelButtonStyle);
+		ipLabel.setSize(150, 30);
+		ipLabel.setX(Gdx.graphics.getWidth() / 2 - ipTextField.getWidth());
+		ipLabel.setY(Gdx.graphics.getHeight() / 2 + nameTextField.getHeight());
 
 		cancelButton = new ImageTextButton("Cancel", imageTextButtonStyle);
 		cancelButton.setSize(150, 60);
 		cancelButton.setX(Gdx.graphics.getWidth() / 2);
-		cancelButton.setY(80);
+		cancelButton.setY(Gdx.graphics.getHeight() / 2 -
+				nameTextField.getHeight() -
+				ipTextField.getHeight());
 		cancelButton.addListener(new ChangeListener() {
 			@Override
 			public void changed(ChangeEvent changeEvent, Actor actor) {
@@ -133,7 +153,9 @@ public class MultiplayerSetupScreen implements Screen {
 		okButton = new ImageTextButton("OK", imageTextButtonStyle);
 		okButton.setSize(150, 60);
 		okButton.setX(Gdx.graphics.getWidth() / 2- cancelButton.getWidth());
-		okButton.setY(80);
+		okButton.setY(Gdx.graphics.getHeight() / 2 -
+				nameTextField.getHeight() -
+				ipTextField.getHeight());
 		okButton.addListener(new ChangeListener() {
 			@Override
 			public void changed(ChangeEvent changeEvent, Actor actor) {
@@ -145,30 +167,15 @@ public class MultiplayerSetupScreen implements Screen {
 		hostButton = new ImageTextButton("Host", imageTextButtonStyle);
 		hostButton.setSize(150, 60);
 		hostButton.setX(Gdx.graphics.getWidth() / 2 + cancelButton.getWidth());
-		hostButton.setY(80);
+		hostButton.setY(Gdx.graphics.getHeight() / 2 -
+				nameTextField.getHeight() -
+				ipTextField.getHeight());
 		hostButton.addListener(new ChangeListener() {
 			@Override
 			public void changed(ChangeEvent changeEvent, Actor actor) {
 				roboGame.startHost(nameTextField.getText());
 			}
 		});
-
-		imageLabelButtonStyle = new ImageTextButtonStyle();
-		imageLabelButtonStyle.up = skin.newDrawable("label"); // Set image for pressed
-		imageLabelButtonStyle.pressedOffsetX = 1;
-		imageLabelButtonStyle.pressedOffsetY = -1;
-		imageLabelButtonStyle.font = fontLabel;
-		imageLabelButtonStyle.fontColor = Color.WHITE;
-
-		nameLabel = new ImageTextButton("Nickname", imageLabelButtonStyle);
-		nameLabel.setSize(150, 30);
-		nameLabel.setX(Gdx.graphics.getWidth() / 2 - nameTextField.getWidth());
-		nameLabel.setY(230);
-
-		ipLabel = new ImageTextButton("Enter IP", imageLabelButtonStyle);
-		ipLabel.setSize(150, 30);
-		ipLabel.setX(Gdx.graphics.getWidth() / 2 - ipTextField.getWidth());
-		ipLabel.setY(180);
 
 		stage = new Stage();
 		stage.addActor(okButton);
