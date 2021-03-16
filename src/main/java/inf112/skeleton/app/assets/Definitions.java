@@ -2,8 +2,11 @@ package inf112.skeleton.app.assets;
 
 public class Definitions {
 
-    enum Direction {
-        NORTH, SOUTH, EAST, WEST;
+    public enum Direction {
+        UP,
+        RIGHT,
+        DOWN,
+        LEFT
     }
 
     public enum ActivityType {
