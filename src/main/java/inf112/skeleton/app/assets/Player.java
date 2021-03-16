@@ -1,7 +1,5 @@
 package inf112.skeleton.app.assets;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.math.Vector2;
 import inf112.skeleton.app.assets.cards.ICard;
 import inf112.skeleton.app.assets.cards.ProgramCard;
 
@@ -9,12 +7,13 @@ import java.util.List;
 
 public class Player {
 
-    private static final long TIMEBETWEENMOVES = 1000;
+    private static final long TIMEBETWEENMOVES = 50;
     private String playerName;
     private List<ProgramCard> programCards;
-    private int damage, life;
+    private int damage;
+    private int life;
+    public int x, y, lastX, lastY, archiveX, archiveY, directionIndex;
     private boolean powerDown;
-    private Vector2 position, archiveMarkerPosition;
     private Definitions.Direction direction;
 
     public static final int MIN_NUMBER_OF_LIFE_TOKENS = 0;
@@ -27,9 +26,12 @@ public class Player {
 
     public Player(String playerName) {
         this.playerName = playerName;
-        direction = Definitions.Direction.NORTH;
+        directionIndex = 0;
         lastMove = System.currentTimeMillis();
-        position = new Vector2(1, 1);
+        x = 1;
+        y = 1;
+        lastX = -1;
+        lastY = -1;
     }
 
     private void registerSelectedCards(List<ICard> cards) {
@@ -40,9 +42,6 @@ public class Player {
         this.programCards = cards;
     }
 
-    public void chooseRobot(String robotName) {
-    }
-
     public int getDamage() {
         return damage;
     }
@@ -51,14 +50,11 @@ public class Player {
         return playerName;
     }
 
-    public ProgramCard revealProgramCard(int registerNumber) {
-        return getProgramCard(registerNumber);
-    }
-
     public ProgramCard getProgramCard(int registerNumber) {
         return programCards.get(registerNumber);
     }
 
+    // === DAMAGE LOGIC ===
     public void loseLife(int lifeTokens) throws IllegalArgumentException {
         int updatedLifeTokens = Math.max((this.life - lifeTokens), this.MIN_NUMBER_OF_LIFE_TOKENS);
         if (MAX_NUMBER_OF_LIFE_TOKENS < updatedLifeTokens)
@@ -74,26 +70,26 @@ public class Player {
     }
 
     // === MOVE LOGIC ===
-    public Vector2 getRobotPosition() {
-        return position;
+    public void setRobotPosition(int x, int y) {
+        lastX = this.x;
+        lastY = this.y;
+        this.x = x;
+        this.y = y;
     }
 
-    public void setRobotPosition(float x, float y) {
-        position.set(x, y);
-    }
-
-    public Vector2 getArchiveMarkerPosition() {
-        return archiveMarkerPosition;
-    }
-
-    public void setArchiveMarkerPosition(float x, float y) {
-        archiveMarkerPosition.set(x, y);
+    public void setArchiveMarkerPosition(int x, int y) {
+        archiveX = x;
+        archiveY = y;
     }
 
     public void moveRobotByProgramCard(ProgramCard programCard) {
-        System.out.println(programCard);
+        System.out.println(programCard); // TODO only for testing purposes
+
         int[] moveAndRotate = ProgramCard.interpretType(programCard.getProgramCardType());
-        position.setAngle(position.angle() + moveAndRotate[1]);
+
+        directionIndex += moveAndRotate[1];
+        directionIndex %= Definitions.Direction.values().length;
+        while (directionIndex < 0) directionIndex += Definitions.Direction.values().length;
 
         for (int step = 0; step < moveAndRotate[0]; step++) moveOneStep();
     }
@@ -103,39 +99,29 @@ public class Player {
             // spin waiter TODO improve
         }
         lastMove = System.currentTimeMillis();
-        if (direction == Definitions.Direction.NORTH) {
-            position.set(position.x, position.y + 1);
+        Definitions.Direction direction = Definitions.Direction.values()[directionIndex];
+        if (direction == Definitions.Direction.UP) {
+            y++;
         }
-        else if (direction == Definitions.Direction.WEST) {
-            position.set(position.x - 1, position.y);
+        else if (direction == Definitions.Direction.LEFT) {
+            x--;
         }
-        else if (direction == Definitions.Direction.SOUTH) {
-            position.set(position.x, position.y - 1);
+        else if (direction == Definitions.Direction.DOWN) {
+            y--;
         }
         else {
-            position.set(position.x + 1, position.y);
+            x++;
         }
     }
-
-//    private void move(int dx, int dy) {
-//        playerLayer.setCell((int) playerPosition.x, (int) playerPosition.y, null);
-//        playerPosition.set(playerPosition.x + dx, playerPosition.y + dy);
-//    }
 
     public List<ProgramCard> getProgramCards() {
         return programCards;
-    }
-
-    public void pushRobotToPosition(Vector2 position) {
-        this.position.set(position.x, position.y);
     }
 
     @Override
     public String toString() {
         return "Player{" +
                 "playerName='" + playerName + '\'' +
-                ", position=" + position +
-                ", archiveMarkerPosition=" + archiveMarkerPosition +
                 ", direction=" + direction +
                 '}';
     }
