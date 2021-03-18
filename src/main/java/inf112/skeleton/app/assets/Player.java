@@ -3,7 +3,6 @@ package inf112.skeleton.app.assets;
 import inf112.skeleton.app.assets.cards.ICard;
 import inf112.skeleton.app.assets.cards.ProgramCard;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Player {
@@ -15,7 +14,6 @@ public class Player {
     private int life;
     public int x, y, lastX, lastY, archiveX, archiveY, directionIndex;
     private boolean powerDown;
-    private Definitions.Direction direction;
 
     public static final int MIN_NUMBER_OF_LIFE_TOKENS = 0;
     public static final int MAX_NUMBER_OF_LIFE_TOKENS = 3; // or 4 if 5 or more players
@@ -35,6 +33,8 @@ public class Player {
         lastMove = System.currentTimeMillis();
         this.x = x;
         this.y = y;
+        archiveX = x;
+        archiveY = y;
         lastX = -1;
         lastY = -1;
     }
@@ -127,7 +127,6 @@ public class Player {
     public String toString() {
         return "Player{" +
                 "playerName='" + playerName + '\'' +
-                ", direction=" + direction +
                 '}';
     }
 }
