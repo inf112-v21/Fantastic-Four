@@ -11,7 +11,7 @@ public class ActivityTest {
     @Test
     public void testHasTimedOut() throws InterruptedException {
         int durationInSeconds = 1;
-        Activity activity = new Activity(Definitions.ActivityType.OPENMENU, durationInSeconds);
+        Activity activity = new Activity(Definitions.ActivityType.OPEN_MENU, durationInSeconds);
         int secToMillis = 1000;
         long start = currentTimeMillis();
 
@@ -25,7 +25,7 @@ public class ActivityTest {
     @Test
     public void testHasNotTimedOut() throws InterruptedException {
         int durationInSeconds = 1;
-        Activity activity = new Activity(Definitions.ActivityType.OPENMENU, durationInSeconds);
+        Activity activity = new Activity(Definitions.ActivityType.OPEN_MENU, durationInSeconds);
         Assert.assertFalse(activity.hasTimedOut());
     }
 }
