@@ -35,12 +35,12 @@ public class RoboGameTest {
 
     @Test
     public void testTickFromWAITFORMENUSELECTIONToCHECKMULTIPLAYER() {
-        roboGame.currentActivity = new Activity(Definitions.ActivityType.WAITFORMENUSELECTION, -1);
+        roboGame.currentActivity = new Activity(Definitions.ActivityType.WAIT_FOR_MENU_SELECTION, -1);
         roboGame.gameStarted = true;
 
         roboGame.tick();
 
-        Assert.assertEquals(Definitions.ActivityType.CHECKMULTIPLAYER, roboGame.currentActivity.currentType);
+        Assert.assertEquals(Definitions.ActivityType.CHECK_MULTIPLAYER, roboGame.currentActivity.currentType);
     }
 
     @Test
