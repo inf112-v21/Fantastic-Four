@@ -23,18 +23,15 @@ import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageTextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import inf112.skeleton.app.assets.cards.CradUI;
-import inf112.skeleton.app.assets.cards.ProgramCard;
-import inf112.skeleton.app.assets.cards.ProgramDeck;
 import inf112.skeleton.app.assets.Definitions;
 import inf112.skeleton.app.assets.Player;
 import inf112.skeleton.app.game.RoboGame;
 import inf112.skeleton.app.mechanics.player.Movement;
 import java.util.HashMap;
 import java.util.LinkedList;
-import java.util.List;
 import java.util.Map;
 
-public class GameActionScreen implements Screen {
+public class GameWindow implements Screen {
 
 	private SpriteBatch batch;
 	private BitmapFont font;
@@ -46,37 +43,38 @@ public class GameActionScreen implements Screen {
 	InputMultiplexer inputMultiplexer;
 	OrthogonalTiledMapRenderer renderer;
 	OrthographicCamera camera;
+
 	Map<Player, TiledMapTileLayer.Cell> playerTextures;
+
 	String mapName;
+
 	Movement movementMechanics;
+
 	RoboGame roboGame;
+
 	Vector2 playerPosition;
 	OrthographicCamera gameCamera, uiCamera;
 
-	
-	
 	int width;
 	int height;
 	ImageTextButton.ImageTextButtonStyle imageLabelButtonStyle;
 	Texture lifeToken, lifeToken2, lifeToken3;
-	ProgramDeck deck;
-	List<ProgramCard> drawCards;
-	
-	
-	int viewPortWidth, viewPortHeight;
-	Stage pickedCardsStage;
-	Stage damageTokensStage;
-	CradUI cardui;
-	Stage otherButtonsStage;
-	Stage startCardsStage;
-	LinkedList<Integer> cardPositions;
 
-	public GameActionScreen(RoboGame roboGame, String mapName) {
+	ControlPanel rules;
+	int viewPortWidth, viewPortHeight;
+	Stage uiStage;
+	Stage damageStage;
+	CradUI cardui;
+	Stage buttons;
+	Stage moveCards;
+	LinkedList<Integer> positions;
+
+	public GameWindow(RoboGame roboGame, String mapName) {
 		this.roboGame = roboGame;
 		this.mapName = mapName;
 		batch = new SpriteBatch();
 		cardui = new CradUI();
-		startCardsStage = new Stage();
+		moveCards = new Stage();
 		width = Gdx.graphics.getWidth();
 		height = Gdx.graphics.getHeight();
 
@@ -88,37 +86,27 @@ public class GameActionScreen implements Screen {
 
 		gameCamera.update();
 		uiCamera.update();
-		pickedCardsStage = new Stage();
-		damageTokensStage = new Stage();
-		otherButtonsStage = new Stage();
+		rules = new ControlPanel(roboGame);
+		uiStage = new Stage();
+		damageStage = new Stage();
+		buttons = new Stage();
 
 		gameCamera = new OrthographicCamera();
 		uiCamera = new OrthographicCamera();
 
 		gameCamera.update();
 		uiCamera.update();
-		cardPositions = new LinkedList<>();
-		cardPositions.add(65);
-		cardPositions.add(190);
-		cardPositions.add(315);
-		cardPositions.add(440);
-		cardPositions.add(565);
-		
-		
-		//CardDeck
-		deck = new ProgramDeck();
-		deck.createDeck();
-		drawCards = deck.draw(9);
-
-		
+		positions = new LinkedList<>();
+		positions.add(65);
+		positions.add(190);
+		positions.add(315);
+		positions.add(440);
+		positions.add(565);
 
 	}
 
 	@Override
 	public void show() {
-		
-		
-		
 		background = new Texture(Gdx.files.internal("backgroundui.jpg"));
 		batch = new SpriteBatch();
 		font = new BitmapFont();
@@ -219,8 +207,8 @@ public class GameActionScreen implements Screen {
 
 		
 		// CARDS
-		ImageButton poweroff = CradUI.createTextureButton("powerdown");
-		ImageButton poweroffON = CradUI.createTextureButton("powerdownON");
+		ImageButton poweroff = CradUI.createCard("powerdown");
+		ImageButton poweroffON = CradUI.createCard("powerdownON");
 
 		poweroff.setPosition(850, 55);
 		poweroff.addListener(new InputListener() {
@@ -228,7 +216,7 @@ public class GameActionScreen implements Screen {
 
 				poweroff.setVisible(false);
 				poweroffON.setPosition(850, 55);
-				startCardsStage.addActor(poweroffON);
+				moveCards.addActor(poweroffON);
 			}
 
 			public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
@@ -237,28 +225,22 @@ public class GameActionScreen implements Screen {
 		});
 		
 		
-		LinkedList<String> cardNames = new LinkedList<>();
-		for (ProgramCard c : drawCards) {
-			System.out.println(c.getProgramCardType());
-			cardNames.add(c.getProgramCardType().toString());
-		}
-		cardNames.size();
 		
 		
 		
 
-		ImageButton move1 = CradUI.createTextureButton(("/cards/" + cardNames.removeFirst()));
+		ImageButton move1 = CradUI.createCard("/cards/move1");
 		move1.setPosition(800, 700);
 		move1.setSize(120, 200);
 		move1.addListener(new InputListener() {
 			
 			public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-				ImageButton back = CradUI.createTextureButton("/back");
+				ImageButton back = CradUI.createCard("/back");
 				back.setSize(120, 200);
 				back.setPosition(800, 700);
-				move1.setPosition(cardPositions.removeFirst(), 0);
-				startCardsStage.addActor(back);
-				pickedCardsStage.addActor(move1);
+				move1.setPosition(positions.removeFirst(), 0);
+				moveCards.addActor(back);
+				uiStage.addActor(move1);
 			}
 
 			public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
@@ -266,17 +248,17 @@ public class GameActionScreen implements Screen {
 			}
 		});
 
-		ImageButton move2 = CradUI.createTextureButton(("/cards/" + cardNames.removeFirst()));
+		ImageButton move2 = CradUI.createCard("/cards/move2");
 		move2.setSize(120, 200);
 		move2.setPosition(925, 700);
 		move2.addListener(new InputListener() {
 			public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-				ImageButton back = CradUI.createTextureButton("/back");
+				ImageButton back = CradUI.createCard("/back");
 				back.setSize(120, 200);
 				back.setPosition(925, 700);
-				move2.setPosition(cardPositions.removeFirst(), 0);
-				pickedCardsStage.addActor(move2);
-				startCardsStage.addActor(back);
+				move2.setPosition(positions.removeFirst(), 0);
+				uiStage.addActor(move2);
+				moveCards.addActor(back);
 
 			}
 
@@ -284,18 +266,18 @@ public class GameActionScreen implements Screen {
 				return true;
 			}
 		});
-		ImageButton move3 = CradUI.createTextureButton(("/cards/" + cardNames.removeFirst()));
+		ImageButton move3 = CradUI.createCard("/cards/move3");
 		move3.setSize(120, 200);
 		move3.setPosition(1050, 700);
 		move3.addListener(new InputListener() {
 			public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
 
-				ImageButton back = CradUI.createTextureButton("/back");
+				ImageButton back = CradUI.createCard("/back");
 				back.setPosition(1050, 700);
 				back.setSize(120, 200);
-				move3.setPosition(cardPositions.removeFirst(), 0);
-				pickedCardsStage.addActor(move3);
-				startCardsStage.addActor(back);
+				move3.setPosition(positions.removeFirst(), 0);
+				uiStage.addActor(move3);
+				moveCards.addActor(back);
 
 			}
 
@@ -304,18 +286,18 @@ public class GameActionScreen implements Screen {
 			}
 		});
 
-		ImageButton move4 = CradUI.createTextureButton(("/cards/" + cardNames.removeFirst()));
+		ImageButton move4 = CradUI.createCard("/cards/rotateLeft");
 		move4.setSize(120, 200);
 		move4.setPosition(800, 495);
 		move4.addListener(new InputListener() {
 			public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
 				
-				ImageButton back = CradUI.createTextureButton("/back");
+				ImageButton back = CradUI.createCard("/back");
 				back.setPosition(800, 495);
 				back.setSize(120, 200);
-				move4.setPosition(cardPositions.removeFirst(), 0);
-				pickedCardsStage.addActor(move4);
-				startCardsStage.addActor(back);
+				move4.setPosition(positions.removeFirst(), 0);
+				uiStage.addActor(move4);
+				moveCards.addActor(back);
 
 			}
 
@@ -324,18 +306,18 @@ public class GameActionScreen implements Screen {
 			}
 		});
 
-		ImageButton move5 =CradUI.createTextureButton(("/cards/" + cardNames.removeFirst()));
+		ImageButton move5 = CradUI.createCard("/cards/rotateRight");
 		move5.setSize(120, 200);
 		move5.setPosition(925, 495);
 		move5.addListener(new InputListener() {
 			public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
 
-				ImageButton back = CradUI.createTextureButton("/back");
+				ImageButton back = CradUI.createCard("/back");
 				back.setPosition(925, 495);
 				back.setSize(120, 200);
-				move5.setPosition(cardPositions.removeFirst(), 0);
-				pickedCardsStage.addActor(move5);
-				startCardsStage.addActor(back);
+				move5.setPosition(positions.removeFirst(), 0);
+				uiStage.addActor(move5);
+				moveCards.addActor(back);
 
 			}
 
@@ -343,18 +325,18 @@ public class GameActionScreen implements Screen {
 				return true;
 			}
 		});
-		ImageButton move6 = CradUI.createTextureButton(("/cards/" + cardNames.removeFirst()));
+		ImageButton move6 = CradUI.createCard("/cards/rotateRight");
 		move6.setSize(120, 200);
 		move6.setPosition(1050, 495);
 		move6.addListener(new InputListener() {
 			public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
 
-				ImageButton back = CradUI.createTextureButton("/back");
+				ImageButton back = CradUI.createCard("/back");
 				back.setSize(120, 200);
 				back.setPosition(1050, 495);
-				move6.setPosition(cardPositions.removeFirst(), 0);
-				pickedCardsStage.addActor(move6);
-				startCardsStage.addActor(back);
+				move6.setPosition(positions.removeFirst(), 0);
+				uiStage.addActor(move6);
+				moveCards.addActor(back);
 
 			}
 
@@ -362,18 +344,18 @@ public class GameActionScreen implements Screen {
 				return true;
 			}
 		});
-		ImageButton move7 = CradUI.createTextureButton(("/cards/" + cardNames.removeFirst()));
+		ImageButton move7 = CradUI.createCard("/cards/rotateRight");
 		move7.setSize(120, 200);
 		move7.setPosition(800, 290);
 		move7.addListener(new InputListener() {
 			public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
 				
-				ImageButton back = CradUI.createTextureButton("/back");
+				ImageButton back = CradUI.createCard("/back");
 				back.setPosition(800, 290);
 				back.setSize(120, 200);
-				move7.setPosition(cardPositions.removeFirst(), 0);
-				pickedCardsStage.addActor(move7);
-				startCardsStage.addActor(back);
+				move7.setPosition(positions.removeFirst(), 0);
+				uiStage.addActor(move7);
+				moveCards.addActor(back);
 
 			}
 
@@ -381,18 +363,18 @@ public class GameActionScreen implements Screen {
 				return true;
 			}
 		});
-		ImageButton move8 = CradUI.createTextureButton(("/cards/" + cardNames.removeFirst()));
+		ImageButton move8 = CradUI.createCard("/cards/rotateRight");
 		move8.setSize(120, 200);
 		move8.setPosition(925, 290);
 		move8.addListener(new InputListener() {
 			public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
 
-				ImageButton back = CradUI.createTextureButton("/back");
+				ImageButton back = CradUI.createCard("/back");
 				back.setPosition(925, 290);
 				back.setSize(120, 200);
-				move8.setPosition(cardPositions.removeFirst(), 0);
-				pickedCardsStage.addActor(move8);
-				startCardsStage.addActor(back);
+				move8.setPosition(positions.removeFirst(), 0);
+				uiStage.addActor(move8);
+				moveCards.addActor(back);
 
 			}
 
@@ -400,17 +382,17 @@ public class GameActionScreen implements Screen {
 				return true;
 			}
 		});
-		ImageButton move9 = CradUI.createTextureButton(("/cards/" + cardNames.removeFirst()));
+		ImageButton move9 = CradUI.createCard("/cards/rotateRight");
 		move9.setSize(120, 200);
 		move9.setPosition(1050, 290);
 		move9.addListener(new InputListener() {
 			public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-				ImageButton back = CradUI.createTextureButton("/back");
+				ImageButton back = CradUI.createCard("/back");
 				back.setPosition(1050, 290);
 				back.setSize(120, 200);
-				move9.setPosition(cardPositions.removeFirst(), 0);
-				pickedCardsStage.addActor(move9);
-				startCardsStage.addActor(back);
+				move9.setPosition(positions.removeFirst(), 0);
+				uiStage.addActor(move9);
+				moveCards.addActor(back);
 
 			}
 
@@ -419,34 +401,31 @@ public class GameActionScreen implements Screen {
 			}
 		});
 		
-		
-		
-		
 		// Add elements to stage
-		damageTokensStage.addActor(damage1);
-		damageTokensStage.addActor(damage2);
-		damageTokensStage.addActor(damage3);
-		damageTokensStage.addActor(damage4);
-		damageTokensStage.addActor(damage5);
-		damageTokensStage.addActor(damage6);
-		damageTokensStage.addActor(damage7);
-		damageTokensStage.addActor(damage8);
-		damageTokensStage.addActor(damage9);
+		damageStage.addActor(damage1);
+		damageStage.addActor(damage2);
+		damageStage.addActor(damage3);
+		damageStage.addActor(damage4);
+		damageStage.addActor(damage5);
+		damageStage.addActor(damage6);
+		damageStage.addActor(damage7);
+		damageStage.addActor(damage8);
+		damageStage.addActor(damage9);
 		
-		startCardsStage.addActor(move1);
-		startCardsStage.addActor(move2);
-		startCardsStage.addActor(move3);
-		startCardsStage.addActor(move4);
-		startCardsStage.addActor(move5);
-		startCardsStage.addActor(move6);
-		startCardsStage.addActor(move7);
-		startCardsStage.addActor(move8);
-		startCardsStage.addActor(move9);
-		startCardsStage.addActor(poweroff);
+		moveCards.addActor(move1);
+		moveCards.addActor(move2);
+		moveCards.addActor(move3);
+		moveCards.addActor(move4);
+		moveCards.addActor(move5);
+		moveCards.addActor(move6);
+		moveCards.addActor(move7);
+		moveCards.addActor(move8);
+		moveCards.addActor(move9);
+		moveCards.addActor(poweroff);
 
-		otherButtonsStage.addActor(life);
-		otherButtonsStage.addActor(life2);
-		otherButtonsStage.addActor(life3);
+		buttons.addActor(life);
+		buttons.addActor(life2);
+		buttons.addActor(life3);
 
 		// InputMultiplexer inputMultiplexer = new InputMultiplexer();
 		// inputMultiplexer.addProcessor(moveCards);
@@ -491,33 +470,34 @@ public class GameActionScreen implements Screen {
 			else
 				angle = 270;
 		}
-		
-		
+		// render card 9.
+
 		Gdx.gl.glViewport(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-		startCardsStage.act();
-		startCardsStage.draw();
+		moveCards.act();
+		moveCards.draw();
 
-		Gdx.input.setInputProcessor(startCardsStage);
+		Gdx.input.setInputProcessor(moveCards);
 
-		// RenderCards
+		// RENDER cards /
 		Gdx.gl.glViewport(-70, 0, Gdx.graphics.getWidth(), 700);
-		pickedCardsStage.act();
-		pickedCardsStage.draw();
+		uiStage.act();
+		uiStage.draw();
 
-		// Render damage tokens
+		// Render damagetokens
 		Gdx.gl.glViewport(-150, 200, Gdx.graphics.getWidth(), 700);
-		damageTokensStage.act();
-		damageTokensStage.draw();
+		damageStage.act();
+		damageStage.draw();
 
 		// render buttons
 		Gdx.gl.glViewport(800, 50, Gdx.graphics.getWidth(), 700);
-		otherButtonsStage.act();
-		otherButtonsStage.draw();
+		buttons.act();
+		buttons.draw();
 
 	}
 
 	@Override
 	public void resize(int i, int i1) {
+		moveCards.getViewport().update(width, height, true);
 
 	}
 

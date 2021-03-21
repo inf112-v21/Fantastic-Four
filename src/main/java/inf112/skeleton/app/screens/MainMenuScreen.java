@@ -103,7 +103,7 @@ public class MainMenuScreen implements Screen {
 		button3.addListener(new ChangeListener() {
 			@Override
 			public void changed(ChangeEvent changeEvent, Actor actor) {
-				Screen ruleScreen = new RulesScreen(roboGame);
+				Screen ruleScreen = new GameWindow(roboGame, "exchange.tmx");
 				roboGame.setScreen(ruleScreen);
 			}
 		});
@@ -117,7 +117,8 @@ public class MainMenuScreen implements Screen {
 		button4.addListener(new ChangeListener() {
 			@Override
 			public void changed(ChangeEvent changeEvent, Actor actor) {
-				Gdx.app.exit();
+				Screen gamewindow = new ControlPanel(roboGame);
+				roboGame.setScreen(gamewindow);
 			}
 		});
 

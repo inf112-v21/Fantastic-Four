@@ -9,7 +9,7 @@ public class Main {
     public static void main(String[] args) {
         Lwjgl3ApplicationConfiguration cfg = new Lwjgl3ApplicationConfiguration();
         cfg.setTitle("RoboRally");
-        cfg.setWindowedMode(900, 900);
+        cfg.setWindowedMode(1200, 900);
 
         //Map ui = new Map("example.tmx");
         //MainMenuScreen mainMenuScreen = new MainMenuScreen();
