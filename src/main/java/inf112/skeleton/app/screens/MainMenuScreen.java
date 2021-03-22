@@ -103,7 +103,7 @@ public class MainMenuScreen implements Screen {
 		button3.addListener(new ChangeListener() {
 			@Override
 			public void changed(ChangeEvent changeEvent, Actor actor) {
-				Screen ruleScreen = new GameWindow(roboGame, "exchange.tmx");
+				Screen ruleScreen = new RulesScreen(roboGame);
 				roboGame.setScreen(ruleScreen);
 			}
 		});
