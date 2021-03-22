@@ -16,6 +16,7 @@ public class RoboGame extends com.badlogic.gdx.Game {
     private ProgramDeck programDeck;
     private List<Player> players;
     final int MAX_NUMBER_OF_CARDS = 9;
+    public long lastMove;
 
     RoboRallyClient roboClient;
     RoboRallyServer roboServer;
@@ -59,6 +60,7 @@ public class RoboGame extends com.badlogic.gdx.Game {
         PROGRAMCARD_DURATION = 1;
         STANDARD_DURATION = 1;
         WAITCONNECTIONDURATION = 5;
+        lastMove = 0L;
     }
 
     @Override
@@ -66,7 +68,7 @@ public class RoboGame extends com.badlogic.gdx.Game {
     }
 
     public void launchGame() {
-        addPlayer(new Player("Player 2", 8, 4)); // TODO For testing purposes, remove
+        addPlayer(new Player("Player 2", 8, 4, this)); // TODO For testing purposes, remove
 
         gameActionScreen = new GameActionScreen(this, "exchange.tmx");
         setScreen(gameActionScreen);
@@ -236,7 +238,7 @@ public class RoboGame extends com.badlogic.gdx.Game {
      */
     public void dealProgramCards() {
         for (Player player : players) {
-            List<ProgramCard> cards = new ArrayList(); // Create a small deck of cards for each player
+            List<ProgramCard> cards = new ArrayList<>(); // Create a small deck of cards for each player
             cards.addAll(programDeck.draw(MAX_NUMBER_OF_CARDS - player.getDamage()));
             player.receive(cards); // Each player receives it's cards
         }

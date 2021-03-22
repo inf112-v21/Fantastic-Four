@@ -47,7 +47,7 @@ public class GameActionScreen implements Screen {
     public GameActionScreen(RoboGame roboGame, String mapName) {
         this.roboGame = roboGame;
         this.mapName = mapName;
-        lastMove = 0l;
+        lastMove = 0L;
     }
 
     @Override
@@ -97,10 +97,10 @@ public class GameActionScreen implements Screen {
         renderer.render();
 
         for (int playerIndex = 0; playerIndex < roboGame.getPlayers().size(); playerIndex++) {
-            while (System.currentTimeMillis() - lastMove < TIMEBETWEENMOVES) {
+            while (System.currentTimeMillis() - roboGame.lastMove < TIMEBETWEENMOVES) {
                 // spin waiter TODO improve
             }
-            lastMove = System.currentTimeMillis();
+            roboGame.lastMove = System.currentTimeMillis();
 
             Player player = roboGame.getPlayers().get(playerIndex);
 

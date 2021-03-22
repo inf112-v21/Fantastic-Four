@@ -63,7 +63,7 @@ public class RoboRallyClient {
 
     public void addPlayer() {
         Network.AddPlayer addPlayer = new Network.AddPlayer();
-        addPlayer.player = new Player(nickname);
+        addPlayer.player = new Player(nickname, roboGame);
 
         System.out.println("Sent player register");
 
