@@ -14,7 +14,6 @@ import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.maps.tiled.tiles.StaticTiledMapTile;
-import inf112.skeleton.app.assets.Definitions;
 import inf112.skeleton.app.assets.Player;
 import inf112.skeleton.app.game.RoboGame;
 import inf112.skeleton.app.mechanics.player.Movement;
@@ -23,9 +22,12 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class GameActionScreen implements Screen {
+    private static final long TIMEBETWEENMOVES = 300;
+    long lastMove;
 
     private SpriteBatch batch;
     private BitmapFont font;
+    TextureRegion[][] textureRegions;
 
     TiledMap tiledMap;
     TiledMapTileLayer playerLayer, boardLayer, holeLayer, flagLayer;
@@ -45,6 +47,7 @@ public class GameActionScreen implements Screen {
     public GameActionScreen(RoboGame roboGame, String mapName) {
         this.roboGame = roboGame;
         this.mapName = mapName;
+        lastMove = 0l;
     }
 
     @Override
@@ -70,15 +73,15 @@ public class GameActionScreen implements Screen {
         renderer.setView(camera);
 
         // Display player
-        Texture playerTexture = new Texture("arrowsAndRobots.png");
-        TextureRegion[][] textureRegions = TextureRegion.split(playerTexture, 300, 300);
+        Texture playerTexture = new Texture("arrows2.png");
+        textureRegions = TextureRegion.split(playerTexture, 300, 300);
 
         playerTextures = new HashMap<>();
         int i = 0;
         for (Player player : roboGame.getPlayers()) {
             System.out.println(player);
             TiledMapTileLayer.Cell playerCell = new TiledMapTileLayer.Cell();
-            playerCell.setTile(new StaticTiledMapTile(textureRegions[0][i]));
+            playerCell.setTile(new StaticTiledMapTile(textureRegions[i][0]));
             playerTextures.put(player, playerCell);
             i++;
         }
@@ -93,7 +96,14 @@ public class GameActionScreen implements Screen {
 
         renderer.render();
 
-        for (Player player : roboGame.getPlayers()) {
+        for (int playerIndex = 0; playerIndex < roboGame.getPlayers().size(); playerIndex++) {
+            while (System.currentTimeMillis() - lastMove < TIMEBETWEENMOVES) {
+                // spin waiter TODO improve
+            }
+            lastMove = System.currentTimeMillis();
+
+            Player player = roboGame.getPlayers().get(playerIndex);
+
             // === (x, y) ===
             playerLayer.setCell(player.lastX, player.lastY, null);
             playerLayer.setCell(player.x, player.y, playerTextures.get(player));
@@ -101,23 +111,8 @@ public class GameActionScreen implements Screen {
             player.lastY = player.y;
 
             // === Direction ===
-            Definitions.Direction direction = Definitions.Direction.values()[player.directionIndex];
-            int angle;
-            if (direction == Definitions.Direction.UP) angle = 0;
-            else if (direction == Definitions.Direction.RIGHT) angle = 90;
-            else if (direction == Definitions.Direction.DOWN) angle = 180;
-            else angle = 270;
-//            batch.draw(playerTextures.get(player).getTile().getTextureRegion(),
-//                player.x,
-//                player.y,
-//                150,
-//                150,
-//                200,
-//                200,
-//                1,
-//                1,
-//                angle
-//            );
+            playerTextures.get(player).setTile(new StaticTiledMapTile(textureRegions[playerIndex][player.directionIndex]));
+
         }
     }
 

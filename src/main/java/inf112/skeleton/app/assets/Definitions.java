@@ -3,10 +3,10 @@ package inf112.skeleton.app.assets;
 public class Definitions {
 
     public enum Direction {
-        UP,
         RIGHT,
         DOWN,
-        LEFT
+        LEFT,
+        UP
     }
 
     public enum ActivityType {

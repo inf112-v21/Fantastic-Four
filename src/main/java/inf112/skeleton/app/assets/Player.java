@@ -7,7 +7,6 @@ import java.util.List;
 
 public class Player {
 
-    private static final long TIMEBETWEENMOVES = 50;
     private String playerName;
     private List<ProgramCard> programCards;
     private int damage;
@@ -21,16 +20,12 @@ public class Player {
     public static final int MIN_NUMBER_OF_DAMAGE_TOKENS = 0;
     public static final int MAX_NUMBER_OF_DAMAGE_TOKENS = 9;
 
-    long lastMove;
-
-
     public Player(String playerName) {
         this(playerName, 1, 1);
     }
     public Player(String playerName, int x, int y) {
         this.playerName = playerName;
-        directionIndex = 0;
-        lastMove = System.currentTimeMillis();
+        directionIndex = 3;
         this.x = x;
         this.y = y;
         archiveX = x;
@@ -100,10 +95,6 @@ public class Player {
     }
 
     public void moveOneStep() {
-        while (lastMove + TIMEBETWEENMOVES > System.currentTimeMillis()) {
-            // spin waiter TODO improve
-        }
-        lastMove = System.currentTimeMillis();
         Definitions.Direction direction = Definitions.Direction.values()[directionIndex];
         if (direction == Definitions.Direction.UP) {
             y++;
