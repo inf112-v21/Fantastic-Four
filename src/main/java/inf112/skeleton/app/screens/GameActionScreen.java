@@ -24,7 +24,6 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import inf112.skeleton.app.assets.cards.CardUI;
 import inf112.skeleton.app.assets.cards.ProgramCard;
 import inf112.skeleton.app.assets.cards.ProgramDeck;
-import inf112.skeleton.app.assets.Definitions;
 import inf112.skeleton.app.assets.Player;
 import inf112.skeleton.app.game.RoboGame;
 import inf112.skeleton.app.mechanics.player.Movement;
@@ -57,7 +56,7 @@ public class GameActionScreen implements Screen {
 	ImageTextButton.ImageTextButtonStyle imageLabelButtonStyle;
 	Texture lifeToken, lifeToken2, lifeToken3;
 	ProgramDeck deck;
-	List<ProgramCard> drawCards;
+	List<ProgramCard> programCardsToChooseFrom;
 	
 	
 	int viewPortWidth, viewPortHeight;
@@ -105,7 +104,7 @@ public class GameActionScreen implements Screen {
 		cardPositions.add(565);
 		
 		//CardDeck
-		picked = new LinkedList();
+		picked = new LinkedList<>();
 		chosen = new LinkedList<>();
 		donePickingCards = false;
 	}
@@ -155,14 +154,11 @@ public class GameActionScreen implements Screen {
 	}
 
 	public void showCards() {
-		drawCards = roboGame.localPlayer.getReceivedProgramCards();
+		programCardsToChooseFrom = roboGame.localPlayer.getReceivedProgramCards();// TODO drawCard and cardNames are not used, picked is used but can be changed
 
-		LinkedList<String> cardNames = new LinkedList<>();
-		for (ProgramCard c : drawCards) {
-			cardNames.add(c.getProgramCardType().toString());
+		for (ProgramCard c : programCardsToChooseFrom) {
 			picked.add(c);
 		}
-
 
 		int xStart = 800;
 		int yStart = 295;

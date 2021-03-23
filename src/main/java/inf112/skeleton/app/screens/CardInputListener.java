@@ -31,7 +31,6 @@ public class CardInputListener extends InputListener {
         back.setSize(width, height);
         back.setPosition(x, y);
         cardButton.setPosition(gas.cardPositions.removeFirst(), 0);
-        gas.startCardsStage.addActor(back);
         gas.pickedCardsStage.addActor(cardButton);
         ProgramCard pickedCard = gas.picked.get(index);
         gas.chosen.add(pickedCard);
