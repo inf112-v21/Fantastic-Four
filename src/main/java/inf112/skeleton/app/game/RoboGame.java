@@ -67,7 +67,7 @@ public class RoboGame extends com.badlogic.gdx.Game {
     }
 
     public void launchGame() {
-        addPlayer(new Player("Player 2", 8, 4)); // TODO For testing purposes, remove
+//        addPlayer(new Player("Player 2", 8, 4)); // TODO For testing purposes, remove
 
         gameActionScreen = new GameActionScreen(this, "exchange.tmx");
         setScreen(gameActionScreen);
@@ -150,21 +150,25 @@ public class RoboGame extends com.badlogic.gdx.Game {
         else if (currentActivity.currentType.equals(Definitions.ActivityType.
                 PICK_BOARD)) {
             if (currentActivity.hasTimedOut()) {
-                currentActivity = new Activity(Definitions.ActivityType.DEAL_CARDS, -1);
+                currentActivity = new Activity(Definitions.ActivityType.DEAL_CARDS, STANDARD_DURATION);
             }
         }
         else if (currentActivity.currentType.equals(Definitions.ActivityType.
                 DEAL_CARDS)) {
             dealProgramCards();
-            currentActivity = new Activity(Definitions.ActivityType.PICK_CARDS, STANDARD_DURATION);
+            gameActionScreen.showCards();
+            currentActivity = new Activity(Definitions.ActivityType.PICK_CARDS, 10);
         }
         else if (currentActivity.currentType.equals(Definitions.ActivityType.
                 PICK_CARDS)) {
             if (currentActivity.hasTimedOut()) {
                 for (Player player : players) {
-                    List<ProgramCard> cards = player.getProgramCards();
-                    while (cards.size() > 5) cards.remove(0);
-                    player.receive(cards);
+                    if (!player.hasChosenProgramCards()) {
+                        System.out.println("plyaer has not chosen programcards");
+                        List<ProgramCard> cards = player.getReceivedProgramCards();
+                        while (cards.size() > 5) cards.remove(0);
+                        player.receiveChosenProgramCards(cards);
+                    }
                     // TODO 1: Pick 5 cards for each player
                     // TODO 2: Only pick 5 cards for the players that are not finished
                 }
@@ -239,7 +243,7 @@ public class RoboGame extends com.badlogic.gdx.Game {
         for (Player player : players) {
             cards = new ArrayList(); // Create a small deck of cards for each player
             cards.addAll(programDeck.draw(MAX_NUMBER_OF_CARDS - player.getDamage()));
-            player.receive(cards); // Each player receives it's cards
+            player.receiveProgramCardsToPick(cards); // Each player receives it's cards
             System.out.println();
             for (ProgramCard c : cards) {
             	System.out.println(c.getProgramCardType());
