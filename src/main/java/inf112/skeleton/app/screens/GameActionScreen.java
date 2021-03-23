@@ -157,23 +157,8 @@ public class GameActionScreen implements Screen {
 	public void showCards() {
 		drawCards = roboGame.localPlayer.getReceivedProgramCards();
 
-		ImageButton poweroff = CardUI.createTextureButton("powerdown");
-
-		poweroff.setSize(180, 180);
-		poweroff.setPosition(870, 55);
-		poweroff.addListener(new InputListener() {
-			public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-				
-			}
-
-			public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-				return true;
-			}
-		});
-
 		LinkedList<String> cardNames = new LinkedList<>();
 		for (ProgramCard c : drawCards) {
-//			System.out.println(c.getProgramCardType()); // TODO remove
 			cardNames.add(c.getProgramCardType().toString());
 			picked.add(c);
 		}
@@ -366,7 +351,6 @@ public class GameActionScreen implements Screen {
 		startCardsStage.addActor(move7);
 		startCardsStage.addActor(move8);
 		startCardsStage.addActor(move9);
-		startCardsStage.addActor(poweroff);
 	}
 
 	public void hideCards() {
@@ -422,7 +406,23 @@ public class GameActionScreen implements Screen {
 	}
 
 	public void showOtherButtons() {
-		// LifeTokens
+		// === Power down button ===
+		ImageButton powerDown = CardUI.createTextureButton("powerdown");
+
+		powerDown.setSize(180, 180);
+		powerDown.setPosition(870, 55);
+		powerDown.addListener(new InputListener() {
+			public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+
+			}
+
+			public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+				return true;
+			}
+		});
+		startCardsStage.addActor(powerDown);
+
+		// === LifeTokens ===
 		Texture lifeTexture = new Texture(Gdx.files.internal("src/main/resources/greenLife.png"));
 
 		TextureRegion lifeTextureRegion = new TextureRegion(lifeTexture);
