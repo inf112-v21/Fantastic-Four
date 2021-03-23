@@ -134,7 +134,7 @@ public class GameActionScreen implements Screen {
 		renderer.setView(camera);
 
 		// Display players
-		Texture playerTexture = new Texture("arrows2.png");
+		Texture playerTexture = new Texture("arrowsAndRobots3.png");
 		textureRegions = TextureRegion.split(playerTexture, 300, 300);
 
 		playerTextures = new HashMap<>();
@@ -163,194 +163,20 @@ public class GameActionScreen implements Screen {
 			picked.add(c);
 		}
 
-		ImageButton move1 = CardUI.createTextureButton(("/cards/" + cardNames.removeFirst()));
-		move1.setPosition(800, 700);
-		move1.setSize(120, 200);
-		move1.addListener(new InputListener() {
-			public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-				ImageButton back = CardUI.createTextureButton(("/cards/SLOT"));
-				back.setSize(120, 190);
-				back.setPosition(800, 700);
-				move1.setPosition(cardPositions.removeFirst(), 0);
-				startCardsStage.addActor(back);
-				pickedCardsStage.addActor(move1);
-				ProgramCard pickedCard = picked.get(0);
-				chosen.add(pickedCard);
-				roboGame.localPlayer.addChosenProgramCard(pickedCard);
+
+		int width = 120;
+		int height = 200;
+		for (int x = 800; x < 800 + 3 * 125; x += 125) {
+			for (int y = 295; y < 295 + 3 * 205; y += 205) {
+				System.out.println(x + " " + y);
+				ProgramCard currentCard = roboGame.localPlayer.getReceivedProgramCards().remove(0);
+				ImageButton imageButton = CardUI.createTextureButton(("/cards/" + currentCard.getProgramCardType().toString()));
+				imageButton.setPosition(x, y);
+				imageButton.setSize(width, height);
+				imageButton.addListener(new CardInputListener(imageButton, this, x, y, width, height));
+				startCardsStage.addActor(imageButton);
 			}
-
-			public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-				return true;
-			}
-		});
-
-		ImageButton move2 = CardUI.createTextureButton(("/cards/" + cardNames.removeFirst()));
-		move2.setSize(120, 200);
-		move2.setPosition(925, 700);
-		move2.addListener(new InputListener() {
-			public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-				ImageButton back = CardUI.createTextureButton(("/cards/SLOT"));
-				back.setSize(120, 200);
-				back.setPosition(925, 700);
-				move2.setPosition(cardPositions.removeFirst(), 0);
-				pickedCardsStage.addActor(move2);
-				startCardsStage.addActor(back);
-				ProgramCard pickedCard = picked.get(1);
-				chosen.add(pickedCard);
-				roboGame.localPlayer.addChosenProgramCard(pickedCard);			}
-
-			public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-				return true;
-			}
-		});
-		ImageButton move3 = CardUI.createTextureButton(("/cards/" + cardNames.removeFirst()));
-		move3.setSize(120, 200);
-		move3.setPosition(1050, 700);
-		move3.addListener(new InputListener() {
-			public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-				ImageButton back = CardUI.createTextureButton(("/cards/SLOT"));
-				back.setPosition(1050, 700);
-				back.setSize(120, 200);
-				move3.setPosition(cardPositions.removeFirst(), 0);
-				pickedCardsStage.addActor(move3);
-				startCardsStage.addActor(back);
-				ProgramCard pickedCard = picked.get(2);
-				chosen.add(pickedCard);
-				roboGame.localPlayer.addChosenProgramCard(pickedCard);			}
-
-			public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-				return true;
-			}
-		});
-
-		ImageButton move4 = CardUI.createTextureButton(("/cards/" + cardNames.removeFirst()));
-		move4.setSize(120, 200);
-		move4.setPosition(800, 495);
-		move4.addListener(new InputListener() {
-			public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-				ImageButton back = CardUI.createTextureButton(("/cards/SLOT"));
-				back.setPosition(800, 495);
-				back.setSize(120, 200);
-				move4.setPosition(cardPositions.removeFirst(), 0);
-				pickedCardsStage.addActor(move4);
-				startCardsStage.addActor(back);
-				ProgramCard pickedCard = picked.get(3);
-				chosen.add(pickedCard);
-				roboGame.localPlayer.addChosenProgramCard(pickedCard);
-			}
-
-			public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-				return true;
-			}
-		});
-
-		ImageButton move5 = CardUI.createTextureButton(("/cards/" + cardNames.removeFirst()));
-		move5.setSize(120, 200);
-		move5.setPosition(925, 495);
-		move5.addListener(new InputListener() {
-			public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-				ImageButton back = CardUI.createTextureButton(("/cards/SLOT"));
-				back.setPosition(925, 495);
-				back.setSize(120, 200);
-				move5.setPosition(cardPositions.removeFirst(), 0);
-				pickedCardsStage.addActor(move5);
-				startCardsStage.addActor(back);
-				ProgramCard pickedCard = picked.get(4);
-				chosen.add(pickedCard);
-				roboGame.localPlayer.addChosenProgramCard(pickedCard);			}
-
-			public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-				return true;
-			}
-		});
-		ImageButton move6 = CardUI.createTextureButton(("/cards/" + cardNames.removeFirst()));
-		move6.setSize(120, 200);
-		move6.setPosition(1050, 495);
-		move6.addListener(new InputListener() {
-			public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-				ImageButton back = CardUI.createTextureButton(("/cards/SLOT"));
-				back.setSize(120, 200);
-				back.setPosition(1050, 495);
-				move6.setPosition(cardPositions.removeFirst(), 0);
-				pickedCardsStage.addActor(move6);
-				startCardsStage.addActor(back);
-				ProgramCard pickedCard = picked.get(5);
-				chosen.add(pickedCard);
-				roboGame.localPlayer.addChosenProgramCard(pickedCard);			}
-
-			public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-				return true;
-			}
-		});
-		ImageButton move7 = CardUI.createTextureButton(("/cards/" + cardNames.removeFirst()));
-		move7.setSize(120, 200);
-		move7.setPosition(800, 290);
-		move7.addListener(new InputListener() {
-			public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-				ImageButton back = CardUI.createTextureButton(("/cards/SLOT"));
-				back.setPosition(800, 290);
-				back.setSize(120, 200);
-				move7.setPosition(cardPositions.removeFirst(), 0);
-				pickedCardsStage.addActor(move7);
-				startCardsStage.addActor(back);
-				ProgramCard pickedCard = picked.get(6);
-				chosen.add(pickedCard);
-				roboGame.localPlayer.addChosenProgramCard(pickedCard);			}
-
-			public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-				return true;
-			}
-		});
-		ImageButton move8 = CardUI.createTextureButton(("/cards/" + cardNames.removeFirst()));
-		move8.setSize(120, 200);
-		move8.setPosition(925, 290);
-		move8.addListener(new InputListener() {
-			public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-				ImageButton back = CardUI.createTextureButton(("/cards/SLOT"));
-				back.setPosition(925, 290);
-				back.setSize(120, 200);
-				move8.setPosition(cardPositions.removeFirst(), 0);
-				pickedCardsStage.addActor(move8);
-				startCardsStage.addActor(back);
-				ProgramCard pickedCard = picked.get(7);
-				chosen.add(pickedCard);
-				roboGame.localPlayer.addChosenProgramCard(pickedCard);			}
-
-			public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-				return true;
-			}
-		});
-
-		ImageButton move9 = CardUI.createTextureButton(("/cards/" + cardNames.removeFirst()));
-		move9.setSize(120, 200);
-		move9.setPosition(1050, 290);
-		move9.addListener(new InputListener() {
-			public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-				ImageButton back = CardUI.createTextureButton(("/cards/SLOT"));
-				back.setPosition(1050, 290);
-				back.setSize(120, 190);
-				move9.setPosition(cardPositions.removeFirst(), 0);
-				pickedCardsStage.addActor(move9);
-				startCardsStage.addActor(back);
-				ProgramCard pickedCard = picked.get(8);
-				chosen.add(pickedCard);
-				roboGame.localPlayer.addChosenProgramCard(pickedCard);
-			}
-
-			public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-				return true;
-			}
-		});
-
-		startCardsStage.addActor(move1);
-		startCardsStage.addActor(move2);
-		startCardsStage.addActor(move3);
-		startCardsStage.addActor(move4);
-		startCardsStage.addActor(move5);
-		startCardsStage.addActor(move6);
-		startCardsStage.addActor(move7);
-		startCardsStage.addActor(move8);
-		startCardsStage.addActor(move9);
+		}
 	}
 
 	public void hideCards() {

@@ -1,0 +1,43 @@
+package inf112.skeleton.app.screens;
+
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.InputListener;
+import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
+import inf112.skeleton.app.assets.cards.CardUI;
+import inf112.skeleton.app.assets.cards.ProgramCard;
+
+public class CardInputListener extends InputListener {
+    ImageButton cardButton;
+    GameActionScreen gas;
+    int x;
+    int y;
+    int width;
+    int height;
+
+    public CardInputListener(ImageButton cardButton, GameActionScreen gas, int x, int y, int width, int height) {
+        this.cardButton = cardButton;
+        this.gas = gas;
+        this.x = x;
+        this.y = y;
+        this.width = width;
+        this.height = height;
+    }
+
+    @Override
+    public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+        ImageButton back = CardUI.createTextureButton(("/cards/SLOT"));
+        back.setSize(width, height);
+        back.setPosition(x, y);
+        cardButton.setPosition(gas.cardPositions.removeFirst(), 0);
+        gas.startCardsStage.addActor(back);
+        gas.pickedCardsStage.addActor(cardButton);
+        ProgramCard pickedCard = gas.picked.get(0);
+        gas.chosen.add(pickedCard);
+        gas.roboGame.localPlayer.addChosenProgramCard(pickedCard);
+    }
+
+    @Override
+    public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+				return true;
+    }
+}
