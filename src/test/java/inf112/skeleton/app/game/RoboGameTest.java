@@ -22,7 +22,7 @@ public class RoboGameTest {
     public void testDealProgramCards() {
         roboGame.dealProgramCards();
 
-        Assert.assertEquals(9, player.getProgramCards().size());
+        Assert.assertEquals(9, player.getReceivedProgramCards().size());
     }
 
     @Test

@@ -2,19 +2,20 @@ package inf112.skeleton.app.assets;
 
 import inf112.skeleton.app.assets.cards.ICard;
 import inf112.skeleton.app.assets.cards.ProgramCard;
-import inf112.skeleton.app.game.RoboGame;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Player {
 
+    private static final long TIMEBETWEENMOVES = 50;
     private String playerName;
-    private List<ProgramCard> programCards;
+    private List<ProgramCard> receivedProgramCards;
+    private List<ProgramCard> chosenProgramCards;
     private int damage;
     private int life;
     public int x, y, lastX, lastY, archiveX, archiveY, directionIndex;
     private boolean powerDown;
-    private RoboGame game;
 
     public static final int MIN_NUMBER_OF_LIFE_TOKENS = 0;
     public static final int MAX_NUMBER_OF_LIFE_TOKENS = 3; // or 4 if 5 or more players
@@ -22,23 +23,36 @@ public class Player {
     public static final int MIN_NUMBER_OF_DAMAGE_TOKENS = 0;
     public static final int MAX_NUMBER_OF_DAMAGE_TOKENS = 9;
 
-    public Player(String playerName, RoboGame game) {
-        this(playerName, 1, 1, game);
+    long lastMove;
+
+
+    public Player(String playerName) {
+        this(playerName, 1, 1);
     }
-    public Player(String playerName, int x, int y, RoboGame game) {
+
+    public Player(String playerName, int x, int y) {
         this.playerName = playerName;
         directionIndex = 3;
+        lastMove = System.currentTimeMillis();
         this.x = x;
         this.y = y;
         archiveX = x;
         archiveY = y;
         lastX = -1;
         lastY = -1;
-        this.game = game;
+        chosenProgramCards = new ArrayList<>();
     }
 
-    public void receive(List<ProgramCard> cards) {
-        this.programCards = cards;
+    private void registerSelectedCards(List<ICard> cards) {
+
+    }
+
+    public void receiveProgramCardsToPick(List<ProgramCard> cards) {
+        this.receivedProgramCards = cards;
+    }
+
+    public void receiveChosenProgramCards(List<ProgramCard> cards) {
+        this.chosenProgramCards = cards;
     }
 
     public int getDamage() {
@@ -50,7 +64,7 @@ public class Player {
     }
 
     public ProgramCard getProgramCard(int registerNumber) {
-        return programCards.get(registerNumber);
+        return chosenProgramCards.get(registerNumber);
     }
 
     // === DAMAGE LOGIC ===
@@ -94,6 +108,10 @@ public class Player {
     }
 
     public void moveOneStep() {
+        while (lastMove + TIMEBETWEENMOVES > System.currentTimeMillis()) {
+            // spin waiter TODO improve
+        }
+        lastMove = System.currentTimeMillis();
         Definitions.Direction direction = Definitions.Direction.values()[directionIndex];
         if (direction == Definitions.Direction.UP) {
             y++;
@@ -109,8 +127,21 @@ public class Player {
         }
     }
 
-    public List<ProgramCard> getProgramCards() {
-        return programCards;
+    public List<ProgramCard> getReceivedProgramCards() {
+        return receivedProgramCards;
+    }
+
+    public List<ProgramCard> getChosenProgramCards() {
+        return chosenProgramCards;
+    }
+
+    public void addChosenProgramCard(ProgramCard card) {
+        System.out.println("Adding " + card.getProgramCardType().toString()); // TODO for debugging purposes
+        chosenProgramCards.add(card);
+    }
+
+    public boolean hasChosenProgramCards() {
+        return chosenProgramCards.size() == 5;
     }
 
     @Override

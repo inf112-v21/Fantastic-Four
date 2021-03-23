@@ -75,20 +75,22 @@ public class MainMenuScreen implements Screen {
 
 		button1 = new ImageTextButton("Single Player", imageTextButtonStyle);
 		button1.setSize(200, 60);
-		button1.setX(Gdx.graphics.getWidth() / 2.0f - button1.getWidth() / 2.0f);
-		button1.setY(Gdx.graphics.getHeight() / 2.0f + button1.getHeight());
+		button1.setX(Gdx.graphics.getWidth() / 2 - button1.getWidth() / 2);
+		button1.setY(Gdx.graphics.getHeight() / 2 + button1.getHeight());
 		button1.addListener(new ChangeListener() {
 			@Override
 			public void changed(ChangeEvent changeEvent, Actor actor) {
-				roboGame.addPlayer(new Player("Player 1", 5, 5, roboGame)); // TODO Change the starting position
+				Player localPlayer = new Player("Player 1", 5, 5);
+				roboGame.localPlayer = localPlayer;
+				roboGame.addPlayer(localPlayer); // TODO Change the starting position
 				roboGame.launchGame();
 			}
 		});
 
 		button2 = new ImageTextButton("Multiplayer", imageTextButtonStyle);
 		button2.setSize(200, 60);
-		button2.setX(Gdx.graphics.getWidth() / 2.0f - button2.getWidth() / 2.0f);
-		button2.setY(Gdx.graphics.getHeight() / 2.0f);
+		button2.setX(Gdx.graphics.getWidth() / 2 - button2.getWidth() / 2);
+		button2.setY(Gdx.graphics.getHeight() / 2);
 		button2.addListener(new ChangeListener() {
 			@Override
 			public void changed(ChangeEvent changeEvent, Actor actor) {
@@ -98,8 +100,8 @@ public class MainMenuScreen implements Screen {
 
 		button3 = new ImageTextButton("Rules", imageTextButtonStyle);
 		button3.setSize(200, 60);
-		button3.setX(Gdx.graphics.getWidth() / 2.0f - button3.getWidth() / 2.0f);
-		button3.setY(Gdx.graphics.getHeight() / 2.0f - button3.getHeight());
+		button3.setX(Gdx.graphics.getWidth() / 2 - button3.getWidth() / 2);
+		button3.setY(Gdx.graphics.getHeight() / 2 - button3.getHeight());
 		button3.addListener(new ChangeListener() {
 			@Override
 			public void changed(ChangeEvent changeEvent, Actor actor) {
@@ -110,21 +112,22 @@ public class MainMenuScreen implements Screen {
 
 		button4 = new ImageTextButton("Settings", imageTextButtonStyle);
 		button4.setSize(200, 60);
-		button4.setX(Gdx.graphics.getWidth() / 2.0f - button4.getWidth() / 2.0f);
-		button4.setY(Gdx.graphics.getHeight() / 2.0f -
+		button4.setX(Gdx.graphics.getWidth() / 2 - button4.getWidth() / 2);
+		button4.setY(Gdx.graphics.getHeight() / 2 -
 				button3.getHeight() -
 				button4.getHeight());
 		button4.addListener(new ChangeListener() {
 			@Override
 			public void changed(ChangeEvent changeEvent, Actor actor) {
-				Gdx.app.exit();
+				Screen gamewindow = new ControlPanel(roboGame);
+				roboGame.setScreen(gamewindow);
 			}
 		});
 
 		button5 = new ImageTextButton("Quit", imageTextButtonStyle);
 		button5.setSize(200, 60);
-		button5.setX(Gdx.graphics.getWidth() / 2.0f - button5.getWidth() / 2.0f);
-		button5.setY(Gdx.graphics.getHeight() / 2.0f -
+		button5.setX(Gdx.graphics.getWidth() / 2 - button5.getWidth() / 2);
+		button5.setY(Gdx.graphics.getHeight() / 2 -
 				button3.getHeight() -
 				button4.getHeight() -
 				button5.getHeight());
@@ -158,7 +161,7 @@ public class MainMenuScreen implements Screen {
 				Gdx.graphics.getWidth(),
 				Gdx.graphics.getHeight());
 		batch.draw(logo,
-				Gdx.graphics.getWidth() / 2.0f - logo.getWidth() / 2.0f,
+				Gdx.graphics.getWidth() / 2 - logo.getWidth() / 2,
 				Gdx.graphics.getHeight() - logo.getHeight() - BORDER,
 				logo.getWidth(),
 				logo.getHeight());

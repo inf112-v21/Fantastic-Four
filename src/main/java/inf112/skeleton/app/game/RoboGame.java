@@ -15,8 +15,8 @@ public class RoboGame extends com.badlogic.gdx.Game {
 
     private ProgramDeck programDeck;
     private List<Player> players;
+    public Player localPlayer;
     final int MAX_NUMBER_OF_CARDS = 9;
-    public long lastMove;
 
     RoboRallyClient roboClient;
     RoboRallyServer roboServer;
@@ -33,7 +33,7 @@ public class RoboGame extends com.badlogic.gdx.Game {
     GameOverScreen gameOverScreen;
     RulesScreen rulesScreen;
     GameActionScreen gameActionScreen;
-
+    List<ProgramCard> cards;
     /**
      * Duration of each program card execution in seconds
      */
@@ -60,7 +60,6 @@ public class RoboGame extends com.badlogic.gdx.Game {
         PROGRAMCARD_DURATION = 1;
         STANDARD_DURATION = 1;
         WAITCONNECTIONDURATION = 5;
-        lastMove = 0L;
     }
 
     @Override
@@ -68,7 +67,7 @@ public class RoboGame extends com.badlogic.gdx.Game {
     }
 
     public void launchGame() {
-        addPlayer(new Player("Player 2", 8, 4, this)); // TODO For testing purposes, remove
+//        addPlayer(new Player("Player 2", 8, 4)); // TODO For testing purposes, remove
 
         gameActionScreen = new GameActionScreen(this, "exchange.tmx");
         setScreen(gameActionScreen);
@@ -151,25 +150,28 @@ public class RoboGame extends com.badlogic.gdx.Game {
         else if (currentActivity.currentType.equals(Definitions.ActivityType.
                 PICK_BOARD)) {
             if (currentActivity.hasTimedOut()) {
-                currentActivity = new Activity(Definitions.ActivityType.DEAL_CARDS, -1);
+                currentActivity = new Activity(Definitions.ActivityType.DEAL_CARDS, STANDARD_DURATION);
             }
         }
         else if (currentActivity.currentType.equals(Definitions.ActivityType.
                 DEAL_CARDS)) {
             dealProgramCards();
-            currentActivity = new Activity(Definitions.ActivityType.PICK_CARDS, STANDARD_DURATION);
+            gameActionScreen.showCards();
+            currentActivity = new Activity(Definitions.ActivityType.PICK_CARDS, 10);
         }
         else if (currentActivity.currentType.equals(Definitions.ActivityType.
                 PICK_CARDS)) {
             if (currentActivity.hasTimedOut()) {
                 for (Player player : players) {
-                    List<ProgramCard> cards = player.getProgramCards();
-                    while (cards.size() > 5) cards.remove(0);
-                    player.receive(cards);
-                    // TODO 1: Pick 5 cards for each player
-                    // TODO 2: Only pick 5 cards for the players that are not finished
+                    if (!player.hasChosenProgramCards()) {
+                        System.out.println(player + " has not chosen programcards"); // TODO remove
+                        List<ProgramCard> cards = player.getReceivedProgramCards();
+                        while (cards.size() > 5) cards.remove(0);
+                        player.receiveChosenProgramCards(cards);
+                    }
                 }
                 currentActivity = new Activity(Definitions.ActivityType.EXECUTE_PROGRAMCARDS_1, PROGRAMCARD_DURATION);
+                gameActionScreen.hideCards();
             }
         }
         else if (currentActivity.currentType.equals(Definitions.ActivityType.
@@ -238,9 +240,14 @@ public class RoboGame extends com.badlogic.gdx.Game {
      */
     public void dealProgramCards() {
         for (Player player : players) {
-            List<ProgramCard> cards = new ArrayList<>(); // Create a small deck of cards for each player
+            cards = new ArrayList(); // Create a small deck of cards for each player
             cards.addAll(programDeck.draw(MAX_NUMBER_OF_CARDS - player.getDamage()));
-            player.receive(cards); // Each player receives it's cards
+            player.receiveProgramCardsToPick(cards); // Each player receives it's cards
+            System.out.println();
+            for (ProgramCard c : cards) {
+            	System.out.println(c.getProgramCardType());
+            }
+            
         }
     }
 
@@ -249,5 +256,10 @@ public class RoboGame extends com.badlogic.gdx.Game {
      */
     public void dealOptionCards() {
 
+    }
+    public List<ProgramCard> getdealProgramCards() {
+    	dealProgramCards();
+		return cards;
+    	
     }
 }

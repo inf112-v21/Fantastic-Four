@@ -10,7 +10,7 @@ public class ProgramCard extends AbstractCard {
         this.priorityNumber = priorityNumber;
     }
 
-    enum ProgramCardType {
+    public enum ProgramCardType {
         MOVE1,
         MOVE2,
         MOVE3,
