@@ -359,10 +359,6 @@ public class GameActionScreen implements Screen {
 				ProgramCard pickedCard = picked.get(8);
 				chosen.add(pickedCard);
 				roboGame.localPlayer.addChosenProgramCard(pickedCard);
-
-				for (ProgramCard c: chosen) {
-					System.out.println("picked" + c.getProgramCardType());
-				}
 			}
 
 			public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
@@ -380,6 +376,10 @@ public class GameActionScreen implements Screen {
 		startCardsStage.addActor(move8);
 		startCardsStage.addActor(move9);
 		startCardsStage.addActor(poweroff);
+	}
+
+	public void hideCards() {
+		startCardsStage.dispose();
 	}
 
 	public void showDamageTokens() {
@@ -484,7 +484,7 @@ public class GameActionScreen implements Screen {
 		renderer.render();
 
 
-
+		// === Move players/robots on-screen ===
 		for (int playerIndex = 0; playerIndex < roboGame.getPlayers().size(); playerIndex++) {
 			Player player = roboGame.getPlayers().get(playerIndex);
 			// === (x, y) ===
@@ -494,7 +494,6 @@ public class GameActionScreen implements Screen {
 			player.lastY = player.y;
 
 			// === Direction ===
-			Definitions.Direction direction = Definitions.Direction.values()[player.directionIndex];
 			playerTextures.get(player).setTile(new StaticTiledMapTile(textureRegions[playerIndex][player.directionIndex]));
 		}
 
