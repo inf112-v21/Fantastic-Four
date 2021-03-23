@@ -27,14 +27,16 @@ public class CardInputListener extends InputListener {
 
     @Override
     public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-        ImageButton back = CardUI.createTextureButton(("/cards/SLOT"));
-        back.setSize(width, height);
-        back.setPosition(x, y);
-        cardButton.setPosition(gas.cardPositions.removeFirst(), 0);
-        gas.pickedCardsStage.addActor(cardButton);
-        ProgramCard pickedCard = gas.picked.get(index);
-        gas.chosen.add(pickedCard);
-        gas.roboGame.localPlayer.addChosenProgramCard(pickedCard);
+        if (gas.roboGame.localPlayer.getChosenProgramCards().size() < 5) {
+            ImageButton back = CardUI.createTextureButton(("/cards/SLOT"));
+            back.setSize(width, height);
+            back.setPosition(x, y);
+            cardButton.setPosition(gas.cardPositions.removeFirst(), 0);
+            gas.pickedCardsStage.addActor(cardButton);
+            ProgramCard pickedCard = gas.picked.get(index);
+            gas.chosen.add(pickedCard);
+            gas.roboGame.localPlayer.addChosenProgramCard(pickedCard);
+        }
     }
 
     @Override
