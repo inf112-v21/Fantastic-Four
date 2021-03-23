@@ -1,14 +1,15 @@
 # Manual test for main menu
 
 Start: Run the application by starting Main.java in IDE. 
-	A menu page has popped so you can start testing.
+	A menu page has popped up so you can start testing.
 
 ### Single player
  - Expect: When "Single Player" is clicked it opens a game window.
  - Actual: The game map window was shown.
  
 ### Multiplayer
- - Expect: When "Multiplayer" is clicked it shows the user a window where it is possible to 		        declare player name and ip address in text filed.
+ - Expect: When "Multiplayer" is clicked it shows the user a window where it is possible to 
+   declare player name and ip address in text filed.
  - Actual: The user was shown a player name and ip address text filed.
 
 ### Rules
