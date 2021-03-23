@@ -3,13 +3,15 @@ package inf112.skeleton.app.assets;
 import inf112.skeleton.app.assets.cards.ICard;
 import inf112.skeleton.app.assets.cards.ProgramCard;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Player {
 
     private static final long TIMEBETWEENMOVES = 50;
     private String playerName;
-    private List<ProgramCard> programCards;
+    private List<ProgramCard> receivedProgramCards;
+    private List<ProgramCard> chosenProgramCards;
     private int damage;
     private int life;
     public int x, y, lastX, lastY, archiveX, archiveY, directionIndex;
@@ -27,6 +29,7 @@ public class Player {
     public Player(String playerName) {
         this(playerName, 1, 1);
     }
+
     public Player(String playerName, int x, int y) {
         this.playerName = playerName;
         directionIndex = 0;
@@ -37,14 +40,19 @@ public class Player {
         archiveY = y;
         lastX = -1;
         lastY = -1;
+        chosenProgramCards = new ArrayList<>();
     }
 
     private void registerSelectedCards(List<ICard> cards) {
 
     }
 
-    public void receive(List<ProgramCard> cards) {
-        this.programCards = cards;
+    public void receiveProgramCardsToPick(List<ProgramCard> cards) {
+        this.receivedProgramCards = cards;
+    }
+
+    public void receiveChosenProgramCards(List<ProgramCard> cards) {
+        this.chosenProgramCards = cards;
     }
 
     public int getDamage() {
@@ -56,7 +64,7 @@ public class Player {
     }
 
     public ProgramCard getProgramCard(int registerNumber) {
-        return programCards.get(registerNumber);
+        return chosenProgramCards.get(registerNumber);
     }
 
     // === DAMAGE LOGIC ===
@@ -119,8 +127,21 @@ public class Player {
         }
     }
 
-    public List<ProgramCard> getProgramCards() {
-        return programCards;
+    public List<ProgramCard> getReceivedProgramCards() {
+        return receivedProgramCards;
+    }
+
+    public List<ProgramCard> getChosenProgramCards() {
+        return chosenProgramCards;
+    }
+
+    public void addChosenProgramCard(ProgramCard card) {
+        System.out.println("Adding " + card.getProgramCardType().toString()); // TODO for debugging purposes
+        chosenProgramCards.add(card);
+    }
+
+    public boolean hasChosenProgramCards() {
+        return chosenProgramCards.size() == 5;
     }
 
     @Override
