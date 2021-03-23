@@ -111,8 +111,8 @@ public class GameActionScreen implements Screen {
 		
 		
 		//CardDeck
-
-		drawCards =roboGame.getdealProgramCards();
+//		drawCards = roboGame.localPlayer.getProgramCards();
+		drawCards = roboGame.getdealProgramCards();
 		picked = new LinkedList(); 
 		chosen = new LinkedList<>();
 	}

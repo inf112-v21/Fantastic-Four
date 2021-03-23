@@ -15,6 +15,7 @@ public class RoboGame extends com.badlogic.gdx.Game {
 
     private ProgramDeck programDeck;
     private List<Player> players;
+    public Player localPlayer;
     final int MAX_NUMBER_OF_CARDS = 9;
 
     RoboRallyClient roboClient;

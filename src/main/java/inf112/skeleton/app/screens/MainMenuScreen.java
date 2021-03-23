@@ -80,7 +80,9 @@ public class MainMenuScreen implements Screen {
 		button1.addListener(new ChangeListener() {
 			@Override
 			public void changed(ChangeEvent changeEvent, Actor actor) {
-				roboGame.addPlayer(new Player("Player 1", 5, 5)); // TODO Change the starting position
+				Player localPlayer = new Player("Player 1", 5, 5);
+				roboGame.localPlayer = localPlayer;
+				roboGame.addPlayer(localPlayer); // TODO Change the starting position
 				roboGame.launchGame();
 			}
 		});
