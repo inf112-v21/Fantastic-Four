@@ -39,6 +39,7 @@ public class GameActionScreen implements Screen {
 	private SpriteBatch batch;
 	private BitmapFont font;
 	Texture background;
+	public TextureRegion[][] textureRegions;
 
 	TiledMap tiledMap;
 	TiledMapTileLayer playerLayer, boardLayer, holeLayer, flagLayer;
@@ -134,16 +135,16 @@ public class GameActionScreen implements Screen {
 		renderer = new OrthogonalTiledMapRenderer(tiledMap, 1f / 300f);
 		renderer.setView(camera);
 
-		// Display player
-		Texture playerTexture = new Texture("arrowsAndRobots.png");
-		TextureRegion[][] textureRegions = TextureRegion.split(playerTexture, 300, 300);
+		// Display players
+		Texture playerTexture = new Texture("arrowsAndRobots2.png");
+		textureRegions = TextureRegion.split(playerTexture, 300, 300);
 
 		playerTextures = new HashMap<>();
 		int i = 0;
 		for (Player player : roboGame.getPlayers()) {
 			System.out.println(player);
 			TiledMapTileLayer.Cell playerCell = new TiledMapTileLayer.Cell();
-			playerCell.setTile(new StaticTiledMapTile(textureRegions[0][i]));
+			playerCell.setTile(new StaticTiledMapTile(textureRegions[i][player.directionIndex]));
 			playerTextures.put(player, playerCell);
 			i++;
 		}
@@ -197,7 +198,7 @@ public class GameActionScreen implements Screen {
 				move1.setPosition(cardPositions.removeFirst(), 0);
 				startCardsStage.addActor(back);
 				pickedCardsStage.addActor(move1);
-				ProgramCard pickedCard = picked.removeFirst();
+				ProgramCard pickedCard = picked.get(0);
 				chosen.add(pickedCard);
 				roboGame.localPlayer.addChosenProgramCard(pickedCard);
 			}
@@ -218,7 +219,7 @@ public class GameActionScreen implements Screen {
 				move2.setPosition(cardPositions.removeFirst(), 0);
 				pickedCardsStage.addActor(move2);
 				startCardsStage.addActor(back);
-				ProgramCard pickedCard = picked.removeFirst();
+				ProgramCard pickedCard = picked.get(1);
 				chosen.add(pickedCard);
 				roboGame.localPlayer.addChosenProgramCard(pickedCard);			}
 
@@ -237,7 +238,7 @@ public class GameActionScreen implements Screen {
 				move3.setPosition(cardPositions.removeFirst(), 0);
 				pickedCardsStage.addActor(move3);
 				startCardsStage.addActor(back);
-				ProgramCard pickedCard = picked.removeFirst();
+				ProgramCard pickedCard = picked.get(2);
 				chosen.add(pickedCard);
 				roboGame.localPlayer.addChosenProgramCard(pickedCard);			}
 
@@ -257,7 +258,7 @@ public class GameActionScreen implements Screen {
 				move4.setPosition(cardPositions.removeFirst(), 0);
 				pickedCardsStage.addActor(move4);
 				startCardsStage.addActor(back);
-				ProgramCard pickedCard = picked.removeFirst();
+				ProgramCard pickedCard = picked.get(3);
 				chosen.add(pickedCard);
 				roboGame.localPlayer.addChosenProgramCard(pickedCard);
 			}
@@ -278,7 +279,7 @@ public class GameActionScreen implements Screen {
 				move5.setPosition(cardPositions.removeFirst(), 0);
 				pickedCardsStage.addActor(move5);
 				startCardsStage.addActor(back);
-				ProgramCard pickedCard = picked.removeFirst();
+				ProgramCard pickedCard = picked.get(4);
 				chosen.add(pickedCard);
 				roboGame.localPlayer.addChosenProgramCard(pickedCard);			}
 
@@ -297,7 +298,7 @@ public class GameActionScreen implements Screen {
 				move6.setPosition(cardPositions.removeFirst(), 0);
 				pickedCardsStage.addActor(move6);
 				startCardsStage.addActor(back);
-				ProgramCard pickedCard = picked.removeFirst();
+				ProgramCard pickedCard = picked.get(5);
 				chosen.add(pickedCard);
 				roboGame.localPlayer.addChosenProgramCard(pickedCard);			}
 
@@ -316,7 +317,7 @@ public class GameActionScreen implements Screen {
 				move7.setPosition(cardPositions.removeFirst(), 0);
 				pickedCardsStage.addActor(move7);
 				startCardsStage.addActor(back);
-				ProgramCard pickedCard = picked.removeFirst();
+				ProgramCard pickedCard = picked.get(6);
 				chosen.add(pickedCard);
 				roboGame.localPlayer.addChosenProgramCard(pickedCard);			}
 
@@ -335,7 +336,7 @@ public class GameActionScreen implements Screen {
 				move8.setPosition(cardPositions.removeFirst(), 0);
 				pickedCardsStage.addActor(move8);
 				startCardsStage.addActor(back);
-				ProgramCard pickedCard = picked.removeFirst();
+				ProgramCard pickedCard = picked.get(7);
 				chosen.add(pickedCard);
 				roboGame.localPlayer.addChosenProgramCard(pickedCard);			}
 
@@ -355,7 +356,7 @@ public class GameActionScreen implements Screen {
 				move9.setPosition(cardPositions.removeFirst(), 0);
 				pickedCardsStage.addActor(move9);
 				startCardsStage.addActor(back);
-				ProgramCard pickedCard = picked.removeFirst();
+				ProgramCard pickedCard = picked.get(8);
 				chosen.add(pickedCard);
 				roboGame.localPlayer.addChosenProgramCard(pickedCard);
 
@@ -466,7 +467,6 @@ public class GameActionScreen implements Screen {
 
 	@Override
 	public void render(float v) {
-		
 		Gdx.gl.glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 		Gdx.gl.glClear(GL30.GL_COLOR_BUFFER_BIT);
 
@@ -482,8 +482,11 @@ public class GameActionScreen implements Screen {
 		gameCamera.update();
 		uiCamera.update();
 		renderer.render();
-		Player player = roboGame.getPlayers().get(0);
 
+
+
+		for (int playerIndex = 0; playerIndex < roboGame.getPlayers().size(); playerIndex++) {
+			Player player = roboGame.getPlayers().get(playerIndex);
 			// === (x, y) ===
 			playerLayer.setCell(player.lastX, player.lastY, null);
 			playerLayer.setCell(player.x, player.y, playerTextures.get(player));
@@ -492,17 +495,9 @@ public class GameActionScreen implements Screen {
 
 			// === Direction ===
 			Definitions.Direction direction = Definitions.Direction.values()[player.directionIndex];
-			int angle;
-			if (direction == Definitions.Direction.UP)
-				angle = 0;
-			else if (direction == Definitions.Direction.RIGHT)
-				angle = 90;
-			else if (direction == Definitions.Direction.DOWN)
-				angle = 180;
-			else
-				angle = 270;
-	
-		
+			playerTextures.get(player).setTile(new StaticTiledMapTile(textureRegions[playerIndex][player.directionIndex]));
+		}
+
 		Gdx.gl.glViewport(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 		startCardsStage.act();
 		startCardsStage.draw();

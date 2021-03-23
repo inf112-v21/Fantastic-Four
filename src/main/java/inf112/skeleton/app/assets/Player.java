@@ -32,7 +32,7 @@ public class Player {
 
     public Player(String playerName, int x, int y) {
         this.playerName = playerName;
-        directionIndex = 0;
+        directionIndex = 3;
         lastMove = System.currentTimeMillis();
         this.x = x;
         this.y = y;
