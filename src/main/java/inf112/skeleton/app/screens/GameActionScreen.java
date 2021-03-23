@@ -24,11 +24,14 @@ import com.badlogic.gdx.scenes.scene2d.ui.ImageTextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import inf112.skeleton.app.assets.cards.CradUI;
 import inf112.skeleton.app.assets.cards.ProgramCard;
+import inf112.skeleton.app.assets.cards.ProgramCard.ProgramCardType;
 import inf112.skeleton.app.assets.cards.ProgramDeck;
 import inf112.skeleton.app.assets.Definitions;
 import inf112.skeleton.app.assets.Player;
 import inf112.skeleton.app.game.RoboGame;
 import inf112.skeleton.app.mechanics.player.Movement;
+
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -70,7 +73,9 @@ public class GameActionScreen implements Screen {
 	Stage otherButtonsStage;
 	Stage startCardsStage;
 	LinkedList<Integer> cardPositions;
-
+	LinkedList<ProgramCard> picked;
+	LinkedList<ProgramCard> chosen;
+	
 	public GameActionScreen(RoboGame roboGame, String mapName) {
 		this.roboGame = roboGame;
 		this.mapName = mapName;
@@ -106,12 +111,10 @@ public class GameActionScreen implements Screen {
 		
 		
 		//CardDeck
-		deck = new ProgramDeck();
-		deck.createDeck();
-		drawCards = deck.draw(9);
 
-		
-
+		drawCards =roboGame.getdealProgramCards();
+		picked = new LinkedList(); 
+		chosen = new LinkedList<>();
 	}
 
 	@Override
@@ -220,15 +223,15 @@ public class GameActionScreen implements Screen {
 		
 		// CARDS
 		ImageButton poweroff = CradUI.createTextureButton("powerdown");
-		ImageButton poweroffON = CradUI.createTextureButton("powerdownON");
-
-		poweroff.setPosition(850, 55);
+		
+		poweroff.setSize(180, 180);
+		poweroff.setPosition(870, 55);
 		poweroff.addListener(new InputListener() {
 			public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
 
-				poweroff.setVisible(false);
-				poweroffON.setPosition(850, 55);
-				startCardsStage.addActor(poweroffON);
+				//poweroff.setVisible(false);
+				//poweroffON.setPosition(850, 55);
+			//	startCardsStage.addActor(poweroffON);
 			}
 
 			public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
@@ -241,6 +244,7 @@ public class GameActionScreen implements Screen {
 		for (ProgramCard c : drawCards) {
 			System.out.println(c.getProgramCardType());
 			cardNames.add(c.getProgramCardType().toString());
+			picked.add(c);
 		}
 		cardNames.size();
 		
@@ -252,6 +256,7 @@ public class GameActionScreen implements Screen {
 		move1.setSize(120, 200);
 		move1.addListener(new InputListener() {
 			
+
 			public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
 				ImageButton back = CradUI.createTextureButton("/back");
 				back.setSize(120, 200);
@@ -259,6 +264,7 @@ public class GameActionScreen implements Screen {
 				move1.setPosition(cardPositions.removeFirst(), 0);
 				startCardsStage.addActor(back);
 				pickedCardsStage.addActor(move1);
+				chosen.add(picked.removeFirst());
 			}
 
 			public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
@@ -277,6 +283,8 @@ public class GameActionScreen implements Screen {
 				move2.setPosition(cardPositions.removeFirst(), 0);
 				pickedCardsStage.addActor(move2);
 				startCardsStage.addActor(back);
+				chosen.add(picked.removeFirst());
+
 
 			}
 
@@ -296,6 +304,8 @@ public class GameActionScreen implements Screen {
 				move3.setPosition(cardPositions.removeFirst(), 0);
 				pickedCardsStage.addActor(move3);
 				startCardsStage.addActor(back);
+				chosen.add(picked.removeFirst());
+
 
 			}
 
@@ -316,6 +326,8 @@ public class GameActionScreen implements Screen {
 				move4.setPosition(cardPositions.removeFirst(), 0);
 				pickedCardsStage.addActor(move4);
 				startCardsStage.addActor(back);
+				chosen.add(picked.removeFirst());
+
 
 			}
 
@@ -336,6 +348,7 @@ public class GameActionScreen implements Screen {
 				move5.setPosition(cardPositions.removeFirst(), 0);
 				pickedCardsStage.addActor(move5);
 				startCardsStage.addActor(back);
+				chosen.add(picked.removeFirst());
 
 			}
 
@@ -355,6 +368,8 @@ public class GameActionScreen implements Screen {
 				move6.setPosition(cardPositions.removeFirst(), 0);
 				pickedCardsStage.addActor(move6);
 				startCardsStage.addActor(back);
+				chosen.add(picked.removeFirst());
+
 
 			}
 
@@ -374,6 +389,8 @@ public class GameActionScreen implements Screen {
 				move7.setPosition(cardPositions.removeFirst(), 0);
 				pickedCardsStage.addActor(move7);
 				startCardsStage.addActor(back);
+				chosen.add(picked.removeFirst());
+				
 
 			}
 
@@ -393,6 +410,8 @@ public class GameActionScreen implements Screen {
 				move8.setPosition(cardPositions.removeFirst(), 0);
 				pickedCardsStage.addActor(move8);
 				startCardsStage.addActor(back);
+				chosen.add(picked.removeFirst());
+
 
 			}
 
@@ -411,6 +430,12 @@ public class GameActionScreen implements Screen {
 				move9.setPosition(cardPositions.removeFirst(), 0);
 				pickedCardsStage.addActor(move9);
 				startCardsStage.addActor(back);
+				chosen.add(picked.removeFirst());
+			
+				for (ProgramCard c: chosen) {
+					System.out.println("picked" + c.getProgramCardType());
+				}
+
 
 			}
 
@@ -418,6 +443,8 @@ public class GameActionScreen implements Screen {
 				return true;
 			}
 		});
+		
+	
 		
 		
 		
@@ -453,9 +480,14 @@ public class GameActionScreen implements Screen {
 		// inputMultiplexer.addProcessor(buttons);
 
 	}
+	
+	public LinkedList<ProgramCard> getPickedCardList() {
+		return chosen;
+	}
 
 	@Override
 	public void render(float v) {
+		
 		Gdx.gl.glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 		Gdx.gl.glClear(GL30.GL_COLOR_BUFFER_BIT);
 
@@ -471,8 +503,8 @@ public class GameActionScreen implements Screen {
 		gameCamera.update();
 		uiCamera.update();
 		renderer.render();
+		Player player = roboGame.getPlayers().get(0);
 
-		for (Player player : roboGame.getPlayers()) {
 			// === (x, y) ===
 			playerLayer.setCell(player.lastX, player.lastY, null);
 			playerLayer.setCell(player.x, player.y, playerTextures.get(player));
@@ -490,8 +522,7 @@ public class GameActionScreen implements Screen {
 				angle = 180;
 			else
 				angle = 270;
-		}
-		
+	
 		
 		Gdx.gl.glViewport(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 		startCardsStage.act();

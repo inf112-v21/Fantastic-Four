@@ -32,7 +32,7 @@ public class RoboGame extends com.badlogic.gdx.Game {
     GameOverScreen gameOverScreen;
     RulesScreen rulesScreen;
     GameActionScreen gameActionScreen;
-
+    List<ProgramCard> cards;
     /**
      * Duration of each program card execution in seconds
      */
@@ -236,9 +236,14 @@ public class RoboGame extends com.badlogic.gdx.Game {
      */
     public void dealProgramCards() {
         for (Player player : players) {
-            List<ProgramCard> cards = new ArrayList(); // Create a small deck of cards for each player
+            cards = new ArrayList(); // Create a small deck of cards for each player
             cards.addAll(programDeck.draw(MAX_NUMBER_OF_CARDS - player.getDamage()));
             player.receive(cards); // Each player receives it's cards
+            System.out.println();
+            for (ProgramCard c : cards) {
+            	System.out.println(c.getProgramCardType());
+            }
+            
         }
     }
 
@@ -247,5 +252,10 @@ public class RoboGame extends com.badlogic.gdx.Game {
      */
     public void dealOptionCards() {
 
+    }
+    public List<ProgramCard> getdealProgramCards() {
+    	dealProgramCards();
+		return cards;
+    	
     }
 }

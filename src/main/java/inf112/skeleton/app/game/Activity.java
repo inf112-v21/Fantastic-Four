@@ -10,7 +10,7 @@ public class Activity {
     long startingTime;
     long duration;
     Definitions.ActivityType currentType;
-    final int MILLIS_TO_SECONDS = 1000;
+    final int MILLIS_TO_SECONDS = 3000;
 
     /**
      *
