@@ -6,13 +6,13 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 
-public class CradUI {
+public class CardUI {
 	static Texture cardTexture;
 	static TextureRegion cardTextureRegion;
 	static TextureRegionDrawable cardTextureDrawable;
 	static ImageButton texture;
 
-	public CradUI() {
+	public CardUI() {
 	
 
 	}
