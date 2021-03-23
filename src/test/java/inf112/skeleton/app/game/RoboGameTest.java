@@ -13,7 +13,7 @@ public class RoboGameTest {
     @Before
     public void setup() {
         roboGame = new RoboGame();
-        player = new Player("TestPlayer", roboGame);
+        player = new Player("TestPlayer");
         player.setRobotPosition(2, 2);
         roboGame.addPlayer(player);
     }
@@ -27,7 +27,7 @@ public class RoboGameTest {
 
     @Test
     public void testAddPlayer() {
-        Player newPlayer = new Player("AnotherTestPlayer", roboGame);
+        Player newPlayer = new Player("AnotherTestPlayer");
         roboGame.addPlayer(newPlayer);
 
         Assert.assertTrue(roboGame.getPlayers().contains(newPlayer));
