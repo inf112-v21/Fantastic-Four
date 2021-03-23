@@ -428,21 +428,14 @@ public class GameActionScreen implements Screen {
 		TextureRegion lifeTextureRegion = new TextureRegion(lifeTexture);
 		TextureRegionDrawable lifeTextureDrawable = new TextureRegionDrawable(lifeTextureRegion);
 
-		ImageButton life = new ImageButton(lifeTextureDrawable);
-		life.setSize(250, 200);
-		life.setPosition(viewPortHeight - 90, viewPortWidth + 70);
-
-		ImageButton life2 = new ImageButton(lifeTextureDrawable);
-		life2.setPosition(viewPortHeight - 90, viewPortWidth);
-		life2.setSize(250, 200);
-
-		ImageButton life3 = new ImageButton(lifeTextureDrawable);
-		life3.setPosition(viewPortHeight - 90, viewPortWidth - 70);
-		life3.setSize(250, 200);
-
-		otherButtonsStage.addActor(life);
-		otherButtonsStage.addActor(life2);
-		otherButtonsStage.addActor(life3);
+		int widthOffset = -70;
+		for (int lifeButton = 0; lifeButton < 3; lifeButton++) {
+			ImageButton life = new ImageButton((lifeTextureDrawable));
+			life.setSize(250, 200);
+			life.setPosition(viewPortHeight - 90, viewPortWidth + widthOffset);
+			otherButtonsStage.addActor(life);
+			widthOffset += 70;
+		}
 	}
 
 	public LinkedList<ProgramCard> getPickedCardList() {
