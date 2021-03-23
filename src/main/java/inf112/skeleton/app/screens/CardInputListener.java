@@ -13,14 +13,16 @@ public class CardInputListener extends InputListener {
     int y;
     int width;
     int height;
+    int index;
 
-    public CardInputListener(ImageButton cardButton, GameActionScreen gas, int x, int y, int width, int height) {
+    public CardInputListener(ImageButton cardButton, GameActionScreen gas, int x, int y, int width, int height, int index) {
         this.cardButton = cardButton;
         this.gas = gas;
         this.x = x;
         this.y = y;
         this.width = width;
         this.height = height;
+        this.index = index;
     }
 
     @Override
@@ -31,7 +33,7 @@ public class CardInputListener extends InputListener {
         cardButton.setPosition(gas.cardPositions.removeFirst(), 0);
         gas.startCardsStage.addActor(back);
         gas.pickedCardsStage.addActor(cardButton);
-        ProgramCard pickedCard = gas.picked.get(0);
+        ProgramCard pickedCard = gas.picked.get(index);
         gas.chosen.add(pickedCard);
         gas.roboGame.localPlayer.addChosenProgramCard(pickedCard);
     }

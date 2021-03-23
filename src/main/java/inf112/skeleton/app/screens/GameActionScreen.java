@@ -164,17 +164,22 @@ public class GameActionScreen implements Screen {
 		}
 
 
+		int xStart = 800;
+		int yStart = 295;
 		int width = 120;
 		int height = 200;
-		for (int x = 800; x < 800 + 3 * 125; x += 125) {
-			for (int y = 295; y < 295 + 3 * 205; y += 205) {
-				System.out.println(x + " " + y);
+		int deltaW = 125;
+		int deltaH = 205;
+		int i = 0;
+		for (int x = xStart; x < xStart + 3 * deltaW; x += deltaW) {
+			for (int y = yStart; y < yStart + 3 * deltaH; y += deltaH) {
 				ProgramCard currentCard = roboGame.localPlayer.getReceivedProgramCards().remove(0);
 				ImageButton imageButton = CardUI.createTextureButton(("/cards/" + currentCard.getProgramCardType().toString()));
 				imageButton.setPosition(x, y);
 				imageButton.setSize(width, height);
-				imageButton.addListener(new CardInputListener(imageButton, this, x, y, width, height));
+				imageButton.addListener(new CardInputListener(imageButton, this, x, y, width, height, i));
 				startCardsStage.addActor(imageButton);
+				i++;
 			}
 		}
 	}
