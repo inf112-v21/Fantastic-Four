@@ -38,7 +38,7 @@ public class GameActionScreen implements Screen {
 
 	private SpriteBatch batch;
 	private BitmapFont font;
-	Texture background;
+	Texture background, slot;
 	public TextureRegion[][] textureRegions;
 
 	TiledMap tiledMap;
@@ -54,7 +54,7 @@ public class GameActionScreen implements Screen {
 	OrthographicCamera gameCamera, uiCamera;
 
 	
-	
+	int xPosition;
 	int width;
 	int height;
 	ImageTextButton.ImageTextButtonStyle imageLabelButtonStyle;
@@ -115,6 +115,7 @@ public class GameActionScreen implements Screen {
 
 	@Override
 	public void show() {
+		
 		background = new Texture(Gdx.files.internal("backgroundui.jpg"));
 		batch = new SpriteBatch();
 		font = new BitmapFont();
@@ -154,25 +155,18 @@ public class GameActionScreen implements Screen {
 		showDamageTokens();
 		showOtherButtons();
 
-		// InputMultiplexer inputMultiplexer = new InputMultiplexer();
-		// inputMultiplexer.addProcessor(moveCards);
-		// inputMultiplexer.addProcessor(buttons);
-
 	}
 
 	public void showCards() {
 		drawCards = roboGame.localPlayer.getReceivedProgramCards();
 
-		// CARDS
 		ImageButton poweroff = CardUI.createTextureButton("powerdown");
 
 		poweroff.setSize(180, 180);
 		poweroff.setPosition(870, 55);
 		poweroff.addListener(new InputListener() {
 			public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-				//poweroff.setVisible(false);
-				//poweroffON.setPosition(850, 55);
-				//	startCardsStage.addActor(poweroffON);
+				
 			}
 
 			public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
@@ -192,8 +186,8 @@ public class GameActionScreen implements Screen {
 		move1.setSize(120, 200);
 		move1.addListener(new InputListener() {
 			public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-				ImageButton back = CardUI.createTextureButton("/back");
-				back.setSize(120, 200);
+				ImageButton back = CardUI.createTextureButton(("/cards/SLOT"));
+				back.setSize(120, 190);
 				back.setPosition(800, 700);
 				move1.setPosition(cardPositions.removeFirst(), 0);
 				startCardsStage.addActor(back);
@@ -213,7 +207,7 @@ public class GameActionScreen implements Screen {
 		move2.setPosition(925, 700);
 		move2.addListener(new InputListener() {
 			public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-				ImageButton back = CardUI.createTextureButton("/back");
+				ImageButton back = CardUI.createTextureButton(("/cards/SLOT"));
 				back.setSize(120, 200);
 				back.setPosition(925, 700);
 				move2.setPosition(cardPositions.removeFirst(), 0);
@@ -232,7 +226,7 @@ public class GameActionScreen implements Screen {
 		move3.setPosition(1050, 700);
 		move3.addListener(new InputListener() {
 			public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-				ImageButton back = CardUI.createTextureButton("/back");
+				ImageButton back = CardUI.createTextureButton(("/cards/SLOT"));
 				back.setPosition(1050, 700);
 				back.setSize(120, 200);
 				move3.setPosition(cardPositions.removeFirst(), 0);
@@ -252,7 +246,7 @@ public class GameActionScreen implements Screen {
 		move4.setPosition(800, 495);
 		move4.addListener(new InputListener() {
 			public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-				ImageButton back = CardUI.createTextureButton("/back");
+				ImageButton back = CardUI.createTextureButton(("/cards/SLOT"));
 				back.setPosition(800, 495);
 				back.setSize(120, 200);
 				move4.setPosition(cardPositions.removeFirst(), 0);
@@ -273,7 +267,7 @@ public class GameActionScreen implements Screen {
 		move5.setPosition(925, 495);
 		move5.addListener(new InputListener() {
 			public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-				ImageButton back = CardUI.createTextureButton("/back");
+				ImageButton back = CardUI.createTextureButton(("/cards/SLOT"));
 				back.setPosition(925, 495);
 				back.setSize(120, 200);
 				move5.setPosition(cardPositions.removeFirst(), 0);
@@ -292,7 +286,7 @@ public class GameActionScreen implements Screen {
 		move6.setPosition(1050, 495);
 		move6.addListener(new InputListener() {
 			public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-				ImageButton back = CardUI.createTextureButton("/back");
+				ImageButton back = CardUI.createTextureButton(("/cards/SLOT"));
 				back.setSize(120, 200);
 				back.setPosition(1050, 495);
 				move6.setPosition(cardPositions.removeFirst(), 0);
@@ -311,7 +305,7 @@ public class GameActionScreen implements Screen {
 		move7.setPosition(800, 290);
 		move7.addListener(new InputListener() {
 			public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-				ImageButton back = CardUI.createTextureButton("/back");
+				ImageButton back = CardUI.createTextureButton(("/cards/SLOT"));
 				back.setPosition(800, 290);
 				back.setSize(120, 200);
 				move7.setPosition(cardPositions.removeFirst(), 0);
@@ -330,7 +324,7 @@ public class GameActionScreen implements Screen {
 		move8.setPosition(925, 290);
 		move8.addListener(new InputListener() {
 			public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-				ImageButton back = CardUI.createTextureButton("/back");
+				ImageButton back = CardUI.createTextureButton(("/cards/SLOT"));
 				back.setPosition(925, 290);
 				back.setSize(120, 200);
 				move8.setPosition(cardPositions.removeFirst(), 0);
@@ -350,9 +344,9 @@ public class GameActionScreen implements Screen {
 		move9.setPosition(1050, 290);
 		move9.addListener(new InputListener() {
 			public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-				ImageButton back = CardUI.createTextureButton("/back");
+				ImageButton back = CardUI.createTextureButton(("/cards/SLOT"));
 				back.setPosition(1050, 290);
-				back.setSize(120, 200);
+				back.setSize(120, 190);
 				move9.setPosition(cardPositions.removeFirst(), 0);
 				pickedCardsStage.addActor(move9);
 				startCardsStage.addActor(back);
@@ -380,6 +374,30 @@ public class GameActionScreen implements Screen {
 
 	public void hideCards() {
 		startCardsStage.dispose();
+	}
+	
+	public void showSlots() {
+		slot = new Texture(Gdx.files.internal("src/main/resources/cards/SLOT.png"));
+		xPosition = 800;
+		batch.begin();
+		for (int i = 0; i < 3; i++) {
+			batch.draw(slot, xPosition, 700, 120, 190);
+			xPosition += 125;
+		}
+		xPosition = 800;
+
+		for (int i = 0; i < 3; i++) {
+			batch.draw(slot, xPosition, 505, 120, 190);
+			xPosition += 125;
+		}
+		xPosition = 800;
+
+		for (int i = 0; i < 3; i++) {
+			batch.draw(slot, xPosition, 310, 120, 190);
+			xPosition += 125;
+		}
+		batch.end();
+
 	}
 
 	public void showDamageTokens() {
@@ -498,8 +516,12 @@ public class GameActionScreen implements Screen {
 		}
 
 		Gdx.gl.glViewport(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+		showSlots();
+
 		startCardsStage.act();
 		startCardsStage.draw();
+		
+
 
 		Gdx.input.setInputProcessor(startCardsStage);
 
