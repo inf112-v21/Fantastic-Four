@@ -29,10 +29,7 @@ import inf112.skeleton.app.assets.Player;
 import inf112.skeleton.app.game.RoboGame;
 import inf112.skeleton.app.mechanics.player.Movement;
 
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class GameActionScreen implements Screen {
 
@@ -403,56 +400,25 @@ public class GameActionScreen implements Screen {
 	public void showDamageTokens() {
 		// DamageTokens
 		Texture damageTexture = new Texture(Gdx.files.internal("src/main/resources/tokendamage.png"));
-
 		TextureRegion damageTextureRegion = new TextureRegion(damageTexture);
 		TextureRegionDrawable damageTextureDrawable = new TextureRegionDrawable(damageTextureRegion);
 
-		ImageButton damage1 = new ImageButton(damageTextureDrawable);
-		damage1.setPosition(150, viewPortWidth);
-		damage1.setSize(120, 70);
+		List<ImageButton> damageButtons = new ArrayList<>();
 
-		ImageButton damage2 = new ImageButton(damageTextureDrawable);
-		damage2.setPosition((float) (damage1.getX() + (damage1.getWidth() * 0.7)), viewPortWidth);
-		damage2.setSize(120, 70);
+		ImageButton firstDamageButton = new ImageButton(damageTextureDrawable);
+		firstDamageButton.setPosition(150, viewPortWidth);
+		firstDamageButton.setSize(120, 70);
+		damageButtons.add(firstDamageButton);
 
-		ImageButton damage3 = new ImageButton(damageTextureDrawable);
-		damage3.setPosition((float) (damage2.getX() + (damage2.getWidth() * 0.7)), viewPortWidth);
-		damage3.setSize(120, 70);
-
-		ImageButton damage4 = new ImageButton(damageTextureDrawable);
-		damage4.setPosition((float) (damage3.getX() + (damage2.getWidth() * 0.7)), viewPortWidth);
-		damage4.setSize(120, 70);
-
-		ImageButton damage5 = new ImageButton(damageTextureDrawable);
-		damage5.setPosition((float) (damage4.getX() + (damage2.getWidth() * 0.7)), viewPortWidth);
-		damage5.setSize(120, 70);
-
-		ImageButton damage6 = new ImageButton(damageTextureDrawable);
-		damage6.setPosition((float) (damage5.getX() + (damage2.getWidth() * 0.7)), viewPortWidth);
-		damage6.setSize(120, 70);
-
-		ImageButton damage7 = new ImageButton(damageTextureDrawable);
-		damage7.setPosition((float) (damage6.getX() + (damage2.getWidth() * 0.7)), viewPortWidth);
-		damage7.setSize(120, 70);
-
-		ImageButton damage8 = new ImageButton(damageTextureDrawable);
-		damage8.setPosition((float) (damage7.getX() + (damage2.getWidth() * 0.7)), viewPortWidth);
-		damage8.setSize(120, 70);
-
-		ImageButton damage9 = new ImageButton(damageTextureDrawable);
-		damage9.setPosition((float) (damage8.getX() + (damage2.getWidth() * 0.7)), viewPortWidth);
-		damage9.setSize(120, 70);
+		for (int damageNumber = 1; damageNumber < 9; damageNumber++) {
+			ImageButton damageButton = new ImageButton(damageTextureDrawable);
+			damageButton.setPosition((float) (damageButtons.get(damageNumber - 1).getX() + (damageButtons.get(damageNumber - 1).getWidth() * 0.7)), viewPortWidth);
+			damageButton.setSize(120, 70);
+			damageButtons.add(damageButton);
+		}
 
 		// Add elements to stage
-		damageTokensStage.addActor(damage1);
-		damageTokensStage.addActor(damage2);
-		damageTokensStage.addActor(damage3);
-		damageTokensStage.addActor(damage4);
-		damageTokensStage.addActor(damage5);
-		damageTokensStage.addActor(damage6);
-		damageTokensStage.addActor(damage7);
-		damageTokensStage.addActor(damage8);
-		damageTokensStage.addActor(damage9);
+		for (ImageButton damageButton : damageButtons) damageTokensStage.addActor(damageButton);
 	}
 
 	public void showOtherButtons() {
