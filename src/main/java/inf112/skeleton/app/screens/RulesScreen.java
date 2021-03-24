@@ -19,6 +19,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageTextButton.ImageTextButtonStyle;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
+import com.badlogic.gdx.utils.Align;
 
 import inf112.skeleton.app.game.RoboGame;
 
@@ -38,6 +39,7 @@ public class RulesScreen implements Screen {
 	ScrollPane.ScrollPaneStyle scrollStyle;
 	ScrollPane scroll;
 	Label label;
+	Table container;
 
 	public RulesScreen(RoboGame roboGame) {
 		this.roboGame = roboGame;
@@ -54,18 +56,17 @@ public class RulesScreen implements Screen {
 			Gdx.app.log("MyGame", "atlas file is NOT loaded");
 		}
 
-		// Initiate key variables
+		// Initiatlize key variables
 		batch = new SpriteBatch();
-
 		logo = new Texture(Gdx.files.internal("logo.png"));
 		background = new Texture(Gdx.files.internal("background.png"));
 
 		// Font section
 		fontLabel = new BitmapFont(Gdx.files.internal("src/main/resources/skin/font-export.fnt"), false);
-
 		labelStyle = new Label.LabelStyle();
 		labelStyle.font = fontLabel;
 
+		// Return button
 		imageTextButtonStyle = new ImageTextButtonStyle();
 		imageTextButtonStyle.up = skin.newDrawable("panel2", Color.GRAY);
 		imageTextButtonStyle.down = skin.newDrawable("panel2"); // Set image for pressed
@@ -74,10 +75,10 @@ public class RulesScreen implements Screen {
 		imageTextButtonStyle.pressedOffsetY = -1;
 		imageTextButtonStyle.font = fontLabel;
 		imageTextButtonStyle.fontColor = Color.WHITE;
-		
+
 		button1 = new ImageTextButton("Return", imageTextButtonStyle);
-		button1.setX(250);
-		button1.setY(80);
+		button1.setX(Gdx.app.getGraphics().getWidth() / 2 - (button1.getWidth() / 2));
+		button1.setY(Gdx.app.getGraphics().getHeight() - 800);
 		button1.setSize(150, 60);
 		button1.addListener(new ChangeListener() {
 			@Override
@@ -88,9 +89,7 @@ public class RulesScreen implements Screen {
 			}
 		});
 
-		
-		
-		
+		// Rules label
 		imageLabelButtonStyle = new ImageTextButtonStyle();
 		imageLabelButtonStyle.up = skin.newDrawable("label"); // Set image for pressed
 		imageLabelButtonStyle.pressedOffsetX = 1;
@@ -99,32 +98,44 @@ public class RulesScreen implements Screen {
 		imageLabelButtonStyle.fontColor = Color.WHITE;
 
 		label1 = new ImageTextButton("Rules", imageLabelButtonStyle);
-		label1.setX(250);
-		label1.setY(400);
 		label1.setSize(150, 30);
+		label1.setX(Gdx.app.getGraphics().getWidth() / 2 - (label1.getWidth() / 2));
+		label1.setY(Gdx.app.getGraphics().getHeight() - 200);
 
 		
-        Table table = new Table();
+		stage = new Stage();
 
+		// Scroll field
+		container = new Table();
+		stage.addActor(container);
+		container.setFillParent(true);
+		Table table = new Table();
+
+		String text = "			SUMMARY OF PLAY" + "\n"+ "\n"
+				+ "Each turn, you will draw random Program cards (instructions for your robot)." + "\n" + "\n"
+						+ "Secretly, choose five cards to plan your robot's moves." + "\n" +  "\n"
+				+ "Goal: be the first to touch all flags in order." + "\n"  + "\n"
+				+ "Robots can get in each other's way, push each other off the board, and shoot each other with lasers.";
+				
 		
+		Label label = new Label(text, labelStyle);
+		label.setAlignment(Align.left);
+		label.setWrap(true);
+		table.add(label).width(Gdx.graphics.getWidth()/2);
 		scrollStyle = new ScrollPaneStyle();
 		scrollStyle.background = skin.newDrawable("panel2", Color.GRAY);
 		ScrollPane scroll = new ScrollPane(table, scrollStyle);
-        scroll.setScrollingDisabled(true,false);
-		
-        scroll.setX(50);
-        scroll.setY(150);
-        scroll.setSize(550, 250);
-    
-	
+		scroll.setScrollingDisabled(true, false);
+		scroll.setSize(200, 400);
+		table.setSize(200, 200);
 
-
-		stage = new Stage();
+		// Add elements to stage
 		stage.addActor(button1);
 		stage.addActor(label1);
-		stage.addActor(scroll);
+		
+		
 
-
+		container.add(scroll).fill();
 	}
 
 	@Override
