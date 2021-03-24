@@ -49,7 +49,6 @@ public class GameActionScreen implements Screen {
 	RoboGame roboGame;
 	OrthographicCamera gameCamera, uiCamera;
 
-	
 	int xPosition;
 	int width;
 	int height;
@@ -57,8 +56,7 @@ public class GameActionScreen implements Screen {
 	Texture lifeToken, lifeToken2, lifeToken3;
 	ProgramDeck deck;
 	List<ProgramCard> programCardsToChooseFrom;
-	
-	
+
 	int viewPortWidth, viewPortHeight;
 	Stage pickedCardsStage;
 	Stage damageTokensStage;
@@ -69,7 +67,7 @@ public class GameActionScreen implements Screen {
 	LinkedList<ProgramCard> picked;
 	LinkedList<ProgramCard> chosen;
 	private boolean donePickingCards;
-	
+
 	public GameActionScreen(RoboGame roboGame, String mapName) {
 		this.roboGame = roboGame;
 		this.mapName = mapName;
@@ -82,7 +80,7 @@ public class GameActionScreen implements Screen {
 		gameCamera = new OrthographicCamera();
 		uiCamera = new OrthographicCamera();
 
-		gameCamera.setToOrtho(false, width - 400, height - 300); 
+		gameCamera.setToOrtho(false, width - 400, height - 300);
 		uiCamera.setToOrtho(false, viewPortWidth, viewPortWidth);
 
 		gameCamera.update();
@@ -102,8 +100,8 @@ public class GameActionScreen implements Screen {
 		cardPositions.add(315);
 		cardPositions.add(440);
 		cardPositions.add(565);
-		
-		//CardDeck
+
+		// CardDeck
 		picked = new LinkedList<>();
 		chosen = new LinkedList<>();
 		donePickingCards = false;
@@ -111,7 +109,7 @@ public class GameActionScreen implements Screen {
 
 	@Override
 	public void show() {
-		
+
 		background = new Texture(Gdx.files.internal("backgroundui.jpg"));
 		batch = new SpriteBatch();
 		font = new BitmapFont();
@@ -154,7 +152,9 @@ public class GameActionScreen implements Screen {
 	}
 
 	public void showCards() {
-		programCardsToChooseFrom = roboGame.localPlayer.getReceivedProgramCards();// TODO drawCard and cardNames are not used, picked is used but can be changed
+		programCardsToChooseFrom = roboGame.localPlayer.getReceivedProgramCards();// TODO drawCard and cardNames are not
+																					// used, picked is used but can be
+																					// changed
 
 		for (ProgramCard c : programCardsToChooseFrom) {
 			picked.add(c);
@@ -170,7 +170,8 @@ public class GameActionScreen implements Screen {
 		for (int x = xStart; x < xStart + 3 * deltaW; x += deltaW) {
 			for (int y = yStart; y < yStart + 3 * deltaH; y += deltaH) {
 				ProgramCard currentCard = roboGame.localPlayer.getReceivedProgramCards().remove(0);
-				ImageButton imageButton = CardUI.createTextureButton(("/cards/" + currentCard.getProgramCardType().toString()));
+				ImageButton imageButton = CardUI
+						.createTextureButton(("/cards/" + currentCard.getProgramCardType().toString()));
 				imageButton.setPosition(x, y);
 				imageButton.setSize(width, height);
 				imageButton.addListener(new CardInputListener(imageButton, this, x, y, width, height, i));
@@ -183,26 +184,22 @@ public class GameActionScreen implements Screen {
 	public void hideCards() {
 		startCardsStage.dispose();
 	}
-	
+
 	public void showSlots() {
 		slot = new Texture(Gdx.files.internal("src/main/resources/cards/SLOT.png"));
-		xPosition = 800;
+
+		int xStart = 800;
+		int yStart = 305;
+		int width = 120;
+		int height = 185;
+		int deltaW = 125;
+		int deltaH = 205;
+
 		batch.begin();
-		for (int i = 0; i < 3; i++) {
-			batch.draw(slot, xPosition, 700, 120, 190);
-			xPosition += 125;
-		}
-		xPosition = 800;
-
-		for (int i = 0; i < 3; i++) {
-			batch.draw(slot, xPosition, 505, 120, 190);
-			xPosition += 125;
-		}
-		xPosition = 800;
-
-		for (int i = 0; i < 3; i++) {
-			batch.draw(slot, xPosition, 310, 120, 190);
-			xPosition += 125;
+		for (int x = xStart; x < xStart + 3 * deltaW; x += deltaW) {
+			for (int y = yStart; y < yStart + 3 * deltaH; y += deltaH) {
+				batch.draw(slot, x, y, width, height);
+			}
 		}
 		batch.end();
 
@@ -223,13 +220,15 @@ public class GameActionScreen implements Screen {
 
 		for (int damageNumber = 1; damageNumber < 9; damageNumber++) {
 			ImageButton damageButton = new ImageButton(damageTextureDrawable);
-			damageButton.setPosition((float) (damageButtons.get(damageNumber - 1).getX() + (damageButtons.get(damageNumber - 1).getWidth() * 0.7)), viewPortWidth);
+			damageButton.setPosition((float) (damageButtons.get(damageNumber - 1).getX()
+					+ (damageButtons.get(damageNumber - 1).getWidth() * 0.7)), viewPortWidth);
 			damageButton.setSize(120, 70);
 			damageButtons.add(damageButton);
 		}
 
 		// Add elements to stage
-		for (ImageButton damageButton : damageButtons) damageTokensStage.addActor(damageButton);
+		for (ImageButton damageButton : damageButtons)
+			damageTokensStage.addActor(damageButton);
 	}
 
 	public void showOtherButtons() {
@@ -287,7 +286,6 @@ public class GameActionScreen implements Screen {
 		uiCamera.update();
 		renderer.render();
 
-
 		// === Move players/robots on-screen ===
 		for (int playerIndex = 0; playerIndex < roboGame.getPlayers().size(); playerIndex++) {
 			Player player = roboGame.getPlayers().get(playerIndex);
@@ -298,7 +296,8 @@ public class GameActionScreen implements Screen {
 			player.lastY = player.y;
 
 			// === Direction ===
-			playerTextures.get(player).setTile(new StaticTiledMapTile(textureRegions[playerIndex][player.directionIndex]));
+			playerTextures.get(player)
+					.setTile(new StaticTiledMapTile(textureRegions[playerIndex][player.directionIndex]));
 		}
 
 		Gdx.gl.glViewport(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
@@ -306,8 +305,6 @@ public class GameActionScreen implements Screen {
 
 		startCardsStage.act();
 		startCardsStage.draw();
-		
-
 
 		Gdx.input.setInputProcessor(startCardsStage);
 
