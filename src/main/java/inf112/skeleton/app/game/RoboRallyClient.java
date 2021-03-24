@@ -10,12 +10,13 @@ import java.io.IOException;
 
 public class RoboRallyClient {
 
-    Client client;
+    final Client client;
     String nickname;
 
-    RoboGame roboGame;
+    final RoboGame roboGame;
 
-    static int udpPort = 62210, tcpPort = 62210;
+    static final int udpPort = 62210;
+    static final int tcpPort = 62210;
 
     public RoboRallyClient(RoboGame roboGame) {
         // Create client

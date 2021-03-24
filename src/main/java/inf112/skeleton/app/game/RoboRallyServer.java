@@ -12,14 +12,15 @@ import java.util.HashMap;
 public class RoboRallyServer {
 
     Server roboRallyServer;
-    static int udpPort = 62210, tcpPort = 62210;
+    static final int udpPort = 62210;
+    static final int tcpPort = 62210;
 
-    ArrayList<Connection> connections = new ArrayList<>();
-    HashMap<Connection, PlayerConnection> players = new HashMap();
+    final ArrayList<Connection> connections = new ArrayList<>();
+    final HashMap<Connection, PlayerConnection> players = new HashMap<>();
 
-    String nickname;
+    final String nickname;
 
-    RoboGame roboGame;
+    final RoboGame roboGame;
 
     public RoboRallyServer(RoboGame roboGame, String nickname) {
         this.roboGame = roboGame;

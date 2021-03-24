@@ -13,8 +13,8 @@ import java.util.List;
 
 public class RoboGame extends com.badlogic.gdx.Game {
 
-    private ProgramDeck programDeck;
-    private List<Player> players;
+    private final ProgramDeck programDeck;
+    private final List<Player> players;
     public Player localPlayer;
     final int MAX_NUMBER_OF_CARDS = 9;
 
@@ -230,17 +230,12 @@ public class RoboGame extends com.badlogic.gdx.Game {
         }
     }
 
-    @Override
-    public void dispose() {
-        super.dispose();
-    }
-
     /**
      * Deal the program cards
      */
     public void dealProgramCards() {
         for (Player player : players) {
-            cards = new ArrayList(); // Create a small deck of cards for each player
+            cards = new ArrayList<>(); // Create a small deck of cards for each player
             cards.addAll(programDeck.draw(MAX_NUMBER_OF_CARDS - player.getDamage()));
             player.receiveProgramCardsToPick(cards); // Each player receives it's cards
             System.out.println();
@@ -251,12 +246,6 @@ public class RoboGame extends com.badlogic.gdx.Game {
         }
     }
 
-    /**
-     * Deal the option cards
-     */
-    public void dealOptionCards() {
-
-    }
     public List<ProgramCard> getdealProgramCards() {
     	dealProgramCards();
 		return cards;

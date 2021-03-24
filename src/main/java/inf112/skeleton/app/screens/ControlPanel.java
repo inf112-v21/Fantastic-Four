@@ -23,22 +23,25 @@ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import inf112.skeleton.app.game.RoboGame;
 
 public class ControlPanel implements Screen {
-	SpriteBatch batch;
+	final SpriteBatch batch;
 	Texture logo;
-	Texture background;
-	Stage stage;
-	RoboGame roboGame;
-	ImageTextButton.ImageTextButtonStyle imageLabelButtonStyle;
-	ImageTextButton label1, label2;
-	BitmapFont fontLabel;
-	Skin skin;
-	Label.LabelStyle labelStyle;
-	ImageTextButton button1;
-	ImageTextButton.ImageTextButtonStyle imageTextButtonStyle;
-	ScrollPane.ScrollPaneStyle scrollStyle;
+	final Texture background;
+	final Stage stage;
+	final RoboGame roboGame;
+	final ImageTextButton.ImageTextButtonStyle imageLabelButtonStyle;
+	final ImageTextButton label1;
+	final ImageTextButton label2;
+	final BitmapFont fontLabel;
+	final Skin skin;
+	final Label.LabelStyle labelStyle;
+	final ImageTextButton button1;
+	final ImageTextButton.ImageTextButtonStyle imageTextButtonStyle;
+	final ScrollPane.ScrollPaneStyle scrollStyle;
 	ScrollPane scroll;
 	Label label;
-	Texture lifeToken, lifeToken2, lifeToken3;
+	final Texture lifeToken;
+	final Texture lifeToken2;
+	final Texture lifeToken3;
 
 
 	public ControlPanel(RoboGame roboGame) {
@@ -101,12 +104,12 @@ public class ControlPanel implements Screen {
 		imageLabelButtonStyle.fontColor = Color.WHITE;
 
 		label1 = new ImageTextButton(" Life tokens ", imageLabelButtonStyle);
-		label1.setX(Gdx.graphics.getWidth()/2 - label1.getWidth()/2);
+		label1.setX(Gdx.graphics.getWidth() / 2.0f - label1.getWidth()/2);
 		label1.setY(Gdx.graphics.getHeight() - 150);
 		label1.setSize(250, 50);
 
 		label2= new ImageTextButton("Damage tokens", imageLabelButtonStyle);
-		label2.setX(Gdx.graphics.getWidth()/2 - label2.getWidth()/2);
+		label2.setX(Gdx.graphics.getWidth() / 2.0f - label2.getWidth()/2);
 		label2.setY(Gdx.graphics.getHeight() - 300);
 		label2.setSize(250, 50);
 		
@@ -144,9 +147,9 @@ public class ControlPanel implements Screen {
 		Gdx.gl.glClear(GL30.GL_COLOR_BUFFER_BIT);
 		batch.begin();
 		batch.draw(background, 0, 0, Gdx.app.getGraphics().getWidth(), Gdx.app.getGraphics().getHeight());
-		batch.draw(lifeToken, Gdx.graphics.getWidth()/2-120, label1.getY()-150, 270, 200);
-		batch.draw(lifeToken2, Gdx.graphics.getWidth()/2, label1.getY()-150, 270, 200);
-		batch.draw(lifeToken3, Gdx.graphics.getWidth()/2-220, label1.getY()-150, 270, 200);
+		batch.draw(lifeToken, Gdx.graphics.getWidth() / 2.0f - 120, label1.getY()-150, 270, 200);
+		batch.draw(lifeToken2, Gdx.graphics.getWidth() / 2.0f, label1.getY()-150, 270, 200);
+		batch.draw(lifeToken3, Gdx.graphics.getWidth() / 2.0f - 220, label1.getY()-150, 270, 200);
 		batch.end();
 		stage.draw();
 		stage.act();

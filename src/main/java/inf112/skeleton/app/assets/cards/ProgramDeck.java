@@ -6,7 +6,7 @@ import java.util.List;
 import inf112.skeleton.app.assets.cards.ProgramCard.ProgramCardType;
 
 public class ProgramDeck {
-    public List<ProgramCard> deck;
+    public final List<ProgramCard> deck;
 
     public ProgramDeck() {
         deck = new ArrayList<>();
@@ -42,7 +42,7 @@ public class ProgramDeck {
     }
 
     public void add(ProgramCard card) {
-        deck.add((ProgramCard) card);
+        deck.add(card);
     }
 
     public List<ProgramCard> draw(int quantity) {

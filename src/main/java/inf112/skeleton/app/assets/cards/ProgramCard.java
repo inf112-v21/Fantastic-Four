@@ -1,9 +1,9 @@
 package inf112.skeleton.app.assets.cards;
 
-public class ProgramCard extends AbstractCard {
+public class ProgramCard {
 
-    private ProgramCardType programCardType;
-    private int priorityNumber;
+    private final ProgramCardType programCardType;
+    private final int priorityNumber;
 
     public ProgramCard(ProgramCard.ProgramCardType programCardType, int priorityNumber) {
         this.programCardType = programCardType;
@@ -22,7 +22,7 @@ public class ProgramCard extends AbstractCard {
 
     /**
      *
-     * @param programCardType
+     * @param programCardType Program card type
      * @return [Number of steps, degrees to turn]
      */
     public static int[] interpretType(ProgramCardType programCardType) {
@@ -36,12 +36,10 @@ public class ProgramCard extends AbstractCard {
         return new int[]{0, 0};
     }
 
-    @Override
     public int getPriorityNumber() {
         return priorityNumber;
     }
 
-    @Override
     public String toString() {
         return "ProgramCard{" +
                 "type='" + programCardType + '\'' +
@@ -49,7 +47,6 @@ public class ProgramCard extends AbstractCard {
                 '}';
     }
 
-	@Override
 	public String getCardName() {
 		// TODO Auto-generated method stub
 		return null;

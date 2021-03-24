@@ -39,34 +39,33 @@ public class GameActionScreen implements Screen {
 
 	TiledMap tiledMap;
 	TiledMapTileLayer playerLayer, boardLayer, holeLayer, flagLayer;
-	TmxMapLoader tmxMapLoader = new TmxMapLoader();
+	final TmxMapLoader tmxMapLoader = new TmxMapLoader();
 	InputMultiplexer inputMultiplexer;
 	OrthogonalTiledMapRenderer renderer;
 	OrthographicCamera camera;
 	Map<Player, TiledMapTileLayer.Cell> playerTextures;
-	String mapName;
+	final String mapName;
 	Movement movementMechanics;
-	RoboGame roboGame;
+	final RoboGame roboGame;
 	OrthographicCamera gameCamera, uiCamera;
 
 	int xPosition;
-	int width;
-	int height;
+	final int width;
+	final int height;
 	ImageTextButton.ImageTextButtonStyle imageLabelButtonStyle;
 	Texture lifeToken, lifeToken2, lifeToken3;
 	ProgramDeck deck;
 	List<ProgramCard> programCardsToChooseFrom;
 
 	int viewPortWidth, viewPortHeight;
-	Stage pickedCardsStage;
-	Stage damageTokensStage;
-	CardUI cardui;
-	Stage otherButtonsStage;
-	Stage startCardsStage;
-	LinkedList<Integer> cardPositions;
-	LinkedList<ProgramCard> picked;
-	LinkedList<ProgramCard> chosen;
-	private boolean donePickingCards;
+	final Stage pickedCardsStage;
+	final Stage damageTokensStage;
+	final CardUI cardui;
+	final Stage otherButtonsStage;
+	final Stage startCardsStage;
+	final LinkedList<Integer> cardPositions;
+	final LinkedList<ProgramCard> picked;
+	final LinkedList<ProgramCard> chosen;
 
 	public GameActionScreen(RoboGame roboGame, String mapName) {
 		this.roboGame = roboGame;
@@ -104,7 +103,7 @@ public class GameActionScreen implements Screen {
 		// CardDeck
 		picked = new LinkedList<>();
 		chosen = new LinkedList<>();
-		donePickingCards = false;
+		boolean donePickingCards = false;
 	}
 
 	@Override
@@ -156,9 +155,7 @@ public class GameActionScreen implements Screen {
 																					// used, picked is used but can be
 																					// changed
 
-		for (ProgramCard c : programCardsToChooseFrom) {
-			picked.add(c);
-		}
+		picked.addAll(programCardsToChooseFrom);
 
 		int xStart = 800;
 		int yStart = 295;

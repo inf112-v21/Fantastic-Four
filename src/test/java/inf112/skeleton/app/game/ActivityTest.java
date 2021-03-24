@@ -9,7 +9,7 @@ import static java.lang.System.currentTimeMillis;
 public class ActivityTest {
 
     @Test
-    public void testHasTimedOut() throws InterruptedException {
+    public void testHasTimedOut() {
         int durationInSeconds = 1;
         Activity activity = new Activity(Definitions.ActivityType.OPEN_MENU, durationInSeconds);
         int secToMillis = 1000;
@@ -23,7 +23,7 @@ public class ActivityTest {
     }
 
     @Test
-    public void testHasNotTimedOut() throws InterruptedException {
+    public void testHasNotTimedOut() {
         int durationInSeconds = 1;
         Activity activity = new Activity(Definitions.ActivityType.OPEN_MENU, durationInSeconds);
         Assert.assertFalse(activity.hasTimedOut());

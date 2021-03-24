@@ -1,6 +1,5 @@
 package inf112.skeleton.app.assets;
 
-import inf112.skeleton.app.assets.cards.ICard;
 import inf112.skeleton.app.assets.cards.ProgramCard;
 
 import java.util.ArrayList;
@@ -9,7 +8,7 @@ import java.util.List;
 public class Player {
 
     private static final long TIMEBETWEENMOVES = 50;
-    private String playerName;
+    private final String playerName;
     private List<ProgramCard> receivedProgramCards;
     private List<ProgramCard> chosenProgramCards;
     private int damage;
@@ -43,10 +42,6 @@ public class Player {
         chosenProgramCards = new ArrayList<>();
     }
 
-    private void registerSelectedCards(List<ICard> cards) {
-
-    }
-
     public void receiveProgramCardsToPick(List<ProgramCard> cards) {
         this.receivedProgramCards = cards;
     }
@@ -69,14 +64,14 @@ public class Player {
 
     // === DAMAGE LOGIC ===
     public void loseLife(int lifeTokens) throws IllegalArgumentException {
-        int updatedLifeTokens = Math.max((this.life - lifeTokens), this.MIN_NUMBER_OF_LIFE_TOKENS);
+        int updatedLifeTokens = Math.max((this.life - lifeTokens), MIN_NUMBER_OF_LIFE_TOKENS);
         if (MAX_NUMBER_OF_LIFE_TOKENS < updatedLifeTokens)
             throw new IllegalArgumentException("Cannot lose a negative amount of life tokens");
         this.life = updatedLifeTokens;
     }
 
     public void receiveDamage(int damageTokens) throws IllegalArgumentException {
-        int updatedDamageTokens = Math.min((this.damage + damageTokens), this.MAX_NUMBER_OF_DAMAGE_TOKENS);
+        int updatedDamageTokens = Math.min((this.damage + damageTokens), MAX_NUMBER_OF_DAMAGE_TOKENS);
         if (updatedDamageTokens < MIN_NUMBER_OF_DAMAGE_TOKENS)
             throw new IllegalArgumentException("Cannot receive a negative amount of damage tokens");
         this.damage = updatedDamageTokens;

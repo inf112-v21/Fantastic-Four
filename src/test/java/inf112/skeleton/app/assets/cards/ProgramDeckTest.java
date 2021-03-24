@@ -8,8 +8,8 @@ import org.junit.jupiter.api.Test;
 
 class ProgramDeckTest {
 
-	ProgramDeck cardDeck = new ProgramDeck();
-	List<ProgramCard> testDeck = cardDeck.createDeck();
+	final ProgramDeck cardDeck = new ProgramDeck();
+	final List<ProgramCard> testDeck = cardDeck.createDeck();
 
 	@Test
 	void testSizeOfDeck() {

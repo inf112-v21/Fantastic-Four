@@ -21,30 +21,22 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import inf112.skeleton.app.game.RoboGame;
 
 public class MultiplayerSetupScreen implements Screen {
-	SpriteBatch batch;
-	Texture logo;
-	Texture background;
-	Stage stage;
-	RoboGame roboGame;
+	final SpriteBatch batch;
+	final Texture logo;
+	final Texture background;
+	final Stage stage;
+	final RoboGame roboGame;
 
-	private BitmapFont fontLabel, fontLabelText;
-	private TextField ipTextField;
-	private TextField nameTextField;
-	private TextField.TextFieldStyle textFieldStyle;
-	private Skin skin;
-	private Label.LabelStyle labelStyle;
-	private Label oneCharSizeCalibrationThrowAway;
-	private ImageTextButton okButton, cancelButton, hostButton;
-	private ImageTextButton.ImageTextButtonStyle imageTextButtonStyle;
+	private final TextField ipTextField;
+	private final TextField nameTextField;
 
-	private ImageTextButton.ImageTextButtonStyle imageLabelButtonStyle;
-	private ImageTextButton nameLabel, ipLabel, hostLabel;
+	private ImageTextButton hostLabel;
 
 
 	public MultiplayerSetupScreen(RoboGame roboGame) {
 		this.roboGame = roboGame;
 
-		skin = new Skin();
+		Skin skin = new Skin();
 
 		// Create skin
 		FileHandle fileHandle = Gdx.files.internal("src/main/resources/skin/uiskin.json");
@@ -63,36 +55,36 @@ public class MultiplayerSetupScreen implements Screen {
 		background = new Texture(Gdx.files.internal("background.png"));
 
 		// Font section
-		fontLabel = new BitmapFont(Gdx.files.internal("src/main/resources/skin/font-export.fnt"), false);
-		fontLabelText = new BitmapFont(Gdx.files.internal("src/main/resources/skin/font-export.fnt"), false);
+		BitmapFont fontLabel = new BitmapFont(Gdx.files.internal("src/main/resources/skin/font-export.fnt"), false);
+		BitmapFont fontLabelText = new BitmapFont(Gdx.files.internal("src/main/resources/skin/font-export.fnt"), false);
 		fontLabelText.setColor(Color.WHITE);
 
-		labelStyle = new Label.LabelStyle();
+		Label.LabelStyle labelStyle = new Label.LabelStyle();
 		labelStyle.font = fontLabel;
 
 		// Cursor for the text field
-		oneCharSizeCalibrationThrowAway = new Label("|", labelStyle);
+		Label oneCharSizeCalibrationThrowAway = new Label("|", labelStyle);
 		Pixmap cursorColor = new Pixmap((int) oneCharSizeCalibrationThrowAway.getWidth(),
 				(int) oneCharSizeCalibrationThrowAway.getHeight(), Pixmap.Format.RGB888);
 		cursorColor.setColor(Color.GRAY);
 		cursorColor.fill();
 
 		// === Styles ===
-		imageLabelButtonStyle = new ImageTextButtonStyle();
+		ImageTextButtonStyle imageLabelButtonStyle = new ImageTextButtonStyle();
 		imageLabelButtonStyle.up = skin.newDrawable("label"); // Set image for pressed
 		imageLabelButtonStyle.pressedOffsetX = 1;
 		imageLabelButtonStyle.pressedOffsetY = -1;
 		imageLabelButtonStyle.font = fontLabel;
 		imageLabelButtonStyle.fontColor = Color.WHITE;
 
-		textFieldStyle = new TextField.TextFieldStyle();
+		TextField.TextFieldStyle textFieldStyle = new TextField.TextFieldStyle();
 		textFieldStyle.font = fontLabel;
 		textFieldStyle.fontColor = new Color(Color.GRAY);
 		textFieldStyle.focusedFontColor = new Color(Color.DARK_GRAY);
 		textFieldStyle.cursor = new Image(new Texture(cursorColor)).getDrawable();
 		textFieldStyle.background = skin.getDrawable("textfield");
 
-		imageTextButtonStyle = new ImageTextButtonStyle();
+		ImageTextButtonStyle imageTextButtonStyle = new ImageTextButtonStyle();
 		imageTextButtonStyle.up = skin.newDrawable("panel2", Color.GRAY);
 		imageTextButtonStyle.down = skin.newDrawable("panel2"); // Set image for pressed
 		imageTextButtonStyle.over = skin.newDrawable("panel2", Color.BLUE); // set image for mouse over
@@ -111,8 +103,8 @@ public class MultiplayerSetupScreen implements Screen {
 			}
 		});
 		nameTextField.setSize(300, 50);
-		nameTextField.setX(Gdx.graphics.getWidth() / 2);
-		nameTextField.setY(Gdx.graphics.getHeight() / 2);
+		nameTextField.setX(Gdx.graphics.getWidth() / 2.0f);
+		nameTextField.setY(Gdx.graphics.getHeight() / 2.0f);
 
 		ipTextField = new TextField("Enter IP", textFieldStyle);
 		ipTextField.addListener(new ClickListener() {
@@ -123,23 +115,23 @@ public class MultiplayerSetupScreen implements Screen {
 			}
 		});
 		ipTextField.setSize(300, 50);
-		ipTextField.setX(Gdx.graphics.getWidth() / 2);
-		ipTextField.setY(Gdx.graphics.getHeight() / 2 + nameTextField.getHeight());
+		ipTextField.setX(Gdx.graphics.getWidth() / 2.0f);
+		ipTextField.setY(Gdx.graphics.getHeight() / 2.0f + nameTextField.getHeight());
 
-		nameLabel = new ImageTextButton("Nickname", imageLabelButtonStyle);
+		ImageTextButton nameLabel = new ImageTextButton("Nickname", imageLabelButtonStyle);
 		nameLabel.setSize(150, 30);
-		nameLabel.setX(Gdx.graphics.getWidth() / 2 - nameTextField.getWidth());
-		nameLabel.setY(Gdx.graphics.getHeight() / 2);
+		nameLabel.setX(Gdx.graphics.getWidth() / 2.0f - nameTextField.getWidth());
+		nameLabel.setY(Gdx.graphics.getHeight() / 2.0f);
 
-		ipLabel = new ImageTextButton("Enter IP", imageLabelButtonStyle);
+		ImageTextButton ipLabel = new ImageTextButton("Enter IP", imageLabelButtonStyle);
 		ipLabel.setSize(150, 30);
-		ipLabel.setX(Gdx.graphics.getWidth() / 2 - ipTextField.getWidth());
-		ipLabel.setY(Gdx.graphics.getHeight() / 2 + nameTextField.getHeight());
+		ipLabel.setX(Gdx.graphics.getWidth() / 2.0f - ipTextField.getWidth());
+		ipLabel.setY(Gdx.graphics.getHeight() / 2.0f + nameTextField.getHeight());
 
-		cancelButton = new ImageTextButton("Cancel", imageTextButtonStyle);
+		ImageTextButton cancelButton = new ImageTextButton("Cancel", imageTextButtonStyle);
 		cancelButton.setSize(150, 60);
-		cancelButton.setX(Gdx.graphics.getWidth() / 2);
-		cancelButton.setY(Gdx.graphics.getHeight() / 2 -
+		cancelButton.setX(Gdx.graphics.getWidth() / 2.0f);
+		cancelButton.setY(Gdx.graphics.getHeight() / 2.0f -
 				nameTextField.getHeight() -
 				ipTextField.getHeight());
 		cancelButton.addListener(new ChangeListener() {
@@ -150,10 +142,10 @@ public class MultiplayerSetupScreen implements Screen {
 			}
 		});
 
-		okButton = new ImageTextButton("OK", imageTextButtonStyle);
+		ImageTextButton okButton = new ImageTextButton("OK", imageTextButtonStyle);
 		okButton.setSize(150, 60);
-		okButton.setX(Gdx.graphics.getWidth() / 2- cancelButton.getWidth());
-		okButton.setY(Gdx.graphics.getHeight() / 2 -
+		okButton.setX(Gdx.graphics.getWidth() / 2.0f- cancelButton.getWidth());
+		okButton.setY(Gdx.graphics.getHeight() / 2.0f -
 				nameTextField.getHeight() -
 				ipTextField.getHeight());
 		okButton.addListener(new ChangeListener() {
@@ -164,10 +156,10 @@ public class MultiplayerSetupScreen implements Screen {
 		});
 
 
-		hostButton = new ImageTextButton("Host", imageTextButtonStyle);
+		ImageTextButton hostButton = new ImageTextButton("Host", imageTextButtonStyle);
 		hostButton.setSize(150, 60);
-		hostButton.setX(Gdx.graphics.getWidth() / 2 + cancelButton.getWidth());
-		hostButton.setY(Gdx.graphics.getHeight() / 2 -
+		hostButton.setX(Gdx.graphics.getWidth() / 2.0f + cancelButton.getWidth());
+		hostButton.setY(Gdx.graphics.getHeight() / 2.0f -
 				nameTextField.getHeight() -
 				ipTextField.getHeight());
 		hostButton.addListener(new ChangeListener() {
@@ -198,7 +190,7 @@ public class MultiplayerSetupScreen implements Screen {
 		Gdx.gl.glClear(GL30.GL_COLOR_BUFFER_BIT);
 		batch.begin();
 		batch.draw(background, 0, 0, Gdx.app.getGraphics().getWidth(), Gdx.app.getGraphics().getHeight());
-		batch.draw(logo, (Gdx.app.getGraphics().getWidth() / 2) - 200, Gdx.app.getGraphics().getHeight() - 200, 400,
+		batch.draw(logo, (Gdx.app.getGraphics().getWidth() / 2.0f) - 200, Gdx.app.getGraphics().getHeight() - 200, 400,
 				150);
 		batch.end();
 

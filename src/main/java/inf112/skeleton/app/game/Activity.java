@@ -7,9 +7,9 @@ import inf112.skeleton.app.assets.Definitions;
  * rules of RoboRally and any other activities that has to happen at a certain time
  */
 public class Activity {
-    long startingTime;
-    long duration;
-    Definitions.ActivityType currentType;
+    final long startingTime;
+    final long duration;
+    final Definitions.ActivityType currentType;
     final int MILLIS_TO_SECONDS = 1000;
 
     /**

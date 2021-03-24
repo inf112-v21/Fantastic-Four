@@ -22,24 +22,18 @@ import inf112.skeleton.app.game.RoboGame;
 
 public class MainMenuScreen implements Screen {
 	private static final int BORDER = 40;
-	SpriteBatch batch;
-	Texture logo;
-	Texture background;
-	Stage stage;
-	RoboGame roboGame;
-
-	private BitmapFont fontLabel, fontLabelText;
-	private Skin skin;
-	private Label.LabelStyle labelStyle;
-	private ImageTextButton button1, button2, button3, button4, button5;
-	private ImageTextButton.ImageTextButtonStyle imageTextButtonStyle;
+	final SpriteBatch batch;
+	final Texture logo;
+	final Texture background;
+	final Stage stage;
+	final RoboGame roboGame;
 
 	public MainMenuScreen(RoboGame roboGame) {
 		this.roboGame = roboGame;
 
 
 		// Create skin
-		skin = new Skin();
+		Skin skin = new Skin();
 
 		FileHandle fileHandle = Gdx.files.internal("src/main/resources/skin/uiskin.json");
 		FileHandle atlasFile = fileHandle.sibling("uiskin.atlas");
@@ -58,14 +52,14 @@ public class MainMenuScreen implements Screen {
 		background.setWrap(Texture.TextureWrap.ClampToEdge, Texture.TextureWrap.ClampToEdge);
 
 		// Font section
-		fontLabel = new BitmapFont(Gdx.files.internal("src/main/resources/skin/font-export.fnt"), false);
-		fontLabelText = new BitmapFont(Gdx.files.internal("src/main/resources/skin/font-export.fnt"), false);
+		BitmapFont fontLabel = new BitmapFont(Gdx.files.internal("src/main/resources/skin/font-export.fnt"), false);
+		BitmapFont fontLabelText = new BitmapFont(Gdx.files.internal("src/main/resources/skin/font-export.fnt"), false);
 		fontLabelText.setColor(Color.WHITE);
 
-		labelStyle = new Label.LabelStyle();
+		Label.LabelStyle labelStyle = new Label.LabelStyle();
 		labelStyle.font = fontLabel;
 
-		imageTextButtonStyle = new ImageTextButtonStyle();
+		ImageTextButtonStyle imageTextButtonStyle = new ImageTextButtonStyle();
 		imageTextButtonStyle.up = skin.newDrawable("panel2", Color.GRAY);
 		imageTextButtonStyle.down = skin.newDrawable("panel2"); // Set image for pressed
 		imageTextButtonStyle.over = skin.newDrawable("panel2", Color.BLUE); // set image for mouse over
@@ -73,10 +67,10 @@ public class MainMenuScreen implements Screen {
 		imageTextButtonStyle.pressedOffsetY = -1;
 		imageTextButtonStyle.font = fontLabel;
 
-		button1 = new ImageTextButton("Single Player", imageTextButtonStyle);
+		ImageTextButton button1 = new ImageTextButton("Single Player", imageTextButtonStyle);
 		button1.setSize(200, 60);
-		button1.setX(Gdx.graphics.getWidth() / 2 - button1.getWidth() / 2);
-		button1.setY(Gdx.graphics.getHeight() / 2 + button1.getHeight());
+		button1.setX(Gdx.graphics.getWidth() / 2.0f - button1.getWidth() / 2);
+		button1.setY(Gdx.graphics.getHeight() / 2.0f + button1.getHeight());
 		button1.addListener(new ChangeListener() {
 			@Override
 			public void changed(ChangeEvent changeEvent, Actor actor) {
@@ -87,10 +81,10 @@ public class MainMenuScreen implements Screen {
 			}
 		});
 
-		button2 = new ImageTextButton("Multiplayer", imageTextButtonStyle);
+		ImageTextButton button2 = new ImageTextButton("Multiplayer", imageTextButtonStyle);
 		button2.setSize(200, 60);
-		button2.setX(Gdx.graphics.getWidth() / 2 - button2.getWidth() / 2);
-		button2.setY(Gdx.graphics.getHeight() / 2);
+		button2.setX(Gdx.graphics.getWidth() / 2.0f - button2.getWidth() / 2.0f);
+		button2.setY(Gdx.graphics.getHeight() / 2.0f);
 		button2.addListener(new ChangeListener() {
 			@Override
 			public void changed(ChangeEvent changeEvent, Actor actor) {
@@ -98,10 +92,10 @@ public class MainMenuScreen implements Screen {
 			}
 		});
 
-		button3 = new ImageTextButton("Rules", imageTextButtonStyle);
+		ImageTextButton button3 = new ImageTextButton("Rules", imageTextButtonStyle);
 		button3.setSize(200, 60);
-		button3.setX(Gdx.graphics.getWidth() / 2 - button3.getWidth() / 2);
-		button3.setY(Gdx.graphics.getHeight() / 2 - button3.getHeight());
+		button3.setX(Gdx.graphics.getWidth() / 2.0f - button3.getWidth() / 2);
+		button3.setY(Gdx.graphics.getHeight() / 2.0f - button3.getHeight());
 		button3.addListener(new ChangeListener() {
 			@Override
 			public void changed(ChangeEvent changeEvent, Actor actor) {
@@ -110,10 +104,10 @@ public class MainMenuScreen implements Screen {
 			}
 		});
 
-		button4 = new ImageTextButton("Settings", imageTextButtonStyle);
+		ImageTextButton button4 = new ImageTextButton("Settings", imageTextButtonStyle);
 		button4.setSize(200, 60);
-		button4.setX(Gdx.graphics.getWidth() / 2 - button4.getWidth() / 2);
-		button4.setY(Gdx.graphics.getHeight() / 2 -
+		button4.setX(Gdx.graphics.getWidth() / 2.0f - button4.getWidth() / 2.0f);
+		button4.setY(Gdx.graphics.getHeight() / 2.0f -
 				button3.getHeight() -
 				button4.getHeight());
 		button4.addListener(new ChangeListener() {
@@ -124,10 +118,10 @@ public class MainMenuScreen implements Screen {
 			}
 		});
 
-		button5 = new ImageTextButton("Quit", imageTextButtonStyle);
+		ImageTextButton button5 = new ImageTextButton("Quit", imageTextButtonStyle);
 		button5.setSize(200, 60);
-		button5.setX(Gdx.graphics.getWidth() / 2 - button5.getWidth() / 2);
-		button5.setY(Gdx.graphics.getHeight() / 2 -
+		button5.setX(Gdx.graphics.getWidth() / 2.0f - button5.getWidth() / 2.0f);
+		button5.setY(Gdx.graphics.getHeight() / 2.0f -
 				button3.getHeight() -
 				button4.getHeight() -
 				button5.getHeight());
@@ -161,7 +155,7 @@ public class MainMenuScreen implements Screen {
 				Gdx.graphics.getWidth(),
 				Gdx.graphics.getHeight());
 		batch.draw(logo,
-				Gdx.graphics.getWidth() / 2 - logo.getWidth() / 2,
+				Gdx.graphics.getWidth() / 2.0f - logo.getWidth() / 2.0f,
 				Gdx.graphics.getHeight() - logo.getHeight() - BORDER,
 				logo.getWidth(),
 				logo.getHeight());

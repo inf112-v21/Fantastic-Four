@@ -7,13 +7,13 @@ import inf112.skeleton.app.assets.cards.CardUI;
 import inf112.skeleton.app.assets.cards.ProgramCard;
 
 public class CardInputListener extends InputListener {
-    ImageButton cardButton;
-    GameActionScreen gas;
-    int x;
-    int y;
-    int width;
-    int height;
-    int index;
+    final ImageButton cardButton;
+    final GameActionScreen gas;
+    final int x;
+    final int y;
+    final int width;
+    final int height;
+    final int index;
 
     public CardInputListener(ImageButton cardButton, GameActionScreen gas, int x, int y, int width, int height, int index) {
         this.cardButton = cardButton;
@@ -30,7 +30,7 @@ public class CardInputListener extends InputListener {
         if (gas.roboGame.localPlayer.getChosenProgramCards().size() < 5) {
             ImageButton back = CardUI.createTextureButton(("/cards/SLOT"));
             back.setSize(width, height);
-            back.setPosition(x, y);
+            back.setPosition(this.x, this.y);
             cardButton.setPosition(gas.cardPositions.removeFirst(), 0);
             gas.pickedCardsStage.addActor(cardButton);
             ProgramCard pickedCard = gas.picked.get(index);

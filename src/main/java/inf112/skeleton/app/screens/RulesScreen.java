@@ -24,27 +24,20 @@ import com.badlogic.gdx.utils.Align;
 import inf112.skeleton.app.game.RoboGame;
 
 public class RulesScreen implements Screen {
-	SpriteBatch batch;
-	Texture logo;
-	Texture background;
-	Stage stage;
-	RoboGame roboGame;
-	private ImageTextButton.ImageTextButtonStyle imageLabelButtonStyle;
-	private ImageTextButton label1;
-	private BitmapFont fontLabel;
-	private Skin skin;
-	private Label.LabelStyle labelStyle;
-	private ImageTextButton button1;
-	private ImageTextButton.ImageTextButtonStyle imageTextButtonStyle;
-	ScrollPane.ScrollPaneStyle scrollStyle;
+	final SpriteBatch batch;
+	final Texture logo;
+	final Texture background;
+	final Stage stage;
+	final RoboGame roboGame;
+	final ScrollPane.ScrollPaneStyle scrollStyle;
 	ScrollPane scroll;
 	Label label;
-	Table container;
+	final Table container;
 
 	public RulesScreen(RoboGame roboGame) {
 		this.roboGame = roboGame;
 
-		skin = new Skin();
+		Skin skin = new Skin();
 
 		// Create skin
 		FileHandle fileHandle = Gdx.files.internal("src/main/resources/skin/uiskin.json");
@@ -62,12 +55,12 @@ public class RulesScreen implements Screen {
 		background = new Texture(Gdx.files.internal("background.png"));
 
 		// Font section
-		fontLabel = new BitmapFont(Gdx.files.internal("src/main/resources/skin/font-export.fnt"), false);
-		labelStyle = new Label.LabelStyle();
+		BitmapFont fontLabel = new BitmapFont(Gdx.files.internal("src/main/resources/skin/font-export.fnt"), false);
+		Label.LabelStyle labelStyle = new Label.LabelStyle();
 		labelStyle.font = fontLabel;
 
 		// Return button
-		imageTextButtonStyle = new ImageTextButtonStyle();
+		ImageTextButtonStyle imageTextButtonStyle = new ImageTextButtonStyle();
 		imageTextButtonStyle.up = skin.newDrawable("panel2", Color.GRAY);
 		imageTextButtonStyle.down = skin.newDrawable("panel2"); // Set image for pressed
 		imageTextButtonStyle.over = skin.newDrawable("panel2", Color.BLUE); // set image for mouse over
@@ -76,8 +69,8 @@ public class RulesScreen implements Screen {
 		imageTextButtonStyle.font = fontLabel;
 		imageTextButtonStyle.fontColor = Color.WHITE;
 
-		button1 = new ImageTextButton("Return", imageTextButtonStyle);
-		button1.setX(Gdx.app.getGraphics().getWidth() / 2 - (button1.getWidth() / 2));
+		ImageTextButton button1 = new ImageTextButton("Return", imageTextButtonStyle);
+		button1.setX(Gdx.app.getGraphics().getWidth() / 2.0f - (button1.getWidth() / 2.0f));
 		button1.setY(Gdx.app.getGraphics().getHeight() - 800);
 		button1.setSize(150, 60);
 		button1.addListener(new ChangeListener() {
@@ -90,16 +83,16 @@ public class RulesScreen implements Screen {
 		});
 
 		// Rules label
-		imageLabelButtonStyle = new ImageTextButtonStyle();
+		ImageTextButtonStyle imageLabelButtonStyle = new ImageTextButtonStyle();
 		imageLabelButtonStyle.up = skin.newDrawable("label"); // Set image for pressed
 		imageLabelButtonStyle.pressedOffsetX = 1;
 		imageLabelButtonStyle.pressedOffsetY = -1;
 		imageLabelButtonStyle.font = fontLabel;
 		imageLabelButtonStyle.fontColor = Color.WHITE;
 
-		label1 = new ImageTextButton("Rules", imageLabelButtonStyle);
+		ImageTextButton label1 = new ImageTextButton("Rules", imageLabelButtonStyle);
 		label1.setSize(150, 30);
-		label1.setX(Gdx.app.getGraphics().getWidth() / 2 - (label1.getWidth() / 2));
+		label1.setX(Gdx.app.getGraphics().getWidth() / 2.0f - (label1.getWidth() / 2));
 		label1.setY(Gdx.app.getGraphics().getHeight() - 200);
 
 		
@@ -121,7 +114,7 @@ public class RulesScreen implements Screen {
 		Label label = new Label(text, labelStyle);
 		label.setAlignment(Align.left);
 		label.setWrap(true);
-		table.add(label).width(Gdx.graphics.getWidth()/2);
+		table.add(label).width(Gdx.graphics.getWidth() / 2.0f);
 		scrollStyle = new ScrollPaneStyle();
 		scrollStyle.background = skin.newDrawable("panel2", Color.GRAY);
 		ScrollPane scroll = new ScrollPane(table, scrollStyle);
