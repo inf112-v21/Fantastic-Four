@@ -231,11 +231,18 @@ public class GameActionScreen implements Screen {
 	public void showOtherButtons() {
 		// === Power down button ===
 		ImageButton powerDown = CardUI.createTextureButton("powerdown");
+		ImageButton powerDownON = CardUI.createTextureButton("powerdownON");
 
-		powerDown.setSize(180, 180);
+		ImageButton lockCards = CardUI.createTextureButton("lockcardsbutton");
+		ImageButton lockCardsON = CardUI.createTextureButton("lockcardsbuttonON");
+
+		powerDown.setSize(150, 150);
 		powerDown.setPosition(870, 55);
 		powerDown.addListener(new InputListener() {
 			public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+				powerDownON.setPosition(powerDown.getX(), powerDown.getY());
+				powerDownON.setSize(150, 150);
+				startCardsStage.addActor(powerDownON);
 
 			}
 
@@ -243,6 +250,23 @@ public class GameActionScreen implements Screen {
 				return true;
 			}
 		});
+		
+		lockCards.setSize(150, 150);
+		lockCards.setPosition(1050, 55);
+		lockCards.addListener(new InputListener() {
+			public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+				lockCardsON.setPosition(lockCards.getX(), lockCards.getY());
+				lockCardsON.setSize(150, 150);
+				startCardsStage.addActor(lockCardsON);
+
+			}
+
+			public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+				return true;
+			}
+		});
+		
+		startCardsStage.addActor(lockCards);
 		startCardsStage.addActor(powerDown);
 
 		// === LifeTokens ===
