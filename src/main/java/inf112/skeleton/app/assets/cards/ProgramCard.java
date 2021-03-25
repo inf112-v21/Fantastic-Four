@@ -47,11 +47,6 @@ public class ProgramCard {
                 '}';
     }
 
-	public String getCardName() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 	public ProgramCardType getProgramCardType() {
         return programCardType;
     }

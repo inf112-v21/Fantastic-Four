@@ -19,11 +19,9 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
-import com.badlogic.gdx.scenes.scene2d.ui.ImageTextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import inf112.skeleton.app.assets.cards.CardUI;
 import inf112.skeleton.app.assets.cards.ProgramCard;
-import inf112.skeleton.app.assets.cards.ProgramDeck;
 import inf112.skeleton.app.assets.Player;
 import inf112.skeleton.app.game.RoboGame;
 import inf112.skeleton.app.mechanics.player.Movement;
@@ -49,12 +47,8 @@ public class GameActionScreen implements Screen {
 	final RoboGame roboGame;
 	OrthographicCamera gameCamera, uiCamera;
 
-	int xPosition;
 	final int width;
 	final int height;
-	ImageTextButton.ImageTextButtonStyle imageLabelButtonStyle;
-	Texture lifeToken, lifeToken2, lifeToken3;
-	ProgramDeck deck;
 	List<ProgramCard> programCardsToChooseFrom;
 
 	int viewPortWidth, viewPortHeight;
@@ -103,7 +97,6 @@ public class GameActionScreen implements Screen {
 		// CardDeck
 		picked = new LinkedList<>();
 		chosen = new LinkedList<>();
-		boolean donePickingCards = false;
 	}
 
 	@Override

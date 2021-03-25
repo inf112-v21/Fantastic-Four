@@ -41,19 +41,11 @@ public class ProgramDeck {
         return cards;
     }
 
-    public void add(ProgramCard card) {
-        deck.add(card);
-    }
-
     public List<ProgramCard> draw(int quantity) {
         ArrayList<ProgramCard> cards = new ArrayList<>();
         for (int card = 0; card < quantity; card++) {
             cards.add(deck.remove(0));
         }
         return cards;
-    }
-
-    public Iterable<? extends ProgramCard> getCards() {
-        return deck;
     }
 }
