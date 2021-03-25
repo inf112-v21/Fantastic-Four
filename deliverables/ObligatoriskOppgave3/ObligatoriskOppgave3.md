@@ -140,9 +140,6 @@ Lever klassediagram. (Hvis det er veldig mange klasser, lager dere for de viktig
 
 
 
-
-
-
 ### Explanation of difference in number of commits
 At first glance there is a big difference in the number of commits between the team members.
 If one also looks at the number of lines changed, the difference is a lot less.
