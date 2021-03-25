@@ -3,6 +3,9 @@
 
 ## Subproblem 1: Team and project
 
+### Project board screen shot
+![alt text](projectboard.png "Project board")
+
 
 ### Links to minutes of meeting since last time
 
