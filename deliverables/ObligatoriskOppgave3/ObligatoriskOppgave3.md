@@ -37,4 +37,5 @@ in the below screenshots (at the time of writing, Mathias' big change is not com
 ![alt text](deletions.png "Deletions")
 
 
-[Click here for live commit statistics](https://github.com/inf112-v21/Fantastic-Four/graphs/contributors)
+Use this link for live commit statistics:
+<https://github.com/inf112-v21/Fantastic-Four/graphs/contributors>
