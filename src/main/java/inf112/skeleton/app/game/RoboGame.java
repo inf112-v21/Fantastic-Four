@@ -30,8 +30,6 @@ public class RoboGame extends com.badlogic.gdx.Game {
     //Declaration of screens
     MainMenuScreen mainMenuScreen;
     MultiplayerSetupScreen multiplayerSetupScreen;
-    GameOverScreen gameOverScreen;
-    RulesScreen rulesScreen;
     GameActionScreen gameActionScreen;
     List<ProgramCard> cards;
     /**
@@ -72,11 +70,6 @@ public class RoboGame extends com.badlogic.gdx.Game {
         gameActionScreen = new GameActionScreen(this, "exchange.tmx");
         setScreen(gameActionScreen);
         gameStarted = true;
-    }
-
-    public void launchStartScreen() {
-        mainMenuScreen = new MainMenuScreen(this);
-        setScreen(mainMenuScreen);
     }
 
     public void initiateMultiplayer() {
@@ -244,11 +237,5 @@ public class RoboGame extends com.badlogic.gdx.Game {
             }
             
         }
-    }
-
-    public List<ProgramCard> getdealProgramCards() {
-    	dealProgramCards();
-		return cards;
-    	
     }
 }

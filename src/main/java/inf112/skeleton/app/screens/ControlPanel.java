@@ -24,10 +24,8 @@ import inf112.skeleton.app.game.RoboGame;
 
 public class ControlPanel implements Screen {
 	final SpriteBatch batch;
-	Texture logo;
 	final Texture background;
 	final Stage stage;
-	final RoboGame roboGame;
 	final ImageTextButton.ImageTextButtonStyle imageLabelButtonStyle;
 	final ImageTextButton label1;
 	final ImageTextButton label2;
@@ -37,15 +35,12 @@ public class ControlPanel implements Screen {
 	final ImageTextButton button1;
 	final ImageTextButton.ImageTextButtonStyle imageTextButtonStyle;
 	final ScrollPane.ScrollPaneStyle scrollStyle;
-	ScrollPane scroll;
-	Label label;
 	final Texture lifeToken;
 	final Texture lifeToken2;
 	final Texture lifeToken3;
 
 
 	public ControlPanel(RoboGame roboGame) {
-		this.roboGame = roboGame;
 
 		skin = new Skin();
 

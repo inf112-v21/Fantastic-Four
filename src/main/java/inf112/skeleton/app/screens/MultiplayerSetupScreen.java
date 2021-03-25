@@ -30,9 +30,6 @@ public class MultiplayerSetupScreen implements Screen {
 	private final TextField ipTextField;
 	private final TextField nameTextField;
 
-	private ImageTextButton hostLabel;
-
-
 	public MultiplayerSetupScreen(RoboGame roboGame) {
 		this.roboGame = roboGame;
 

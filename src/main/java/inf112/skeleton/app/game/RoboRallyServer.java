@@ -76,7 +76,6 @@ public class RoboRallyServer {
 
                     roboRallyServer.sendToAllTCP(playerPacket);
                     System.out.println("Player " + playerPacket.player.getPlayerName() + " Has connected. All players present at the server now: " + roboGame.getPlayers());
-                    return;
                 }
             }
         });

@@ -25,13 +25,10 @@ import inf112.skeleton.app.game.RoboGame;
 
 public class RulesScreen implements Screen {
 	final SpriteBatch batch;
-	final Texture logo;
 	final Texture background;
 	final Stage stage;
 	final RoboGame roboGame;
 	final ScrollPane.ScrollPaneStyle scrollStyle;
-	ScrollPane scroll;
-	Label label;
 	final Table container;
 
 	public RulesScreen(RoboGame roboGame) {
@@ -51,7 +48,6 @@ public class RulesScreen implements Screen {
 
 		// Initiatlize key variables
 		batch = new SpriteBatch();
-		logo = new Texture(Gdx.files.internal("logo.png"));
 		background = new Texture(Gdx.files.internal("background.png"));
 
 		// Font section
