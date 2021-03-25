@@ -3,9 +3,6 @@
 
 ## Subproblem 1: Team and project
 
-### Project board screen shot
-![alt text](projectboard.png "Project board")
-
 - The team roles work good, they have solidified over the past weeks of working together
 -
 - Retrospect:
@@ -29,6 +26,9 @@
 - Communication is good, as we all try to respect the others work, and the fact that we have different technical
   approaches when it comes to programming
 
+
+### Project board screen shot
+![alt text](projectboard.png "Project board")
 
 ### Links to minutes of meeting since last time
 
