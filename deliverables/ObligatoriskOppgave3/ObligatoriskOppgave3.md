@@ -41,7 +41,6 @@ headaches, so we decided to fully focus on getting the singleplayer part of Robo
 
 [2021.3.25](moms/mom_2021_03_25.md)
 
-Husk å skrive hvilke bugs som finnes i de kravene dere har utført (dersom det finnes bugs).
 
 ## Subproblem 2: Requirements
 Last time our focus was on MVP's 6 through 9, and we finished those with a preliminary back-end solution involving
@@ -147,7 +146,11 @@ similar to the ones delivered in ObligatoriskOppgave2.md, but we tried to make i
   
 
 ## Subproblem 3: Product delivery and code quality
+
+For an overview of classes and relationships, see [class diagram](roborally_class_diagram_oblig3.pdf)
+
 For instructions on how to build the project, see [README.md](../../README.md).
+
 
 
 ### Explanation of difference in number of commits
