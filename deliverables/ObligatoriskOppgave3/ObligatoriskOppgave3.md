@@ -158,11 +158,11 @@ By looking at the number of lines added, removed and the number of commits, the 
 as seen
 in the below screenshots (at the time of writing, Mathias' big change is not commited/merged).
 #### Commits
-![alt text](commits.png "Commits")
+![alt text](img/commits.png "Commits")
 #### Additions
-![alt text](additions.png "Additions")
+![alt text](img/additions.png "Additions")
 #### Deletions
-![alt text](deletions.png "Deletions")
+![alt text](img/deletions.png "Deletions")
 
 
 [Click here for live commit statistics]("https://github.com/inf112-v21/Fantastic-Four/graphs/contributors")
