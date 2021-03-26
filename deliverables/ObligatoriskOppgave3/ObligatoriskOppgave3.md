@@ -29,8 +29,20 @@ dere har tatt er gode? Hvis ikke, hva kan dere gjøre annerledes for å forbedre
 - Communication is good, as we all try to respect the others work, and the fact that we have different technical
   approaches when it comes to programming
 
+### Project board screen shot
+![alt text](img/projectboard.png "Project board")
+
 
 ### Links to minutes of meeting since last time
+[2021.3.8](moms/mom_2021_03_08.md)
+
+[2021.3.15](moms/mom_2021_03_15.md)
+
+[2021.3.18](moms/mom_2021_03_18.md)
+
+[2021.3.22](moms/mom_2021_03_22.md)
+
+[2021.3.25](moms/mom_2021_03_25.md)
 
 Husk å skrive hvilke bugs som finnes i de kravene dere har utført (dersom det finnes bugs).
 
