@@ -4,10 +4,17 @@
 ## Subproblem 1: Team and project
 
 ### Project board screen shot
-![alt text](projectboard.png "Project board")
+![alt text](img/projectboard.png "Project board")
 
 
 ### Links to minutes of meeting since last time
+[2021.03.08](moms/mom_2021_03_08.md)
+
+[2021.03.15](moms/mom_2021_03_15.md)
+
+[2021.03.18](moms/mom_2021_03_18.md)
+
+[2021.03.22](moms/mom_2021_03_22.md)
 
 
 ## Subproblem 2: Requirements
@@ -33,11 +40,11 @@ By looking at the number of lines added, removed and the number of commits, the 
 as seen
 in the below screenshots (at the time of writing, Mathias' big change is not commited/merged). 
 #### Commits
-![alt text](commits.png "Commits")
+![alt text](img/commits.png "Commits")
 #### Additions
-![alt text](additions.png "Additions")
+![alt text](img/additions.png "Additions")
 #### Deletions
-![alt text](deletions.png "Deletions")
+![alt text](img/deletions.png "Deletions")
 
 
 [Click here for live commit statistics](https://github.com/inf112-v21/Fantastic-Four/graphs/contributors)
