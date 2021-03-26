@@ -1,13 +1,11 @@
 # Mandatory Assignment 3
 
-
-Er det noen erfaringer enten team-messig eller mtp prosjektmetodikk som er verdt å nevne? Synes teamet at de valgene
-dere har tatt er gode? Hvis ikke, hva kan dere gjøre annerledes for å forbedre måten teamet fungerer på?
+Summary: Also this time we wanted to implement MVP6 (multiplayer), but the multiplayer part of the MVPs still gives us
+headaches, so we decided to fully focus on getting the singleplayer part of RoboRally to work well through the GUI.
 
 ## Subproblem 1: Team and project
 
 - The team roles work good, they have solidified over the past weeks of working together
--
 - Retrospect:
   - We wanted to do improve on what we discussed in last delivery's retrospect, so we had a physical meeting early on
     such that every team member got a common view and understanding of how the different parts of the project and codes
@@ -18,8 +16,7 @@ dere har tatt er gode? Hvis ikke, hva kan dere gjøre annerledes for å forbedre
   - however, pandemic restrictions made it so that we were only able to meet up once
 - Improvements for next time:
   - If possible, we would like to physically meet up at least once for the next sprint of the project, as we saw that
-    this helped us immensely
-  -
+    this helped us immensely.
 - The prioritized tasks for the next sprint are:
   - making the multiplayer part of the game work (focus on the classes RoboRallyClient
     and RoboRallyServer)
@@ -141,15 +138,16 @@ similar to the ones delivered in ObligatoriskOppgave2.md, but we tried to make i
 - Implement a RoboGame loop with one turn (five phases), that show the movement of the robot in the GUI
 
 
-Deloppgave 3: Produktleveranse og kodekvalitet
-Dere må dokumentere hvordan prosjektet bygger, testes og kjøres, slik at det er lett for gruppelderne å bygge, teste og kjøre koden deres. Under vurdering kommer koden også til å brukertestes.
-Prosjektet skal kunne bygge, testes og kjøres på Linux, Windows og OSX.
-
-Lever klassediagram. (Hvis det er veldig mange klasser, lager dere for de viktigste.)
-
+### Bugs
+- MVP7 (Deal cards to players): no obvious bugs here.
+- MVP8 (Each player to choose 5 cards): Sometimes when cards were selected, discarded cards ended up being shown in a
+  random place in the GUI, but this was fixed.
+- MVP9 (Move robot by selected program cards): The robot moves where it is instructed to move, however, per now it is
+  possible for it to move off the board.
+  
 
 ## Subproblem 3: Product delivery and code quality
-
+For instructions on how to build the project, see [README.md](../../README.md).
 
 
 ### Explanation of difference in number of commits
