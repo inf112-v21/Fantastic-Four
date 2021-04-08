@@ -19,7 +19,9 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
+import com.badlogic.gdx.scenes.scene2d.Group;
 import inf112.skeleton.app.assets.cards.CardUI;
 import inf112.skeleton.app.assets.cards.ProgramCard;
 import inf112.skeleton.app.assets.Player;
@@ -100,7 +102,7 @@ public class GameActionScreen implements Screen {
 	@Override
 	public void show() {
 
-		background = new Texture(Gdx.files.internal("backgroundui.jpg"));
+		background = new Texture(Gdx.files.internal("backgroundui.png"));
 		batch = new SpriteBatch();
 		font = new BitmapFont();
 		font.setColor(Color.RED);
@@ -153,19 +155,36 @@ public class GameActionScreen implements Screen {
 		int deltaW = 125;
 		int deltaH = 205;
 		int i = 0;
-		for (int x = xStart; x < xStart + 3 * deltaW; x += deltaW) {
-			for (int y = yStart; y < yStart + 3 * deltaH; y += deltaH) {
-				ProgramCard currentCard = roboGame.localPlayer.getReceivedProgramCards().remove(0);
-				ImageButton imageButton = CardUI
-						.createTextureButton(("/cards/" + currentCard.getProgramCardType().toString()));
-				imageButton.setPosition(x, y);
-				imageButton.setSize(width, height);
-				imageButton.addListener(new CardInputListener(imageButton, this, x, y, width, height, i));
-				startCardsStage.addActor(imageButton);
-				i++;
+		//Add values to the cards
+				Label.LabelStyle label1Style = new Label.LabelStyle();
+				BitmapFont myFont = new BitmapFont(Gdx.files.internal("src/main/resources/skin/font-export.fnt"));
+			    myFont.getData().setScale(.6f);
+
+				label1Style.font = myFont;
+				label1Style.fontColor = Color.RED;
+				
+
+				for (int x = xStart; x < xStart + 3 * deltaW; x += deltaW) {
+					for (int y = yStart; y < yStart + 3 * deltaH; y += deltaH) {
+						ProgramCard currentCard = roboGame.localPlayer.getReceivedProgramCards().remove(0);
+						ImageButton imageButton = CardUI
+								.createTextureButton(("/cards/" + currentCard.getProgramCardType().toString()));
+						imageButton.setPosition(x, y);
+						imageButton.setSize(width, height);
+						//startCardsStage.addActor(imageButton);
+						Label cardvalue = new Label("" + currentCard.getPriorityNumber(), label1Style);
+						Group overlay = new Group();
+						cardvalue.setPosition((float) (imageButton.getX()+(width*.7)), (float) (imageButton.getY()+(height *.8)));
+						overlay.addActor(imageButton);
+						overlay.addActor(cardvalue);
+						imageButton.addListener(new CardInputListener(imageButton, this, cardvalue, x, y, width, height, i));
+
+						i++;
+						startCardsStage.addActor(overlay);
+
+					}
+				}
 			}
-		}
-	}
 
 	public void hideCards() {
 		startCardsStage.dispose();

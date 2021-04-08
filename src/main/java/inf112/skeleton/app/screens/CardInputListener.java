@@ -3,6 +3,8 @@ package inf112.skeleton.app.screens;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
+
 import inf112.skeleton.app.assets.cards.CardUI;
 import inf112.skeleton.app.assets.cards.ProgramCard;
 
@@ -14,8 +16,9 @@ public class CardInputListener extends InputListener {
     final int width;
     final int height;
     final int index;
+    final Label priority;
 
-    public CardInputListener(ImageButton cardButton, GameActionScreen gas, int x, int y, int width, int height, int index) {
+    public CardInputListener(ImageButton cardButton, GameActionScreen gas, Label priority, int x, int y, int width, int height, int index) {
         this.cardButton = cardButton;
         this.gas = gas;
         this.x = x;
@@ -23,6 +26,7 @@ public class CardInputListener extends InputListener {
         this.width = width;
         this.height = height;
         this.index = index;
+        this.priority = priority;
     }
 
     @Override
@@ -32,10 +36,15 @@ public class CardInputListener extends InputListener {
             back.setSize(width, height);
             back.setPosition(this.x, this.y);
             cardButton.setPosition(gas.cardPositions.removeFirst(), 0);
+            priority.setPosition((float) (cardButton.getX()+width*.7), (float) (cardButton.getY()+height*.8));
+
             gas.pickedCardsStage.addActor(cardButton);
+            gas.pickedCardsStage.addActor(priority);
+
             ProgramCard pickedCard = gas.picked.get(index);
             gas.chosen.add(pickedCard);
             gas.roboGame.localPlayer.addChosenProgramCard(pickedCard);
+            priority.setAlignment(500);
         }
     }
 
