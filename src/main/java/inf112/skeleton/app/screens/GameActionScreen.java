@@ -156,35 +156,35 @@ public class GameActionScreen implements Screen {
 		int deltaH = 205;
 		int i = 0;
 		//Add values to the cards
-				Label.LabelStyle label1Style = new Label.LabelStyle();
-				BitmapFont myFont = new BitmapFont(Gdx.files.internal("src/main/resources/skin/font-export.fnt"));
-			    myFont.getData().setScale(.6f);
+		Label.LabelStyle label1Style = new Label.LabelStyle();
+		BitmapFont myFont = new BitmapFont(Gdx.files.internal("src/main/resources/skin/font-export.fnt"));
+		myFont.getData().setScale(.6f);
 
-				label1Style.font = myFont;
-				label1Style.fontColor = Color.RED;
-				
+		label1Style.font = myFont;
+		label1Style.fontColor = Color.RED;
 
-				for (int x = xStart; x < xStart + 3 * deltaW; x += deltaW) {
-					for (int y = yStart; y < yStart + 3 * deltaH; y += deltaH) {
-						ProgramCard currentCard = roboGame.localPlayer.getReceivedProgramCards().remove(0);
-						ImageButton imageButton = CardUI
-								.createTextureButton(("/cards/" + currentCard.getProgramCardType().toString()));
-						imageButton.setPosition(x, y);
-						imageButton.setSize(width, height);
-						//startCardsStage.addActor(imageButton);
-						Label cardvalue = new Label("" + currentCard.getPriorityNumber(), label1Style);
-						Group overlay = new Group();
-						cardvalue.setPosition((float) (imageButton.getX()+(width*.7)), (float) (imageButton.getY()+(height *.8)));
-						overlay.addActor(imageButton);
-						overlay.addActor(cardvalue);
-						imageButton.addListener(new CardInputListener(imageButton, this, cardvalue, x, y, width, height, i));
 
-						i++;
-						startCardsStage.addActor(overlay);
+		for (int x = xStart; x < xStart + 3 * deltaW; x += deltaW) {
+			for (int y = yStart; y < yStart + 3 * deltaH; y += deltaH) {
+				ProgramCard currentCard = roboGame.localPlayer.getReceivedProgramCards().remove(0);
+				ImageButton imageButton = CardUI
+						.createTextureButton(("/cards/" + currentCard.getProgramCardType().toString()));
+				imageButton.setPosition(x, y);
+				imageButton.setSize(width, height);
+				//startCardsStage.addActor(imageButton);
+				Label cardvalue = new Label("" + currentCard.getPriorityNumber(), label1Style);
+				Group overlay = new Group();
+				cardvalue.setPosition((float) (imageButton.getX()+(width*.7)), (float) (imageButton.getY()+(height *.8)));
+				overlay.addActor(imageButton);
+				overlay.addActor(cardvalue);
+				imageButton.addListener(new CardInputListener(imageButton, this, cardvalue, x, y, width, height, i));
 
-					}
-				}
+				i++;
+				startCardsStage.addActor(overlay);
+
 			}
+		}
+	}
 
 	public void hideCards() {
 		startCardsStage.dispose();
