@@ -35,7 +35,7 @@ public class GameActionScreen implements Screen {
 	private BitmapFont font;
 	Texture background, slot;
 	public TextureRegion[][] textureRegions;
-
+	ArrayList<ImageButton> pickedCards;
 	TiledMap tiledMap;
 	TiledMapTileLayer playerLayer, boardLayer, holeLayer, flagLayer;
 	final TmxMapLoader tmxMapLoader = new TmxMapLoader();
@@ -60,6 +60,8 @@ public class GameActionScreen implements Screen {
 	final LinkedList<Integer> cardPositions;
 	final LinkedList<ProgramCard> picked;
 	final LinkedList<ProgramCard> chosen;
+	ImageButton imageButton;
+	CardInputListener imageButtonListener;
 
 	public GameActionScreen(RoboGame roboGame, String mapName) {
 		this.roboGame = roboGame;
@@ -167,27 +169,34 @@ public class GameActionScreen implements Screen {
 		for (int x = xStart; x < xStart + 3 * deltaW; x += deltaW) {
 			for (int y = yStart; y < yStart + 3 * deltaH; y += deltaH) {
 				ProgramCard currentCard = roboGame.localPlayer.getReceivedProgramCards().remove(0);
-				ImageButton imageButton = CardUI
+				imageButton = CardUI
 						.createTextureButton(("/cards/" + currentCard.getProgramCardType().toString()));
 				imageButton.setPosition(x, y);
 				imageButton.setSize(width, height);
-				//startCardsStage.addActor(imageButton);
 				Label cardvalue = new Label("" + currentCard.getPriorityNumber(), label1Style);
 				Group overlay = new Group();
 				cardvalue.setPosition((float) (imageButton.getX()+(width*.7)), (float) (imageButton.getY()+(height *.8)));
 				overlay.addActor(imageButton);
 				overlay.addActor(cardvalue);
 				imageButton.addListener(new CardInputListener(imageButton, this, cardvalue, x, y, width, height, i));
-
 				i++;
 				startCardsStage.addActor(overlay);
-
+				pickedCards = new ArrayList<ImageButton>();
+				pickedCards.add(imageButton);
 			}
+
 		}
+
 	}
 
 	public void hideCards() {
 		startCardsStage.dispose();
+		
+	}
+	public void clearCards() {
+		startCardsStage.clear();
+		System.out.println("wyczyszczone glowne");
+		pickedCardsStage.clear();
 	}
 
 	public void showSlots() {
