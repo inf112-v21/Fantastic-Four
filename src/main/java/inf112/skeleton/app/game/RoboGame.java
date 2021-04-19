@@ -213,6 +213,7 @@ public class RoboGame extends com.badlogic.gdx.Game {
             boardElementsMove();
             lasersFire();
             touchFlagsCheckpoints();
+            if (checkWinner()) announceWinner();
             phaseNumber++;
         }
         else {
@@ -220,6 +221,10 @@ public class RoboGame extends com.badlogic.gdx.Game {
 //            gameActionScreen.hideCards();
             currentActivity = new Activity(ActivityType.DEAL_CARDS, STANDARD_DURATION);
         }
+    }
+
+    private void announceWinner() {
+        System.out.println("Winner!");
     }
 
     public void revealCards() {
