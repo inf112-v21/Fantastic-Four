@@ -45,7 +45,7 @@ public class RoboGame extends com.badlogic.gdx.Game {
 	/**
 	 * How long to wait for incoming connections
 	 */
-	private final long WAITCONNECTIONDURATION;
+	private final long WAIT_CONNECTION_DURATION;
 
 	private final long NUMBER_OF_PHASES;
 	int phaseNumber;
@@ -60,7 +60,7 @@ public class RoboGame extends com.badlogic.gdx.Game {
 		gameStarted = false;
 		PROGRAMCARD_DURATION = 1;
 		STANDARD_DURATION = 1;
-		WAITCONNECTIONDURATION = 5;
+		WAIT_CONNECTION_DURATION = 5;
 		NUMBER_OF_PHASES = 5;
 		phaseNumber = 0;
 	}
@@ -162,15 +162,11 @@ public class RoboGame extends com.badlogic.gdx.Game {
 			gameActionScreen.clearCards();
 			for (Player player : players) {
 				if (!player.hasChosenProgramCards()) {
-					System.out.println(player + " has not chosen program cards"); // TODO remove
-					List<ProgramCard> cards = player.getReceivedProgramCards();
+					List<ProgramCard> remainingCardsToPickFrom = player.getReceivedProgramCards();
 					List<ProgramCard> alreadyPicked = player.getChosenProgramCards();
-					System.out.println(cards);
-					System.out.println(alreadyPicked);
-					while (alreadyPicked.size() < 5) {
-						alreadyPicked.add(cards.remove(0));
-					}
-					player.receiveChosenProgramCards(cards);
+					for (ProgramCard p : alreadyPicked) remainingCardsToPickFrom.remove(p);
+					while (alreadyPicked.size() < 5) alreadyPicked.add(remainingCardsToPickFrom.remove(0));
+					player.receiveChosenProgramCards(alreadyPicked);
 				}
 			}
 			currentActivity = new Activity(Definitions.ActivityType.COMPLETE_REGISTERS, PROGRAMCARD_DURATION);
@@ -192,16 +188,13 @@ public class RoboGame extends com.badlogic.gdx.Game {
 
 	private void checkMultiplayer() {
 		if (gameStarted) {
-			if (multiplayer)
-				currentActivity = new Activity(Definitions.ActivityType.WAIT_FOR_CONNECTIONS, WAITCONNECTIONDURATION);
-			else
-				currentActivity = new Activity(Definitions.ActivityType.PICK_BOARD, STANDARD_DURATION);
+			if (multiplayer) currentActivity = new Activity(Definitions.ActivityType.WAIT_FOR_CONNECTIONS, WAIT_CONNECTION_DURATION);
+			else currentActivity = new Activity(Definitions.ActivityType.PICK_BOARD, STANDARD_DURATION);
 		}
 	}
 
 	private void waitForMenuSelection() {
-		if (gameStarted)
-			currentActivity = new Activity(Definitions.ActivityType.CHECK_MULTIPLAYER, -1);
+		if (gameStarted) currentActivity = new Activity(Definitions.ActivityType.CHECK_MULTIPLAYER, -1);
 	}
 
 	private void openMenu() {
@@ -217,8 +210,7 @@ public class RoboGame extends com.badlogic.gdx.Game {
 			boardElementsMove();
 			lasersFire();
 			touchFlagsCheckpoints();
-			if (checkWinner())
-				announceWinner();
+			if (checkWinner()) announceWinner();
 			phaseNumber++;
 		} else {
 			// Reset everything for the next set of phases (probably wrong term)

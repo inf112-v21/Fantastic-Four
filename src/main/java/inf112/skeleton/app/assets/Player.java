@@ -104,23 +104,15 @@ public class Player {
     }
 
     public void moveOneStep() {
-        while (lastMove + TIMEBETWEENMOVES > System.currentTimeMillis()) {
-            // spin waiter TODO improve
-        }
+//        while (lastMove + TIMEBETWEENMOVES > System.currentTimeMillis()) {
+//            // spin waiter TODO improve
+//        }
         lastMove = System.currentTimeMillis();
         Definitions.Direction direction = Definitions.Direction.values()[directionIndex];
-        if (direction == Definitions.Direction.UP) {
-            y++;
-        }
-        else if (direction == Definitions.Direction.LEFT) {
-            x--;
-        }
-        else if (direction == Definitions.Direction.DOWN) {
-            y--;
-        }
-        else {
-            x++;
-        }
+        if (direction == Definitions.Direction.UP) y++;
+        else if (direction == Definitions.Direction.LEFT) x--;
+        else if (direction == Definitions.Direction.DOWN) y--;
+        else x++;
     }
 
     public List<ProgramCard> getReceivedProgramCards() {
