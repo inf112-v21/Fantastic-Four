@@ -40,14 +40,15 @@ public class Player {
         lastX = -1;
         lastY = -1;
         chosenProgramCards = new ArrayList<>();
+        receivedProgramCards = new ArrayList<>();
     }
 
     public void receiveProgramCardsToPick(List<ProgramCard> cards) {
-        this.receivedProgramCards = cards;
+        this.receivedProgramCards.addAll(cards);
     }
 
     public void receiveChosenProgramCards(List<ProgramCard> cards) {
-        this.chosenProgramCards = cards;
+        this.chosenProgramCards.addAll(cards);
     }
 
     public int getDamage() {

@@ -160,16 +160,16 @@ public class RoboGame extends com.badlogic.gdx.Game {
 	private void arrangeCards() {
 		if (currentActivity.hasTimedOut()) {
 			gameActionScreen.clearCards();
-//			dealCards();
-
 			for (Player player : players) {
 				if (!player.hasChosenProgramCards()) {
 					System.out.println(player + " has not chosen program cards"); // TODO remove
 					List<ProgramCard> cards = player.getReceivedProgramCards();
-					while (cards.size() > 5) {
-						cards.remove(0);
+					List<ProgramCard> alreadyPicked = player.getChosenProgramCards();
+					System.out.println(cards);
+					System.out.println(alreadyPicked);
+					while (alreadyPicked.size() < 5) {
+						alreadyPicked.add(cards.remove(0));
 					}
-					System.out.println(cards); // TODO remove
 					player.receiveChosenProgramCards(cards);
 				}
 			}

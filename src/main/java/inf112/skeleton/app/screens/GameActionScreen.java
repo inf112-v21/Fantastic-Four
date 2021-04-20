@@ -170,10 +170,11 @@ public class GameActionScreen implements Screen {
 		label1Style.font = myFont;
 		label1Style.fontColor = Color.RED;
 
-
+		int index = 0;
 		for (int x = xStart; x < xStart + 3 * deltaW; x += deltaW) {
 			for (int y = yStart; y < yStart + 3 * deltaH; y += deltaH) {
-				ProgramCard currentCard = roboGame.localPlayer.getReceivedProgramCards().remove(0);
+				ProgramCard currentCard = roboGame.localPlayer.getReceivedProgramCards().get(index);
+				index++;
 				imageButton = CardUI
 						.createTextureButton(("/cards/" + currentCard.getProgramCardType().toString()));
 				imageButton.setPosition(x, y);
