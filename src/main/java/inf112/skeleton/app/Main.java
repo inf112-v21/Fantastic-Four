@@ -9,6 +9,7 @@ public class Main {
         Lwjgl3ApplicationConfiguration cfg = new Lwjgl3ApplicationConfiguration();
         cfg.setTitle("RoboRally");
         cfg.setWindowedMode(1200, 900);
+//        cfg.setFullscreenMode(Lwjgl3ApplicationConfiguration.getDisplayMode());
 
         RoboGame roboGame = new RoboGame();
 

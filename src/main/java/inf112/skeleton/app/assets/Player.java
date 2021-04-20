@@ -8,7 +8,7 @@ import java.util.List;
 
 public class Player implements Serializable {
 
-    private static final long TIMEBETWEENMOVES = 50;
+    private static final long TIMEBETWEENMOVES = 500;
     private final String playerName;
     private List<ProgramCard> receivedProgramCards;
     private List<ProgramCard> chosenProgramCards;
@@ -43,6 +43,7 @@ public class Player implements Serializable {
         lastX = -1;
         lastY = -1;
         chosenProgramCards = new ArrayList<>();
+        receivedProgramCards = new ArrayList<>();
     }
 
     public void setId(int id) {
@@ -54,11 +55,11 @@ public class Player implements Serializable {
     }
 
     public void receiveProgramCardsToPick(List<ProgramCard> cards) {
-        this.receivedProgramCards = cards;
+        this.receivedProgramCards.addAll(cards);
     }
 
     public void receiveChosenProgramCards(List<ProgramCard> cards) {
-        this.chosenProgramCards = cards;
+        this.chosenProgramCards.addAll(cards);
     }
 
     public int getDamage() {
@@ -114,23 +115,11 @@ public class Player implements Serializable {
     }
 
     public void moveOneStep() {
-        while (lastMove + TIMEBETWEENMOVES > System.currentTimeMillis()) {
-            // spin waiter TODO improve
-        }
-        lastMove = System.currentTimeMillis();
         Definitions.Direction direction = Definitions.Direction.values()[directionIndex];
-        if (direction == Definitions.Direction.UP) {
-            y++;
-        }
-        else if (direction == Definitions.Direction.LEFT) {
-            x--;
-        }
-        else if (direction == Definitions.Direction.DOWN) {
-            y--;
-        }
-        else {
-            x++;
-        }
+        if (direction == Definitions.Direction.UP) y++;
+        else if (direction == Definitions.Direction.LEFT) x--;
+        else if (direction == Definitions.Direction.DOWN) y--;
+        else x++;
     }
 
     public List<ProgramCard> getReceivedProgramCards() {
@@ -139,6 +128,11 @@ public class Player implements Serializable {
 
     public List<ProgramCard> getChosenProgramCards() {
         return chosenProgramCards;
+    }
+
+    public void resetProgramCards() {
+        chosenProgramCards = new ArrayList<>();
+        receivedProgramCards = new ArrayList<>();
     }
 
     public void addChosenProgramCard(ProgramCard card) {

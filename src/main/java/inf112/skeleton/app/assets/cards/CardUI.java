@@ -12,11 +12,6 @@ public class CardUI {
 	static TextureRegionDrawable cardTextureDrawable;
 	static ImageButton texture;
 
-	public CardUI() {
-	
-
-	}
-
 	public static ImageButton createTextureButton(String name) {
 		cardTexture = new Texture(Gdx.files.internal("src/main/resources/" + name + ".png"));
 		cardTextureRegion = new TextureRegion(cardTexture);
@@ -26,5 +21,4 @@ public class CardUI {
 
 		return texture;
 	}
-
 }

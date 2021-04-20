@@ -6,13 +6,10 @@ import java.util.List;
 import inf112.skeleton.app.assets.cards.ProgramCard.ProgramCardType;
 
 public class ProgramDeck {
-    public final List<ProgramCard> deck;
-
-    public ProgramDeck() {
-        deck = new ArrayList<>();
-    }
+    public List<ProgramCard> deck;
 
     public List<ProgramCard> createDeck() {
+        deck = new ArrayList<>();
         // move 1 (18)
         deck.addAll(createCardType(ProgramCardType.MOVE1, 18, 490, 10));
         // move 2 (12)
@@ -21,9 +18,9 @@ public class ProgramDeck {
         deck.addAll(createCardType(ProgramCardType.MOVE3, 6, 790, 10));
         // BackUP (6)
         deck.addAll(createCardType(ProgramCardType.BACKUP, 6, 430, 10));
-        // rotate right // TODO mismatch between comment and following line
+        // rotate right
         deck.addAll(createCardType(ProgramCardType.ROTATELEFT, 18, 80, 20));
-        // rotate left // TODO mismatch between comment and following line
+        // rotate left
         deck.addAll(createCardType(ProgramCardType.ROTATERIGHT, 18, 70, 20));
         // u-turn
         deck.addAll(createCardType(ProgramCardType.UTURN, 6, 10, 10));

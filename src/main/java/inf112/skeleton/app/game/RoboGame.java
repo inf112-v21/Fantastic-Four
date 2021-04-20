@@ -18,8 +18,8 @@ public class RoboGame extends com.badlogic.gdx.Game {
     private final ProgramDeck programDeck;
     final int MAX_NUMBER_OF_CARDS = 9;
 
-    RoboRallyClient roboClient;
-    RoboRallyServer roboServer;
+	RoboRallyClient roboClient;
+	RoboRallyServer roboServer;
 
     // Server metadata
     public String ip;
@@ -30,59 +30,68 @@ public class RoboGame extends com.badlogic.gdx.Game {
     Activity currentActivity;
     ActivityType lastActivityType;
 
-    boolean gameStarted;
-    boolean multiplayer;
+	boolean gameStarted;
+	boolean multiplayer;
 
-    //Declaration of screens
-    MainMenuScreen mainMenuScreen;
-    MultiplayerSetupScreen multiplayerSetupScreen;
-    GameActionScreen gameActionScreen;
-    List<ProgramCard> cards;
-    /**
-     * Duration of each program card execution in seconds
-     */
-    private final long PROGRAMCARD_DURATION;
+	long lastMove;
+	long WAIT_BETWEEN_MOVES = 500l; // milliseconds
 
-    /**
-     * The standard duration of each activity that is not instant or unbound
-     */
-    private final long STANDARD_DURATION;
+	// Declaration of screens
+	MainMenuScreen mainMenuScreen;
+	MultiplayerSetupScreen multiplayerSetupScreen;
+	GameActionScreen gameActionScreen;
+	List<ProgramCard> cards;
+	/**
+	 * Duration of each program card execution in seconds
+	 */
+	private final long PROGRAMCARD_DURATION;
 
-    /**
-     * How long to wait for incoming connections
-     */
-    private final long WAITCONNECTIONDURATION;
+	/**
+	 * The standard duration of each activity that is not instant or unbound
+	 */
+	private final long STANDARD_DURATION;
 
-    public RoboGame() {
-        programDeck = new ProgramDeck();
-        programDeck.createDeck();
-        players = new LinkedList<>();
-        currentActivity = new Activity(Definitions.ActivityType.OPEN_MENU, -1);
-        lastActivityType = Definitions.ActivityType.EXECUTE_PROGRAMCARDS_5;
-        multiplayer = false; // Will be changed if the server starts
-        gameStarted = false;
-        PROGRAMCARD_DURATION = 1;
-        STANDARD_DURATION = 1;
-        WAITCONNECTIONDURATION = 5;
-    }
+	/**
+	 * How long to wait for incoming connections
+	 */
+	private final long WAIT_CONNECTION_DURATION;
 
-    @Override
-    public void create() {
-    }
+	private final long NUMBER_OF_PHASES;
+	int phaseNumber;
 
-    public void launchGame() {
-//        addPlayer(new Player("Player 2", 8, 4)); // TODO For testing purposes, remove
+	public RoboGame() {
+		programDeck = new ProgramDeck();
+		programDeck.createDeck();
+		players = new LinkedList<>();
+		currentActivity = new Activity(Definitions.ActivityType.OPEN_MENU, -1);
+		lastActivityType = Definitions.ActivityType.EXECUTE_PROGRAMCARDS_5;
+		multiplayer = false; // Will be changed if the server starts
+		gameStarted = false;
+		PROGRAMCARD_DURATION = 1;
+		STANDARD_DURATION = 1;
+		WAIT_CONNECTION_DURATION = 5;
+		NUMBER_OF_PHASES = 5;
+		phaseNumber = 0;
+		lastMove = 0l;
+	}
 
-        gameActionScreen = new GameActionScreen(this, "exchange.tmx");
-        setScreen(gameActionScreen);
-        gameStarted = true;
-    }
+	@Override
+	public void create() {
+	}
 
-    public void initiateMultiplayer() {
-        multiplayerSetupScreen = new MultiplayerSetupScreen(this);
-        setScreen(multiplayerSetupScreen);
-        multiplayer = true;
-    }
+	public void launchGame() {
+        addPlayer(new Player("Player 2", 8, 4)); // TODO For testing purposes, remove
+
+		gameActionScreen = new GameActionScreen(this, "exchange.tmx");
+		setScreen(gameActionScreen);
+		gameStarted = true;
+	}
+
+	public void initiateMultiplayer() {
+		multiplayerSetupScreen = new MultiplayerSetupScreen(this);
+		setScreen(multiplayerSetupScreen);
+		multiplayer = true;
+	}
 
     public void connectToHost(String serverIp, String name) {
         roboClient = new RoboRallyClient(this, serverIp, name);
@@ -97,154 +106,184 @@ public class RoboGame extends com.badlogic.gdx.Game {
 
     }
 
-    public void addPlayer(Player player) {
-        players.add(player);
-        System.out.println(players.toString());
-    }
+	public void addPlayer(Player player) {
+		players.add(player);
+		System.out.println(players.toString());
+	}
 
-    public List<Player> getPlayers() {
-        return players;
-    }
+	public List<Player> getPlayers() {
+		return players;
+	}
 
-    @Override
-    public void render() {
-        super.render();
-        tick();
-    }
+	@Override
+	public void render() {
+		super.render();
+		tick();
+	}
 
-    /**
-     * The ticker is called several times a second, via the LibGDX render()-method
-     */
-    void tick() {
-        // TODO Check win conditions before the if-statement
+	/**
+	 * The ticker is called several times a second, via the LibGDX render()-method
+	 */
+	void tick() {
+		// TODO Check win conditions before the if-statement
 
-        // Print the current activity
-        if (lastActivityType != currentActivity.currentType) {
-            System.out.println(currentActivity.currentType);
-            lastActivityType = currentActivity.currentType;
-        }
+		// Print the current activity
+		if (lastActivityType != currentActivity.currentType) {
+			System.out.println(currentActivity.currentType);
+			lastActivityType = currentActivity.currentType;
+		}
 
-        if (currentActivity.currentType.equals(Definitions.ActivityType.
-                OPEN_MENU)) {
-            mainMenuScreen = new MainMenuScreen(this);
-            setScreen(mainMenuScreen);
-            currentActivity = new Activity(Definitions.ActivityType.
-                    WAIT_FOR_MENU_SELECTION, -1);
-        }
-        else if (currentActivity.currentType.equals(Definitions.ActivityType.
-                WAIT_FOR_MENU_SELECTION)) {
-            if (gameStarted) currentActivity = new Activity(Definitions.ActivityType.CHECK_MULTIPLAYER, -1);
-        }
-        else if (currentActivity.currentType.equals(Definitions.ActivityType.
-                CHECK_MULTIPLAYER)) {
-            if (gameStarted) {
-                if (multiplayer) currentActivity = new Activity(Definitions.ActivityType.WAIT_FOR_CONNECTIONS, WAITCONNECTIONDURATION);
-                else currentActivity = new Activity(Definitions.ActivityType.PICK_BOARD, STANDARD_DURATION);
-            }
-        }
-        else if (currentActivity.currentType.equals(Definitions.ActivityType.
-                WAIT_FOR_CONNECTIONS)) {
-            if (currentActivity.hasTimedOut()) {
-                // TODO decide if one should add an AI player if noone has connected
-                currentActivity = new Activity(Definitions.ActivityType.PICK_BOARD, STANDARD_DURATION);
-            }
-        }
-        else if (currentActivity.currentType.equals(Definitions.ActivityType.
-                PICK_BOARD)) {
-            if (currentActivity.hasTimedOut()) {
-                currentActivity = new Activity(Definitions.ActivityType.DEAL_CARDS, STANDARD_DURATION);
-            }
-        }
-        else if (currentActivity.currentType.equals(Definitions.ActivityType.
-                DEAL_CARDS)) {
-            dealProgramCards();
-            gameActionScreen.showCards();
-            currentActivity = new Activity(Definitions.ActivityType.PICK_CARDS, 10);
-        }
-        else if (currentActivity.currentType.equals(Definitions.ActivityType.
-                PICK_CARDS)) {
-            if (currentActivity.hasTimedOut()) {
-                for (Player player : players) {
-                    if (!player.hasChosenProgramCards()) {
-                        System.out.println(player + " has not chosen programcards"); // TODO remove
-                        List<ProgramCard> cards = player.getReceivedProgramCards();
-                        while (cards.size() > 5) cards.remove(0);
-                        player.receiveChosenProgramCards(cards);
-                    }
-                }
-                currentActivity = new Activity(Definitions.ActivityType.EXECUTE_PROGRAMCARDS_1, PROGRAMCARD_DURATION);
-                gameActionScreen.hideCards();
-            }
-        }
-        else if (currentActivity.currentType.equals(Definitions.ActivityType.
-                EXECUTE_PROGRAMCARDS_1)) {
-            for (Player player : players) {
-                player.moveRobotByProgramCard(player.getProgramCard(0));
-                currentActivity = new Activity(Definitions.ActivityType.EXECUTE_PROGRAMCARDS_2, PROGRAMCARD_DURATION);
-            }
-            if (currentActivity.hasTimedOut()) {
-                currentActivity = new Activity(Definitions.ActivityType.EXECUTE_PROGRAMCARDS_2, PROGRAMCARD_DURATION);
-            }
-        }
-        else if (currentActivity.currentType.equals(Definitions.ActivityType.
-                EXECUTE_PROGRAMCARDS_2)) {
-            for (Player player : players) {
-                player.moveRobotByProgramCard(player.getProgramCard(1));
-                currentActivity = new Activity(Definitions.ActivityType.EXECUTE_PROGRAMCARDS_3, PROGRAMCARD_DURATION);
-            }
-            if (currentActivity.hasTimedOut()) {
-                currentActivity = new Activity(Definitions.ActivityType.EXECUTE_PROGRAMCARDS_3, PROGRAMCARD_DURATION);
-            }
-        }
-        else if (currentActivity.currentType.equals(Definitions.ActivityType.
-                EXECUTE_PROGRAMCARDS_3)) {
-            for (Player player : players) {
-                player.moveRobotByProgramCard(player.getProgramCard(2));
-                currentActivity = new Activity(Definitions.ActivityType.EXECUTE_PROGRAMCARDS_4, PROGRAMCARD_DURATION);
-            }
-            if (currentActivity.hasTimedOut()) {
-                currentActivity = new Activity(Definitions.ActivityType.EXECUTE_PROGRAMCARDS_4, PROGRAMCARD_DURATION);
-            }
-        }
-        else if (currentActivity.currentType.equals(Definitions.ActivityType.
-                EXECUTE_PROGRAMCARDS_4)) {
-            for (Player player : players) {
-                player.moveRobotByProgramCard(player.getProgramCard(3));
-                currentActivity = new Activity(Definitions.ActivityType.EXECUTE_PROGRAMCARDS_5, PROGRAMCARD_DURATION);
-            }
-            if (currentActivity.hasTimedOut()) {
-                currentActivity = new Activity(Definitions.ActivityType.EXECUTE_PROGRAMCARDS_5, PROGRAMCARD_DURATION);
-            }
-        }
-        else if (currentActivity.currentType.equals(Definitions.ActivityType.
-                EXECUTE_PROGRAMCARDS_5)) {
-            for (Player player : players) {
-                player.moveRobotByProgramCard(player.getProgramCard(4));
-                currentActivity = new Activity(Definitions.ActivityType.HALT, PROGRAMCARD_DURATION);
-            }
-            if (currentActivity.hasTimedOut()) {
-                currentActivity = new Activity(Definitions.ActivityType.HALT, STANDARD_DURATION);
-            }
-        }
-        else if (currentActivity.currentType.equals(Definitions.ActivityType.
-                HALT)) {
-                // No content
-        }
-    }
+		switch (currentActivity.currentType) {
+		case OPEN_MENU:
+			openMenu();
+			break;
+		case WAIT_FOR_MENU_SELECTION:
+			waitForMenuSelection();
+			break;
+		case CHECK_MULTIPLAYER:
+			checkMultiplayer();
+			break;
+		case WAIT_FOR_CONNECTIONS:
+			waitForConnections();
+			break;
+		case PICK_BOARD:
+			pickBoard();
+			break;
+		case DEAL_CARDS:
+			dealCards();
+			break;
+		case ARRANGE_CARDS_AND_ANNOUNCE_INTENT:
+			arrangeCards();
+			break;
+		case COMPLETE_REGISTERS:
+			completeRegisters();
+			break;
+		case HALT:
+			break;
+		}
+	}
 
-    /**
-     * Deal the program cards
-     */
-    public void dealProgramCards() {
-        for (Player player : players) {
-            cards = new ArrayList<>(); // Create a small deck of cards for each player
-            cards.addAll(programDeck.draw(MAX_NUMBER_OF_CARDS - player.getDamage()));
-            player.receiveProgramCardsToPick(cards); // Each player receives it's cards
-            System.out.println();
-            for (ProgramCard c : cards) {
-            	System.out.println(c.getProgramCardType());
-            }
-            
-        }
-    }
+	private void dealCards() {
+		dealProgramCards();
+		gameActionScreen.showCards();
+		currentActivity = new Activity(Definitions.ActivityType.ARRANGE_CARDS_AND_ANNOUNCE_INTENT, 10);
+	}
+
+	// "Handle input"
+	private void arrangeCards() {
+		if (currentActivity.hasTimedOut()) {
+			gameActionScreen.clearCards();
+			for (Player player : players) {
+				if (!player.hasChosenProgramCards()) {
+					List<ProgramCard> remainingCardsToPickFrom = player.getReceivedProgramCards();
+					List<ProgramCard> alreadyPicked = player.getChosenProgramCards();
+					for (ProgramCard p : alreadyPicked) remainingCardsToPickFrom.remove(p);
+					while (alreadyPicked.size() < 5) alreadyPicked.add(remainingCardsToPickFrom.remove(0));
+					player.receiveChosenProgramCards(alreadyPicked);
+				}
+			}
+			currentActivity = new Activity(Definitions.ActivityType.COMPLETE_REGISTERS, PROGRAMCARD_DURATION);
+		}
+	}
+
+	private void pickBoard() {
+		if (currentActivity.hasTimedOut()) {
+			currentActivity = new Activity(Definitions.ActivityType.DEAL_CARDS, STANDARD_DURATION);
+		}
+	}
+
+	private void waitForConnections() {
+		if (currentActivity.hasTimedOut()) {
+			// TODO decide if one should add an AI player if noone has connected
+			currentActivity = new Activity(Definitions.ActivityType.PICK_BOARD, STANDARD_DURATION);
+		}
+	}
+
+	private void checkMultiplayer() {
+		if (gameStarted) {
+			if (multiplayer) currentActivity = new Activity(Definitions.ActivityType.WAIT_FOR_CONNECTIONS, WAIT_CONNECTION_DURATION);
+			else currentActivity = new Activity(Definitions.ActivityType.PICK_BOARD, STANDARD_DURATION);
+		}
+	}
+
+	private void waitForMenuSelection() {
+		if (gameStarted) currentActivity = new Activity(Definitions.ActivityType.CHECK_MULTIPLAYER, -1);
+	}
+
+	private void openMenu() {
+		mainMenuScreen = new MainMenuScreen(this);
+		setScreen(mainMenuScreen);
+		currentActivity = new Activity(Definitions.ActivityType.WAIT_FOR_MENU_SELECTION, -1);
+	}
+
+	public void completeRegisters() {
+		if (phaseNumber < NUMBER_OF_PHASES) {
+			revealCards();
+			robotsMove();
+			boardElementsMove();
+			lasersFire();
+			touchFlagsCheckpoints();
+			if (checkWinner()) announceWinner();
+			phaseNumber++;
+		} else {
+			// Reset everything for the next set of phases (probably wrong term)
+			for (Player player : players) player.resetProgramCards();
+			gameActionScreen.resetCardPositions();
+			phaseNumber = 0;
+			currentActivity = new Activity(ActivityType.DEAL_CARDS, STANDARD_DURATION);
+		}
+	}
+
+	private void announceWinner() {
+		System.out.println("Winner!");
+	}
+
+	public void revealCards() {
+
+	}
+
+	public void robotsMove() {
+		for (Player player : players) {
+			player.moveRobotByProgramCard(player.getProgramCard(phaseNumber));
+			while (System.currentTimeMillis() < lastMove + WAIT_BETWEEN_MOVES) {
+				// spin waiter
+			}
+			lastMove = System.currentTimeMillis();
+
+		}
+//		if (currentActivity.hasTimedOut()) {
+//			currentActivity = new Activity(Definitions.ActivityType.EXECUTE_PROGRAMCARDS_2, PROGRAMCARD_DURATION);
+//		}
+	}
+
+	public void boardElementsMove() {
+
+	}
+
+	public void lasersFire() {
+
+	}
+
+	public void touchFlagsCheckpoints() {
+
+	}
+
+	public boolean checkWinner() {
+		return false;
+	}
+
+	/**
+	 * Deal the program cards
+	 */
+	public void dealProgramCards() {
+		programDeck.createDeck();
+		for (Player player : players) {
+			cards = new ArrayList<>(); // Create a small deck of cards for each player
+			cards.addAll(programDeck.draw(MAX_NUMBER_OF_CARDS - player.getDamage()));
+			player.receiveProgramCardsToPick(cards); // Each player receives it's cards
+			System.out.print(player.getPlayerName() + " receives ");
+			for (ProgramCard c : cards) System.out.print(c.getProgramCardType() + " ");
+			System.out.println();
+		}
+	}
 }
