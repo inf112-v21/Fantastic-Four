@@ -58,7 +58,7 @@ public class GameActionScreen implements Screen {
 	final Stage otherButtonsStage;
 	final Stage startCardsStage;
 	LinkedList<Integer> cardPositions;
-	final LinkedList<ProgramCard> picked;
+	LinkedList<ProgramCard> picked;
 	final LinkedList<ProgramCard> chosen;
 	ImageButton imageButton;
 	CardInputListener imageButtonListener;
@@ -92,7 +92,7 @@ public class GameActionScreen implements Screen {
 		resetCardPositions();
 
 		// CardDeck
-		picked = new LinkedList<>();
+//		picked = new LinkedList<>();
 		chosen = new LinkedList<>();
 	}
 
@@ -151,6 +151,7 @@ public class GameActionScreen implements Screen {
 		programCardsToChooseFrom = roboGame.localPlayer.getReceivedProgramCards();// TODO drawCard and cardNames are not
 																					// used, picked is used but can be
 																					// changed
+		picked = new LinkedList<>();
 
 		picked.addAll(programCardsToChooseFrom);
 
