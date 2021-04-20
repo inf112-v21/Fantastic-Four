@@ -113,7 +113,7 @@ public class MainMenuScreen implements Screen {
 		button4.addListener(new ChangeListener() {
 			@Override
 			public void changed(ChangeEvent changeEvent, Actor actor) {
-				Screen gamewindow = new ControlPanel(roboGame);
+				Screen gamewindow = new PlayersScreen(roboGame);
 				roboGame.setScreen(gamewindow);
 			}
 		});
