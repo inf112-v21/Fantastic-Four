@@ -7,7 +7,7 @@ import java.util.List;
 
 public class Player {
 
-    private static final long TIMEBETWEENMOVES = 50;
+    private static final long TIMEBETWEENMOVES = 500;
     private final String playerName;
     private List<ProgramCard> receivedProgramCards;
     private List<ProgramCard> chosenProgramCards;
@@ -104,10 +104,6 @@ public class Player {
     }
 
     public void moveOneStep() {
-//        while (lastMove + TIMEBETWEENMOVES > System.currentTimeMillis()) {
-//            // spin waiter TODO improve
-//        }
-        lastMove = System.currentTimeMillis();
         Definitions.Direction direction = Definitions.Direction.values()[directionIndex];
         if (direction == Definitions.Direction.UP) y++;
         else if (direction == Definitions.Direction.LEFT) x--;
@@ -126,7 +122,6 @@ public class Player {
     public void resetProgramCards() {
         chosenProgramCards = new ArrayList<>();
         receivedProgramCards = new ArrayList<>();
-
     }
 
     public void addChosenProgramCard(ProgramCard card) {

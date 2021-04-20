@@ -27,6 +27,9 @@ public class RoboGame extends com.badlogic.gdx.Game {
 	boolean gameStarted;
 	boolean multiplayer;
 
+	long lastMove;
+	long WAIT_BETWEEN_MOVES = 500l; // milliseconds
+
 	// Declaration of screens
 	MainMenuScreen mainMenuScreen;
 	MultiplayerSetupScreen multiplayerSetupScreen;
@@ -63,6 +66,7 @@ public class RoboGame extends com.badlogic.gdx.Game {
 		WAIT_CONNECTION_DURATION = 5;
 		NUMBER_OF_PHASES = 5;
 		phaseNumber = 0;
+		lastMove = 0l;
 	}
 
 	@Override
@@ -70,7 +74,7 @@ public class RoboGame extends com.badlogic.gdx.Game {
 	}
 
 	public void launchGame() {
-//        addPlayer(new Player("Player 2", 8, 4)); // TODO For testing purposes, remove
+        addPlayer(new Player("Player 2", 8, 4)); // TODO For testing purposes, remove
 
 		gameActionScreen = new GameActionScreen(this, "exchange.tmx");
 		setScreen(gameActionScreen);
@@ -232,10 +236,15 @@ public class RoboGame extends com.badlogic.gdx.Game {
 	public void robotsMove() {
 		for (Player player : players) {
 			player.moveRobotByProgramCard(player.getProgramCard(phaseNumber));
+			while (System.currentTimeMillis() < lastMove + WAIT_BETWEEN_MOVES) {
+				// spin waiter
+			}
+			lastMove = System.currentTimeMillis();
+
 		}
-		if (currentActivity.hasTimedOut()) {
-			currentActivity = new Activity(Definitions.ActivityType.EXECUTE_PROGRAMCARDS_2, PROGRAMCARD_DURATION);
-		}
+//		if (currentActivity.hasTimedOut()) {
+//			currentActivity = new Activity(Definitions.ActivityType.EXECUTE_PROGRAMCARDS_2, PROGRAMCARD_DURATION);
+//		}
 	}
 
 	public void boardElementsMove() {
@@ -258,6 +267,7 @@ public class RoboGame extends com.badlogic.gdx.Game {
 	 * Deal the program cards
 	 */
 	public void dealProgramCards() {
+		programDeck.createDeck();
 		for (Player player : players) {
 			cards = new ArrayList<>(); // Create a small deck of cards for each player
 			cards.addAll(programDeck.draw(MAX_NUMBER_OF_CARDS - player.getDamage()));
