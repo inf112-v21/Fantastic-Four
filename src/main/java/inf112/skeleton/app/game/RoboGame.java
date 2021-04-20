@@ -40,6 +40,7 @@ public class RoboGame extends com.badlogic.gdx.Game {
 	MainMenuScreen mainMenuScreen;
 	MultiplayerSetupScreen multiplayerSetupScreen;
 	GameActionScreen gameActionScreen;
+	PlayersScreen playersScreen;
 	List<ProgramCard> cards;
 	/**
 	 * Duration of each program card execution in seconds
@@ -80,8 +81,6 @@ public class RoboGame extends com.badlogic.gdx.Game {
 	}
 
 	public void launchGame() {
-        addPlayer(new Player("Player 2", 8, 4)); // TODO For testing purposes, remove
-
 		gameActionScreen = new GameActionScreen(this, "exchange.tmx");
 		setScreen(gameActionScreen);
 		gameStarted = true;
@@ -95,6 +94,8 @@ public class RoboGame extends com.badlogic.gdx.Game {
 
     public void connectToHost(String serverIp, String name) {
         roboClient = new RoboRallyClient(this, serverIp, name);
+        playersScreen = new PlayersScreen(this);
+        setScreen(playersScreen);
     }
 
     public void startHost(String nickname) {

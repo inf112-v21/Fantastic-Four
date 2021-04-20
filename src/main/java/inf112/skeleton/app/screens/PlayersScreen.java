@@ -18,6 +18,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageTextButton.ImageTextButtonStyle;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
+import inf112.skeleton.app.assets.Player;
 import inf112.skeleton.app.game.RoboGame;
 
 public class PlayersScreen implements Screen {
@@ -30,25 +31,8 @@ public class PlayersScreen implements Screen {
 	ImageTextButton startButton, hostButton, playerButton, labelplayerButton;
 	ImageTextButtonStyle imageTextButtonStyle, playerButtonStyle, playersLabelStyle, hostButtonStyle;
 
-	// To use when multiplayer is working
-	// String host;
-	// ArrayList<Player> players;
-
-	// To delete host, player below:
-	String host = "Max";
-	ArrayList<String> players = new ArrayList<String>();
-
 	public PlayersScreen(RoboGame roboGame) {
 		this.roboGame = roboGame;
-		// players = roboGame.getPlayers();
-		// host = roboGame.host.getPlayerName();
-
-		// TO DELETE
-		players.add("Anna");
-		players.add("Hans");
-		players.add("Max");
-		players.add("Julia");
-		players.add("Stian");
 
 		Skin skin = new Skin();
 
@@ -164,34 +148,17 @@ public class PlayersScreen implements Screen {
 
 		int y = Gdx.app.getGraphics().getHeight() - 300;
 
-//TO use when multi is working
-		/*
-		 * for (Player p : players) { playerButton = new
-		 * ImageTextButton(p.getPlayerName(), imageTextButtonStyle2);
-		 * playerButton.setWidth(200); playerButton.setHeight(70);
-		 * stage.addActor(playerButton); playerButton.setPosition(300, y); if
-		 * (p.getPlayerName().equals(host)) { hostButton.setPosition(200, y);
-		 * startButton.setPosition(600, y);
-		 * 
-		 * } y-=80;
-		 * 
-		 * }
-		 */
+		for (Player p : roboGame.players) {
+			playerButton = new ImageTextButton(p.getPlayerName(), playerButtonStyle);
+		 	playerButton.setWidth(200); playerButton.setHeight(70);
+		   	stage.addActor(playerButton); playerButton.setPosition(300, y);
 
-		// To delete
-		for (String c : players) {
-			playerButton = new ImageTextButton(c, playerButtonStyle);
-			playerButton.setWidth(200);
-			playerButton.setHeight(70);
-			stage.addActor(playerButton);
-			playerButton.setPosition(300, y);
-			if (c.equals(host)) {
-				hostButton.setPosition(200, y);
-				startButton.setPosition(600, y);
+		   	if (p.equals(roboGame.host)) {
+		   		hostButton.setPosition(200, y);
+		   		startButton.setPosition(600, y);
+		   	}
 
-			}
-			y -= 80;
-
+		   	y-=80;
 		}
 
 		batch.end();

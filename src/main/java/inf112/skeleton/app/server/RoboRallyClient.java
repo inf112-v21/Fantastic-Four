@@ -84,7 +84,7 @@ public class RoboRallyClient extends Client {
         for (Player player : players) {
             if (!roboGame.players.contains(player)) {
                 roboGame.players.add(player);
-                System.out.println("[Client]  + Added Player to list: " + player.id + ". List now: " + roboGame.players);
+                System.out.println("[Client] + Added Player to list: " + player.id + ". List now: " + roboGame.players);
             }
 
             if (player.id == this.getID()) {
