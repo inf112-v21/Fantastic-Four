@@ -2,10 +2,11 @@ package inf112.skeleton.app.assets;
 
 import inf112.skeleton.app.assets.cards.ProgramCard;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Player {
+public class Player implements Serializable {
 
     private static final long TIMEBETWEENMOVES = 50;
     private final String playerName;
@@ -15,6 +16,8 @@ public class Player {
     private int life;
     public int x, y, lastX, lastY, archiveX, archiveY, directionIndex;
     private boolean powerDown;
+
+    public int id;
 
     public static final int MIN_NUMBER_OF_LIFE_TOKENS = 0;
     public static final int MAX_NUMBER_OF_LIFE_TOKENS = 3; // or 4 if 5 or more players
@@ -40,6 +43,14 @@ public class Player {
         lastX = -1;
         lastY = -1;
         chosenProgramCards = new ArrayList<>();
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getId() {
+        return this.id;
     }
 
     public void receiveProgramCardsToPick(List<ProgramCard> cards) {

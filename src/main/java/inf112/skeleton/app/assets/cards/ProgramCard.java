@@ -1,6 +1,8 @@
 package inf112.skeleton.app.assets.cards;
 
-public class ProgramCard {
+import java.io.Serializable;
+
+public class ProgramCard implements Serializable {
 
     private final ProgramCardType programCardType;
     private final int priorityNumber;

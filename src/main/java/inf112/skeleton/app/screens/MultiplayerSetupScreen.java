@@ -218,4 +218,9 @@ public class MultiplayerSetupScreen implements Screen {
 
 	}
 
+	public void setMetadata(String name, String ip) {
+		this.ipTextField.setText(ip);
+		this.nameTextField.setText(name);
+	}
+
 }
