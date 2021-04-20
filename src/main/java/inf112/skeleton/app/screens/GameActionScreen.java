@@ -57,7 +57,7 @@ public class GameActionScreen implements Screen {
 	final CardUI cardui;
 	final Stage otherButtonsStage;
 	final Stage startCardsStage;
-	final LinkedList<Integer> cardPositions;
+	LinkedList<Integer> cardPositions;
 	final LinkedList<ProgramCard> picked;
 	final LinkedList<ProgramCard> chosen;
 	ImageButton imageButton;
@@ -89,16 +89,20 @@ public class GameActionScreen implements Screen {
 
 		gameCamera.update();
 		uiCamera.update();
+		resetCardPositions();
+
+		// CardDeck
+		picked = new LinkedList<>();
+		chosen = new LinkedList<>();
+	}
+
+	public void resetCardPositions() {
 		cardPositions = new LinkedList<>();
 		cardPositions.add(65);
 		cardPositions.add(190);
 		cardPositions.add(315);
 		cardPositions.add(440);
 		cardPositions.add(565);
-
-		// CardDeck
-		picked = new LinkedList<>();
-		chosen = new LinkedList<>();
 	}
 
 	@Override
@@ -181,7 +185,7 @@ public class GameActionScreen implements Screen {
 				imageButton.addListener(new CardInputListener(imageButton, this, cardvalue, x, y, width, height, i));
 				i++;
 				startCardsStage.addActor(overlay);
-				pickedCards = new ArrayList<ImageButton>();
+				pickedCards = new ArrayList<>();
 				pickedCards.add(imageButton);
 			}
 

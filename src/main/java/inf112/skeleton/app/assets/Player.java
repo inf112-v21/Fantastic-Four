@@ -130,6 +130,12 @@ public class Player {
         return chosenProgramCards;
     }
 
+    public void resetProgramCards() {
+        chosenProgramCards = new ArrayList<>();
+        receivedProgramCards = new ArrayList<>();
+
+    }
+
     public void addChosenProgramCard(ProgramCard card) {
         System.out.println("Adding " + card.getProgramCardType().toString()); // TODO for debugging purposes
         chosenProgramCards.add(card);

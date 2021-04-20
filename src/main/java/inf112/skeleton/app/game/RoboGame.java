@@ -1,6 +1,5 @@
 package inf112.skeleton.app.game;
 
-import com.badlogic.gdx.scenes.scene2d.Stage;
 import inf112.skeleton.app.assets.Definitions;
 import inf112.skeleton.app.assets.Definitions.ActivityType;
 import inf112.skeleton.app.assets.Player;
@@ -159,28 +158,23 @@ public class RoboGame extends com.badlogic.gdx.Game {
 
 	// "Handle input"
 	private void arrangeCards() {
-
 		if (currentActivity.hasTimedOut()) {
 			gameActionScreen.clearCards();
-			dealCards();
+//			dealCards();
 
 			for (Player player : players) {
 				if (!player.hasChosenProgramCards()) {
 					System.out.println(player + " has not chosen program cards"); // TODO remove
 					List<ProgramCard> cards = player.getReceivedProgramCards();
-					while (cards.size() > 5)
+					while (cards.size() > 5) {
 						cards.remove(0);
+					}
 					System.out.println(cards); // TODO remove
 					player.receiveChosenProgramCards(cards);
-
 				}
-
-			}			
-
+			}
+			currentActivity = new Activity(Definitions.ActivityType.COMPLETE_REGISTERS, PROGRAMCARD_DURATION);
 		}
-
-
-
 	}
 
 	private void pickBoard() {
@@ -227,8 +221,10 @@ public class RoboGame extends com.badlogic.gdx.Game {
 				announceWinner();
 			phaseNumber++;
 		} else {
+			// Reset everything for the next set of phases (probably wrong term)
+			for (Player player : players) player.resetProgramCards();
+			gameActionScreen.resetCardPositions();
 			phaseNumber = 0;
-//            gameActionScreen.hideCards();
 			currentActivity = new Activity(ActivityType.DEAL_CARDS, STANDARD_DURATION);
 		}
 	}
@@ -274,11 +270,9 @@ public class RoboGame extends com.badlogic.gdx.Game {
 			cards = new ArrayList<>(); // Create a small deck of cards for each player
 			cards.addAll(programDeck.draw(MAX_NUMBER_OF_CARDS - player.getDamage()));
 			player.receiveProgramCardsToPick(cards); // Each player receives it's cards
+			System.out.print(player.getPlayerName() + " receives ");
+			for (ProgramCard c : cards) System.out.print(c.getProgramCardType() + " ");
 			System.out.println();
-			for (ProgramCard c : cards) {
-				System.out.println(c.getProgramCardType());
-			}
-
 		}
 	}
 }
