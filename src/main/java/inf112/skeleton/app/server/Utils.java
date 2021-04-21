@@ -14,6 +14,7 @@ public class Utils {
                         System.out.println("[Port Utils] Successfully mapped port: " + tcpPort);
                     }
                 }
+                System.out.println("[Port Utils] UPnP not available on this network");
             }
         } catch (Throwable t) {
             System.err.println("[Port Utils] Network error: " + t);
