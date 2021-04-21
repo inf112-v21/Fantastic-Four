@@ -52,7 +52,6 @@ public class RoboRallyServer extends Server {
 
     public void startServer(String nickname) {
         new Thread(this).start();
-        this.start();
 
         // ======== Try-catch for lower crash-rates when trying to start a server. ========
 
@@ -60,11 +59,14 @@ public class RoboRallyServer extends Server {
             this.bind(udpPort, tcpPort);
             Utils.openPort(udpPort, tcpPort);
             System.out.println("[Server] Started server at port: " + udpPort + ". Send this IP to your friends: " + InetAddress.getLocalHost().getHostAddress());
-            roboGame.launchGame();
         } catch (IOException e) {
             System.out.println("[Server] Could not bind to port " + udpPort + ". Something else is occupying it, close all other applications that utilize the same port before trying again.");
             //e.printStackTrace();
         }
+
+         // ======= Start server =======
+
+        this.start();
 
         // ======== Listener for server/client actions ========
 
