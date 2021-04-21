@@ -104,9 +104,7 @@ public class PlayersScreen implements Screen {
 		startButton.addListener(new ChangeListener() {
 			@Override
 			public void changed(ChangeEvent changeEvent, Actor actor) {
-				Gdx.app.exit();
-				// TO DO SOMETHING
-
+				roboGame.launchGame();
 			}
 		});
 
