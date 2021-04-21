@@ -35,6 +35,7 @@ public class RoboRallyServer extends Server {
     final RoboGame roboGame;
 
     public RoboRallyServer(RoboGame roboGame) {
+        super(4096, 4096);
 
         // ======== Assign roboGame for easy access throughout the code ========
 

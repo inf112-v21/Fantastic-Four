@@ -34,7 +34,7 @@ public class RoboRallyClient extends Client {
 
         // Connect to lobby
         try {
-            this.connect(10000, ip, udpPort, tcpPort);
+            this.connect(5000, ip, udpPort, tcpPort);
         } catch (IOException e) {
             System.out.println("Error connecting to server " + e);
         }
