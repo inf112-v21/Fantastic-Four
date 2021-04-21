@@ -135,16 +135,19 @@ public class GameActionScreen implements Screen {
 		playerTextures = new HashMap<>();
 		int i = 0;
 		for (Player player : roboGame.getPlayers()) {
-			System.out.println(player);
-			TiledMapTileLayer.Cell playerCell = new TiledMapTileLayer.Cell();
-			playerCell.setTile(new StaticTiledMapTile(textureRegions[i][player.directionIndex]));
-			playerTextures.put(player, playerCell);
+			assignPlayerTexture(textureRegions[i][player.directionIndex], player);
 			i++;
 		}
 
 		showDamageTokens();
 		showOtherButtons();
+	}
 
+	private void assignPlayerTexture(TextureRegion textureRegion, Player player) {
+		System.out.println(player);
+		TiledMapTileLayer.Cell playerCell = new TiledMapTileLayer.Cell();
+		playerCell.setTile(new StaticTiledMapTile(textureRegion));
+		playerTextures.put(player, playerCell);
 	}
 
 	public void showCards() {
