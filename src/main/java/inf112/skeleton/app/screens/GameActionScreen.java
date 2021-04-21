@@ -2,6 +2,7 @@ package inf112.skeleton.app.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputMultiplexer;
+import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL30;
@@ -56,7 +57,7 @@ public class GameActionScreen implements Screen {
 	final Stage damageTokensStage;
 	final CardUI cardui;
 	final Stage otherButtonsStage;
-	final Stage startCardsStage;
+	final Stage startCardsStage, powerButtonsStage;
 	LinkedList<Integer> cardPositions;
 	LinkedList<ProgramCard> picked;
 	final LinkedList<ProgramCard> chosen;
@@ -69,6 +70,7 @@ public class GameActionScreen implements Screen {
 		batch = new SpriteBatch();
 		cardui = new CardUI();
 		startCardsStage = new Stage();
+		powerButtonsStage = new Stage();
 		width = Gdx.graphics.getWidth();
 		height = Gdx.graphics.getHeight();
 
@@ -268,7 +270,7 @@ public class GameActionScreen implements Screen {
 			public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
 				powerDownON.setPosition(powerDown.getX(), powerDown.getY());
 				powerDownON.setSize(150, 150);
-				startCardsStage.addActor(powerDownON);
+				powerButtonsStage.addActor(powerDownON);
 
 			}
 
@@ -283,7 +285,7 @@ public class GameActionScreen implements Screen {
 			public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
 				lockCardsON.setPosition(lockCards.getX(), lockCards.getY());
 				lockCardsON.setSize(150, 150);
-				startCardsStage.addActor(lockCardsON);
+				powerButtonsStage.addActor(lockCardsON);
 
 			}
 
@@ -292,8 +294,8 @@ public class GameActionScreen implements Screen {
 			}
 		});
 		
-		startCardsStage.addActor(lockCards);
-		startCardsStage.addActor(powerDown);
+		powerButtonsStage.addActor(lockCards);
+		powerButtonsStage.addActor(powerDown);
 
 		// === LifeTokens ===
 		Texture lifeTexture = new Texture(Gdx.files.internal("src/main/resources/greenLife.png"));
@@ -352,8 +354,15 @@ public class GameActionScreen implements Screen {
 
 		startCardsStage.act();
 		startCardsStage.draw();
-
-		Gdx.input.setInputProcessor(startCardsStage);
+		powerButtonsStage.act();
+		powerButtonsStage.draw();
+		
+		//Handle 2 x input 
+		InputMultiplexer inputMultiplexer = new InputMultiplexer();
+		inputMultiplexer.addProcessor(startCardsStage);
+		inputMultiplexer.addProcessor(powerButtonsStage);
+		Gdx.input.setInputProcessor(inputMultiplexer);
+		
 
 		// RenderCards
 		Gdx.gl.glViewport(-70, 0, Gdx.graphics.getWidth(), 700);
