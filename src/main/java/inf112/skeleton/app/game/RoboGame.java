@@ -8,24 +8,27 @@ import inf112.skeleton.app.assets.cards.ProgramDeck;
 import inf112.skeleton.app.screens.*;
 import inf112.skeleton.app.server.RoboRallyClient;
 import inf112.skeleton.app.server.RoboRallyServer;
+import org.lwjgl.system.CallbackI;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Stack;
 
 public class RoboGame extends com.badlogic.gdx.Game {
 
     private final ProgramDeck programDeck;
     final int MAX_NUMBER_OF_CARDS = 9;
 
-	RoboRallyClient roboClient;
-	RoboRallyServer roboServer;
+	public RoboRallyClient roboClient;
+	public RoboRallyServer roboServer;
 
     // Server metadata
     public String ip;
     public Player host;
     public Player localPlayer;
     public List<Player> players;
+    public Stack<Player> turns;
 
     Activity currentActivity;
     ActivityType lastActivityType;
@@ -82,6 +85,12 @@ public class RoboGame extends com.badlogic.gdx.Game {
 
 	public void launchGame() {
 		gameActionScreen = new GameActionScreen(this, "exchange.tmx");
+
+		turns = new Stack<>();
+
+		for (Player player : players) {
+			turns.push(player);
+		}
 		setScreen(gameActionScreen);
 		gameStarted = true;
 	}
@@ -103,9 +112,12 @@ public class RoboGame extends com.badlogic.gdx.Game {
         roboServer.startServer(nickname);
     }
 
-    public void startGame() {
+    public void playerAction(List<ProgramCard> cards, Player player) {
+		player.receiveChosenProgramCards(cards);
 
-    }
+		turns.pop();
+		turns.push(player);
+	}
 
 	public void addPlayer(Player player) {
 		players.add(player);

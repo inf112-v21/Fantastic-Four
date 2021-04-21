@@ -12,6 +12,7 @@ import inf112.skeleton.app.game.RoboGame;
 import inf112.skeleton.app.server.packets.*;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class RoboRallyClient extends Client {
@@ -59,6 +60,19 @@ public class RoboRallyClient extends Client {
                     Connect connect = (Connect) object;
                     handleInit(connect.getLobbyName(), connect.getIp());
                 }
+
+                else if (object instanceof PlayerAction) {
+                    System.out.println("[Client] Player Action Received");
+                    PlayerAction playerAction = (PlayerAction) object;
+                    roboGame.playerAction(playerAction.cards, playerAction.player);
+                }
+
+                else if (object instanceof LobbyUpdate) {
+                    LobbyUpdate lobbyUpdate = (LobbyUpdate) object;
+                    if (lobbyUpdate.start) {
+                        roboGame.launchGame();
+                    }
+                }
             }
         }));
     }
@@ -70,6 +84,8 @@ public class RoboRallyClient extends Client {
         kryo.register(PlayerAction.class, new JavaSerializer());
         kryo.register(Confirmation.class, new JavaSerializer());
         kryo.register(ConfigureClient.class, new JavaSerializer());
+        kryo.register(PlayerAction.class, new JavaSerializer());
+        kryo.register(LobbyUpdate.class, new JavaSerializer());
     }
 
     public void setupClient(Object object) {
@@ -82,7 +98,14 @@ public class RoboRallyClient extends Client {
 
     private void handlePlayersUpdate(List<Player> players) {
         for (Player player : players) {
-            if (!roboGame.players.contains(player)) {
+            boolean exists = false;
+
+            for (Player listedPlayer : roboGame.players) {
+                if (listedPlayer.getId() == player.getId()) {
+                    exists = true;
+                }
+            }
+            if (!exists) {
                 roboGame.players.add(player);
                 System.out.println("[Client] + Added Player to list: " + player.id + ". List now: " + roboGame.players);
             }
@@ -99,19 +122,18 @@ public class RoboRallyClient extends Client {
         }
     }
 
-    public void handleAction(Player player, List<ProgramCard> cards) {
+    public void startAsHost() {
+        LobbyUpdate lobbyUpdate = new LobbyUpdate(true, roboGame.players.size());
 
+        sendTCP(lobbyUpdate);
     }
 
-    public void handleSceneChange(String scene) {
-
+    public void sendPlayerAction(Player player, List<ProgramCard> cards) {
+        PlayerAction playerAction = new PlayerAction(cards, player);
+        sendTCP(playerAction);
     }
 
     public void handleInit(String name, String ip) {
-
-    }
-
-    public void addPlayer() {
 
     }
 }

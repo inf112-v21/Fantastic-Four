@@ -104,7 +104,7 @@ public class PlayersScreen implements Screen {
 		startButton.addListener(new ChangeListener() {
 			@Override
 			public void changed(ChangeEvent changeEvent, Actor actor) {
-				roboGame.launchGame();
+				roboGame.roboClient.startAsHost();
 			}
 		});
 

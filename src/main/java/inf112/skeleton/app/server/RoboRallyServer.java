@@ -1,11 +1,13 @@
 package inf112.skeleton.app.server;
 
+import com.badlogic.gdx.Gdx;
 import com.esotericsoftware.kryo.Kryo;
 import com.esotericsoftware.kryo.serializers.JavaSerializer;
 import com.esotericsoftware.kryonet.Connection;
 import com.esotericsoftware.kryonet.Listener;
 import com.esotericsoftware.kryonet.Server;
 import inf112.skeleton.app.assets.Player;
+import inf112.skeleton.app.assets.cards.ProgramCard;
 import inf112.skeleton.app.game.RoboGame;
 import inf112.skeleton.app.server.packets.*;
 import org.lwjgl.system.CallbackI;
@@ -87,6 +89,15 @@ public class RoboRallyServer extends Server {
                     System.out.println("[Server] Client Configuration received");
                     handleConfigureClient(connection, packet);
                 }
+
+                else if (packet instanceof PlayerAction) {
+                    System.out.println("[Client] Server Action Received");
+                    Gdx.app.postRunnable(() -> handlePlayerAction(packet));
+                }
+
+                else if (packet instanceof LobbyUpdate) {
+                    startGame(packet);
+                }
             }
         });
 
@@ -106,6 +117,8 @@ public class RoboRallyServer extends Server {
         kryo.register(PlayerAction.class, new JavaSerializer());
         kryo.register(Confirmation.class, new JavaSerializer());
         kryo.register(ConfigureClient.class, new JavaSerializer());
+        kryo.register(PlayerAction.class, new JavaSerializer());
+        kryo.register(LobbyUpdate.class, new JavaSerializer());
     }
 
     /**
@@ -141,11 +154,16 @@ public class RoboRallyServer extends Server {
         sendToAllTCP(new AddPlayer(players));
     }
 
-    public void startGame() {
+    public void handlePlayerAction(Object packet) {
+        sendToAllTCP(packet);
+    }
 
+    public void startGame(Object packet) {
+        sendToAllTCP(packet);
     }
 
     public void shutdown() {
         Utils.closePorts(udpPort, tcpPort);
+        this.close();
     }
 }
