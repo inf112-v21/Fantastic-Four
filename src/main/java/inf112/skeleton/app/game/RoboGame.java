@@ -73,7 +73,7 @@ public class RoboGame extends com.badlogic.gdx.Game {
 		gameStarted = false;
 		PROGRAMCARD_DURATION = 1;
 		STANDARD_DURATION = 1;
-		WAIT_CONNECTION_DURATION = 5;
+		WAIT_CONNECTION_DURATION = 300;
 		NUMBER_OF_PHASES = 5;
 		phaseNumber = 0;
 		lastMoveTimestamp = 0l;
@@ -194,6 +194,9 @@ public class RoboGame extends com.badlogic.gdx.Game {
 					while (alreadyPicked.size() < 5) alreadyPicked.add(remainingCardsToPickFrom.remove(0));
 					player.receiveChosenProgramCards(alreadyPicked);
 				}
+				if (multiplayer) {
+					roboClient.sendPlayerAction(player, player.getChosenProgramCards());
+				}
 			}
 			currentActivity = new Activity(Definitions.ActivityType.COMPLETE_REGISTERS, PROGRAMCARD_DURATION);
 		}
@@ -207,14 +210,13 @@ public class RoboGame extends com.badlogic.gdx.Game {
 
 	private void waitForConnections() {
 		if (currentActivity.hasTimedOut()) {
-			// TODO decide if one should add an AI player if noone has connected
 			currentActivity = new Activity(Definitions.ActivityType.PICK_BOARD, STANDARD_DURATION);
 		}
 	}
 
 	private void checkMultiplayer() {
 		if (gameStarted) {
-			if (multiplayer) currentActivity = new Activity(Definitions.ActivityType.WAIT_FOR_CONNECTIONS, WAIT_CONNECTION_DURATION);
+			if (multiplayer) currentActivity = new Activity(Definitions.ActivityType.WAIT_FOR_CONNECTIONS, -1);
 			else currentActivity = new Activity(Definitions.ActivityType.PICK_BOARD, STANDARD_DURATION);
 		}
 	}

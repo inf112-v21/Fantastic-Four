@@ -43,7 +43,7 @@ public class GameActionScreen implements Screen {
 	InputMultiplexer inputMultiplexer;
 	OrthogonalTiledMapRenderer renderer;
 	OrthographicCamera camera;
-	Map<Player, TiledMapTileLayer.Cell> playerTextures;
+	public Map<Player, TiledMapTileLayer.Cell> playerTextures;
 	final String mapName;
 	final RoboGame roboGame;
 	OrthographicCamera gameCamera, uiCamera;
@@ -94,7 +94,6 @@ public class GameActionScreen implements Screen {
 		resetCardPositions();
 
 		// CardDeck
-//		picked = new LinkedList<>();
 		chosen = new LinkedList<>();
 	}
 
@@ -109,9 +108,8 @@ public class GameActionScreen implements Screen {
 
 	@Override
 	public void show() {
-
 		background = new Texture(Gdx.files.internal("backgroundui.png"));
-		batch = new SpriteBatch();
+//		batch = new SpriteBatch();
 		font = new BitmapFont();
 		font.setColor(Color.RED);
 
@@ -202,11 +200,10 @@ public class GameActionScreen implements Screen {
 
 	public void hideCards() {
 		startCardsStage.dispose();
-		
 	}
+
 	public void clearCards() {
 		startCardsStage.clear();
-		System.out.println("wyczyszczone glowne");
 		pickedCardsStage.clear();
 	}
 

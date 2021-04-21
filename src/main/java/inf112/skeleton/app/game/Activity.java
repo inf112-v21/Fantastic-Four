@@ -30,10 +30,12 @@ public class Activity {
      * @return True if the current activity has timed out
      */
     public boolean hasTimedOut() {
-        long timeDiff = ((startingTime + duration * MILLIS_TO_SECONDS) - System.currentTimeMillis()) / 1000;
-        if (lastTimeDiff != timeDiff) {
-            System.out.println(timeDiff);
-            lastTimeDiff = timeDiff;
+        if (duration > 0) {
+            long timeDiff = ((startingTime + duration * MILLIS_TO_SECONDS) - System.currentTimeMillis()) / 1000;
+            if (lastTimeDiff != timeDiff) {
+                System.out.println(timeDiff);
+                lastTimeDiff = timeDiff;
+            }
         }
         return duration > 0 && (startingTime + duration * MILLIS_TO_SECONDS) <= System.currentTimeMillis();
     }
