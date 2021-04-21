@@ -33,7 +33,7 @@ public class RoboGame extends com.badlogic.gdx.Game {
 	boolean gameStarted;
 	boolean multiplayer;
 
-	long lastMove;
+	long lastMoveTimestamp;
 	long WAIT_BETWEEN_MOVES = 500l; // milliseconds
 
 	// Declaration of screens
@@ -73,7 +73,7 @@ public class RoboGame extends com.badlogic.gdx.Game {
 		WAIT_CONNECTION_DURATION = 5;
 		NUMBER_OF_PHASES = 5;
 		phaseNumber = 0;
-		lastMove = 0l;
+		lastMoveTimestamp = 0l;
 	}
 
 	@Override
@@ -246,15 +246,11 @@ public class RoboGame extends com.badlogic.gdx.Game {
 	public void robotsMove() {
 		for (Player player : players) {
 			player.moveRobotByProgramCard(player.getProgramCard(phaseNumber));
-			while (System.currentTimeMillis() < lastMove + WAIT_BETWEEN_MOVES) {
+			while (System.currentTimeMillis() < lastMoveTimestamp + WAIT_BETWEEN_MOVES) {
 				// spin waiter
 			}
-			lastMove = System.currentTimeMillis();
-
+			lastMoveTimestamp = System.currentTimeMillis();
 		}
-//		if (currentActivity.hasTimedOut()) {
-//			currentActivity = new Activity(Definitions.ActivityType.EXECUTE_PROGRAMCARDS_2, PROGRAMCARD_DURATION);
-//		}
 	}
 
 	public void boardElementsMove() {
