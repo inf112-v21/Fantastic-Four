@@ -11,6 +11,7 @@ public class Activity {
     final long duration;
     final Definitions.ActivityType currentType;
     final int MILLIS_TO_SECONDS = 1000;
+    long lastTimeDiff;
 
     /**
      *
@@ -21,6 +22,7 @@ public class Activity {
         currentType = activity;
         startingTime = System.currentTimeMillis();
         this.duration = duration;
+        lastTimeDiff = startingTime;
     }
 
     /**
@@ -28,6 +30,11 @@ public class Activity {
      * @return True if the current activity has timed out
      */
     public boolean hasTimedOut() {
+        long timeDiff = ((startingTime + duration * MILLIS_TO_SECONDS) - System.currentTimeMillis()) / 1000;
+        if (lastTimeDiff != timeDiff) {
+            System.out.println(timeDiff);
+            lastTimeDiff = timeDiff;
+        }
         return duration > 0 && (startingTime + duration * MILLIS_TO_SECONDS) <= System.currentTimeMillis();
     }
 }
