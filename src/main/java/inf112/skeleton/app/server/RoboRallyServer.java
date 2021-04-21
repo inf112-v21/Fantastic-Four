@@ -51,6 +51,7 @@ public class RoboRallyServer extends Server {
     }
 
     public void startServer(String nickname) {
+        new Thread(this).start();
         this.start();
 
         // ======== Try-catch for lower crash-rates when trying to start a server. ========
