@@ -191,7 +191,11 @@ public class RoboGame extends com.badlogic.gdx.Game {
 					List<ProgramCard> remainingCardsToPickFrom = new ArrayList<>(player.getReceivedProgramCards());
 					List<ProgramCard> alreadyPicked = new ArrayList<>(player.getChosenProgramCards());
 					for (ProgramCard p : alreadyPicked) remainingCardsToPickFrom.remove(p);
-					while (alreadyPicked.size() < 5) alreadyPicked.add(remainingCardsToPickFrom.remove(0));
+					int i = 0;
+					while (alreadyPicked.size() < 5) {
+						alreadyPicked.add(remainingCardsToPickFrom.get(i));
+						i++;
+					}
 					player.receiveChosenProgramCards(alreadyPicked);
 				}
 				if (multiplayer) {
@@ -294,12 +298,21 @@ public class RoboGame extends com.badlogic.gdx.Game {
 	public void dealProgramCards() {
 		// todo if multiplayer: if host: deal. else:receveive. else deal
 		programDeck.createDeck();
-		for (Player player : players) {
-			cards = new ArrayList<>(programDeck.draw(MAX_NUMBER_OF_CARDS - player.getDamage())); // Create a small deck of cards for each player
-			player.receiveProgramCardsToPick(cards); // Each player receives it's cards
-			System.out.print(player.getPlayerName() + " receives ");
+		if (multiplayer) {
+			cards = new ArrayList<>(programDeck.draw(MAX_NUMBER_OF_CARDS - localPlayer.getDamage())); // Create a small deck of cards for each player
+			localPlayer.receiveProgramCardsToPick(cards); // Each player receives it's cards
+			System.out.print(localPlayer.getPlayerName() + " receives ");
 			for (ProgramCard c : cards) System.out.print(c.getProgramCardType() + " ");
 			System.out.println();
+		}
+		else {
+			for (Player player : players) {
+				cards = new ArrayList<>(programDeck.draw(MAX_NUMBER_OF_CARDS - player.getDamage())); // Create a small deck of cards for each player
+				player.receiveProgramCardsToPick(cards); // Each player receives it's cards
+				System.out.print(player.getPlayerName() + " receives ");
+				for (ProgramCard c : cards) System.out.print(c.getProgramCardType() + " ");
+				System.out.println();
+			}
 		}
 	}
 }
