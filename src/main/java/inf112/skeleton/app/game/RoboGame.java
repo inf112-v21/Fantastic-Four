@@ -115,6 +115,8 @@ public class RoboGame extends com.badlogic.gdx.Game {
     }
 
     public void playerAction(List<ProgramCard> cards, Player player) {
+		System.out.println("playerAction for " + player.getPlayerName() + " (id " + player.id + ") " + cards);
+
 		for (Player p : players) {
 			if (p.id == player.id) {
 				System.out.println("player id " + p.id + " received " + cards);
