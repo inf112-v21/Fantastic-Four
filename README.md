@@ -5,6 +5,13 @@ This project uses:
 *   JUnit 4.11
 *   Maven
 
+### For hosting multiplayer games online
+- Log in to your router 
+- Open port `62210` for both TCP and UDP and forward the traffic to your server's IP address
+- Get your router's public IP (for example from 
+[Google](https://www.google.com/search?q=what+is+my+ip)), and send that IP to your friends for connecting.
+  (The internal IP can be used locally without port forwarding)
+
 
 ### macOS and Linux
 1. Open cmd `Ctrl+Alt+T`
