@@ -61,6 +61,7 @@ public class RoboGame extends com.badlogic.gdx.Game {
 
 	private final long NUMBER_OF_PHASES;
 	int phaseNumber;
+	int numPlayersCompletedPickingCards;
 
 	public RoboGame() {
 		programDeck = new ProgramDeck();
@@ -74,6 +75,7 @@ public class RoboGame extends com.badlogic.gdx.Game {
 		STANDARD_DURATION = 1;
 		NUMBER_OF_PHASES = 5;
 		phaseNumber = 0;
+		numPlayersCompletedPickingCards = 0;
 		lastMoveTimestamp = 0L;
 		multiplayerReadyToStartGame = new AtomicBoolean(false);
 	}
@@ -117,10 +119,12 @@ public class RoboGame extends com.badlogic.gdx.Game {
 			if (p.id == player.id) {
 				System.out.println("player id " + p.id + " received " + cards);
 				p.receiveChosenProgramCards(cards);
+				numPlayersCompletedPickingCards++;
 			}
 		}
-		if (player.id == localPlayer.id) {
+		if (numPlayersCompletedPickingCards == players.size()) {
 			currentActivity = new Activity(Definitions.ActivityType.COMPLETE_REGISTERS, PROGRAMCARD_DURATION);
+			numPlayersCompletedPickingCards = 0;
 		}
 		turns.pop();
 		turns.push(player);
