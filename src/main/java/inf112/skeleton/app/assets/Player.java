@@ -105,16 +105,24 @@ public class Player implements Serializable {
         directionIndex += moveAndRotate[1];
         directionIndex %= Definitions.Direction.values().length;
         while (directionIndex < 0) directionIndex += Definitions.Direction.values().length;
-
-        for (int step = 0; step < moveAndRotate[0]; step++) moveOneStep();
+        if (moveAndRotate[0] < 0) moveOneStep(true);
+        else for (int step = 0; step < moveAndRotate[0]; step++) moveOneStep(false);
     }
 
-    public void moveOneStep() {
+    public void moveOneStep(boolean reverse) {
         Definitions.Direction direction = Definitions.Direction.values()[directionIndex];
-        if (direction == Definitions.Direction.UP) y++;
-        else if (direction == Definitions.Direction.LEFT) x--;
-        else if (direction == Definitions.Direction.DOWN) y--;
-        else x++;
+        if (reverse) {
+            if (direction == Definitions.Direction.UP) y--;
+            else if (direction == Definitions.Direction.LEFT) x++;
+            else if (direction == Definitions.Direction.DOWN) y++;
+            else x--;
+        }
+        else {
+            if (direction == Definitions.Direction.UP) y++;
+            else if (direction == Definitions.Direction.LEFT) x--;
+            else if (direction == Definitions.Direction.DOWN) y--;
+            else x++;
+        }
     }
 
     public List<ProgramCard> getReceivedProgramCards() {
