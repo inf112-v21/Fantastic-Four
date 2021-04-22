@@ -150,13 +150,8 @@ public class GameActionScreen implements Screen {
 	}
 
 	public void showCards() {
-		programCardsToChooseFrom = roboGame.localPlayer.getReceivedProgramCards();// TODO drawCard and cardNames are not
-																					// used, picked is used but can be
-																					// changed
-		picked = new LinkedList<>();
-
-		picked.addAll(programCardsToChooseFrom);
-
+		picked = new LinkedList<>(roboGame.localPlayer.getReceivedProgramCards());
+		System.out.println(picked);
 		int xStart = 800;
 		int yStart = 295;
 		int width = 120;
@@ -173,6 +168,8 @@ public class GameActionScreen implements Screen {
 		label1Style.fontColor = Color.RED;
 
 		int index = 0;
+		System.out.println("local player: " + roboGame.localPlayer);
+		System.out.println("local player received program cards: " + roboGame.localPlayer.getReceivedProgramCards());
 		for (int x = xStart; x < xStart + 3 * deltaW; x += deltaW) {
 			for (int y = yStart; y < yStart + 3 * deltaH; y += deltaH) {
 				ProgramCard currentCard = roboGame.localPlayer.getReceivedProgramCards().get(index);
@@ -192,9 +189,7 @@ public class GameActionScreen implements Screen {
 				pickedCards = new ArrayList<>();
 				pickedCards.add(imageButton);
 			}
-
 		}
-
 	}
 
 	public void hideCards() {
