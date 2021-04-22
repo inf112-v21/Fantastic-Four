@@ -14,6 +14,7 @@ import inf112.skeleton.app.server.packets.*;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 public class RoboRallyClient extends Client {
     String nickname;
@@ -23,7 +24,7 @@ public class RoboRallyClient extends Client {
     static final int udpPort = 62210;
     static final int tcpPort = 62210;
 
-    public RoboRallyClient(RoboGame roboGame, String ip, String username) {
+    public RoboRallyClient(RoboGame roboGame, String ip, String username, AtomicBoolean multiplayerReadyToStartGame) {
         // Start the client
         new Thread(this).start();
         this.start();
@@ -71,7 +72,8 @@ public class RoboRallyClient extends Client {
                 else if (object instanceof LobbyUpdate) {
                     LobbyUpdate lobbyUpdate = (LobbyUpdate) object;
                     if (lobbyUpdate.start) {
-                        roboGame.launchGame();
+                        multiplayerReadyToStartGame.set(true);
+//                        roboGame.launchGame();
                     }
                 }
             }
@@ -124,6 +126,7 @@ public class RoboRallyClient extends Client {
     }
 
     public void startAsHost() {
+
         LobbyUpdate lobbyUpdate = new LobbyUpdate(true, roboGame.players.size());
 
         sendTCP(lobbyUpdate);

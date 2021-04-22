@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Stack;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 public class RoboGame extends com.badlogic.gdx.Game {
 
@@ -29,6 +30,7 @@ public class RoboGame extends com.badlogic.gdx.Game {
     public Player localPlayer;
     public List<Player> players;
     public Stack<Player> turns;
+    public AtomicBoolean multiplayerReadyToStartGame;
 
     Activity currentActivity;
     ActivityType lastActivityType;
@@ -77,6 +79,7 @@ public class RoboGame extends com.badlogic.gdx.Game {
 		NUMBER_OF_PHASES = 5;
 		phaseNumber = 0;
 		lastMoveTimestamp = 0l;
+		multiplayerReadyToStartGame = new AtomicBoolean(false);
 	}
 
 	@Override
@@ -96,13 +99,14 @@ public class RoboGame extends com.badlogic.gdx.Game {
 	}
 
 	public void initiateMultiplayer() {
+		currentActivity = new Activity(Definitions.ActivityType.WAIT_FOR_CONNECTIONS, -1);
 		multiplayerSetupScreen = new MultiplayerSetupScreen(this);
 		setScreen(multiplayerSetupScreen);
 		multiplayer = true;
 	}
 
     public void connectToHost(String serverIp, String name) {
-        roboClient = new RoboRallyClient(this, serverIp, name);
+        roboClient = new RoboRallyClient(this, serverIp, name, multiplayerReadyToStartGame);
         playersScreen = new PlayersScreen(this);
         setScreen(playersScreen);
     }
@@ -209,6 +213,11 @@ public class RoboGame extends com.badlogic.gdx.Game {
 	}
 
 	private void waitForConnections() {
+		if (multiplayerReadyToStartGame.get()) {
+			launchGame();
+			multiplayerReadyToStartGame.set(false);
+			currentActivity = new Activity(Definitions.ActivityType.PICK_BOARD, STANDARD_DURATION);
+		}
 		if (currentActivity.hasTimedOut()) {
 			currentActivity = new Activity(Definitions.ActivityType.PICK_BOARD, STANDARD_DURATION);
 		}
