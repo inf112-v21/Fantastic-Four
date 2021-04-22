@@ -207,7 +207,6 @@ public class RoboGame extends com.badlogic.gdx.Game {
 			}
 			if (numPlayersCompletedPickingCards == players.size()) {
 				currentActivity = new Activity(Definitions.ActivityType.COMPLETE_REGISTERS, PROGRAMCARD_DURATION);
-				sentCards = false;
 			}
 		}
 		else if (currentActivity.hasTimedOut()) {
@@ -264,6 +263,7 @@ public class RoboGame extends com.badlogic.gdx.Game {
 	}
 
 	public void completeRegisters() {
+		sentCards = false;
 		if (phaseNumber < NUMBER_OF_PHASES) {
 			revealCards();
 			robotsMove();
@@ -275,7 +275,9 @@ public class RoboGame extends com.badlogic.gdx.Game {
 		} else {
 			// Reset everything for the next set of phases (probably wrong term)
 			for (Player player : players) player.resetProgramCards();
+			localPlayer.resetProgramCards();
 			gameActionScreen.resetCardPositions();
+			gameActionScreen.clearCards();
 			phaseNumber = 0;
 			currentActivity = new Activity(ActivityType.DEAL_CARDS, STANDARD_DURATION);
 		}
