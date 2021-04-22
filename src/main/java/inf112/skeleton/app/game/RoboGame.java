@@ -192,6 +192,10 @@ public class RoboGame extends com.badlogic.gdx.Game {
 
 	// "Handle input"
 	private void arrangeCards() {
+		if (multiplayer && localPlayer.getChosenProgramCards().size() == 5) {
+			roboClient.sendPlayerAction(localPlayer, localPlayer.getChosenProgramCards());
+			return;
+		}
 		if (currentActivity.hasTimedOut()) {
 			gameActionScreen.clearCards();
 			for (Player player : players) {
@@ -205,9 +209,6 @@ public class RoboGame extends com.badlogic.gdx.Game {
 						i++;
 					}
 					player.receiveChosenProgramCards(alreadyPicked);
-				}
-				if (multiplayer) {
-					roboClient.sendPlayerAction(player, player.getChosenProgramCards());
 				}
 			}
 			if (!multiplayer) {
