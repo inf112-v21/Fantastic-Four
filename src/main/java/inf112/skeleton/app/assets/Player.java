@@ -39,15 +39,6 @@ public class Player implements Serializable {
         lastY = -1;
         chosenProgramCards = new ArrayList<>();
         receivedProgramCards = new ArrayList<>();
-//        receivedProgramCards.add(new ProgramCard(ProgramCard.ProgramCardType.MOVE3, 3));
-//        receivedProgramCards.add(new ProgramCard(ProgramCard.ProgramCardType.MOVE3, 3));
-//        receivedProgramCards.add(new ProgramCard(ProgramCard.ProgramCardType.MOVE3, 3));
-//        receivedProgramCards.add(new ProgramCard(ProgramCard.ProgramCardType.MOVE3, 3));
-//        receivedProgramCards.add(new ProgramCard(ProgramCard.ProgramCardType.MOVE3, 3));
-//        receivedProgramCards.add(new ProgramCard(ProgramCard.ProgramCardType.MOVE3, 3));
-//        receivedProgramCards.add(new ProgramCard(ProgramCard.ProgramCardType.MOVE3, 3));
-//        receivedProgramCards.add(new ProgramCard(ProgramCard.ProgramCardType.MOVE3, 3));
-//        receivedProgramCards.add(new ProgramCard(ProgramCard.ProgramCardType.MOVE3, 3));
     }
 
     public void setId(int id) {

@@ -113,10 +113,18 @@ public class RoboGame extends com.badlogic.gdx.Game {
     }
 
     public void playerAction(List<ProgramCard> cards, Player player) {
-		player.receiveChosenProgramCards(cards);
-
+		for (Player p : players) {
+			if (p.id == player.id) {
+				System.out.println("player id " + p.id + " received " + cards);
+				p.receiveChosenProgramCards(cards);
+			}
+		}
+		if (player.id == localPlayer.id) {
+			currentActivity = new Activity(Definitions.ActivityType.COMPLETE_REGISTERS, PROGRAMCARD_DURATION);
+		}
 		turns.pop();
 		turns.push(player);
+
 	}
 
 	public void addPlayer(Player player) {
@@ -202,7 +210,9 @@ public class RoboGame extends com.badlogic.gdx.Game {
 					roboClient.sendPlayerAction(player, player.getChosenProgramCards());
 				}
 			}
-			currentActivity = new Activity(Definitions.ActivityType.COMPLETE_REGISTERS, PROGRAMCARD_DURATION);
+			if (!multiplayer) {
+				currentActivity = new Activity(Definitions.ActivityType.COMPLETE_REGISTERS, PROGRAMCARD_DURATION);
+			}
 		}
 	}
 

@@ -71,8 +71,7 @@ public class RoboRallyClient extends Client {
                 else if (object instanceof LobbyUpdate) {
                     LobbyUpdate lobbyUpdate = (LobbyUpdate) object;
                     if (lobbyUpdate.start) {
-                        multiplayerReadyToStartGame.set(true);
-//                        roboGame.launchGame();
+                        multiplayerReadyToStartGame.set(true); // launches the game thread safe
                     }
                 }
             }
