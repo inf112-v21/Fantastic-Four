@@ -125,7 +125,6 @@ public class RoboRallyClient extends Client {
     }
 
     public void startAsHost() {
-
         LobbyUpdate lobbyUpdate = new LobbyUpdate(true, roboGame.players.size());
 
         sendTCP(lobbyUpdate);
