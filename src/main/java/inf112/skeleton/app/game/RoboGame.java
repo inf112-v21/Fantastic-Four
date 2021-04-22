@@ -62,6 +62,7 @@ public class RoboGame extends com.badlogic.gdx.Game {
 	private final long NUMBER_OF_PHASES;
 	int phaseNumber;
 	int numPlayersCompletedPickingCards;
+	private boolean sentCards;
 
 	public RoboGame() {
 		programDeck = new ProgramDeck();
@@ -76,6 +77,7 @@ public class RoboGame extends com.badlogic.gdx.Game {
 		NUMBER_OF_PHASES = 5;
 		phaseNumber = 0;
 		numPlayersCompletedPickingCards = 0;
+		sentCards = false;
 		lastMoveTimestamp = 0L;
 		multiplayerReadyToStartGame = new AtomicBoolean(false);
 	}
@@ -198,11 +200,17 @@ public class RoboGame extends com.badlogic.gdx.Game {
 
 	// "Handle input"
 	private void arrangeCards() {
-		if (multiplayer && localPlayer.getChosenProgramCards().size() == 5) {
-			roboClient.sendPlayerAction(localPlayer, localPlayer.getChosenProgramCards());
-			return;
+		if (multiplayer) {
+			if (!sentCards && localPlayer.getChosenProgramCards().size() == 5) {
+				roboClient.sendPlayerAction(localPlayer, localPlayer.getChosenProgramCards());
+				sentCards = true;
+			}
+			if (numPlayersCompletedPickingCards == players.size()) {
+				currentActivity = new Activity(Definitions.ActivityType.COMPLETE_REGISTERS, PROGRAMCARD_DURATION);
+				sentCards = false;
+			}
 		}
-		if (currentActivity.hasTimedOut()) {
+		else if (currentActivity.hasTimedOut()) {
 			gameActionScreen.clearCards();
 			for (Player player : players) {
 				if (!player.hasChosenProgramCards()) {
@@ -217,9 +225,7 @@ public class RoboGame extends com.badlogic.gdx.Game {
 					player.receiveChosenProgramCards(alreadyPicked);
 				}
 			}
-			if (!multiplayer) {
-				currentActivity = new Activity(Definitions.ActivityType.COMPLETE_REGISTERS, PROGRAMCARD_DURATION);
-			}
+			currentActivity = new Activity(Definitions.ActivityType.COMPLETE_REGISTERS, PROGRAMCARD_DURATION);
 		}
 	}
 
