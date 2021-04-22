@@ -12,7 +12,6 @@ import inf112.skeleton.app.game.RoboGame;
 import inf112.skeleton.app.server.packets.*;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
 

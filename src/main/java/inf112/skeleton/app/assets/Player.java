@@ -8,7 +8,6 @@ import java.util.List;
 
 public class Player implements Serializable {
 
-    private static final long TIMEBETWEENMOVES = 500;
     private final String playerName;
     private List<ProgramCard> receivedProgramCards;
     private List<ProgramCard> chosenProgramCards;
@@ -25,9 +24,6 @@ public class Player implements Serializable {
     public static final int MIN_NUMBER_OF_DAMAGE_TOKENS = 0;
     public static final int MAX_NUMBER_OF_DAMAGE_TOKENS = 9;
 
-    long lastMove;
-
-
     public Player(String playerName) {
         this(playerName, 1, 1);
     }
@@ -35,7 +31,6 @@ public class Player implements Serializable {
     public Player(String playerName, int x, int y) {
         this.playerName = playerName;
         directionIndex = 3;
-        lastMove = System.currentTimeMillis();
         this.x = x;
         this.y = y;
         archiveX = x;

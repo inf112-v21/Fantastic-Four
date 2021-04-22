@@ -5,10 +5,12 @@ import inf112.skeleton.app.assets.Definitions.ActivityType;
 import inf112.skeleton.app.assets.Player;
 import inf112.skeleton.app.assets.cards.ProgramCard;
 import inf112.skeleton.app.assets.cards.ProgramDeck;
-import inf112.skeleton.app.screens.*;
+import inf112.skeleton.app.screens.GameActionScreen;
+import inf112.skeleton.app.screens.MainMenuScreen;
+import inf112.skeleton.app.screens.MultiplayerSetupScreen;
+import inf112.skeleton.app.screens.PlayersScreen;
 import inf112.skeleton.app.server.RoboRallyClient;
 import inf112.skeleton.app.server.RoboRallyServer;
-import org.lwjgl.system.CallbackI;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -39,7 +41,7 @@ public class RoboGame extends com.badlogic.gdx.Game {
 	boolean multiplayer;
 
 	long lastMoveTimestamp;
-	long WAIT_BETWEEN_MOVES = 500l; // milliseconds
+	long WAIT_BETWEEN_MOVES = 500L; // milliseconds
 
 	// Declaration of screens
 	MainMenuScreen mainMenuScreen;
@@ -57,11 +59,6 @@ public class RoboGame extends com.badlogic.gdx.Game {
 	 */
 	private final long STANDARD_DURATION;
 
-	/**
-	 * How long to wait for incoming connections
-	 */
-	private final long WAIT_CONNECTION_DURATION;
-
 	private final long NUMBER_OF_PHASES;
 	int phaseNumber;
 
@@ -70,15 +67,14 @@ public class RoboGame extends com.badlogic.gdx.Game {
 		programDeck.createDeck();
 		players = new LinkedList<>();
 		currentActivity = new Activity(Definitions.ActivityType.OPEN_MENU, -1);
-		lastActivityType = Definitions.ActivityType.EXECUTE_PROGRAMCARDS_5;
+		lastActivityType = Definitions.ActivityType.HALT;
 		multiplayer = false; // Will be changed if the server starts
 		gameStarted = false;
 		PROGRAMCARD_DURATION = 1;
 		STANDARD_DURATION = 1;
-		WAIT_CONNECTION_DURATION = 300;
 		NUMBER_OF_PHASES = 5;
 		phaseNumber = 0;
-		lastMoveTimestamp = 0l;
+		lastMoveTimestamp = 0L;
 		multiplayerReadyToStartGame = new AtomicBoolean(false);
 	}
 
