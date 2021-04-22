@@ -58,7 +58,7 @@ class PlayerTest {
 	}
 	
 	@Test
-	void TestPlayerNam() {
+	void TestPlayerName() {
 		assertFalse(testPlayer.getPlayerName().equals("PlayerTest"));
 	}
 		
