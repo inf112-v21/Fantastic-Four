@@ -5,10 +5,10 @@ incorporate all game logic that we envisioned, all in all we are quite happy tha
 multiplayer incorporation of RoboRally.
 
 #### Lobby for multiplayer
-![Project board](img/lobby.png "Project board")
+![Lobby](img/lobby.png "Project board")
 
 #### Multiplayer game
-![Project board](img/multiplayer.png "Project board")
+![Multiplayer](img/multiplayer.png "Project board")
 
 ## Subproblem 1: Team and project
 - No changes in the team roles, as they still work good.
