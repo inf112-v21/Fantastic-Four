@@ -21,30 +21,4 @@ public class Definitions {
         HALT
     }
 
-    public enum Setup {
-        CHOOSE_COURSE, // denne heter PICK_BOARD over
-        CHOOSE_ROBOT,
-        DETERMINE_FIRST
-    }
-
-    public enum HowToPlay {
-        DEAL_CARDS,
-        ARRANGE_CARDS,
-        ANNOUNCE_INTENT,
-        COMPLETE_REGISTERS,
-        CLEANUP
-    }
-
-    public enum CompleteRegisters {
-        REVEAL_PROGRAMCARDS,
-        ROBOTS_MOVE,
-        BOARD_ELEMENTS_MOVE,
-        LASERS_FIRE,
-        TOUCH_CHECK_POINT
-    }
-
-    public enum CleanUp {
-        SINGLE_WRENCH,
-        WIPE_CLEAN_REGISTERS
-    }
 }

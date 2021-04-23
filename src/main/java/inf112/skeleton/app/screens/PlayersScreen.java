@@ -25,9 +25,10 @@ public class PlayersScreen implements Screen {
 	final Texture background;
 	final Stage stage;
 	final RoboGame roboGame;
-	private final BitmapFont fontLabelBig, fontLabel;
 	ImageTextButton startButton, hostButton, playerButton, labelplayerButton;
-	ImageTextButtonStyle imageTextButtonStyle, playerButtonStyle, playersLabelStyle, hostButtonStyle;
+	ImageTextButtonStyle playerButtonStyle;
+	ImageTextButtonStyle playersLabelStyle;
+	ImageTextButtonStyle hostButtonStyle;
 
 	public PlayersScreen(RoboGame roboGame) {
 		this.roboGame = roboGame;
@@ -51,8 +52,8 @@ public class PlayersScreen implements Screen {
 		background = new Texture(Gdx.files.internal("background.png"));
 
 		// Font section
-		fontLabel = new BitmapFont(Gdx.files.internal("src/main/resources/skin/font-export.fnt"), false);
-		fontLabelBig = new BitmapFont(Gdx.files.internal("src/main/resources/skin/font-title-export.fnt"), false);
+		BitmapFont fontLabel = new BitmapFont(Gdx.files.internal("src/main/resources/skin/font-export.fnt"), false);
+        BitmapFont fontLabelBig = new BitmapFont(Gdx.files.internal("src/main/resources/skin/font-title-export.fnt"), false);
 		fontLabelBig.getData().setScale(0.5f);
 
 		Label.LabelStyle labelStyle = new Label.LabelStyle();

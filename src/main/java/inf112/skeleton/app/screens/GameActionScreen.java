@@ -39,7 +39,6 @@ public class GameActionScreen implements Screen {
 	TiledMap tiledMap;
 	TiledMapTileLayer playerLayer, boardLayer, holeLayer, flagLayer;
 	final TmxMapLoader tmxMapLoader = new TmxMapLoader();
-	InputMultiplexer inputMultiplexer;
 	OrthogonalTiledMapRenderer renderer;
 	OrthographicCamera camera;
 	public Map<Player, TiledMapTileLayer.Cell> playerTextures;
@@ -49,7 +48,6 @@ public class GameActionScreen implements Screen {
 
 	final int width;
 	final int height;
-	List<ProgramCard> programCardsToChooseFrom;
 
 	int viewPortWidth, viewPortHeight;
 	final Stage pickedCardsStage;
@@ -61,7 +59,6 @@ public class GameActionScreen implements Screen {
 	LinkedList<ProgramCard> picked;
 	final LinkedList<ProgramCard> chosen;
 	ImageButton imageButton, powerDown, powerDownON, lockCards, lockCardsON;
-	CardInputListener imageButtonListener;
 
 	public GameActionScreen(RoboGame roboGame, String mapName) {
 		this.roboGame = roboGame;
@@ -192,10 +189,6 @@ public class GameActionScreen implements Screen {
 		}
 	}
 
-	public void hideCards() {
-		startCardsStage.dispose();
-	}
-
 	public void clearCards() {
 		startCardsStage.clear();
 		pickedCardsStage.clear();
@@ -308,10 +301,6 @@ public class GameActionScreen implements Screen {
 		powerDownON.remove();
 		lockCardsON.remove();
 		
-	}
-
-	public LinkedList<ProgramCard> getPickedCardList() {
-		return chosen;
 	}
 
 	@Override
