@@ -4,7 +4,6 @@ import inf112.skeleton.app.assets.Player;
 import inf112.skeleton.app.assets.cards.ProgramCard;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
 public class PlayerAction implements Serializable {

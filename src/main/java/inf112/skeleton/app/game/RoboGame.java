@@ -27,7 +27,6 @@ public class RoboGame extends com.badlogic.gdx.Game {
 	public RoboRallyServer roboServer;
 
     // Server metadata
-    public String ip;
     public Player host;
     public Player localPlayer;
     public List<Player> players;
@@ -268,11 +267,7 @@ public class RoboGame extends com.badlogic.gdx.Game {
 	public void completeRegisters() {
 		sentCards = false;
 		if (phaseNumber < NUMBER_OF_PHASES) {
-			revealCards();
 			robotsMove();
-			boardElementsMove();
-			lasersFire();
-			touchFlagsCheckpoints();
 			if (checkWinner()) announceWinner();
 			phaseNumber++;
 		} else {
@@ -290,10 +285,6 @@ public class RoboGame extends com.badlogic.gdx.Game {
 		System.out.println("Winner!");
 	}
 
-	public void revealCards() {
-
-	}
-
 	public void robotsMove() {
 		for (Player player : players) {
 			player.moveRobotByProgramCard(player.getProgramCard(phaseNumber));
@@ -302,18 +293,6 @@ public class RoboGame extends com.badlogic.gdx.Game {
 			}
 			lastMoveTimestamp = System.currentTimeMillis();
 		}
-	}
-
-	public void boardElementsMove() {
-
-	}
-
-	public void lasersFire() {
-
-	}
-
-	public void touchFlagsCheckpoints() {
-
 	}
 
 	public boolean checkWinner() {

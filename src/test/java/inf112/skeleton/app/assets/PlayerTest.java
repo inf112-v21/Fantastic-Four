@@ -13,9 +13,7 @@ class PlayerTest {
 
 	ProgramDeck cardDeck = new ProgramDeck();
 	Player testPlayer = new Player("TestPlayer");
-	List<ProgramCard> testDeck = cardDeck.createDeck();
 	List<ProgramCard> draw9 = cardDeck.draw(9);
-	List<ProgramCard> definedProgramCards = new ArrayList<ProgramCard>();
 	ProgramCard move3 = new ProgramCard(ProgramCardType.MOVE3, 250);
 	ProgramCard move2 = new ProgramCard(ProgramCardType.MOVE2, 250);
 	ProgramCard move1 = new ProgramCard(ProgramCardType.MOVE2, 250);
@@ -59,7 +57,7 @@ class PlayerTest {
 	
 	@Test
 	void TestPlayerName() {
-		assertFalse(testPlayer.getPlayerName().equals("PlayerTest"));
+		assertNotEquals("PlayerTest", testPlayer.getPlayerName());
 	}
 		
 }

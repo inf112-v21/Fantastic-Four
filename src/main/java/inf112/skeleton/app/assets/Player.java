@@ -14,7 +14,6 @@ public class Player implements Serializable {
     private int damage;
     private int life;
     public int x, y, lastX, lastY, archiveX, archiveY, directionIndex;
-    private boolean powerDown;
 
     public int id;
 
@@ -90,11 +89,6 @@ public class Player implements Serializable {
         lastY = this.y;
         this.x = x;
         this.y = y;
-    }
-
-    public void setArchiveMarkerPosition(int x, int y) {
-        archiveX = x;
-        archiveY = y;
     }
 
     public void moveRobotByProgramCard(ProgramCard programCard) {

@@ -27,7 +27,7 @@ class ProgramDeckTest {
 
 	@Test
 	void testCreateDeckCheckIfContainsAllProgramCardType() {
-		ArrayList<ProgramCardType> types = new ArrayList<ProgramCard.ProgramCardType>();
+		ArrayList<ProgramCardType> types = new ArrayList<>();
 		for (ProgramCard card : testDeck) {
 			types.add(card.getProgramCardType());
 		}
@@ -43,7 +43,7 @@ class ProgramDeckTest {
 
 	@Test
 	void testCardPriorityNumberIfInDefinedRange() {
-		ArrayList<ProgramCardType> types = new ArrayList<ProgramCard.ProgramCardType>();
+		ArrayList<ProgramCardType> types = new ArrayList<>();
 		for (ProgramCard card : testDeck) {
 			if (card.getProgramCardType().equals(ProgramCardType.MOVE1)) {
 				assertTrue(card.getPriorityNumber() <= 660 && card.getPriorityNumber() >= 490);
@@ -66,13 +66,13 @@ class ProgramDeckTest {
 
 	@Test
 	void testCardNumberOfEachType() {
-		ArrayList<ProgramCard> sizeMove1 = new ArrayList<ProgramCard>();
-		ArrayList<ProgramCard> sizeMove2 = new ArrayList<ProgramCard>();
-		ArrayList<ProgramCard> sizeMove3 = new ArrayList<ProgramCard>();
-		ArrayList<ProgramCard> sizeBackup = new ArrayList<ProgramCard>();
-		ArrayList<ProgramCard> sizeRotateleft = new ArrayList<ProgramCard>();
-		ArrayList<ProgramCard> sizeRotateRight = new ArrayList<ProgramCard>();
-		ArrayList<ProgramCard> sizeUturn = new ArrayList<ProgramCard>();
+		ArrayList<ProgramCard> sizeMove1 = new ArrayList<>();
+		ArrayList<ProgramCard> sizeMove2 = new ArrayList<>();
+		ArrayList<ProgramCard> sizeMove3 = new ArrayList<>();
+		ArrayList<ProgramCard> sizeBackup = new ArrayList<>();
+		ArrayList<ProgramCard> sizeRotateleft = new ArrayList<>();
+		ArrayList<ProgramCard> sizeRotateRight = new ArrayList<>();
+		ArrayList<ProgramCard> sizeUturn = new ArrayList<>();
 
 		for (ProgramCard card : testDeck) {
 			if (card.getProgramCardType().equals(ProgramCardType.MOVE1)) {
