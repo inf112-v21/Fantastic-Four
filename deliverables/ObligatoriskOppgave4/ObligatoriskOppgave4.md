@@ -4,6 +4,11 @@ Summary: This time we finished implementing MVP6 (multiplayer) across the intern
 incorporate all game logic that we envisioned, all in all we are quite happy that we achieved a working server/client/
 multiplayer incorporation of RoboRally.
 
+#### Lobby for multiplayer
+![Project board](img/lobby.png "Project board")
+
+#### Multiplayer game
+![Project board](img/multiplayer.png "Project board")
 
 ## Subproblem 1: Team and project
 - No changes in the team roles, as they still work good.
@@ -38,18 +43,10 @@ multiplayer incorporation of RoboRally.
   [2021.4.19](moms/mom_2021_04_19.md)
   
 ### Project board screen shot
-![alt text](img/projectboard.png "Project board")
+![Project board](img/projectboard.png "Project board")
 
 
 ## Subproblem 2: Requirements
-Oppdater hvilke krav dere har prioritert, hvor langt dere har kommet og hva dere har gjort siden forrige gang.
-For hvert krav dere jobber med, må dere lage 1) ordentlige brukerhistorier, 2) akseptansekriterier og 3) arbeidsoppgaver.
-Husk at akseptansekriterier ofte skrives mer eller mindre som tester
-Dersom dere har oppgaver som dere skal til å starte med, hvor dere har oversikt over både brukerhistorie,
-akseptansekriterier og arbeidsoppgaver, kan dere ta med disse i innleveringen også.
-Husk å skrive hvilke bugs som finnes i de kravene dere har utført (dersom det finnes bugs).
-Kravlista er lang, men det er ikke nødvendig å levere på alle kravene hvis det ikke er realistisk.
-Det er viktigere at de oppgavene som er utført holder høy kvalitet. Utførte oppgaver skal være ferdige (spillbare).
 
 ### MVP 6: Play from several computers (show and move pieces for all players)
 #### Assumptions:
@@ -98,7 +95,7 @@ Det er viktigere at de oppgavene som er utført holder høy kvalitet. Utførte o
 ### Bugs
 - There are guaranteed bugs that we don't know of, but more importantly there is a lack of functionality that prevents
   us to define this game as "completed"
-- Power Down and Lock buttons on a player's "program sheet" are at the moment not functional
+- Power Down and Lock Cards buttons on a player's "program sheet" are at the moment not functional
 
 
 ## Subproblem 3: Product delivery and code quality
