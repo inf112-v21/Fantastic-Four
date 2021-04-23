@@ -90,7 +90,7 @@ public class PlayersScreen implements Screen {
 
 		hostButton = new ImageTextButton("Host", hostButtonStyle);
 		hostButton.setSize(80, 70);
-
+		hostButton.setVisible(false);
 		labelplayerButton = new ImageTextButton("Players", playersLabelStyle);
 		labelplayerButton.setPosition(150, Gdx.app.getGraphics().getHeight() - 200);
 		labelplayerButton.setSize(200, 70);
@@ -99,6 +99,7 @@ public class PlayersScreen implements Screen {
 		startButton.setX(Gdx.graphics.getWidth() / 2.0f);
 		startButton.setX(Gdx.graphics.getWidth() / 2.0f);
 		startButton.setSize(300, 70);
+		startButton.setVisible(false);
 		startButton.addListener(new ChangeListener() {
 			@Override
 			public void changed(ChangeEvent changeEvent, Actor actor) {
@@ -150,7 +151,9 @@ public class PlayersScreen implements Screen {
 		   	stage.addActor(playerButton); playerButton.setPosition(300, y);
 
 		   	if (p.equals(roboGame.host)) {
+		   		hostButton.setVisible(true);
 		   		hostButton.setPosition(200, y);
+		   		startButton.setVisible(true);
 		   		startButton.setPosition(600, y);
 		   	}
 
