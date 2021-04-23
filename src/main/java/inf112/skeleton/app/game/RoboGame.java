@@ -193,6 +193,7 @@ public class RoboGame extends com.badlogic.gdx.Game {
 	}
 
 	private void dealCards() {
+		
 		dealProgramCards();
 		gameActionScreen.showCards();
 		currentActivity = new Activity(Definitions.ActivityType.ARRANGE_CARDS_AND_ANNOUNCE_INTENT, 10);
@@ -211,6 +212,7 @@ public class RoboGame extends com.badlogic.gdx.Game {
 		}
 		else if (currentActivity.hasTimedOut()) {
 			gameActionScreen.clearCards();
+			gameActionScreen.resetButtons();
 			for (Player player : players) {
 				if (!player.hasChosenProgramCards()) {
 					List<ProgramCard> remainingCardsToPickFrom = new ArrayList<>(player.getReceivedProgramCards());
@@ -225,6 +227,7 @@ public class RoboGame extends com.badlogic.gdx.Game {
 				}
 			}
 			currentActivity = new Activity(Definitions.ActivityType.COMPLETE_REGISTERS, PROGRAMCARD_DURATION);
+
 		}
 	}
 

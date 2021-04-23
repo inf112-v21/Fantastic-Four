@@ -60,7 +60,7 @@ public class GameActionScreen implements Screen {
 	LinkedList<Integer> cardPositions;
 	LinkedList<ProgramCard> picked;
 	final LinkedList<ProgramCard> chosen;
-	ImageButton imageButton;
+	ImageButton imageButton, powerDown, powerDownON, lockCards, lockCardsON;
 	CardInputListener imageButtonListener;
 
 	public GameActionScreen(RoboGame roboGame, String mapName) {
@@ -249,11 +249,11 @@ public class GameActionScreen implements Screen {
 
 	public void showOtherButtons() {
 		// === Power down button ===
-		ImageButton powerDown = CardUI.createTextureButton("powerdown");
-		ImageButton powerDownON = CardUI.createTextureButton("powerdownON");
+		powerDown = CardUI.createTextureButton("powerdown");
+		powerDownON = CardUI.createTextureButton("powerdownON");
 
-		ImageButton lockCards = CardUI.createTextureButton("lockcardsbutton");
-		ImageButton lockCardsON = CardUI.createTextureButton("lockcardsbuttonON");
+		lockCards = CardUI.createTextureButton("lockcardsbutton");
+		lockCardsON = CardUI.createTextureButton("lockcardsbuttonON");
 
 		powerDown.setSize(150, 150);
 		powerDown.setPosition(870, 55);
@@ -302,6 +302,12 @@ public class GameActionScreen implements Screen {
 			otherButtonsStage.addActor(life);
 			widthOffset += 70;
 		}
+	}
+	
+	public void resetButtons () {
+		powerDownON.remove();
+		lockCardsON.remove();
+		
 	}
 
 	public LinkedList<ProgramCard> getPickedCardList() {
